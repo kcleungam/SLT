@@ -22,6 +22,8 @@ public class SLT {
 
     com.leapmotion.leap.Vector inter = screen.intersect(finger, true);
     com.leapmotion.leap.Vector tipV = finger.tipVelocity();
+    com.leapmotion.leap.Vector tipP = finger.tipPosition();             //this finger is an object to store tracked finger
+    com.leapmotion.leap.Vector tipV1 = frame.finger(1).tipVelocity();   //specific one finger in a frame
     com.leapmotion.leap.Vector palmV = frame.hand(1).palmVelocity();
     com.leapmotion.leap.Vector palmN = frame.hand(1).palmNormal();
     int sx = screen.widthPixels();
