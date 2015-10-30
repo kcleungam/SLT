@@ -26,7 +26,6 @@ public class SLT {
     //Use of finger Object
     Finger finger = frame.fingers().get(arg0);
     //must use com.leapmotion.leap.Vector as it has conflict with Vector in java
-    com.leapmotion.leap.Vector inter = screen.intersect(finger, true);
     com.leapmotion.leap.Vector tipV = finger.tipVelocity();
     com.leapmotion.leap.Vector tipP = finger.tipPosition();             //this finger is an object to store tracked finger
     com.leapmotion.leap.Vector tipV1 = frame.finger(1).tipVelocity();   //specific one finger in a frame
