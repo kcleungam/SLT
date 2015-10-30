@@ -51,5 +51,17 @@ public class SLT {
     Screen screen = screenList.get(0);
     int sx = screen.widthPixels();
     int sy = screen.heightPixels();
+    float framePeriod = frame.timestamp() - controller.frame(1).timestamp(); //timestamp of frames
+    long currentID = controller.frame().id();	//calls the ID of the frame
+    
+    //vector operation
+    com.leapmotion.leap.Vector normalizedVector = otherVector.normalized();	
+    com.leapmotion.leap.Vector sum = thisVector.plus(thatVector);
+    com.leapmotion.leap.Vector difference = thisVector.minus(thatVector);
+    float length = thisVector.magnitude();	//magnitude of vector
+    float lengthSquared = thisVector.magnitudeSquared();
+    float x = thisVector.get(0);	// 1 = y-coor; 2 = z-coor
+    com.leapmotion.leap.Vector crossProduct = thisVector.cross(thatVector);
+    float angleInRadians = Vector.xAxis().angleTo(Vector.yAxis()); // angleInRadians = PI/2 (90 degrees)
 
 }
