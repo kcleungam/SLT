@@ -28,7 +28,7 @@ public class database {
                     .append("part_of_speech", "")
                     .append("frames", asList(
                     		/*Frames*/
-                    		)
+                    		))
                     .append("country", "Hong Kong")	//maybe optional
                     .append("type", "single_handed"));
 }
