@@ -31,10 +31,20 @@ public class SLT {
     com.leapmotion.leap.Vector tipP = finger.tipPosition();             //this finger is an object to store tracked finger
     com.leapmotion.leap.Vector tipV1 = frame.finger(1).tipVelocity();   //specific one finger in a frame
 
+    //bones in fingers
+    com.leapmotion.leap.Vector[][] bonejoint = new com.leapmotion.leap.Vector[][];
+    for (Finger finger : hand.fingers()){
+    	for (Bone.Type boneType : Bone.type.values()){
+    		Bone bone = finger.bone(boneType);
+    		bonejoint[finger][boneType] = bone.prevJoint();
+    		//thing with bone
+    	}
+    }
+    
     //arms
     Arm arm = hand.arm();
-    Vector wrist = arm.wristPosition();
-    Vector direction = arm.direction();
+    com.leapmotion.leap.Vector wrist = arm.wristPosition();
+    com.leapmotion.leap.Vector direction = arm.direction();
     
     // Still finding how to use the following, probably it talking about the view in LMC
     ScreenList screenList = controller.calibratedScreens();
