@@ -12,7 +12,7 @@ import java.util.*;
 
 
 public class SLT {
-       Listener listener = new Listener();//Create New Listener For The Leap
+    Listener listener = new Listener();//Create New Listener For The Leap
     Controller controller = new Controller();//Create New Controller For The Leap
     Frame frame = controller.frame();
 
