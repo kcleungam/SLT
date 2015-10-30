@@ -16,16 +16,24 @@ public class SLT {
     Controller controller = new Controller();//Create New Controller For The Leap
 
     Frame frame = controller.frame();
-    Finger finger = frame.fingers().get(arg0);                          // this is the way to store finger object, see line 25
-    ScreenList screenList = controller.calibratedScreens();
-    Screen screen = screenList.get(0);
 
+    //Use of hand Object
+    HandList hands = frame.hands(); // be careful about the s, it means hand list
+    Hand h1 = hands.get(0);
+    Hand h2 = frame.hand(1);    //another way to get specific hand
+    com.leapmotion.leap.Vector palmV = frame.hand(1).palmVelocity();
+    com.leapmotion.leap.Vector palmN = frame.hand(1).palmNormal();
+    
+    //Use of finger Object
+    Finger finger = frame.fingers().get(arg0);
     com.leapmotion.leap.Vector inter = screen.intersect(finger, true);
     com.leapmotion.leap.Vector tipV = finger.tipVelocity();
     com.leapmotion.leap.Vector tipP = finger.tipPosition();             //this finger is an object to store tracked finger
     com.leapmotion.leap.Vector tipV1 = frame.finger(1).tipVelocity();   //specific one finger in a frame
-    com.leapmotion.leap.Vector palmV = frame.hand(1).palmVelocity();
-    com.leapmotion.leap.Vector palmN = frame.hand(1).palmNormal();
+
+    // Still finding how to use the following, probably it talking about the view in LMC
+    ScreenList screenList = controller.calibratedScreens();
+    Screen screen = screenList.get(0);
     int sx = screen.widthPixels();
     int sy = screen.heightPixels();
 
