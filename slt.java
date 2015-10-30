@@ -45,11 +45,5 @@ public class SLT {
     Matrix transformMatrix = new Matrix(xBasis, yBasis, zBasis);
     com.leapmotion.leap.Vector thisTranslation = transformMatrix.getOrigin();
 
-    // Still finding how to use the following, probably it talking about the view in LMC
-    ScreenList screenList = controller.calibratedScreens();
-    Screen screen = screenList.get(0);
-    int sx = screen.widthPixels();
-    int sy = screen.heightPixels();
-
 
 }
