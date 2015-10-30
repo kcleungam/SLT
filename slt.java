@@ -21,6 +21,10 @@ public class SLT {
     Screen screen = screenList.get(0);
 
     com.leapmotion.leap.Vector inter = screen.intersect(finger, true);
-    com.leapmotion.leap.Vector sped = finger.tipVelocity();
+    com.leapmotion.leap.Vector tipV = finger.tipVelocity();
+    com.leapmotion.leap.Vector palmV = frame.hand(1).palmVelocity();
+    com.leapmotion.leap.Vector palmN = frame.hand(1).palmNormal();
+    int sx = screen.widthPixels();
+    int sy = screen.heightPixels();
 
 }
