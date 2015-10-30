@@ -16,7 +16,7 @@ public class SLT {
     Controller controller = new Controller();//Create New Controller For The Leap
 
     Frame frame = controller.frame();
-    Finger finger = frame.fingers().get(arg0);
+    Finger finger = frame.fingers().get(arg0);                          // this is the way to store finger object, see line 25
     ScreenList screenList = controller.calibratedScreens();
     Screen screen = screenList.get(0);
 
