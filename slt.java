@@ -20,6 +20,7 @@ public class SLT {
         Hand h1 = hands.get(0);
         Hand h2 = frame.hand(1);    //another way to get specific hand
         Finger finger = frame.fingers().get(arg0);
+        FingerList allFingers = frame.fingers();
         //must use com.leapmotion.leap.Vector as it has conflict with Vector in java
         com.leapmotion.leap.Vector tipV = finger.tipVelocity();
         float angleInRadians = Vector.xAxis().angleTo(Vector.yAxis()); // angleInRadians = PI/2 (90 degrees)
@@ -45,6 +46,7 @@ public class SLT {
 
     //Use of finger Object
     Finger finger = frame.fingers().get(arg0);
+    FingerList allFingers = frame.fingers();
     //must use com.leapmotion.leap.Vector as it has conflict with Vector in java
     com.leapmotion.leap.Vector tipV = finger.tipVelocity();
     com.leapmotion.leap.Vector tipP = finger.tipPosition();             //this finger is an object to store tracked finger
