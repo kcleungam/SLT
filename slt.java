@@ -35,17 +35,7 @@ public class SLT {
     com.leapmotion.leap.Vector wrist = arm.wristPosition();
     com.leapmotion.leap.Vector direction = arm.direction();
     
-    // Still finding how to use the following, probably it talking about the view in LMC
-    ScreenList screenList = controller.calibratedScreens();
-    Screen screen = screenList.get(0);
-    int sx = screen.widthPixels();
-    int sy = screen.heightPixels();
-    float framePeriod = frame.timestamp() - controller.frame(1).timestamp(); //timestamp of frames
-    long currentID = controller.frame().id();	//calls the ID of the frame
-    
- // Still finding how to use the following, probably it talking about the view in LMC
-    int sx = screen.widthPixels();
-    int sy = screen.heightPixels();
+    //time and ID
     float framePeriod = frame.timestamp() - controller.frame(1).timestamp(); //timestamp of frames
     long currentID = controller.frame().id();	//calls the ID of the frame
     
