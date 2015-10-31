@@ -12,6 +12,26 @@ import java.util.*;
 
 
 public class SLT {
+    //Object List
+    /*
+        HandList hands = frame.hands(); // be careful about the s, it means hand list
+        Listener listener = new Listener();//Create New Listener For The Leap
+        Controller controller = new Controller();//Create New Controller For The Leap
+        Hand h1 = hands.get(0);
+        Hand h2 = frame.hand(1);    //another way to get specific hand
+        Finger finger = frame.fingers().get(arg0);
+        //must use com.leapmotion.leap.Vector as it has conflict with Vector in java
+        com.leapmotion.leap.Vector tipV = finger.tipVelocity();
+        float angleInRadians = Vector.xAxis().angleTo(Vector.yAxis()); // angleInRadians = PI/2 (90 degrees)
+        Arm arm = hand.arm();
+        com.leapmotion.leap.Vector wrist = arm.wristPosition();
+        com.leapmotion.leap.Vector direction = arm.direction();
+        float framePeriod = frame.timestamp() - controller.frame(1).timestamp(); //timestamp of frames
+        long currentID = controller.frame().id();	//calls the ID of the frame
+        Matrix M = new Matrix();
+        com.leapmotion.leap.Vector xBasis = new com.leapmotion.leap.Vector(23, 0, 0);
+    */
+    
     Listener listener = new Listener();//Create New Listener For The Leap
     Controller controller = new Controller();//Create New Controller For The Leap
     Frame frame = controller.frame();
