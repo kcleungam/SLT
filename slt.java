@@ -33,7 +33,7 @@ public class SLT {
         com.leapmotion.leap.Vector xBasis = new com.leapmotion.leap.Vector(23, 0, 0);
     */
     
-    Listener listener = new Listener();//Create New Listener For The Leap
+   Listener listener = new Listener();//Create New Listener For The Leap
     Controller controller = new Controller();//Create New Controller For The Leap
     Frame frame = controller.frame();
 
