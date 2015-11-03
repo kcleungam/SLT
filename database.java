@@ -69,8 +69,6 @@ public class database {
 
 
 
-    public static void main(String args[]) throws ParseException {//testing codes below
 
-    }
 
 }
