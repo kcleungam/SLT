@@ -1,9 +1,6 @@
 import com.leapmotion.leap.*;
-import java.lang.Object;
-import java.util.Collection;
-import java.util.Timer;
-import java.util.Vector;
-import java.lang.Math;
+
+import java.util.ArrayList;
 
 
 //Object List
@@ -43,7 +40,7 @@ public class SLT {
                 /**
                                     * keep grabbing the frame from controller, check whether it is recordable, add to the collection if it is. store it at last
                                 */
-                Vector<Frame> oneSample = new Vector<Frame>();
+                ArrayList<Frame> oneSample = new ArrayList<Frame>();
                 while (true) {
                     Frame frame = controller.frame();
                     if(recording == true ){
@@ -125,7 +122,7 @@ public class SLT {
         return recordable;  //return if the hand is moving or not
     }
 
-    public static Vector<Frame> recordFrame(Vector<Frame> oneSample, Frame frame ){
+    public static ArrayList<Frame> recordFrame(ArrayList<Frame> oneSample, Frame frame ){
         oneSample.add(frame);
         return oneSample;
     }
