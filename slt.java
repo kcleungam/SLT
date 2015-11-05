@@ -1,36 +1,77 @@
 import com.leapmotion.leap.*;
-
-
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.InputEvent;
-import java.io.Console;
-import java.util.Scanner;
+import java.lang.Object;
+import java.util.Collection;
+import java.util.Timer;
 import java.util.Vector;
 import java.lang.Math;
-import java.util.*;
 
+
+//Object List
+    /*
+        HandList hands = frame.hands(); // be careful about the s, it means hand list
+        Listener listener = new Listener();//Create New Listener For The Leap
+        Controller controller = new Controller();//Create New Controller For The Leap
+        Hand h1 = hands.get(0);
+        Hand h2 = frame.hand(1);    //another way to get specific hand
+        Finger finger = frame.fingers().get(arg0);
+        FingerList allFingers = frame.fingers();
+        //must use com.leapmotion.leap.Vector as it has conflict with Vector in java
+        com.leapmotion.leap.Vector tipV = finger.tipVelocity();
+        float angleInRadians = Vector.xAxis().angleTo(Vector.yAxis()); // angleInRadians = PI/2 (90 degrees)
+        Arm arm = hand.arm();
+        com.leapmotion.leap.Vector wrist = arm.wristPosition();
+        com.leapmotion.leap.Vector direction = arm.direction();
+        float framePeriod = frame.timestamp() - controller.frame(1).timestamp(); //timestamp of frames
+        long currentID = controller.frame().id();	//calls the ID of the frame
+        Matrix M = new Matrix();
+        com.leapmotion.leap.Vector xBasis = new com.leapmotion.leap.Vector(23, 0, 0);
+    */
 
 public class SLT {
 
-    boolean recording = false;
-    float minRecVelocity = 100;
-    float maxRecVelocity = 300;
-    int recordedFrames   = 0;
-    int minPoseFrames    = 75;
-    public static void main(String args[]) {
+    static boolean recording = false;
+    static float minRecVelocity = 100;
+    static float maxRecVelocity = 300;
+    static int recordedFrames   = 0;
+    static int minPoseFrames    = 75;
+    public static void main(String args[]) throws InterruptedException {
         Listener listener = new Listener();//Create New Listener For The Leap
         Controller controller = new Controller(listener);//Create New Controller For The Leap
-        if(controller.isConnected() == true){
-            listener.onConnect(controller);     //it will print "connected"
+        while (true) {
+            if (controller.isConnected() == true) {
+                listener.onConnect(controller);     //it will print "connected"
+                /**
+                                    * keep grabbing the frame from controller, check whether it is recordable, add to the collection if it is. store it at last
+                                */
+                Vector<Frame> oneSample = new Vector<Frame>();
+                while (true) {
+                    Frame frame = controller.frame();
+                    if(recording == true ){
+                        if( recordableFrame(frame, minRecVelocity, maxRecVelocity) == true){
+                            oneSample = recordFrame(oneSample, frame);
+                        }else{
+                            continue;
+                        }
+                    }else if(recording == false){
+                        /**
+                                             * This can be gesture recognition session
+                                             */
+                    }
+                }
 
-        }
-        if(controller.isConnected() == false){
-            listener.onDisconnect(controller);  // it will print "disconnected"
+
+
+            }
+            if (controller.isConnected() == false) {
+                listener.onDisconnect(controller);  // it will print "disconnected"
+                while(controller.isConnected() == false){
+                    Thread.currentThread().wait(1000);
+                }
+            }
         }
     }
 
-    public boolean recordableFrame(Frame frame, int min, int max){
+    public static boolean recordableFrame(Frame frame, float min, float max){
         HandList hands = frame.hands();
         boolean recordable = false;
         /*  First check the palmVelocity of each hand to see if it is moving
@@ -74,7 +115,7 @@ public class SLT {
 
         if(recordable){
             recordedFrames++;
-            if(recordedFrames >= this.minPoseFrames){
+            if(recordedFrames >= minPoseFrames){
                 recording = true;
             }
         } else {
@@ -84,31 +125,22 @@ public class SLT {
         return recordable;  //return if the hand is moving or not
     }
 
+    public static Vector<Frame> recordFrame(Vector<Frame> oneSample, Frame frame ){
+        oneSample.add(frame);
+        return oneSample;
+    }
 
+
+
+    public void startTraining(int countDown, Sign sign, Frame frame){ // also the gesture set
+
+    }
 
 
 }
-    //Object List
-    /*
-        HandList hands = frame.hands(); // be careful about the s, it means hand list
-        Listener listener = new Listener();//Create New Listener For The Leap
-        Controller controller = new Controller();//Create New Controller For The Leap
-        Hand h1 = hands.get(0);
-        Hand h2 = frame.hand(1);    //another way to get specific hand
-        Finger finger = frame.fingers().get(arg0);
-        FingerList allFingers = frame.fingers();
-        //must use com.leapmotion.leap.Vector as it has conflict with Vector in java
-        com.leapmotion.leap.Vector tipV = finger.tipVelocity();
-        float angleInRadians = Vector.xAxis().angleTo(Vector.yAxis()); // angleInRadians = PI/2 (90 degrees)
-        Arm arm = hand.arm();
-        com.leapmotion.leap.Vector wrist = arm.wristPosition();
-        com.leapmotion.leap.Vector direction = arm.direction();
-        float framePeriod = frame.timestamp() - controller.frame(1).timestamp(); //timestamp of frames
-        long currentID = controller.frame().id();	//calls the ID of the frame
-        Matrix M = new Matrix();
-        com.leapmotion.leap.Vector xBasis = new com.leapmotion.leap.Vector(23, 0, 0);
-    */
 
+/**
+ *
 Listener listener = new Listener();//Create New Listener For The Leap
 Controller controller = new Controller();//Create New Controller For The Leap
 Frame frame = controller.frame();
@@ -155,3 +187,5 @@ com.leapmotion.leap.Vector yBasis = new com.leapmotion.leap.Vector(0, 12, 0);
 com.leapmotion.leap. Vector zBasis = new com.leapmotion.leap.Vector(0, 0, 45);
 Matrix transformMatrix = new Matrix(xBasis, yBasis, zBasis);
 com.leapmotion.leap.Vector thisTranslation = transformMatrix.getOrigin();
+
+ */
