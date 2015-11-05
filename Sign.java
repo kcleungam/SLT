@@ -14,12 +14,12 @@ import java.util.*;
 public class Sign {
     private int id;
     private String gestureName;
-    private Collection<Frame> data;
+    private Vector< Vector <Frame> > allSample;
 
     public Sign(){
         this.id = -1;
         this.gestureName = "";
-        this.data = null;
+        this.allSample = null;
     }
 
     public void setId(int id){
@@ -29,12 +29,12 @@ public class Sign {
     public void setGestureName(String gestureName) {
         this.gestureName = gestureName;
     }
-    public void insertFrame(Collection<Frame> data, Frame frame){
-        data.add(frame);
+    public void insertSample(Vector<Vector<Frame>> allSample, Vector<Frame> oneSample){
+        allSample.add(oneSample);
     }
 
-    public void setData(Collection<Frame> data) {
-        this.data = data;
+    public void setSample(Vector<Vector<Frame>> allSample) {
+        this.allSample = allSample;
     }
 
     public int getId() {
@@ -45,14 +45,13 @@ public class Sign {
         return gestureName;
     }
 
-    public Collection<Frame> getData() {
-        return data;
+    public Vector<Vector<Frame>> getAllSample() {
+        return allSample;
     }
 
-
-    public Sign(String gestureName, int id, Collection<Frame> data){
+    public Sign(String gestureName, int id, Vector<Frame> data){
         this.id = id;
         this.gestureName = gestureName;
-        this.data = data;
+        this.allSample = allSample;
     }
 }
