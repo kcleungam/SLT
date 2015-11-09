@@ -1,65 +1,80 @@
 /**
- * Created by alex on 30/10/2015.
+ * Jongo supports MongoDB-java-driver with version 3.x
+ * MongoDB-java-driver with version 3.x have different syntax with the previous versions.
+ * Some APIs are depreciated in version 3.x, however, Jongo sticks on the previous versions.
+ * Further updates of Jongo with Mongo-java-driver 3.0 has not been announced.
+ *
+ * We use Jongo here because of its simplicity =]
  */
-/*//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\*/
-/* Leap Motion */
-import com.mongodb.Block;
-import com.mongodb.DB;
+import com.leapmotion.leap.Frame;
 import com.mongodb.MongoClient;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
 import org.jongo.Jongo;
-import org.jongo.MongoCursor;
-import org.jongo.MongoCollection.*;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
-import static java.util.Arrays.asList;
+import java.util.ArrayList;
 
 
-public class database {
+public class Database {
     /* field */
-    private String name="";
+
+    //basic info
+    private String database_name="";
+    private String collection_name="";
+
+    //Mongo
     private MongoClient client;
-    private MongoCollection M;
+
+    //Jongo
     private Jongo Jdb;
-    private org.jongo.MongoCollection J;
+    private org.jongo.MongoCollection Jcoll;
+
+
 
     /* constructor */
-    public database(String database_name){
+
+    public Database(String database_name,String collection_name){
         // record the database name
-        name=database_name;
+        this.database_name=database_name;
+        this.collection_name=collection_name;
+
         // connect to the database
         client=new MongoClient();
+
         // create Jongo
-        Jdb=new Jongo(client.getDB(name));
-        J=Jdb.getCollection("gestures");
-        // create Mongo
-        M=client.getDatabase(name).getCollection("gestures", SLT.class);
+        Jdb=new Jongo(client.getDB(database_name));//if it doesn't exist, Mongo will create it for you
+        Jcoll=Jdb.getCollection("gestures");//if it doesn't exist, Mongo will create it for you
     }
 
     /* methods */
-    //save a gesture
-    public boolean saveGesture(SLT slt,String gesture_name,String asian_sign_bank_id){
-        if(slt==null||gesture_name==null||isNameValid(gesture_name)||isNameValid(asian_sign_bank_id))
-            return false;
-        //TODO: check whether the "save" API adds elements without repetition
-        J.save(slt);
-        return true;
-    }
-    public SLT findGesture(String gesture_name) throws Exception{
-        if(gesture_name==null||isNameValid(gesture_name))
-            throw new Exception();
-        /* find the given gesture in the database */
-        SLT output=J.findOne("{name:"+gesture_name+"}").as(SLT.class);
 
-        return output;
+    //save a gesture
+    public boolean saveSign(Sign sign) throws Exception{
+        if(sign==null||!isNameValid(sign.getSignName())) {
+            System.err.println("Method 'SaveGesture' has received an improper parameter");
+            return false;
+        }
+        //check whether the given sign name exist
+        long existence=Jcoll.count("{SignName:#}",sign.getSignName());
+        if(existence==0){//insert
+            Jcoll.insert(sign);
+            System.out.println("Added 1 new gesture.");
+            return true;
+        }else if(existence==1){//add sample(s) in it
+            //TODO: directly modify the JSON
+            Sign temp=Jcoll.findOne("{SignName:#}",sign.getSignName()).as(Sign.class);
+            //TODO:avoid duplicated samples
+            for(ArrayList<Frame> f:sign.getAllSample())
+                temp.insertSample(sign.getAllSample(),f);
+           // System.out.println("Added 1 new gesture.");
+            return true;
+        }else{//duplication, database get a serious problem
+            throw new Exception("Duplicated Signs:\t"+sign.getSignName());
+        }
     }
+
+    //save sampel(s)
+
+
+
 
     /* helper function */
     private boolean isNameValid(String name){

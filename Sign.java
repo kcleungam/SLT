@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 public class Sign {
     private int id;
-    private String signName;
+    private String SignName;
     private ArrayList< ArrayList <Frame> > allSample;
 
     public Sign(){
         this.id = -1;
-        this.signName = "";
+        this.SignName = "";
         this.allSample = null;
     }
 
@@ -21,7 +21,7 @@ public class Sign {
     }
 
     public void setSignName(String signName) {
-        this.signName = signName;
+        this.SignName = signName;
     }
     public void insertSample(ArrayList<ArrayList<Frame>> allSample, ArrayList<Frame> oneSample){
         allSample.add(oneSample);
@@ -33,7 +33,7 @@ public class Sign {
     }
 
     public String getSignName() {
-        return this.signName;
+        return this.SignName;
     }
 
     public void setAllSample(ArrayList<ArrayList<Frame>> allSample) {
