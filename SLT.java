@@ -1,6 +1,10 @@
-import com.leapmotion.leap.*;
+import com.leapmotion.leap.Controller;
+import com.leapmotion.leap.Finger;
+import com.leapmotion.leap.Frame;
+import com.leapmotion.leap.Hand;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 //Object List
@@ -24,116 +28,277 @@ import java.util.ArrayList;
         com.leapmotion.leap.Vector xBasis = new com.leapmotion.leap.Vector(23, 0, 0);
     */
 
-public class SLT {
+public class SLT{
 
-    static boolean recording = false;
-    static float minRecVelocity = 100;
-    static float maxRecVelocity = 300;
-    static int recordedFrames   = 0;
-    static int minPoseFrames    = 75;
+    static boolean recordingMode    = false;
+    static boolean recording        = false;
+
+    //static int recordedFrames       = 0;
+
+    static int countDown          = 3;
+    static String leftHand = "Left";
+    static String rightHand = "Right";
+    static String bothHand = "Both";
+    static allSign allsign = new allSign();
+
     public static void main(String args[]) throws InterruptedException {
-        Listener listener = new Listener();//Create New Listener For The Leap
-        Controller controller = new Controller(listener);//Create New Controller For The Leap
+        Controller controller = new Controller();//Create New Controller For The Leap
+        Scanner sc = new Scanner(System.in);
+        SampleListener sampleListener = new SampleListener();   //new a listener everytime
+        sampleListener.onFocusLost(controller);
+        controller.addListener(sampleListener);             // add listener, grab data
         while (true) {
             if (controller.isConnected() == true) {
-                listener.onConnect(controller);     //it will print "connected"
-                /**
-                                    * keep grabbing the frame from controller, check whether it is recordable, add to the collection if it is. store it at last
-                                */
-                ArrayList<Frame> oneSample = new ArrayList<Frame>();
                 while (true) {
-                    Frame frame = controller.frame();
-                    if(recording == true ){
-                        if( recordableFrame(frame, minRecVelocity, maxRecVelocity) == true){
-                            oneSample = recordFrame(oneSample, frame);
-                        }else{
-                            continue;
-                        }
-                    }else if(recording == false){
-                        /**
-                                             * This can be gesture recognition session
-                                             */
+                    sampleListener.onFocusLost(controller);
+                    System.out.println("Please enter your choice/n 1. Record new sign/n 2. Train your translator/n 3. Print all sign");
+                    int i = sc.nextInt();
+                    boolean inputValid = true;
+
+                    Sign sign = new Sign();
+                    switch (i) {
+                        case 1:
+                            //recordingMode = true;
+                            /**
+                                                        * keep grabbing the frame from controller, check whether it is recordable, add to oneSample if it is. """store as new Sign"""
+                                                         */
+                            System.out.println("Please enter the gesture name");
+                            String signName = sc.next();
+                            int count = 3;
+                            for( ;count >=0; count--) {
+                                try {
+                                    System.out.println(count);
+                                    Thread.sleep(1000);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            sampleListener.reset();
+                            sampleListener.onFocusGained(controller);
+
+                            while(true){
+                                if (sampleListener.checkFinish() == true){
+                                    if(sampleListener.checkValid() == true) {
+                                        System.out.println("Done!!!");
+                                        recordSign(sampleListener.returnOneSample(), signName, sign, allsign);
+                                        break;
+                                    } else {
+                                        System.out.println("The recording is invalid");
+                                        break;
+                                    }
+                                }
+                                Thread.currentThread().sleep(10);   // The current thread is too fast, will fail to trace Listener if missing this code
+                            }
+                            sampleListener.onFocusLost(controller);
+
+                            /*
+                            while (true) {
+                                Frame frame = controller.frame();
+                                System.out.println("The frame is valid?" + frame.hand(0).palmVelocity());
+                                if (recordingMode == true) {
+                                    //recordSign(frame, oneSample,signName, sign,allsign);     //recordingMode = false at the end of recordSign
+                                } else {
+                                    break;
+                                }
+                            }*/
+
+
+                            break;
+                        case 2:
+                            printTraining();
+                            System.out.println("Please enter the name of the sign you want to train: ");
+                            String trainName = sc.next();
+                            if (allsign.getAllSign().containsKey(trainName)) {
+                                System.out.println("Sign found, ready to start training");
+                                //recordingMode = true;
+                                ready(countDown);
+
+                               // SampleListener trainListener = new SampleListener();   //new a listener everytime
+                                //controller.addListener(trainListener);             // add listener, grab data
+                                sampleListener.reset();
+                                sampleListener.onFocusGained(controller);
+                                /**
+                                                                * keep grabbing the frame from controller, check whether it is recordable, add to the oneSample if it is. """"put it as one sample of specific sign"""
+                                                                 */
+                                while(true){
+                                    if(sampleListener.checkFinish() == true){
+                                        if(sampleListener.checkValid() == true) {
+                                            trainOneSign(sampleListener.returnOneSample(), trainName, allsign);
+                                            break;
+                                        } else {
+                                            System.out.println("The recording is invalid");
+                                            break;
+                                        }
+                                    }
+                                    Thread.currentThread().sleep(10);       //It is necessary, without it, bug occur
+                                }
+                                //controller.removeListener(trainListener);
+                                sampleListener.onFocusLost(controller);
+                            /*
+                                while (true) {
+                                    Frame frame = controller.frame();
+                                    if (recordingMode == true) {
+                                        trainOneSign(frame,oneSample,trainName,allsign); //recordingMode = false at the end of trainOneSign
+                                    } else {
+                                        break;
+                                    }
+                                }
+                             */
+                            }else{          // sign not found
+                                System.out.println("Sign not found!");
+                                inputValid = false;
+                                //recordingMode = false;
+                                break;
+                            }
+
+                            break;
+                        case 3:
+                            printAllDetails();
+                            sampleListener.onFocusLost(controller);
+                            break;
+                        default:
+                            System.out.println("Please enter a valid option");
+                            sampleListener.onFocusLost(controller);
+                            inputValid = false;
+                            break;
+                    }
+                    if (inputValid == false) {       // go back and ask again if the input is not valid
+                        sign = null;
+                        continue;
+                    }
+
+                }
+            }
+        }
+    }
+
+    public static void trainOneSign( ArrayList<Frame> oneSample, String signName, allSign allsign){
+        allsign.getSign(signName).addSample(oneSample);
+        /*
+        if (recordableFrame(frame, minRecVelocity, maxRecVelocity) == true) {
+            recording = true;
+            recordFrame(oneSample, frame);
+        } else if (recordableFrame(frame, minRecVelocity, maxRecVelocity) == false && recording == true) {
+            ///////////////recording finish
+            if (oneSample.size() >= minPoseFrames) {
+                allsign.getSign(signName).addSample(oneSample);
+            }
+            recordingMode = false;      //finish recording
+        }
+        */
+    }
+
+    public static void recordSign( ArrayList<Frame> oneSample,String signName, Sign sign, allSign allsign) {
+        sign.addSample(oneSample);
+        sign.setSignName(signName);
+        sign.setHandCount(oneSample.get(0).hands().count());
+        int fingerCount = 0;
+        if(oneSample.get(0).hands().count() > 1){
+            sign.setHandType(bothHand);
+            for(Hand hand : oneSample.get(0).hands()){
+                for (Finger finger: hand.fingers()){
+                    if(finger.isExtended()){
+                        fingerCount++;
                     }
                 }
-
-
-
             }
-            if (controller.isConnected() == false) {
-                listener.onDisconnect(controller);  // it will print "disconnected"
-                while(controller.isConnected() == false){
-                    Thread.currentThread().wait(1000);
+        } else if(oneSample.get(0).hands().count() == 1){
+            if(oneSample.get(0).hands().get(0).isLeft()){
+                sign.setHandType(leftHand);
+                for (Finger finger: oneSample.get(0).hands().get(0).fingers()){     //doesn't work when hands.get(0) change to hand(0)
+                    if(finger.isExtended()){
+                        fingerCount++;
+                    }
                 }
-            }
-        }
-    }
-
-    public static boolean recordableFrame(Frame frame, float min, float max){
-        HandList hands = frame.hands();
-        boolean recordable = false;
-        /*  First check the palmVelocity of each hand to see if it is moving
-        *   Then check each finger of each hand to see if it is moving*/
-        for(int i = 0; i < hands.count(); i++ ){
-            if( recordable == true){
-                break;
-            }
-            Hand hand = hands.get(i);
-            FingerList fingerList = hand.fingers();
-            // find the palmVelocity and see if it is between min and max
-            // Maybe we can use pythagoras theorem to get more accurate one
-            float maxPalmVelocity  = Math.max( Math.abs(hand.palmVelocity().getX()),
-                                            Math.abs(hand.palmVelocity().getY())
-                                            );
-            maxPalmVelocity        = Math.max(Math.abs(maxPalmVelocity),
-                                            Math.abs(hand.palmVelocity().getZ())
-                                            );
-            if( maxPalmVelocity >= min){
-                if( maxPalmVelocity <=max){
-                    recordable = true;
-                    break;
-                }
-            }
-            for(int j = 0; j < fingerList.count(); j++){
-                com.leapmotion.leap.Vector tipV =   fingerList.get(j).tipVelocity();
-                float maxTipV    =   Math.max(  Math.abs(tipV.getX()),
-                                                Math.abs(tipV.getY())
-                                                );
-                maxTipV = Math.max( maxTipV,
-                                    Math.abs(tipV.getZ())
-                                    );
-                if(maxTipV >= min){
-                    if(maxTipV <= max){
-                        recordable = true;
-                        break;
+            } else if (oneSample.get(0).hands().get(0).isRight()){
+                sign.setHandType(rightHand);
+                for (Finger finger: oneSample.get(0).hands().get(0).fingers()){      //doesn't work when hands.get(0) change to hand(0)
+                    if(finger.isExtended()){
+                        fingerCount++;
                     }
                 }
             }
+            /**
+             *  I find that hands.get(0)  != hand(0). That is because hand(0) will get the hand with ID = 0, which is hard to track;
+             *  But hands.get(0) will get the first hand in the current list
+             */
+
         }
 
-        if(recordable){
-            recordedFrames++;
-            if(recordedFrames >= minPoseFrames){
-                recording = true;
+        sign.setFingerCount(fingerCount);
+
+        allsign.addOneSign(sign);
+
+        /*
+        if (recordableFrame(frame, minRecVelocity, maxRecVelocity) == true) {
+
+            recording = true;
+            recordFrame(oneSample, frame);
+        } else if (recordableFrame(frame, minRecVelocity, maxRecVelocity) == false && recording == true) {
+            ///////////////recording finish
+                if (oneSample.size() >= minPoseFrames) {
+                System.out.println("HI" + oneSample.get(0).hand(0).toString());
+                sign.addSample(oneSample);
+                sign.setSignName(signName);
+                sign.setHandCount(oneSample.get(0).hands().count());            ///////// I use the first frame
+                sign.setFingerCount(oneSample.get(0).fingers().count());
+
+                if(oneSample.get(0).hands().count() > 1){
+                    sign.setSignName(bothHand);
+                }else if(oneSample.get(0).hand(0).isLeft()){
+                    sign.setSignName(leftHand);
+                }else if(oneSample.get(0).hand(0).isRight()){
+                    sign.setSignName(rightHand);
+                }
+
+                allsign.addOneSign(sign);
+
+            }else{
+                recordingMode = false;      // not sure whether it will be memory leak at line 53 when new a sign and arraylist
             }
-        } else {
-            recordedFrames = 0;
+            recordingMode = false;      //finish recording
+        }
+    */
+    }
+
+
+
+    public static void printTraining(){
+        System.out.println("There are " + allsign.getAllSign().size() + " sign in database:\n");
+
+        for (String key : allsign.getAllSign().keySet()) {
+            System.out.println("Sign Name:  " + key + "   , Consist of " + allsign.getAllSign().get(key).getAllSample().size() + " Sample");
         }
 
-        return recordable;  //return if the hand is moving or not
+        System.out.println("");
     }
 
-    public static ArrayList<Frame> recordFrame(ArrayList<Frame> oneSample, Frame frame ){
-        oneSample.add(frame);
-        return oneSample;
+    public static void printAllDetails(){
+        System.out.println("There are " + allsign.getAllSign().size() + " sign in database:\n");
+
+        for (String key : allsign.getAllSign().keySet()) {
+            System.out.println("Sign Name   : " + key + " ,   Consist of " + allsign.getAllSign().get(key).getAllSample().size() + " Sample");
+            System.out.println("Hand Count  : " + allsign.getAllSign().get(key).getHandCount());
+            System.out.println("Hand Type   :" + allsign.getAllSign().get(key).getHandType());
+            System.out.println("Finger Count = " + allsign.getAllSign().get(key).getFingerCount());
+        }
+
+        System.out.println(" \n All sign printed");
     }
 
 
 
-    public void startTraining(int countDown, Sign sign, Frame frame){ // also the gesture set
-
+    public static void ready(int countDown){ // also the gesture set
+        int count = countDown;
+        for( ;count >=0; count--){
+            try{
+                System.out.println(count);
+                Thread.sleep(1000);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
-
-
 }
 
 /**
