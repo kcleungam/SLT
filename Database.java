@@ -69,6 +69,8 @@ public class Database {
         }else{//duplication, database get a serious problem
             throw new Exception("Duplicated Signs:\t"+sign.getSignName());
         }
+        
+        //TODO You have to return true/false
     }
 
     //save sampel(s)
