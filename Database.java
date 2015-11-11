@@ -63,14 +63,15 @@ public class Database {
             Sign temp=Jcoll.findOne("{SignName:#}",sign.getSignName()).as(Sign.class);
             //TODO:avoid duplicated samples
             for(ArrayList<Frame> f:sign.getAllSample())
-                temp.insertSample(sign.getAllSample(),f);
+                //temp.addSample(sign.getAllSample(),f);        // Wrong Statement
            // System.out.println("Added 1 new gesture.");
             return true;
         }else{//duplication, database get a serious problem
             throw new Exception("Duplicated Signs:\t"+sign.getSignName());
         }
         
-        //TODO You have to return true/false
+        //TODO I add return false, cuz you have to return true/false
+        return false;
     }
 
     //save sampel(s)
