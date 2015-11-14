@@ -48,8 +48,8 @@ public class SampleListener extends Listener {
 	static int pauseCount;
 	static int minPauseCount;
 
-	// TODO: constructor minRecVelocity differs from reset(), 
-	// which one should follow? 	 - Jacky
+	// TODO: constructor minRecVelocity differs from reset(),
+	// which one should follow? - Jacky
 	public SampleListener() {
 		minRecVelocity = 40;
 		maxRecVelocity = 300;
@@ -220,7 +220,7 @@ public class SampleListener extends Listener {
 				recordable = true;
 				break;
 			}
-			
+
 			// Check the min < tipVelocity < max ?
 			for (int j = 0; j < fingerList.count(); j++) {
 				com.leapmotion.leap.Vector tipV = fingerList.get(j).tipVelocity();

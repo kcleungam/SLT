@@ -1,3 +1,4 @@
+
 /**
  * Jongo supports MongoDB-java-driver with version 3.x
  * MongoDB-java-driver with version 3.x have different syntax with the previous versions.
@@ -12,81 +13,78 @@ import org.jongo.Jongo;
 
 import java.util.ArrayList;
 
-
 public class Database {
-    /* field */
+	/* field */
 
-    //basic info
-    private String database_name="";
-    private String collection_name="";
+	// basic info
+	private String database_name = "";
+	private String collection_name = "";
 
-    //Mongo
-    private MongoClient client;
+	// Mongo
+	private MongoClient client;
 
-    //Jongo
-    private Jongo Jdb;
-    private org.jongo.MongoCollection Jcoll;
+	// Jongo
+	private Jongo Jdb;
+	private org.jongo.MongoCollection Jcoll;
 
+	/* constructor */
 
+	public Database(String database_name, String collection_name) {
+		// record the database name
+		this.database_name = database_name;
+		this.collection_name = collection_name;
 
-    /* constructor */
+		// connect to the database
+		client = new MongoClient();
 
-    public Database(String database_name,String collection_name){
-        // record the database name
-        this.database_name=database_name;
-        this.collection_name=collection_name;
+		// create Jongo
+		// if it doesn't exist, Mongo will create it for you
+		Jdb = new Jongo(client.getDB(database_name));
+		// if it doesn't exist, Mongo will create it for you
+		Jcoll = Jdb.getCollection("gestures");
+	}
 
-        // connect to the database
-        client=new MongoClient();
+	/* methods */
 
-        // create Jongo
-        Jdb=new Jongo(client.getDB(database_name));//if it doesn't exist, Mongo will create it for you
-        Jcoll=Jdb.getCollection("gestures");//if it doesn't exist, Mongo will create it for you
-    }
+	/**
+	 * Save a Sign into the Database
+	 */
+	public boolean saveSign(Sign sign) throws Exception {
+		if (sign == null || !isNameValid(sign.getSignName())) {
+			System.err.println("Method 'SaveGesture' has received an improper parameter");
+			return false;
+		}
+		// check whether the given sign name exist
+		long existence = Jcoll.count("{SignName:#}", sign.getSignName());
+		if (existence == 0) {// insert
+			Jcoll.insert(sign);
+			System.out.println("Added 1 new gesture.");
+			return true;
+		} else if (existence == 1) {// add sample(s) in it
+			// TODO: directly modify the JSON
+			Sign temp = Jcoll.findOne("{SignName:#}", sign.getSignName()).as(Sign.class);
+			// TODO: avoid duplicated samples
+			for (ArrayList<Frame> f : sign.getAllSample())
+				// Wrong Statement
+				// temp.addSample(sign.getAllSample(),f);
+				// System.out.println("Added 1 new gesture.");
+				return true;
+		} else { // duplication, database get a serious problem
+			throw new Exception("Duplicated Signs:\t" + sign.getSignName());
+			return false;
+		}
 
-    /* methods */
+		// Nothing has been done, so return false
+		return false;
+	}
 
-    //save a gesture
-    public boolean saveSign(Sign sign) throws Exception{
-        if(sign==null||!isNameValid(sign.getSignName())) {
-            System.err.println("Method 'SaveGesture' has received an improper parameter");
-            return false;
-        }
-        //check whether the given sign name exist
-        long existence=Jcoll.count("{SignName:#}",sign.getSignName());
-        if(existence==0){//insert
-            Jcoll.insert(sign);
-            System.out.println("Added 1 new gesture.");
-            return true;
-        }else if(existence==1){//add sample(s) in it
-            //TODO: directly modify the JSON
-            Sign temp=Jcoll.findOne("{SignName:#}",sign.getSignName()).as(Sign.class);
-            //TODO:avoid duplicated samples
-            for(ArrayList<Frame> f:sign.getAllSample())
-                //temp.addSample(sign.getAllSample(),f);        // Wrong Statement
-           // System.out.println("Added 1 new gesture.");
-            return true;
-        }else{//duplication, database get a serious problem
-            throw new Exception("Duplicated Signs:\t"+sign.getSignName());
-        }
-        
-        //TODO I add return false, cuz you have to return true/false
-        return false;
-    }
+	// save sample(s)
 
-    //save sampel(s)
-
-
-
-
-    /* helper function */
-    private boolean isNameValid(String name){
-        //ToDo: may use regular expression to forbid certain kinds of gesture names
-        return !(name.equals(""));
-    }
-
-
-
-
+	/* helper function */
+	private boolean isNameValid(String name) {
+		// TODO: may use regular expression to forbid certain kinds of gesture
+		// names
+		return !(name.equals(""));
+	}
 
 }
