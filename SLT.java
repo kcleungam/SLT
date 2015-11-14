@@ -29,7 +29,7 @@ import java.util.Scanner;
 
 public class SLT {
 
-	// What's the use of recordingMode? - by Jacky
+	// TODO: What's the use of recordingMode? - by Jacky
 	static boolean recordingMode = false;
 	static boolean recording = false;
 
@@ -41,13 +41,14 @@ public class SLT {
 	static allSign allsign = new allSign();
 
 	public static void main(String args[]) throws InterruptedException {
-		Controller controller = new Controller();// Create New Controller For
-													// The Leap
+		// New Controller for the Leap
+		Controller controller = new Controller();
 		Scanner sc = new Scanner(System.in);
-		SampleListener sampleListener = new SampleListener(); // new a listener
-																// everytime
+		// New a Listener everytime
+		SampleListener sampleListener = new SampleListener();
 		sampleListener.onFocusLost(controller);
-		controller.addListener(sampleListener); // add listener, grab data
+		// Add listener, grab data
+		controller.addListener(sampleListener);
 		while (true) {
 			if (controller.isConnected() == true) {
 				while (true) {
@@ -61,45 +62,37 @@ public class SLT {
 					switch (i) {
 					case 1:
 						// recordingMode = true;
-						/**
+						/*
 						 * keep grabbing the frame from controller, check
 						 * whether it is recordable, add to oneSample if it is.
 						 * """store as new Sign"""
 						 */
-						System.out.println("Please enter the gesture name");
+						System.out.println("Please enter the gesture name: ");
 						String signName = sc.next();
-						ready();
-						sampleListener.reset();
-						sampleListener.onFocusGained(controller);
+						if (allsign.getAllSign().containsKey(signName)) {
+							System.out.println("The name existed in the database, exiting to menu... ");
+						} else {
+							ready();
+							sampleListener.reset();
+							sampleListener.onFocusGained(controller);
 
-						while (true) {
-							if (sampleListener.checkFinish() == true) {
-								if (sampleListener.checkValid() == true) {
-									System.out.println("Save this Sample? (Y/N)");
-									while (signName = sc.next()) {
-										if (signName == "Y") {
-											System.out.println("Done!!!");
+							while (true) {
+								if (sampleListener.checkFinish()) {
+									if (sampleListener.checkValid()) {
+										if (savePrompt()) {
 											recordSign(sampleListener.returnOneSample(), signName, sign, allsign);
-											break;
-										} else if (signName == "N") {
-											System.out.println("The Sample is not added.");
-											break;
-										} else {
-											System.out.println("Please input Y or N.");
-											System.out.println("Save this Sample? (Y/N)");
 										}
+									} else {
+										System.out.println("The recording is invalid. ");
 									}
-								} else {
-									System.out.println("The recording is invalid");
+									break;
 								}
-								break;
+								// The current thread is too fast, will fail to
+								// trace Listener if missing this code
+								Thread.currentThread().sleep(10);
 							}
-							// The current thread is too fast, will fail to
-							// trace Listener if missing this code
-							Thread.currentThread().sleep(10);
+							sampleListener.onFocusLost(controller);
 						}
-						sampleListener.onFocusLost(controller);
-
 						/*
 						 * while (true) { Frame frame = controller.frame();
 						 * System.out.println("The frame is valid?" +
@@ -127,21 +120,22 @@ public class SLT {
 							// listener, grab data
 							sampleListener.reset();
 							sampleListener.onFocusGained(controller);
-							/**
+							/*
 							 * keep grabbing the frame from controller, check
 							 * whether it is recordable, add to the oneSample if
 							 * it is. """"put it as one sample of specific
 							 * sign"""
 							 */
 							while (true) {
-								if (sampleListener.checkFinish() == true) {
-									if (sampleListener.checkValid() == true) {
-										trainOneSign(sampleListener.returnOneSample(), trainName, allsign);
-										break;
+								if (sampleListener.checkFinish()) {
+									if (sampleListener.checkValid()) {
+										if (savePrompt()) {
+											trainOneSign(sampleListener.returnOneSample(), trainName, allsign);
+										}
 									} else {
 										System.out.println("The recording is invalid");
-										break;
 									}
+									break;
 								}
 								// It is necessary, without it, bug occur
 								Thread.currentThread().sleep(10);
@@ -173,12 +167,11 @@ public class SLT {
 						inputValid = false;
 						break;
 					}
-					if (inputValid == false) { // go back and ask again if the
-												// input is not valid
+					if (inputValid == false) {
+						// go back and ask again if the input is not valid
 						sign = null;
 						continue;
 					}
-
 				}
 			}
 		}
@@ -197,6 +190,9 @@ public class SLT {
 		 */
 	}
 
+	/**
+	 * Records the attributes of the new Sign and the Sample frame
+	 */
 	public static void recordSign(ArrayList<Frame> oneSample, String signName, Sign sign, allSign allsign) {
 		sign.addSample(oneSample);
 		sign.setSignName(signName);
@@ -279,6 +275,9 @@ public class SLT {
 		System.out.println("");
 	}
 
+	/**
+	 * Print out the basic info of the Sign stored in the trainer.
+	 */
 	public static void printAllDetails() {
 		System.out.println("There are " + allsign.getAllSign().size() + " sign in database:\n");
 
@@ -296,14 +295,32 @@ public class SLT {
 	/**
 	 * Provide a 3-second countdown.
 	 */
-	public static void ready() { // also the gesture set
-		int count = 3;
-		for (; count >= 0; count--) {
+	public static void ready() {
+		for (int count = 3; count >= 0; count--) {
 			try {
 				System.out.println(count);
 				Thread.sleep(1000);
 			} catch (Exception e) {
 				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * Give a save prompt
+	 */
+	public static boolean savePrompt() {
+		System.out.println("Save this Sample? (Y/N)");
+		while (signName = sc.next()) {
+			if (signName == "Y") {
+				System.out.println("Done!!!");
+				return true;
+			} else if (signName == "N") {
+				System.out.println("The Sample is not added.");
+				return false;
+			} else {
+				System.out.println("Please input Y or N.");
+				System.out.println("Save this Sample? (Y/N)");
 			}
 		}
 	}

@@ -48,6 +48,8 @@ public class SampleListener extends Listener {
 	static int pauseCount;
 	static int minPauseCount;
 
+	// TODO: constructor minRecVelocity differs from reset(), 
+	// which one should follow? 	 - Jacky
 	public SampleListener() {
 		minRecVelocity = 40;
 		maxRecVelocity = 300;
@@ -81,7 +83,6 @@ public class SampleListener extends Listener {
 	 * 
 	 * @param controller
 	 */
-
 	public void onConnect(Controller controller) {
 		System.out.println("Connected");
 	}
@@ -143,7 +144,6 @@ public class SampleListener extends Listener {
 	 * 
 	 * @param controller
 	 */
-
 	public void onFocusLost(Controller controller) {
 		focus = false;
 		System.out.println("Focus lost");
@@ -186,8 +186,7 @@ public class SampleListener extends Listener {
 						System.out.println("Yes it finished");
 
 						// Important!!!
-						// This function will do nothing after finish
-						// recording
+						// This function will do nothing after finish recording
 						// It's time to return oneSample
 
 					} else if (oneSample.size() < minPoseFrames) {
@@ -200,6 +199,9 @@ public class SampleListener extends Listener {
 		}
 	}
 
+	/**
+	 * Return if the hand velocity is within the range or not
+	 */
 	public static boolean recordableFrame(Frame frame, float min, float max) {
 		HandList hands = frame.hands();
 		boolean recordable = false;
@@ -208,38 +210,37 @@ public class SampleListener extends Listener {
 		 * check each finger of each hand to see if it is moving
 		 */
 		for (int i = 0; i < hands.count(); i++) {
-			if (recordable == true) {
-				break;
-			}
 			Hand hand = hands.get(i);
 			FingerList fingerList = hand.fingers();
-			// find the palmVelocity and see if it is between min and max
-			// Maybe we can use pythagoras theorem to get more accurate one
-			float maxPalmVelocity = Math.max(Math.abs(hand.palmVelocity().getX()),
-					Math.abs(hand.palmVelocity().getY()));
-			maxPalmVelocity = Math.max(Math.abs(maxPalmVelocity), Math.abs(hand.palmVelocity().getZ()));
+			// Check the min < palmVelocity < max ?
+			float PalmVelocity = pythCal(hand.palmVelocity().getX(), hand.palmVelocity().getY(),
+					hand.palmVelocity().getZ());
 
-			if (maxPalmVelocity >= min) {
-				if (maxPalmVelocity <= max) {
+			if (min <= PalmVelocity && PalmVelocity <= max) {
+				recordable = true;
+				break;
+			}
+			
+			// Check the min < tipVelocity < max ?
+			for (int j = 0; j < fingerList.count(); j++) {
+				com.leapmotion.leap.Vector tipV = fingerList.get(j).tipVelocity();
+				float TipV = pythCal(tipV.getX(), tipV.getY(), tipV.getZ());
+
+				if (min <= TipV && TipV <= max) {
 					recordable = true;
 					break;
 				}
 			}
-			for (int j = 0; j < fingerList.count(); j++) {
-				com.leapmotion.leap.Vector tipV = fingerList.get(j).tipVelocity();
-				float maxTipV = Math.max(Math.abs(tipV.getX()), Math.abs(tipV.getY()));
-				maxTipV = Math.max(maxTipV, Math.abs(tipV.getZ()));
-
-				if (maxTipV >= min) {
-					if (maxTipV <= max) {
-						recordable = true;
-						break;
-					}
-				}
-			}
 		}
 
-		return recordable; // return if the hand is moving or not
+		return recordable;
+	}
+
+	/**
+	 * Applies the Pyth. Theorem on the 3D dimention.
+	 */
+	public static float pythCal(float X, float Y, float Z) {
+		return Math.sqrt(Math.pow(X, 2) + Math.pow(Y, 2) + Math.pow(Z, 2));
 	}
 
 	public static void recordFrame(ArrayList<Frame> oneSample, Frame frame) {
