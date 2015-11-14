@@ -17,8 +17,8 @@ public class Database {
 	/** field */
 
 	// fundamental information
-	private String database_name;
-	private String collection_name;
+	private String database_name="Signs";
+	private String collection_name="HK_Signs";
 
 	// Mongo
 	private MongoClient client;
@@ -45,6 +45,8 @@ public class Database {
 		// if it doesn't exist, Mongo will create it for you
 		Jcoll = Jdb.getCollection("gestures");
 	}
+
+
 
 	/** methods */
 
@@ -73,7 +75,7 @@ public class Database {
 	}
 
 	//remove a sign
-	public boolean remove(Sign sign) throws Exception{
+	public boolean removeSign(Sign sign) throws Exception{
 		if (sign == null || isNameInvalid(sign.getName())) {
 			System.err.println("Method 'SaveGesture' has received an improper parameter");
 			return false;
@@ -84,17 +86,17 @@ public class Database {
 		if (existence == 0) // not exist
 			return false;
 		else if (existence == 1) {// add sample(s) in it
-			for(Sample s:sign.getAllSamples()){
-				Jcoll.update("{name:#}", sign.getName()).with("{$addToSet:{samples:#}}",s);
-				return true;
-			}
+			Jcoll.remove("{name:#}",sign.getName());
+			return true;
 		}
 
 		// else, duplication, database get a serious problem
 		throw new Exception("Duplicated Signs:\t" + sign.getName());
 	}
 
-	/* helper function */
+
+
+	/** helper function */
 	private boolean isNameInvalid(String name) {
 		// TODO: may use regular expression to forbid certain kinds of gesture
 		if(name==null||name.isEmpty())

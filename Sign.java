@@ -29,7 +29,15 @@ public class Sign {
 
 	/** constructor */
 
-	//basic constructor
+	//basic constructor with 1 sample only
+	public Sign(String SignName,Sample sample) throws Exception {
+		if(SignName==null||isNameInvalid(SignName)||sample==null)
+			throw new Exception();
+		this.name=SignName;
+		this.samples.add(sample);
+	}
+
+	//basic constructor with a sequence of samples
 	public Sign(String SignName, Collection<Sample> samples) throws Exception {
 		if(SignName==null||isNameInvalid(SignName)||samples==null||samples.isEmpty())
 			throw new Exception();

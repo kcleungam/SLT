@@ -28,6 +28,7 @@ import java.util.Scanner;
 */
 
 public class SLT {
+	private static Database db=new Database("Signs","HK_Signs");
 
 	// TODO: What's the use of recordingMode? - by Jacky
 	static boolean recordingMode = false;
@@ -38,9 +39,9 @@ public class SLT {
 	static String leftHand = "Left";
 	static String rightHand = "Right";
 	static String bothHand = "Both";
-	static SignBank allsign = new SignBank();
+	static SignBank allSigns = new SignBank();
 
-	public static void main(String args[]) throws InterruptedException {
+	public static void main(String args[]) throws Exception {
 		// New Controller for the Leap
 		Controller controller = new Controller();
 		Scanner sc = new Scanner(System.in);
@@ -57,8 +58,8 @@ public class SLT {
 							+ "2. Train your translator/n " + "3. Print all sign");
 					int i = sc.nextInt();
 					boolean inputValid = true;
-
-					Sign sign = new Sign();
+					//Sign sign = new Sign();
+					Sign sign;
 					switch (i) {
 					case 1:
 						// recordingMode = true;
@@ -69,7 +70,7 @@ public class SLT {
 						 */
 						System.out.println("Please enter the gesture name: ");
 						String signName = sc.next();
-						if (allsign.getAllSigns().containsKey(signName)) {
+						if (allSigns.getAllSigns().containsKey(signName)) {
 							System.out.println("The name existed in the database, exiting to menu... ");
 						} else {
 							ready();
@@ -80,7 +81,11 @@ public class SLT {
 								if (sampleListener.checkFinish()) {
 									if (sampleListener.checkValid()) {
 										if (savePrompt()) {
-											recordSign(sampleListener.returnOneSample(), signName, sign, allsign);
+											//recordSign(sampleListener.returnOneSample(), signName, sign, allsign);
+											sign=new Sign(signName,new Sample(sampleListener.returnOneSample()));
+											//ToDo: handle the boolean return value aftter adding the given sign
+											allSigns.addSign(signName,sign);
+											db.addSign(sign);
 										}
 									} else {
 										System.out.println("The recording is invalid. ");
@@ -109,7 +114,7 @@ public class SLT {
 						printTraining();
 						System.out.println("Please enter the name of the sign you want to train: ");
 						String trainName = sc.next();
-						if (allsign.getAllSign().containsKey(trainName)) {
+						if (allSigns.getAllSigns().containsKey(trainName)) {
 							System.out.println("Sign found, ready to start training");
 							// recordingMode = true;
 							ready();
@@ -130,7 +135,11 @@ public class SLT {
 								if (sampleListener.checkFinish()) {
 									if (sampleListener.checkValid()) {
 										if (savePrompt()) {
-											trainOneSign(sampleListener.returnOneSample(), trainName, allsign);
+											//trainOneSign(sampleListener.returnOneSample(), trainName, allsign);
+											//ToDo: handle the boolean return type after adding sample to the given sign
+											sign=new Sign(trainName,new Sample(sampleListener.returnOneSample()));
+											allSigns.addSign(trainName,sign);
+											db.addSign(sign);
 										}
 									} else {
 										System.out.println("The recording is invalid");
@@ -177,8 +186,8 @@ public class SLT {
 		}
 	}
 
-	public static void trainOneSign(ArrayList<Frame> oneSample, String signName, allSign allsign) {
-		allsign.getSign(signName).addSample(oneSample);
+	public static void trainOneSign(ArrayList<Frame> oneSample, String signName, SignBank allSigns) throws Exception {
+		allSigns.getSign(signName).addSample(new Sample(oneSample));
 		/*
 		 * if (recordableFrame(frame, minRecVelocity, maxRecVelocity) == true) {
 		 * recording = true; recordFrame(oneSample, frame); } else if
@@ -193,9 +202,9 @@ public class SLT {
 	/**
 	 * Records the attributes of the new Sign and the Sample frame
 	 */
-	public static void recordSign(ArrayList<Frame> oneSample, String signName, Sign sign, allSign allsign) {
-		sign.addSample(oneSample);
-		sign.setSignName(signName);
+	public static void recordSign(ArrayList<Frame> oneSample, String signName, Sign sign, SignBank allsign) throws Exception {
+		sign.addSample(new Sample(oneSample));
+		sign.setName(signName);
 		sign.setHandCount(oneSample.get(0).hands().count());
 		int fingerCount = 0;
 		if (oneSample.get(0).hands().count() > 1) {
@@ -235,7 +244,7 @@ public class SLT {
 
 		sign.setFingerCount(fingerCount);
 
-		allsign.addOneSign(sign);
+		allsign.addSign(sign.getName(),sign);
 
 		/*
 		 * if (recordableFrame(frame, minRecVelocity, maxRecVelocity) == true) {
@@ -265,11 +274,11 @@ public class SLT {
 	}
 
 	public static void printTraining() {
-		System.out.println("There are " + allsign.getAllSign().size() + " sign in database:\n");
+		System.out.println("There are " + allSigns.getAllSigns().size() + " sign in database:\n");
 
-		for (String key : allsign.getAllSign().keySet()) {
+		for (String key : allSigns.getAllSigns().keySet()) {
 			System.out.println("Sign Name:  " + key + "   , Consist of "
-					+ allsign.getAllSign().get(key).getAllSample().size() + " Sample");
+					+ allSigns.getAllSigns().get(key).getAllSamples().size() + " Sample");
 		}
 
 		System.out.println("");
@@ -279,14 +288,14 @@ public class SLT {
 	 * Print out the basic info of the Sign stored in the trainer.
 	 */
 	public static void printAllDetails() {
-		System.out.println("There are " + allsign.getAllSign().size() + " sign in database:\n");
+		System.out.println("There are " + allSigns.getAllSigns().size() + " sign in database:\n");
 
-		for (String key : allsign.getAllSign().keySet()) {
+		for (String key : allSigns.getAllSigns().keySet()) {
 			System.out.println("Sign Name   : " + key + " ,   Consist of "
-					+ allsign.getAllSign().get(key).getAllSample().size() + " Sample");
-			System.out.println("Hand Count  : " + allsign.getAllSign().get(key).getHandCount());
-			System.out.println("Hand Type   :" + allsign.getAllSign().get(key).getHandType());
-			System.out.println("Finger Count = " + allsign.getAllSign().get(key).getFingerCount());
+					+ allSigns.getAllSigns().get(key).getAllSamples().size() + " Sample");
+			System.out.println("Hand Count  : " + allSigns.getAllSigns().get(key).getHandCount());
+			System.out.println("Hand Type   :" + allSigns.getAllSigns().get(key).getHandType());
+			System.out.println("Finger Count = " + allSigns.getAllSigns().get(key).getFingerCount());
 		}
 
 		System.out.println(" \n All sign printed");
@@ -311,7 +320,10 @@ public class SLT {
 	 */
 	public static boolean savePrompt() {
 		System.out.println("Save this Sample? (Y/N)");
-		while (signName = sc.next()) {
+		Scanner sc = new Scanner(System.in);//added
+		String signName=new String();//added
+		while(true){//while (signName = sc.next()) {
+			signName=sc.next();//added
 			if (signName == "Y") {
 				System.out.println("Done!!!");
 				return true;
