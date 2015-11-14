@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2bd79e6d-dd5d-4091-a25a-2bcc7ad806c8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Database.java" afterPath="$PROJECT_DIR$/Database.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SLT.java" afterPath="$PROJECT_DIR$/SLT.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sign.java" afterPath="$PROJECT_DIR$/Sign.java" />
-    </list>
+    <list default="true" id="2bd79e6d-dd5d-4091-a25a-2bcc7ad806c8" name="Default" comment="" />
     <ignored path="SLT.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
