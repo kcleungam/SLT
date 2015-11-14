@@ -36,210 +36,226 @@ import com.leapmotion.leap.*;
 
 import java.util.ArrayList;
 
-public class SampleListener extends Listener{
-    static float minRecVelocity;
-    static float maxRecVelocity;
-    static int minPoseFrames;
-    static ArrayList<Frame> oneSample;
-    static boolean recording;
-    static boolean finishRec;
-    static boolean validSample;
-    static boolean focus;
-    static int pauseCount;
-    static int minPauseCount;
+public class SampleListener extends Listener {
+	static float minRecVelocity;
+	static float maxRecVelocity;
+	static int minPoseFrames;
+	static ArrayList<Frame> oneSample;
+	static boolean recording;
+	static boolean finishRec;
+	static boolean validSample;
+	static boolean focus;
+	static int pauseCount;
+	static int minPauseCount;
 
-    public SampleListener(){
-        minRecVelocity     = 40;
-        maxRecVelocity    = 300;
-        minPoseFrames       = 30;
-        oneSample = new ArrayList<Frame>();
-        recording = false;
-        finishRec = false;
-        validSample = false;
-        focus = false;
-        pauseCount = 0;
-        minPauseCount = 10;
-    }
+	public SampleListener() {
+		minRecVelocity = 40;
+		maxRecVelocity = 300;
+		minPoseFrames = 30;
+		oneSample = new ArrayList<Frame>();
+		recording = false;
+		finishRec = false;
+		validSample = false;
+		focus = false;
+		pauseCount = 0;
+		minPauseCount = 10;
+	}
 
-    public void reset(){
-        minRecVelocity     = 50;
-        maxRecVelocity    = 300;
-        minPoseFrames       = 30;
-        oneSample = new ArrayList<Frame>();
-        recording = false;
-        finishRec = false;
-        validSample = false;
-        focus = false;
-        pauseCount = 0;
-        minPauseCount = 10;
-    }
-    /**
-     * Called when the Controller object connects to the Leap Motion software and the Leap Motion hardware device is plugged in,
-     * or when this Listener object is added to a Controller that is already connected.
-     * @param controller
-     */
+	public void reset() {
+		minRecVelocity = 50;
+		maxRecVelocity = 300;
+		minPoseFrames = 30;
+		oneSample = new ArrayList<Frame>();
+		recording = false;
+		finishRec = false;
+		validSample = false;
+		focus = false;
+		pauseCount = 0;
+		minPauseCount = 10;
+	}
 
-    public void onConnect(Controller controller) {
-        System.out.println("Connected");
-    }
-    public void onDisconnect(Controller controller) {
-        //Note: not dispatched when running in a debugger.
-        System.out.println("Disconnected");
-    }
-    public void  onDeviceChange (Controller controller){
-        System.out.println("Device changed");
-    }
+	/**
+	 * Called when the Controller object connects to the Leap Motion software
+	 * and the Leap Motion hardware device is plugged in, or when this Listener
+	 * object is added to a Controller that is already connected.
+	 * 
+	 * @param controller
+	 */
 
-    public void onExit(Controller controller) {
-        System.out.println("Exited");
-    }
+	public void onConnect(Controller controller) {
+		System.out.println("Connected");
+	}
 
+	public void onDisconnect(Controller controller) {
+		// Note: not dispatched when running in a debugger.
+		System.out.println("Disconnected");
+	}
 
-    public void onInit (Controller controller){
-        System.out.println("Initialized");
-    }
+	public void onDeviceChange(Controller controller) {
+		System.out.println("Device changed");
+	}
 
-    /**
-     * Called when the Leap Motion daemon/service connects to your application Controller.
-     * @param controller
-     */
-    public void  onServiceConnect (Controller controller){
-        System.out.println("Service connected");
-    }
+	public void onExit(Controller controller) {
+		System.out.println("Exited");
+	}
 
-    public void  onServiceDisconnect (Controller controller){
-        System.out.println("Service connection lost");
-    }
+	public void onInit(Controller controller) {
+		System.out.println("Initialized");
+	}
 
-    /**
-     *      **** This function is very important!!!!!***
-     *      Called when this application becomes the foreground application.
-     *      Only the foreground application receives tracking data from the Leap Motion Controller. This function is only called when the controller object is in a connected state.
-     *      ***** That means, call this function will enable to grab data
-     * @param controller
-     */
-    public void onFocusGained (Controller controller){
-        focus = true;
-        System.out.println("Focus gained");
-    }
+	/**
+	 * Called when the Leap Motion daemon/service connects to your application
+	 * Controller.
+	 * 
+	 * @param controller
+	 */
+	public void onServiceConnect(Controller controller) {
+		System.out.println("Service connected");
+	}
 
-    /**
-     *    **** Another important function, it disable the listener. You can enable it by can onFocusGained ****
-     * @param controller
-     */
+	/**
+	 * Called when the Leap Motion daemon/service disconnects to your
+	 * application Controller.
+	 * 
+	 * @param controller
+	 */
+	public void onServiceDisconnect(Controller controller) {
+		System.out.println("Service connection lost");
+	}
 
-    public void  onFocusLost (Controller controller){
-        focus = false;
-        System.out.println("Focus lost");
-    }
-    /**
-     * Called when a ***new frame of hand and finger tracking data is available****.
-     *Access the new frame data using the Controller::frame() function.
-     * !!!!! Be Careful, this function will call repeatedly, Just like while loop
-     * @param controller
-     */
-    public void onFrame(Controller controller) {
-        Frame frame = controller.frame();
+	/**
+	 * **** This function is very important!!!!!*** Called when this application
+	 * becomes the foreground application. Only the foreground application
+	 * receives tracking data from the Leap Motion Controller. This function is
+	 * only called when the controller object is in a connected state. *****
+	 * That means, call this function will enable to grab data
+	 * 
+	 * @param controller
+	 */
+	public void onFocusGained(Controller controller) {
+		focus = true;
+		System.out.println("Focus gained");
+	}
 
-        // This part of function will check whether the frame is recordable. It start to record when
-        // recordable frame = true; When the user finish, it count 10 more frame which are not able to record ( stop / too fast)
-        // That means users stop for a while.
-        // The benefit of doing this is to enable short pausing during the change of velocity
-        // e.g. from + 100 to -100 will have 0 in between, previous method can't record this
+	/**
+	 * **** Another important function, it disable the listener. You can enable
+	 * it by can onFocusGained ****
+	 * 
+	 * @param controller
+	 */
 
-        if(focus == true) {
-            if (finishRec == false) {
-                if (recordableFrame(frame, minRecVelocity, maxRecVelocity) == true) {
-                    pauseCount = 0;
-                    recording = true;
-                    recordFrame(oneSample, frame);
-                } else if (recordableFrame(frame, minRecVelocity, maxRecVelocity) == false && recording == true) {
-                    pauseCount ++;
-                    if(pauseCount > minPauseCount) {
-                        System.out.println("Recording Finish");
-                        System.out.println("Sample Size" + oneSample.size());
-                        if (oneSample.size() >= minPoseFrames) {
-                            finishRec = true;
-                            validSample = true;
-                            System.out.println("Yes it finished");
+	public void onFocusLost(Controller controller) {
+		focus = false;
+		System.out.println("Focus lost");
+	}
 
-                            //Important!!!
-                            // This function will do nothing after finish recording
-                            //It's time to return oneSample
+	/**
+	 * Called when a ***new frame of hand and finger tracking data is
+	 * available****. Access the new frame data using the Controller::frame()
+	 * function. !!!!! Be Careful, this function will call repeatedly, Just like
+	 * while loop
+	 * 
+	 * @param controller
+	 */
+	public void onFrame(Controller controller) {
+		Frame frame = controller.frame();
 
-                        } else if (oneSample.size() < minPoseFrames) {
-                            finishRec = true;
-                            validSample = false;
-                            System.out.println("Fail to Record, Moving Time Too Short!!!");
-                        }
-                    }
-                }
-            }
-        }
-    }
+		// This part of function will check whether the frame is recordable. It
+		// start to record when recordable frame = true;
+		// When the user finish, it count 10 more frame
+		// which are not able to record ( stop / too fast)
+		// That means users stop for a while.
+		// The benefit of doing this is to enable short pausing during the
+		// change of velocity
+		// e.g. from + 100 to -100 will have 0 in between, previous method can't
+		// record this
 
-    public static boolean recordableFrame(Frame frame, float min, float max){
-        HandList hands = frame.hands();
-        boolean recordable = false;
-        /*  First check the palmVelocity of each hand to see if it is moving
-        *   Then check each finger of each hand to see if it is moving*/
-        for(int i = 0; i < hands.count(); i++ ){
-            if( recordable == true){
-                break;
-            }
-            Hand hand = hands.get(i);
-            FingerList fingerList = hand.fingers();
-            // find the palmVelocity and see if it is between min and max
-            // Maybe we can use pythagoras theorem to get more accurate one
-            float maxPalmVelocity  = Math.max( Math.abs(hand.palmVelocity().getX()),
-                                               Math.abs(hand.palmVelocity().getY())
-                                               );
-            maxPalmVelocity        = Math.max(Math.abs(maxPalmVelocity),
-                                                Math.abs(hand.palmVelocity().getZ())
-                                                );
+		if (focus == true && finishRec == false) {
+			if (recordableFrame(frame, minRecVelocity, maxRecVelocity) == true) {
+				pauseCount = 0;
+				recording = true;
+				recordFrame(oneSample, frame);
+			} else if (recording == true) {
+				pauseCount++;
+				if (pauseCount > minPauseCount) {
+					System.out.println("Recording Finish");
+					System.out.println("Sample Size" + oneSample.size());
+					if (oneSample.size() >= minPoseFrames) {
+						finishRec = true;
+						validSample = true;
+						System.out.println("Yes it finished");
 
-            if( maxPalmVelocity >= min){
-                if( maxPalmVelocity <=max){
-                    recordable = true;
-                    break;
-                }
-            }
-            for(int j = 0; j < fingerList.count(); j++){
-                com.leapmotion.leap.Vector tipV =   fingerList.get(j).tipVelocity();
-                float maxTipV    =   Math.max(  Math.abs(tipV.getX()),
-                                                 Math.abs(tipV.getY())
-                                                );
-                maxTipV = Math.max( maxTipV,
-                        Math.abs(tipV.getZ())
-                );
+						// Important!!!
+						// This function will do nothing after finish
+						// recording
+						// It's time to return oneSample
 
-                if(maxTipV >= min){
-                    if(maxTipV <= max){
-                        recordable = true;
-                        break;
-                    }
-                }
-            }
-        }
+					} else if (oneSample.size() < minPoseFrames) {
+						finishRec = true;
+						validSample = false;
+						System.out.println("Fail to Record, " + "Time recorded is Too Short!!!");
+					}
+				}
+			}
+		}
+	}
 
+	public static boolean recordableFrame(Frame frame, float min, float max) {
+		HandList hands = frame.hands();
+		boolean recordable = false;
+		/*
+		 * First check the palmVelocity of each hand to see if it is moving Then
+		 * check each finger of each hand to see if it is moving
+		 */
+		for (int i = 0; i < hands.count(); i++) {
+			if (recordable == true) {
+				break;
+			}
+			Hand hand = hands.get(i);
+			FingerList fingerList = hand.fingers();
+			// find the palmVelocity and see if it is between min and max
+			// Maybe we can use pythagoras theorem to get more accurate one
+			float maxPalmVelocity = Math.max(Math.abs(hand.palmVelocity().getX()),
+					Math.abs(hand.palmVelocity().getY()));
+			maxPalmVelocity = Math.max(Math.abs(maxPalmVelocity), Math.abs(hand.palmVelocity().getZ()));
 
-        return recordable;  //return if the hand is moving or not
-    }
+			if (maxPalmVelocity >= min) {
+				if (maxPalmVelocity <= max) {
+					recordable = true;
+					break;
+				}
+			}
+			for (int j = 0; j < fingerList.count(); j++) {
+				com.leapmotion.leap.Vector tipV = fingerList.get(j).tipVelocity();
+				float maxTipV = Math.max(Math.abs(tipV.getX()), Math.abs(tipV.getY()));
+				maxTipV = Math.max(maxTipV, Math.abs(tipV.getZ()));
 
-    public static void recordFrame(ArrayList<Frame> oneSample, Frame frame ){
-        oneSample.add(frame);
-        return;
-    }
+				if (maxTipV >= min) {
+					if (maxTipV <= max) {
+						recordable = true;
+						break;
+					}
+				}
+			}
+		}
 
-    public static boolean checkFinish(){
-        return finishRec;
-    }
+		return recordable; // return if the hand is moving or not
+	}
 
-    public static boolean checkValid(){
-        return validSample;
-    }
+	public static void recordFrame(ArrayList<Frame> oneSample, Frame frame) {
+		oneSample.add(frame);
+		return;
+	}
 
-    public static ArrayList<Frame> returnOneSample(){
-        return oneSample;
-    }
+	public static boolean checkFinish() {
+		return finishRec;
+	}
+
+	public static boolean checkValid() {
+		return validSample;
+	}
+
+	public static ArrayList<Frame> returnOneSample() {
+		return oneSample;
+	}
 }
