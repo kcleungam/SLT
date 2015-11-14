@@ -240,7 +240,7 @@ public class SampleListener extends Listener {
 	 * Applies the Pyth. Theorem on the 3D dimention.
 	 */
 	public static float pythCal(float X, float Y, float Z) {
-		return Math.sqrt(Math.pow(X, 2) + Math.pow(Y, 2) + Math.pow(Z, 2));
+		return (float) Math.sqrt(Math.pow(X, 2) + Math.pow(Y, 2) + Math.pow(Z, 2));
 	}
 
 	public static void recordFrame(ArrayList<Frame> oneSample, Frame frame) {

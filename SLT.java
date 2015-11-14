@@ -38,7 +38,7 @@ public class SLT {
 	static String leftHand = "Left";
 	static String rightHand = "Right";
 	static String bothHand = "Both";
-	static allSign allsign = new allSign();
+	static SignBank allsign = new SignBank();
 
 	public static void main(String args[]) throws InterruptedException {
 		// New Controller for the Leap
@@ -69,7 +69,7 @@ public class SLT {
 						 */
 						System.out.println("Please enter the gesture name: ");
 						String signName = sc.next();
-						if (allsign.getAllSign().containsKey(signName)) {
+						if (allsign.getAllSigns().containsKey(signName)) {
 							System.out.println("The name existed in the database, exiting to menu... ");
 						} else {
 							ready();

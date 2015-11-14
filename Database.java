@@ -14,11 +14,11 @@ import org.jongo.Jongo;
 import java.util.ArrayList;
 
 public class Database {
-	/* field */
+	/** field */
 
-	// basic info
-	private String database_name = "";
-	private String collection_name = "";
+	// fundamental information
+	private String database_name;
+	private String collection_name;
 
 	// Mongo
 	private MongoClient client;
@@ -27,7 +27,9 @@ public class Database {
 	private Jongo Jdb;
 	private org.jongo.MongoCollection Jcoll;
 
-	/* constructor */
+
+
+	/** constructor */
 
 	public Database(String database_name, String collection_name) {
 		// record the database name
@@ -44,47 +46,60 @@ public class Database {
 		Jcoll = Jdb.getCollection("gestures");
 	}
 
-	/* methods */
+	/** methods */
 
-	/**
-	 * Save a Sign into the Database
-	 */
-	public boolean saveSign(Sign sign) throws Exception {
-		if (sign == null || !isNameValid(sign.getSignName())) {
+	//add a sign
+	public boolean addSign(Sign sign) throws Exception {
+		if (sign == null || isNameInvalid(sign.getName())) {
 			System.err.println("Method 'SaveGesture' has received an improper parameter");
 			return false;
 		}
+
 		// check whether the given sign name exist
-		long existence = Jcoll.count("{SignName:#}", sign.getSignName());
+		long existence = Jcoll.count("{name:#}", sign.getName());
 		if (existence == 0) {// insert
 			Jcoll.insert(sign);
-			System.out.println("Added 1 new gesture.");
+			//System.out.println("Added 1 new gesture.");
 			return true;
 		} else if (existence == 1) {// add sample(s) in it
-			// TODO: directly modify the JSON
-			Sign temp = Jcoll.findOne("{SignName:#}", sign.getSignName()).as(Sign.class);
-			// TODO: avoid duplicated samples
-			for (ArrayList<Frame> f : sign.getAllSample())
-				// Wrong Statement
-				// temp.addSample(sign.getAllSample(),f);
-				// System.out.println("Added 1 new gesture.");
+			for(Sample s:sign.getAllSamples()){
+				Jcoll.update("{name:#}", sign.getName()).with("{$addToSet:{samples:#}}",s);
 				return true;
-		} else { // duplication, database get a serious problem
-			throw new Exception("Duplicated Signs:\t" + sign.getSignName());
+			}
+		}
+
+		// else, duplication, database get a serious problem
+		throw new Exception("Duplicated Signs:\t" + sign.getName());
+	}
+
+	//remove a sign
+	public boolean remove(Sign sign) throws Exception{
+		if (sign == null || isNameInvalid(sign.getName())) {
+			System.err.println("Method 'SaveGesture' has received an improper parameter");
 			return false;
 		}
 
-		// Nothing has been done, so return false
-		return false;
+		// check whether the given sign name exist
+		long existence = Jcoll.count("{name:#}", sign.getName());
+		if (existence == 0) // not exist
+			return false;
+		else if (existence == 1) {// add sample(s) in it
+			for(Sample s:sign.getAllSamples()){
+				Jcoll.update("{name:#}", sign.getName()).with("{$addToSet:{samples:#}}",s);
+				return true;
+			}
+		}
+
+		// else, duplication, database get a serious problem
+		throw new Exception("Duplicated Signs:\t" + sign.getName());
 	}
 
-	// save sample(s)
-
 	/* helper function */
-	private boolean isNameValid(String name) {
+	private boolean isNameInvalid(String name) {
 		// TODO: may use regular expression to forbid certain kinds of gesture
-		// names
-		return !(name.equals(""));
+		if(name==null||name.isEmpty())
+			return true;
+		return false;
 	}
 
 }
