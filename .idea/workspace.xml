@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2bd79e6d-dd5d-4091-a25a-2bcc7ad806c8" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\KaChun\Documents\GitHub\SLT\out\production\SLT\allSign.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/SLT.class" afterPath="$PROJECT_DIR$/out/production/SLT/SLT.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/SampleListener.class" afterPath="$PROJECT_DIR$/out/production/SLT/SampleListener.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Sign.class" afterPath="$PROJECT_DIR$/out/production/SLT/Sign.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SLT.java" afterPath="$PROJECT_DIR$/SLT.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SampleListener.java" afterPath="$PROJECT_DIR$/SampleListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sign.java" afterPath="$PROJECT_DIR$/Sign.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/workspace.xml" afterPath="$PROJECT_DIR$/out/production/SLT/.idea/workspace.xml" />
     </list>
     <ignored path="SLT.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,8 +39,8 @@
       <file leaf-file-name="SLT.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SLT.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.71907216">
-              <caret line="380" column="2" selection-start-line="380" selection-start-column="2" selection-end-line="380" selection-end-column="2" />
+            <state vertical-scroll-proportion="0.22164948">
+              <caret line="293" column="40" selection-start-line="293" selection-start-column="40" selection-end-line="293" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -412,7 +407,13 @@
       <option name="project" value="LOCAL" />
       <updated>1447224591713</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fix all bugs">
+      <created>1447576854073</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1447576854073</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -457,7 +458,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix Native Code Library problem" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix Native Code Library problem" />
+    <MESSAGE value="Fix all bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix all bugs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -624,8 +626,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SLT.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71907216">
-          <caret line="380" column="2" selection-start-line="380" selection-start-column="2" selection-end-line="380" selection-end-column="2" />
+        <state vertical-scroll-proportion="0.22164948">
+          <caret line="293" column="40" selection-start-line="293" selection-start-column="40" selection-end-line="293" selection-end-column="40" />
           <folding />
         </state>
       </provider>

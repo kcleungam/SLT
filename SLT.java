@@ -234,38 +234,11 @@ public class SLT {
 			 // I find that hands.get(0) != hand(0). That is because hand(0) will
 			 // get the hand with ID = 0, which is hard to track; But
 			 //hands.get(0) will get the first hand in the current list
-			 *
 
 		}
 
 		sign.setFingerCount(fingerCount);
-
 		allsign.addSign(sign.getName(),sign);
-
-
-		 * if (recordableFrame(frame, minRecVelocity, maxRecVelocity) == true) {
-		 *
-		 * recording = true; recordFrame(oneSample, frame); } else if
-		 * (recordableFrame(frame, minRecVelocity, maxRecVelocity) == false &&
-		 * recording == true) { ///////////////recording finish if
-		 * (oneSample.size() >= minPoseFrames) { System.out.println("HI" +
-		 * oneSample.get(0).hand(0).toString()); sign.addSample(oneSample);
-		 * sign.setSignName(signName);
-		 * sign.setHandCount(oneSample.get(0).hands().count()); ///////// I use
-		 * the first frame
-		 * sign.setFingerCount(oneSample.get(0).fingers().count());
-		 *
-		 * if(oneSample.get(0).hands().count() > 1){ sign.setSignName(bothHand);
-		 * }else if(oneSample.get(0).hand(0).isLeft()){
-		 * sign.setSignName(leftHand); }else
-		 * if(oneSample.get(0).hand(0).isRight()){ sign.setSignName(rightHand);
-		 * }
-		 *
-		 * allsign.addOneSign(sign);
-		 *
-		 * }else{ recordingMode = false; // not sure whether it will be memory
-		 * leak at line 53 when new a sign and arraylist } recordingMode =
-		 * false; //finish recording }
 
 	}*/
 
