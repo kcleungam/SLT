@@ -16,6 +16,13 @@ public class Sample {
 
     /** constructor */
 
+    /* this constructor is used for converting JSON data back to object(s)
+	To make the code safe, please don't use this constructor.
+	Use the constructor force you to give initialised parameter in stead.
+	 */
+    // for Jongo exclusively
+    public Sample(){}
+
     public Sample(Collection<Frame> source) throws Exception {
         //Empty sample is meaningless
         if(source==null||source.isEmpty())

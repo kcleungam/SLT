@@ -10,8 +10,12 @@
 import com.leapmotion.leap.Frame;
 import com.mongodb.MongoClient;
 import org.jongo.Jongo;
+import org.jongo.MongoCursor;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class Database {
 	/** field */
@@ -43,7 +47,7 @@ public class Database {
 		// if it doesn't exist, Mongo will create it for you
 		Jdb = new Jongo(client.getDB(database_name));
 		// if it doesn't exist, Mongo will create it for you
-		Jcoll = Jdb.getCollection("gestures");
+		Jcoll = Jdb.getCollection(collection_name);
 	}
 
 
@@ -92,6 +96,22 @@ public class Database {
 
 		// else, duplication, database get a serious problem
 		throw new Exception("Duplicated Signs:\t" + sign.getName());
+	}
+
+	//get all signs
+	public HashMap<String,Sign> getAllSigns() throws IOException {
+		HashMap<String,Sign> result=new HashMap<String,Sign>();
+		Sign temp;
+
+		MongoCursor<Sign> all = Jcoll.find().as(Sign.class);
+		while(all.hasNext()) {
+			temp=all.next();
+			result.put(temp.getName(),temp);
+		}
+
+		all.close();
+
+		return result;
 	}
 
 

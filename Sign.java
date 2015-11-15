@@ -5,6 +5,9 @@
 import com.leapmotion.leap.Finger;
 import com.leapmotion.leap.Hand;
 
+import de.undercouch.bson4jackson.types.ObjectId;
+import org.jongo.marshall.jackson.oid.MongoObjectId;
+
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -12,7 +15,9 @@ public class Sign {
 	/** field */
 
 	/* fundamental information */
-	private String name;//unique field
+	@MongoObjectId
+	private String _id;
+	String name;//unique field
 	private HashSet<Sample> samples=new HashSet<Sample>();//samples should not repeat
 
 	/* extra information */
@@ -26,6 +31,12 @@ public class Sign {
 
 
 	/** constructor */
+	/* this constructor is used for converting JSON data back to object(s)
+	To make the code safe, please don't use this constructor.
+	Use the constructor force you to give initialised parameter in stead.
+	 */
+	// for Jongo exclusively
+	public Sign(){}
 
 	//basic constructor with 1 sample only
 	public Sign(String SignName,Sample sample) throws Exception {

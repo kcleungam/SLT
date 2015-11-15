@@ -16,8 +16,12 @@ public class SignBank {
 
     /** constructor */
 
-    //empty constructor
-    public SignBank(){}
+    //load from database
+    public SignBank(Database db)throws Exception{
+        if(db==null)
+            throw new Exception();
+        this.signs=db.getAllSigns();
+    }
 
     //with initialisation
     public SignBank(Map<String,Sign> source) throws Exception {

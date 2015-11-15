@@ -34,9 +34,11 @@ public class SLT {
 
 	// static int recordedFrames = 0;
 
-	static SignBank allSigns = new SignBank();
+	static SignBank allSigns;
 
 	public static void main(String args[]) throws Exception {
+		allSigns = new SignBank(db);
+
 		// New Controller for the Leap
 		Controller controller = new Controller();
 		Scanner sc = new Scanner(System.in);
