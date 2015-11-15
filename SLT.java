@@ -1,7 +1,5 @@
 import com.leapmotion.leap.Controller;
-import com.leapmotion.leap.Finger;
 import com.leapmotion.leap.Frame;
-import com.leapmotion.leap.Hand;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -36,9 +34,6 @@ public class SLT {
 
 	// static int recordedFrames = 0;
 
-	static String leftHand = "Left";
-	static String rightHand = "Right";
-	static String bothHand = "Both";
 	static SignBank allSigns = new SignBank();
 
 	public static void main(String args[]) throws Exception {
@@ -47,13 +42,13 @@ public class SLT {
 		Scanner sc = new Scanner(System.in);
 		// New a Listener everytime
 		SampleListener sampleListener = new SampleListener();
-		sampleListener.onFocusLost(controller);
+		sampleListener.lostFocus();
 		// Add listener, grab data
 		controller.addListener(sampleListener);
 		while (true) {
 			if (controller.isConnected() == true) {
 				while (true) {
-					sampleListener.onFocusLost(controller);
+					sampleListener.lostFocus();
 					System.out.println("Please enter your choice/n " + "1. Record new sign/n "
 							+ "2. Train your translator/n " + "3. Print all sign");
 					int i = sc.nextInt();
@@ -75,7 +70,7 @@ public class SLT {
 						} else {
 							ready();
 							sampleListener.reset();
-							sampleListener.onFocusGained(controller);
+							sampleListener.gainFocus();
 
 							while (true) {
 								if (sampleListener.checkFinish()) {
@@ -96,7 +91,7 @@ public class SLT {
 								// trace Listener if missing this code
 								Thread.currentThread().sleep(10);
 							}
-							sampleListener.onFocusLost(controller);
+							sampleListener.lostFocus();
 						}
 						/*
 						 * while (true) { Frame frame = controller.frame();
@@ -124,7 +119,7 @@ public class SLT {
 							// controller.addListener(trainListener); // add
 							// listener, grab data
 							sampleListener.reset();
-							sampleListener.onFocusGained(controller);
+							sampleListener.gainFocus();
 							/*
 							 * keep grabbing the frame from controller, check
 							 * whether it is recordable, add to the oneSample if
@@ -150,7 +145,7 @@ public class SLT {
 								Thread.currentThread().sleep(10);
 							}
 							// controller.removeListener(trainListener);
-							sampleListener.onFocusLost(controller);
+							sampleListener.lostFocus();
 							/*
 							 * while (true) { Frame frame = controller.frame();
 							 * if (recordingMode == true) {
@@ -168,11 +163,11 @@ public class SLT {
 						break;
 					case 3:
 						printAllDetails();
-						sampleListener.onFocusLost(controller);
+						sampleListener.lostFocus();
 						break;
 					default:
 						System.out.println("Please enter a valid option");
-						sampleListener.onFocusLost(controller);
+						sampleListener.lostFocus();
 						inputValid = false;
 						break;
 					}
@@ -202,6 +197,7 @@ public class SLT {
 	/**
 	 * Records the attributes of the new Sign and the Sample frame
 	 */
+	/*
 	public static void recordSign(ArrayList<Frame> oneSample, String signName, Sign sign, SignBank allsign) throws Exception {
 		sign.addSample(new Sample(oneSample));
 		sign.setName(signName);
@@ -234,11 +230,11 @@ public class SLT {
 					}
 				}
 			}
-			/*
-			 * I find that hands.get(0) != hand(0). That is because hand(0) will
-			 * get the hand with ID = 0, which is hard to track; But
-			 * hands.get(0) will get the first hand in the current list
-			 */
+
+			 // I find that hands.get(0) != hand(0). That is because hand(0) will
+			 // get the hand with ID = 0, which is hard to track; But
+			 //hands.get(0) will get the first hand in the current list
+			 *
 
 		}
 
@@ -246,9 +242,9 @@ public class SLT {
 
 		allsign.addSign(sign.getName(),sign);
 
-		/*
+
 		 * if (recordableFrame(frame, minRecVelocity, maxRecVelocity) == true) {
-		 * 
+		 *
 		 * recording = true; recordFrame(oneSample, frame); } else if
 		 * (recordableFrame(frame, minRecVelocity, maxRecVelocity) == false &&
 		 * recording == true) { ///////////////recording finish if
@@ -258,20 +254,20 @@ public class SLT {
 		 * sign.setHandCount(oneSample.get(0).hands().count()); ///////// I use
 		 * the first frame
 		 * sign.setFingerCount(oneSample.get(0).fingers().count());
-		 * 
+		 *
 		 * if(oneSample.get(0).hands().count() > 1){ sign.setSignName(bothHand);
 		 * }else if(oneSample.get(0).hand(0).isLeft()){
 		 * sign.setSignName(leftHand); }else
 		 * if(oneSample.get(0).hand(0).isRight()){ sign.setSignName(rightHand);
 		 * }
-		 * 
+		 *
 		 * allsign.addOneSign(sign);
-		 * 
+		 *
 		 * }else{ recordingMode = false; // not sure whether it will be memory
 		 * leak at line 53 when new a sign and arraylist } recordingMode =
 		 * false; //finish recording }
-		 */
-	}
+
+	}*/
 
 	public static void printTraining() {
 		System.out.println("There are " + allSigns.getAllSigns().size() + " sign in database:\n");
@@ -324,10 +320,10 @@ public class SLT {
 		String signName=new String();//added
 		while(true){//while (signName = sc.next()) {
 			signName=sc.next();//added
-			if (signName == "Y") {
+			if (signName.equals("Y")) {
 				System.out.println("Done!!!");
 				return true;
-			} else if (signName == "N") {
+			} else if (signName.equals("N")) {
 				System.out.println("The Sample is not added.");
 				return false;
 			} else {
@@ -382,5 +378,5 @@ public class SLT {
  * com.leapmotion.leap. Vector zBasis = new com.leapmotion.leap.Vector(0, 0,
  * 45); Matrix transformMatrix = new Matrix(xBasis, yBasis, zBasis);
  * com.leapmotion.leap.Vector thisTranslation = transformMatrix.getOrigin();
- * 
+ *
  */

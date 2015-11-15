@@ -134,8 +134,12 @@ public class SampleListener extends Listener {
 	 * @param controller
 	 */
 	public void onFocusGained(Controller controller) {
-		focus = true;
 		System.out.println("Focus gained");
+	}
+
+	public void gainFocus(){
+		this.focus = true;
+		System.out.println("gained");
 	}
 
 	/**
@@ -144,11 +148,15 @@ public class SampleListener extends Listener {
 	 * 
 	 * @param controller
 	 */
+
 	public void onFocusLost(Controller controller) {
-		focus = false;
 		System.out.println("Focus lost");
 	}
 
+	public void lostFocus(){
+		System.out.println("lost");
+		this.focus = false;
+	}
 	/**
 	 * Called when a ***new frame of hand and finger tracking data is
 	 * available****. Access the new frame data using the Controller::frame()

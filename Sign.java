@@ -2,13 +2,11 @@
 /**
  * Created by Krauser on 4/11/2015.
  */
-import com.leapmotion.leap.Frame;
-import com.sun.istack.internal.NotNull;
+import com.leapmotion.leap.Finger;
+import com.leapmotion.leap.Hand;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Set;
 
 public class Sign {
 	/** field */
@@ -34,6 +32,37 @@ public class Sign {
 		if(SignName==null||isNameInvalid(SignName)||sample==null)
 			throw new Exception();
 		this.name=SignName;
+		setHandCount(sample.getAllFrames().get(0).hands().count());
+		int fingerCount = 0;
+		if (sample.getAllFrames().get(0).hands().count() > 1) {
+			setHandType("Both Hand");
+			for (Hand hand : sample.getAllFrames().get(0).hands()) {
+				for (Finger finger : hand.fingers()) {
+					if (finger.isExtended()) {
+						fingerCount++;
+					}
+				}
+			}
+		} else if (sample.getAllFrames().get(0).hands().count() == 1) {
+			if (sample.getAllFrames().get(0).hands().get(0).isLeft()) {
+				setHandType("Left");
+				// doesn't work when hands.get(0) change to hand(0)
+				for (Finger finger : sample.getAllFrames().get(0).hands().get(0).fingers()) {
+					if (finger.isExtended()) {
+						fingerCount++;
+					}
+				}
+			} else if (sample.getAllFrames().get(0).hands().get(0).isRight()) {
+				setHandType("Right");
+				// doesn't work when hands.get(0) change to hand(0)
+				for (Finger finger : sample.getAllFrames().get(0).hands().get(0).fingers()) {
+					if (finger.isExtended()) {
+						fingerCount++;
+					}
+				}
+			}
+		}
+		setFingerCount(fingerCount);
 		this.samples.add(sample);
 	}
 
