@@ -11,6 +11,8 @@ import org.jongo.marshall.jackson.oid.MongoObjectId;
 import java.util.Collection;
 import java.util.HashSet;
 
+enum Hand {LEFTHAND, RIGHTHAND, BOTHHAND}
+
 public class Sign {
 	/** field */
 
@@ -23,7 +25,7 @@ public class Sign {
 	/* extra information */
 	//hand
 	private int handCount;
-	private String handType;
+	private Hand handType;
 
 	//finger
 	private int fingerCount;
@@ -46,7 +48,7 @@ public class Sign {
 		setHandCount(sample.getAllFrames().get(0).hands().count());
 		int fingerCount = 0;
 		if (sample.getAllFrames().get(0).hands().count() > 1) {
-			setHandType("Both Hand");
+			setHandType(BOTHHAND);
 			for (Hand hand : sample.getAllFrames().get(0).hands()) {
 				for (Finger finger : hand.fingers()) {
 					if (finger.isExtended()) {
@@ -56,7 +58,7 @@ public class Sign {
 			}
 		} else if (sample.getAllFrames().get(0).hands().count() == 1) {
 			if (sample.getAllFrames().get(0).hands().get(0).isLeft()) {
-				setHandType("Left");
+				setHandType(LEFTHAND);
 				// doesn't work when hands.get(0) change to hand(0)
 				for (Finger finger : sample.getAllFrames().get(0).hands().get(0).fingers()) {
 					if (finger.isExtended()) {
@@ -64,7 +66,7 @@ public class Sign {
 					}
 				}
 			} else if (sample.getAllFrames().get(0).hands().get(0).isRight()) {
-				setHandType("Right");
+				setHandType(RIGHTHAND);
 				// doesn't work when hands.get(0) change to hand(0)
 				for (Finger finger : sample.getAllFrames().get(0).hands().get(0).fingers()) {
 					if (finger.isExtended()) {
@@ -77,16 +79,16 @@ public class Sign {
 		this.samples.add(sample);
 	}
 
-	//basic constructor with a sequence of samples
+	// basic constructor with a sequence of samples
 	public Sign(String SignName, Collection<Sample> samples) throws Exception {
-		if(SignName==null||isNameInvalid(SignName)||samples==null||samples.isEmpty())
+		if (SignName == null || isNameInvalid(SignName) || samples == null || samples.isEmpty())
 			throw new Exception();
-		this.name=SignName;
+		this.name = SignName;
 		this.samples.addAll(samples);
 	}
 
 	//advanced constructor
-	public Sign(String SignName, Collection<Sample> samples,int HandCount,String HandType,int FingerCount) throws Exception {
+	public Sign(String SignName, Collection<Sample> samples,int HandCount,Hand HandType,int FingerCount) throws Exception {
 		if(SignName==null||isNameInvalid(SignName)||samples==null||samples.isEmpty())
 			throw new Exception();
 		this.name =SignName;
@@ -160,7 +162,7 @@ public class Sign {
 		return true;
 	}
 
-	public boolean setHandType(String HandType) {
+	public boolean setHandType(Hand HandType) {
 		//ToDo: restrict the values
 		if(HandType==null||HandType.isEmpty())
 			return false;
@@ -183,7 +185,7 @@ public class Sign {
 		return fingerCount;
 	}
 
-	public String getHandType() {
+	public Hand getHandType() {
 		return handType;
 	}
 
