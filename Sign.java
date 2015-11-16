@@ -33,7 +33,7 @@ public class Sign {
 	/** constructor */
 	/* this constructor is used for converting JSON data back to object(s)
 	To make the code safe, please don't use this constructor.
-	Use the constructor force you to give initialised parameter in stead.
+	Use the constructor forcing you to give initialised parameter instead.
 	 */
 	// for Jongo exclusively
 	public Sign(){}

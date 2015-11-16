@@ -114,6 +114,40 @@ public class Database {
 		return result;
 	}
 
+	//ToDo: maybe use Enum to simplify the following query operations
+
+	//search by the number of finger(s)
+	public HashMap<String,Sign> getSignsByFingers(int fingers) throws IOException {
+		HashMap<String,Sign> result=new HashMap<String,Sign>();
+		Sign temp;
+
+		MongoCursor<Sign> all = Jcoll.find("{fingerCount:#}",fingers).as(Sign.class);
+		while(all.hasNext()) {
+			temp=all.next();
+			result.put(temp.getName(),temp);
+		}
+
+		all.close();
+
+		return result;
+	}
+
+	//search by the number of finger(s)
+	public HashMap<String,Sign> getSignsByHandType(String hand_type) throws IOException {
+		HashMap<String,Sign> result=new HashMap<String,Sign>();
+		Sign temp;
+
+		MongoCursor<Sign> all = Jcoll.find("{handType:#}",hand_type).as(Sign.class);
+		while(all.hasNext()) {
+			temp=all.next();
+			result.put(temp.getName(),temp);
+		}
+
+		all.close();
+
+		return result;
+	}
+
 
 
 	/** helper function */

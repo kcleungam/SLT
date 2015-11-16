@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2bd79e6d-dd5d-4091-a25a-2bcc7ad806c8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Database.class" afterPath="$PROJECT_DIR$/out/production/SLT/Database.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/SLT.class" afterPath="$PROJECT_DIR$/out/production/SLT/SLT.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Sign.class" afterPath="$PROJECT_DIR$/out/production/SLT/Sign.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/SignBank.class" afterPath="$PROJECT_DIR$/out/production/SLT/SignBank.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Database.java" afterPath="$PROJECT_DIR$/Database.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SLT.java" afterPath="$PROJECT_DIR$/SLT.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sample.java" afterPath="$PROJECT_DIR$/Sample.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Sign.java" afterPath="$PROJECT_DIR$/Sign.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SignBank.java" afterPath="$PROJECT_DIR$/SignBank.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/workspace.xml" afterPath="$PROJECT_DIR$/out/production/SLT/.idea/workspace.xml" />
     </list>
     <ignored path="SLT.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,68 +26,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Database.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Database.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-54.964287">
-              <caret line="108" column="44" selection-start-line="108" selection-start-column="44" selection-end-line="108" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.8166189">
+              <caret line="139" column="67" selection-start-line="139" selection-start-column="67" selection-end-line="139" selection-end-column="67" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SLT.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SLT.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="39" column="36" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Sample.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Sample.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.81697613">
-              <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Frame.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/lib/LeapJava.jar!/com/leapmotion/leap/Frame.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.071429">
-              <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SampleListener.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SampleListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="160" column="66" selection-start-line="160" selection-start-column="62" selection-end-line="160" selection-end-column="66" />
-              <folding>
-                <element signature="e#0#7792#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SignBank.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SignBank.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -103,10 +39,22 @@
       <file leaf-file-name="Sign.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Sign.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.25">
-              <caret line="37" column="28" selection-start-line="33" selection-start-column="4" selection-end-line="37" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="35" column="68" selection-start-line="35" selection-start-column="68" selection-end-line="35" selection-end-column="68" />
               <folding>
-                <element signature="e#0#5003#0" expanded="true" />
+                <element signature="e#0#5004#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Sample.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Sample.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="68" selection-start-line="20" selection-start-column="68" selection-end-line="20" selection-end-column="68" />
+              <folding>
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
@@ -137,9 +85,9 @@
         <option value="$PROJECT_DIR$/SampleListener.java" />
         <option value="$PROJECT_DIR$/SignBank.java" />
         <option value="$PROJECT_DIR$/SLT.java" />
-        <option value="$PROJECT_DIR$/Database.java" />
         <option value="$PROJECT_DIR$/Sign.java" />
         <option value="$PROJECT_DIR$/Sample.java" />
+        <option value="$PROJECT_DIR$/Database.java" />
       </list>
     </option>
   </component>
@@ -652,7 +600,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
           <folding>
-            <element signature="e#0#5003#0" expanded="true" />
+            <element signature="e#0#5004#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -709,7 +657,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
           <folding>
-            <element signature="e#0#5003#0" expanded="true" />
+            <element signature="e#0#5004#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -756,7 +704,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="36" column="33" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
           <folding>
-            <element signature="e#0#5003#0" expanded="true" />
+            <element signature="e#0#5004#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -813,20 +761,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SampleListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.050397877">
           <caret line="160" column="66" selection-start-line="160" selection-start-column="62" selection-end-line="160" selection-end-column="66" />
           <folding>
             <element signature="e#0#7792#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SignBank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -841,46 +779,56 @@
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/LeapJava.jar!/com/leapmotion/leap/Frame.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.071429">
+        <state vertical-scroll-proportion="0.32664755">
           <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SLT.java">
+    <entry file="file://$PROJECT_DIR$/SignBank.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="36" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Database.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-54.964287">
-          <caret line="108" column="44" selection-start-line="108" selection-start-column="44" selection-end-line="108" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Sign.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.25">
-          <caret line="37" column="28" selection-start-line="33" selection-start-column="4" selection-end-line="37" selection-end-column="28" />
+        <state vertical-scroll-proportion="-2.4535809">
+          <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
           <folding>
-            <element signature="e#0#5003#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SLT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3314121">
+          <caret line="208" column="28" selection-start-line="208" selection-start-column="20" selection-end-line="208" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Sample.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.81697613">
-          <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="68" selection-start-line="20" selection-start-column="68" selection-end-line="20" selection-end-column="68" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Sign.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="68" selection-start-line="35" selection-start-column="68" selection-end-line="35" selection-end-column="68" />
+          <folding>
+            <element signature="e#0#5004#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8166189">
+          <caret line="139" column="67" selection-start-line="139" selection-start-column="67" selection-end-line="139" selection-end-column="67" />
+          <folding />
         </state>
       </provider>
     </entry>
