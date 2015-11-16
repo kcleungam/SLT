@@ -26,7 +26,7 @@ import java.util.Scanner;
 */
 
 public class SLT {
-	private static Database db=new Database("Signs","HK_Signs");
+	private static Database db = new Database("Signs", "HK_Signs");
 
 	// TODO: What's the use of recordingMode? - by Jacky
 	static boolean recordingMode = false;
@@ -55,54 +55,22 @@ public class SLT {
 							+ "2. Train your translator/n " + "3. Print all sign");
 					int i = sc.nextInt();
 					boolean inputValid = true;
-					//Sign sign = new Sign();
+					// Sign sign = new Sign();
 					Sign sign;
 					switch (i) {
 					case 1:
-						// recordingMode = true;
-						/*
-						 * keep grabbing the frame from controller, check
-						 * whether it is recordable, add to oneSample if it is.
-						 * """store as new Sign"""
-						 */
-						System.out.println("Please enter the gesture name: ");
+						// construct new sign and add the sample
+						System.out.println("Please enter the sign name: ");
 						String signName = sc.next();
 						if (allSigns.getAllSigns().containsKey(signName)) {
 							System.out.println("The name existed in the database, exiting to menu... ");
 						} else {
-							ready();
-							sampleListener.reset();
-							sampleListener.gainFocus();
-
-							while (true) {
-								if (sampleListener.checkFinish()) {
-									if (sampleListener.checkValid()) {
-										if (savePrompt()) {
-											//recordSign(sampleListener.returnOneSample(), signName, sign, allsign);
-											sign=new Sign(signName,new Sample(sampleListener.returnOneSample()));
-											//ToDo: handle the boolean return value aftter adding the given sign
-											allSigns.addSign(signName,sign);
-											db.addSign(sign);
-										}
-									} else {
-										System.out.println("The recording is invalid. ");
-									}
-									break;
-								}
-								// The current thread is too fast, will fail to
-								// trace Listener if missing this code
-								Thread.currentThread().sleep(10);
+							if (addSample(sampleListener, sign, signName)) {
+								System.out.println("Sample added, exiting to menu... ");
+							} else {
+								System.out.println("Add sample failed, exiting to menu... ");
 							}
-							sampleListener.lostFocus();
 						}
-						/*
-						 * while (true) { Frame frame = controller.frame();
-						 * System.out.println("The frame is valid?" +
-						 * frame.hand(0).palmVelocity()); if (recordingMode ==
-						 * true) { //recordSign(frame, oneSample,signName,
-						 * sign,allsign); //recordingMode = false at the end of
-						 * recordSign } else { break; } }
-						 */
 
 						break;
 
@@ -113,48 +81,11 @@ public class SLT {
 						String trainName = sc.next();
 						if (allSigns.getAllSigns().containsKey(trainName)) {
 							System.out.println("Sign found, ready to start training");
-							// recordingMode = true;
-							ready();
-
-							// SampleListener trainListener = new
-							// SampleListener(); //new a listener everytime
-							// controller.addListener(trainListener); // add
-							// listener, grab data
-							sampleListener.reset();
-							sampleListener.gainFocus();
-							/*
-							 * keep grabbing the frame from controller, check
-							 * whether it is recordable, add to the oneSample if
-							 * it is. """"put it as one sample of specific
-							 * sign"""
-							 */
-							while (true) {
-								if (sampleListener.checkFinish()) {
-									if (sampleListener.checkValid()) {
-										if (savePrompt()) {
-											//trainOneSign(sampleListener.returnOneSample(), trainName, allsign);
-											//ToDo: handle the boolean return type after adding sample to the given sign
-											sign=new Sign(trainName,new Sample(sampleListener.returnOneSample()));
-											allSigns.addSign(trainName,sign);
-											db.addSign(sign);
-										}
-									} else {
-										System.out.println("The recording is invalid");
-									}
-									break;
-								}
-								// It is necessary, without it, bug occur
-								Thread.currentThread().sleep(10);
+							if (addSample(sampleListener, sign, trainName)) {
+								System.out.println("Sample added, exiting to menu... ");
+							} else {
+								System.out.println("Add sample failed, exiting to menu... ");
 							}
-							// controller.removeListener(trainListener);
-							sampleListener.lostFocus();
-							/*
-							 * while (true) { Frame frame = controller.frame();
-							 * if (recordingMode == true) {
-							 * trainOneSign(frame,oneSample,trainName,allsign);
-							 * //recordingMode = false at the end of
-							 * trainOneSign } else { break; } }
-							 */
 						} else { // sign not found
 							System.out.println("Sign not found!");
 							inputValid = false;
@@ -183,6 +114,51 @@ public class SLT {
 		}
 	}
 
+	/**
+	 * Record the sample and store it into the database according the signName
+	 */
+	public static boolean addSample(SampleListener listener, Sign sign, String signName) {
+		ready();
+
+		sampleListener.reset();
+		sampleListener.gainFocus();
+
+		// keep grabbing the frame from controller
+		while (true) {
+			// check recordable of frame
+			if (sampleListener.checkFinish()) {
+				if (sampleListener.checkValid()) {
+					if (savePrompt()) {
+						// the following function handles the addSample and
+						// newSample cases itself
+						// ToDo: handle the boolean return type after adding
+						// sample to the given sign
+						// what you want to do with the boolean return? - Jacky
+						sign = new Sign(signName, new Sample(sampleListener.returnOneSample()));
+						allSigns.addSign(trainName, sign);
+						db.addSign(sign);
+					}
+				} else {
+					System.out.println("The recording is invalid");
+					return false;
+				}
+				break;
+			}
+			// It is necessary, without it, bug occur
+			Thread.currentThread().sleep(10);
+		}
+		// controller.removeListener(trainListener);
+		sampleListener.lostFocus();
+		return true;
+		/*
+		 * while (true) { Frame frame = controller.frame(); if (recordingMode ==
+		 * true) { trainOneSign(frame,oneSample,trainName,allsign);
+		 * //recordingMode = false at the end of trainOneSign } else { break; }
+		 * }
+		 */
+	}
+
+	// This function should be not used now? - Jacky
 	public static void trainOneSign(ArrayList<Frame> oneSample, String signName, SignBank allSigns) throws Exception {
 		allSigns.getSign(signName).addSample(new Sample(oneSample));
 		/*
@@ -196,53 +172,8 @@ public class SLT {
 		 */
 	}
 
-	/**
-	 * Records the attributes of the new Sign and the Sample frame
-	 */
-	/*
-	public static void recordSign(ArrayList<Frame> oneSample, String signName, Sign sign, SignBank allsign) throws Exception {
-		sign.addSample(new Sample(oneSample));
-		sign.setName(signName);
-		sign.setHandCount(oneSample.get(0).hands().count());
-		int fingerCount = 0;
-		if (oneSample.get(0).hands().count() > 1) {
-			sign.setHandType(bothHand);
-			for (Hand hand : oneSample.get(0).hands()) {
-				for (Finger finger : hand.fingers()) {
-					if (finger.isExtended()) {
-						fingerCount++;
-					}
-				}
-			}
-		} else if (oneSample.get(0).hands().count() == 1) {
-			if (oneSample.get(0).hands().get(0).isLeft()) {
-				sign.setHandType(leftHand);
-				// doesn't work when hands.get(0) change to hand(0)
-				for (Finger finger : oneSample.get(0).hands().get(0).fingers()) {
-					if (finger.isExtended()) {
-						fingerCount++;
-					}
-				}
-			} else if (oneSample.get(0).hands().get(0).isRight()) {
-				sign.setHandType(rightHand);
-				// doesn't work when hands.get(0) change to hand(0)
-				for (Finger finger : oneSample.get(0).hands().get(0).fingers()) {
-					if (finger.isExtended()) {
-						fingerCount++;
-					}
-				}
-			}
-
-			 // I find that hands.get(0) != hand(0). That is because hand(0) will
-			 // get the hand with ID = 0, which is hard to track; But
-			 //hands.get(0) will get the first hand in the current list
-
-		}
-
-		sign.setFingerCount(fingerCount);
-		allsign.addSign(sign.getName(),sign);
-
-	}*/
+	// function here originally moved to Sign.java,
+	// Sign(String SignName, Sample sample) constructor.
 
 	public static void printTraining() {
 		System.out.println("There are " + allSigns.getAllSigns().size() + " sign in database:\n");
@@ -292,10 +223,10 @@ public class SLT {
 	 */
 	public static boolean savePrompt() {
 		System.out.println("Save this Sample? (Y/N)");
-		Scanner sc = new Scanner(System.in);//added
-		String signName=new String();//added
-		while(true){//while (signName = sc.next()) {
-			signName=sc.next();//added
+		Scanner sc = new Scanner(System.in);
+		String signName = new String();
+		while (true) {
+			signName = sc.next();
 			if (signName.equals("Y")) {
 				System.out.println("Done!!!");
 				return true;
