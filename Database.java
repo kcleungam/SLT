@@ -21,8 +21,8 @@ public class Database {
 	/** field */
 
 	// fundamental information
-	private String database_name = "Signs";
-	private String collection_name = "HK_Signs";
+	private String database_name="Signs";
+	private String collection_name="HK_Signs";
 
 	// Mongo
 	private MongoClient client;
@@ -30,6 +30,8 @@ public class Database {
 	// Jongo
 	private Jongo Jdb;
 	private org.jongo.MongoCollection Jcoll;
+
+
 
 	/** constructor */
 
@@ -48,9 +50,11 @@ public class Database {
 		Jcoll = Jdb.getCollection(collection_name);
 	}
 
+
+
 	/** methods */
 
-	// add a sign
+	//add a sign
 	public boolean addSign(Sign sign) throws Exception {
 		if (sign == null || isNameInvalid(sign.getName())) {
 			System.err.println("Method 'SaveGesture' has received an improper parameter");
@@ -61,11 +65,11 @@ public class Database {
 		long existence = Jcoll.count("{name:#}", sign.getName());
 		if (existence == 0) {// insert
 			Jcoll.insert(sign);
-			// System.out.println("Added 1 new gesture.");
+			//System.out.println("Added 1 new gesture.");
 			return true;
 		} else if (existence == 1) {// add sample(s) in it
-			for (Sample s : sign.getAllSamples()) {
-				Jcoll.update("{name:#}", sign.getName()).with("{$addToSet:{samples:#}}", s);
+			for(Sample s:sign.getAllSamples()){
+				Jcoll.update("{name:#}", sign.getName()).with("{$addToSet:{samples:#}}",s);
 				return true;
 			}
 		}
@@ -74,8 +78,8 @@ public class Database {
 		throw new Exception("Duplicated Signs:\t" + sign.getName());
 	}
 
-	// remove a sign
-	public boolean removeSign(Sign sign) throws Exception {
+	//remove a sign
+	public boolean removeSign(Sign sign) throws Exception{
 		if (sign == null || isNameInvalid(sign.getName())) {
 			System.err.println("Method 'SaveGesture' has received an improper parameter");
 			return false;
@@ -86,7 +90,7 @@ public class Database {
 		if (existence == 0) // not exist
 			return false;
 		else if (existence == 1) {// add sample(s) in it
-			Jcoll.remove("{name:#}", sign.getName());
+			Jcoll.remove("{name:#}",sign.getName());
 			return true;
 		}
 
@@ -94,15 +98,15 @@ public class Database {
 		throw new Exception("Duplicated Signs:\t" + sign.getName());
 	}
 
-	// get all signs
-	public HashMap<String, Sign> getAllSigns() throws IOException {
-		HashMap<String, Sign> result = new HashMap<String, Sign>();
+	//get all signs
+	public HashMap<String,Sign> getAllSigns() throws IOException {
+		HashMap<String,Sign> result=new HashMap<String,Sign>();
 		Sign temp;
 
 		MongoCursor<Sign> all = Jcoll.find().as(Sign.class);
-		while (all.hasNext()) {
-			temp = all.next();
-			result.put(temp.getName(), temp);
+		while(all.hasNext()) {
+			temp=all.next();
+			result.put(temp.getName(),temp);
 		}
 
 		all.close();
@@ -110,24 +114,17 @@ public class Database {
 		return result;
 	}
 
-	// ToDo: maybe use Enum to simplify the following query operations
-	// enum used in Hand in Sign.java, but no that seems effective.
-	// TODO: Another simplication Required:
-	// 1. compare following filters and get the same sign appeared in both
-	// filters
-	// 2. combine the two filters in the one function
-	// second one preferred, since it might reduce the storage required(?)
-	//  - Jacky
+	//ToDo: maybe use Enum to simplify the following query operations
 
-	// search by the number of finger(s)
-	public HashMap<String, Sign> getSignsByFingers(int fingers) throws IOException {
-		HashMap<String, Sign> result = new HashMap<String, Sign>();
+	//search by the number of finger(s)
+	public HashMap<String,Sign> getSignsByFingers(int fingers) throws IOException {
+		HashMap<String,Sign> result=new HashMap<String,Sign>();
 		Sign temp;
 
-		MongoCursor<Sign> all = Jcoll.find("{fingerCount:#}", fingers).as(Sign.class);
-		while (all.hasNext()) {
-			temp = all.next();
-			result.put(temp.getName(), temp);
+		MongoCursor<Sign> all = Jcoll.find("{fingerCount:#}",fingers).as(Sign.class);
+		while(all.hasNext()) {
+			temp=all.next();
+			result.put(temp.getName(),temp);
 		}
 
 		all.close();
@@ -135,26 +132,28 @@ public class Database {
 		return result;
 	}
 
-	// search by the handType
-	public HashMap<String, Sign> getSignsByHandType(String hand_type) throws IOException {
-		HashMap<String, Sign> result = new HashMap<String, Sign>();
+	//search by the number of finger(s)
+	public HashMap<String,Sign> getSignsByHandType(String hand_type) throws IOException {
+		HashMap<String,Sign> result=new HashMap<String,Sign>();
 		Sign temp;
 
-		MongoCursor<Sign> all = Jcoll.find("{handType:#}", hand_type).as(Sign.class);
-		while (all.hasNext()) {
-			temp = all.next();
-			result.put(temp.getName(), temp);
+		MongoCursor<Sign> all = Jcoll.find("{handType:#}",hand_type).as(Sign.class);
+		while(all.hasNext()) {
+			temp=all.next();
+			result.put(temp.getName(),temp);
 		}
 
 		all.close();
 
 		return result;
 	}
+
+
 
 	/** helper function */
 	private boolean isNameInvalid(String name) {
 		// TODO: may use regular expression to forbid certain kinds of gesture
-		if (name == null || name.isEmpty())
+		if(name==null||name.isEmpty())
 			return true;
 		return false;
 	}

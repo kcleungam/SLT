@@ -276,7 +276,7 @@ public class SLT {
 	 * Provide a 3-second countdown.
 	 */
 	public static void ready() {
-		for (int count = 3; count > 0; count--) {
+		for (int count = 3; count >= 0; count--) {
 			try {
 				System.out.println(count);
 				Thread.sleep(1000);
@@ -284,7 +284,6 @@ public class SLT {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("Start!");
 	}
 
 	/**
