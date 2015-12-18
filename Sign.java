@@ -4,8 +4,6 @@
  */
 import com.leapmotion.leap.Finger;
 import com.leapmotion.leap.Hand;
-
-import de.undercouch.bson4jackson.types.ObjectId;
 import org.jongo.marshall.jackson.oid.MongoObjectId;
 
 import java.util.Collection;
@@ -194,7 +192,6 @@ public class Sign {
 	public HashSet<Sample> getAllSamples() {
 		return this.samples;
 	}
-
 
 
 	/** helper function */
