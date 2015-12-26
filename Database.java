@@ -132,7 +132,7 @@ public class Database {
 		return result;
 	}
 
-	//search by the number of finger(s)
+	// Search by the handType
 	public HashMap<String,Sign> getSignsByHandType(String hand_type) throws IOException {
 		HashMap<String,Sign> result=new HashMap<String,Sign>();
 		Sign temp;
@@ -144,6 +144,29 @@ public class Database {
 		}
 
 		all.close();
+
+		return result;
+	}
+
+	// Search by both handType and the number of finger(s)
+	public HashMap<String, Sign> getSignsByBoth(int fingers, String hand_type) throws IOException {
+		HashMap<String, Sign> result = new HashMap<String, Sign>();
+		Sign temp;
+
+		MongoCursor<Sign> all = Jcoll.find("{handType:#, fingerCount:#}", hand_type, fingers).as(Sign.class);
+		while (all.hasNext()) {
+			temp = all.next();
+			result.put(temp.getName(), temp);
+		}
+
+		all.close();
+
+		return result;
+	}
+
+	// Search by name
+	public Sign getSignsByBoth(String name) throws IOException {
+		Sign result = Jcoll.findOne("{name:#}", name).as(Sign.class);
 
 		return result;
 	}
