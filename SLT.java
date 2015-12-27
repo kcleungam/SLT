@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 
 public class SLT {
-	private static Database db=new Database("Signs","HK_Signs");
+	private static Database db = new Database("Signs","HK_Signs");
 
 	// TODO: What's the use of recordingMode? - by Jacky
 	static boolean recordingMode = false;
@@ -32,8 +32,8 @@ public class SLT {
 			if (controller.isConnected() == true) {
 				while (true) {
 					sampleListener.lostFocus();
-					System.out.println("Please enter your choice/n " + "1. Record new sign/n "
-							+ "2. Train your translator/n " + "3. Print all sign");
+					System.out.println("Please enter your choice\n " + "1. Record new sign\n "
+							+ "2. Train your translator\n " + "3. Print all sign");
 					int i = sc.nextInt();
 					boolean inputValid = true;
 					//Sign sign = new Sign();

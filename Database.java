@@ -21,8 +21,8 @@ public class Database {
 	/** field */
 
 	// fundamental information
-	private String database_name="Signs";
-	private String collection_name="HK_Signs";
+	private String database_name = "Signs";
+	private String collection_name = "HK_Signs";
 
 	// Mongo
 	private MongoClient client;
