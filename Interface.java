@@ -3,31 +3,26 @@
  */
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
+import javax.swing.*;
 import java.awt.Button;
 import java.awt.BorderLayout;
-import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.GridLayout;
-import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Panel;
 import java.awt.Font;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JList;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.io.OutputStream;
 
 public class Interface {
 
     private JFrame frame;
     private final JTextArea txtrName = new JTextArea();
-    private JTextField textField;
+    private JTextArea textArea;
+    private TextAreaPrintStream ps;
 
     /**
      * Launch the application.
@@ -50,6 +45,15 @@ public class Interface {
      */
     public Interface() {
         initialize();
+
+        OutputStream out = new OutputStream() {
+            @Override
+            public void write(int b) throws IOException {
+
+            }
+        };
+
+        ps = new TextAreaPrintStream(textArea, out);
     }
 
     /**
@@ -79,8 +83,8 @@ public class Interface {
         JMenuItem mntmInfo = new JMenuItem("Info");
         mnSetting.add(mntmInfo);
 
-        JMenu mnSetting_1 = new JMenu("System");
-        menuBar.add(mnSetting_1);
+        JMenu mnSystem = new JMenu("System");
+        menuBar.add(mnSystem);
 
         JMenuItem mntmSetting = new JMenuItem("Setting");
         mntmSetting.addActionListener(new ActionListener() {
@@ -89,45 +93,59 @@ public class Interface {
                 nw.NewScreen();
             }
         });
-        mnSetting_1.add(mntmSetting);
+        mnSystem.add(mntmSetting);
 
         frame.getContentPane().setLayout(null);
         txtrName.setTabSize(6);
         txtrName.setBounds(52, 10, 96, 23);
         frame.getContentPane().add(txtrName);
 
-        Button button = new Button("New");
-        button.setBounds(17, 54, 39, 23);
-        frame.getContentPane().add(button);
+        Button new_button = new Button("New");
+        new_button.setBounds(17, 54, 39, 23);
+        frame.getContentPane().add(new_button);
+        new_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ps.println("New gesture");
+            }
+        });
 
-        Button button_1 = new Button("Train");
-        button_1.setBounds(89, 54, 42, 23);
-        frame.getContentPane().add(button_1);
+        Button button_train = new Button("Train");
+        button_train.setBounds(89, 54, 42, 23);
+        frame.getContentPane().add(button_train);
+        button_train.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                ps.println("Train");
+            }
+        });
 
         JLabel lblNewLabel = new JLabel("Name");
         lblNewLabel.setBounds(10, 15, 46, 15);
         frame.getContentPane().add(lblNewLabel);
 
-        textField = new JTextField();
-        textField.setBounds(10, 386, 704, 69);
-        frame.getContentPane().add(textField);
-        textField.setColumns(10);
+        textArea = new JTextArea();
+        textArea.setBounds(10, 386, 704, 69);
+        frame.getContentPane().add(textArea);
+        textArea.setColumns(10);
 
-        Button button_2 = new Button("Clear");
-        button_2.addActionListener(new ActionListener() {
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setBounds(10, 386, 704, 69);
+        frame.add(scrollPane);
+
+        Button button_clear = new Button("Clear");
+        button_clear.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
+                textArea.setText("");
             }
         });
-        button_2.setBounds(729, 410, 42, 23);
-        frame.getContentPane().add(button_2);
+        button_clear.setBounds(729, 410, 42, 23);
+        frame.getContentPane().add(button_clear);
 
         JList list = new JList();
         list.setBounds(10, 94, 138, 271);
         frame.getContentPane().add(list);
-        button_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-            }
-        });
     }
 }
 
