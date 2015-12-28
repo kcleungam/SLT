@@ -17,7 +17,6 @@ public class TextAreaPrintStream extends PrintStream {
     //The JTextArea to wich the output stream will be redirected.
     private JTextArea textArea;
 
-
     /**
      * Method TextAreaPrintStream
      * The constructor of the class.
@@ -38,8 +37,6 @@ public class TextAreaPrintStream extends PrintStream {
     public void println(String string) {
         textArea.append(string+"\n");
     }
-
-
 
     /**
      * Method print

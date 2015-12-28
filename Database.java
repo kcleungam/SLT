@@ -114,6 +114,13 @@ public class Database {
 		return result;
 	}
 
+    //remove all signs
+    public boolean removeAllSign() throws Exception {
+        Jcoll.remove("{}");
+        return true;
+
+    }
+
 	//ToDo: maybe use Enum to simplify the following query operations
 
 	//search by the number of finger(s)

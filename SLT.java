@@ -247,10 +247,10 @@ public class SLT {
 					+ allSigns.getAllSigns().get(key).getAllSamples().size() + " Sample");
 			System.out.println("Hand Count  : " + allSigns.getAllSigns().get(key).getHandCount());
 			System.out.println("Hand Type   :" + allSigns.getAllSigns().get(key).getHandType());
-			System.out.println("Finger Count = " + allSigns.getAllSigns().get(key).getFingerCount());
+			System.out.println("Finger Count = " + allSigns.getAllSigns().get(key).getFingerCount() + "\n");
 		}
 
-		System.out.println(" \n All sign printed");
+		System.out.println("All sign are printed");
 	}
 
 	/**

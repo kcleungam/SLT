@@ -8,7 +8,7 @@ public class SignBank {
     /** field */
 
     //fundamental information
-    private HashMap<String,Sign> signs=new HashMap<String,Sign>();
+    private HashMap<String,Sign> signs = new HashMap<String,Sign>();
     //private String DBName;
     //private String CollectionName;
 
@@ -18,23 +18,23 @@ public class SignBank {
 
     //load from database
     public SignBank(Database db)throws Exception{
-        if(db==null)
+        if(db == null)
             throw new Exception();
-        this.signs=db.getAllSigns();
+        this.signs = db.getAllSigns();
     }
 
     //with initialisation
     public SignBank(Map<String,Sign> source) throws Exception {
-        if(source==null||source.isEmpty())
+        if(source == null||source.isEmpty())
             throw new Exception();
         this.signs.putAll(source);
     }
 
     //copy constructor
     public SignBank(SignBank other) throws Exception {
-        if(other==null)
+        if(other == null)
             throw new Exception();
-        this.signs=other.signs;
+        this.signs = other.signs;
     }
 
 
@@ -43,7 +43,7 @@ public class SignBank {
 
     //add one sign
     public boolean addSign(String SignName,Sign sign){
-        if(SignName==null||SignName.isEmpty()||sign==null)
+        if(SignName == null||SignName.isEmpty() || sign == null)
             return false;
         if(signs.containsKey(SignName)) {
             return signs.get(SignName).addSamples(sign.getAllSamples());
@@ -55,13 +55,19 @@ public class SignBank {
 
     //remove one sign by SignName
     public boolean removeSign(String SignName){
-        if(SignName==null||SignName.isEmpty())
+        if(SignName == null || SignName.isEmpty())
             return false;
         if(signs.containsKey(SignName)){
             signs.remove(SignName);
             return true;
         }
         return false;
+    }
+
+    //remove all signs
+    public boolean removeAllSign(){
+            signs.clear();
+            return true;
     }
 
 
@@ -74,7 +80,7 @@ public class SignBank {
 
     //replace all signs
     public boolean setAllSigns(Map<String,Sign> source) {
-        if(source==null)
+        if(source == null)
             return false;
         signs.clear();
         signs.putAll(source);
