@@ -124,8 +124,12 @@ public class Interface {
         frame.getContentPane().add(txtrName);
 
         JList list = new JList();
-        list.setBounds(10, 94, 138, 271);
+        list.setBounds(10, 94, 138, 256);
         frame.getContentPane().add(list);
+
+        JScrollPane listScrollPane = new JScrollPane(list);
+        listScrollPane.setBounds(10, 94, 138, 256);
+        frame.add(listScrollPane);
 
         DefaultListModel listModel = new DefaultListModel();
         list.setModel(listModel);
@@ -285,6 +289,31 @@ public class Interface {
             }
         });
 
+        Button btnRemove = new Button("Remove");
+        btnRemove.setBounds(48, 356, 61, 23);
+        frame.getContentPane().add(btnRemove);
+        btnRemove.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String signName = (String) list.getSelectedValue();
+                int index = list.getSelectedIndex();
+
+                if(signName == null){
+                    ps.println("Please select a sign.");
+                    return;
+                }
+
+                try{
+                    Sign sign = db.getSignsByName(signName);
+                    db.removeSign(sign);
+                    listModel.removeElementAt(index);
+                    ps.println("Sign '" + signName + "' is removed.");
+                }catch(Exception ex){
+                    ps.println("Exception caught!");
+                }
+            }
+        });
+
         Button btnClear = new Button("Clear");
         btnClear.setBounds(152, 460, 61, 23);
         btnClear.addActionListener(new ActionListener() {
@@ -312,9 +341,9 @@ public class Interface {
         frame.getContentPane().add(textArea);
         textArea.setColumns(10);
 
-        JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setBounds(10, 385, 761, 68);
-        frame.add(scrollPane);
+        JScrollPane textScrollPane = new JScrollPane(textArea);
+        textScrollPane.setBounds(10, 385, 761, 68);
+        frame.add(textScrollPane);
 
         label_1 = new JLabel("1");
         label_1.setFont(new Font("Papyrus", Font.PLAIN, 150));
@@ -421,7 +450,7 @@ public class Interface {
         while(true){//while (signName = sc.next()) {
             signName=sc.next();//added
             if (signName.equals("Y")) {
-                ps.println("Done!!!");
+                ps.println("The recording is done!");
                 return true;
             } else if (signName.equals("N")) {
                 ps.println("The Sample is not added.");

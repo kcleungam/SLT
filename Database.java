@@ -172,7 +172,7 @@ public class Database {
 	}
 
 	// Search by name
-	public Sign getSignsByBoth(String name) throws IOException {
+	public Sign getSignsByName(String name) throws IOException {
 		Sign result = Jcoll.findOne("{name:#}", name).as(Sign.class);
 
 		return result;
