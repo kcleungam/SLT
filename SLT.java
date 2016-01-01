@@ -147,7 +147,49 @@ public class SLT {
 					case 3:
 						printAllDetails();
 						sampleListener.lostFocus();
+
 						break;
+
+					case 4:
+						System.out.println("--------------------DTW----------------------");
+						ready();
+						sampleListener.reset();
+						sampleListener.gainFocus();
+						boolean getSample = false;
+						Sample rSample = new Sample();
+						while (true) {
+							if (sampleListener.checkFinish()) {
+								if (sampleListener.checkValid()) {
+									if (savePrompt()) {
+
+										rSample.set(sampleListener.returnOneSample());
+										getSample = true;
+
+									}
+								} else {
+									System.out.println("The recording is invalid. ");
+								}
+								break;
+							}
+							// The current thread is too fast, will fail to
+							// trace Listener if missing this code
+							Thread.currentThread().sleep(10);
+						}
+						sampleListener.lostFocus();
+
+						if(getSample == false){
+							break;
+						}
+
+						DTW dtw = new DTW(rSample);
+						for(Sign storedSign : allSigns.getAllSigns().values()){
+							dtw.setStoredSign(storedSign);
+							dtw.calDTW();
+						}
+						dtw.printResult();
+
+
+
 					default:
 						System.out.println("Please enter a valid option");
 						sampleListener.lostFocus();
