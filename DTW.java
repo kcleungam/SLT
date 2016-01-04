@@ -6,12 +6,12 @@ import java.util.ArrayList;
  * Created by Krauser on 21/12/2015.
  */
 public class DTW {
-    public double bestMatch = Double.POSITIVE_INFINITY;
-    public Sample rSample;       // Sample for recognize
-    public Sign storedSign; // Sample from database
-    public int maxSlope = 3;    // the maximum number of slope
-    public int minFrame = 30;
-    public double globalThreshold; // The maximum distance between sample and stored sample which can be recognize
+    public static double bestMatch = Double.POSITIVE_INFINITY;
+    public static Sample rSample;       // Sample for recognize
+    public static Sign storedSign; // Sample from database
+    public static int maxSlope = 3;    // the maximum number of slope
+    public static int minFrame = 30;
+    public static double globalThreshold; // The maximum distance between sample and stored sample which can be recognize
                                     // If the bestMatch > globalThreshold, then unknown gesture
 
     public double localThreshold;   // The distance between sample and one of the stored sample
@@ -40,11 +40,12 @@ public class DTW {
      *
      */
     public void calDTW(){
-
+        System.out.println("--------In---------");
+        ArrayList<Frame> rAllFrame = rSample.getAllFrames();
+        Frame rOrigin = rAllFrame.get(0);
         for(Sample storedSample: storedSign.getAllSamples()) {
-            ArrayList<Frame> rAllFrame = rSample.getAllFrames();
+            System.out.println("Looping");
             ArrayList<Frame> storedAllFrame = storedSample.getAllFrames();
-            Frame rOrigin = rAllFrame.get(0);
             Frame storedOrigin = storedAllFrame.get(0);
 
             int rSize = rAllFrame.size();
@@ -53,7 +54,6 @@ public class DTW {
             double[][] tab = new double[rSize + 1][storedSize + 1];
             int[][] slopeI = new int[rSize + 1][storedSize + 1];
             int[][] slopeJ = new int[rSize + 1][storedSize + 1];
-
             for (int i = 0; i < rSize + 1; i++) {
                 for (int j = 0; j < storedSize + 1; j++) {
                     tab[i][j] = Double.POSITIVE_INFINITY;
@@ -61,12 +61,13 @@ public class DTW {
                     slopeJ[i][j] = 0;
                 }
             }
-
+            System.out.println("Check point 1 ");
             tab[0][0] = 0;  // We don't compare the first frame of rSample and storedSample
 
             // I will try to do things at once
             for (int i = 1; i < rSize + 1; i++) {
                 for (int j = 1; j < storedSize + 1; j++) {
+                    System.out.println("Check point 2 ");
                     if (tab[i][j - 1] < tab[i - 1][j - 1] && tab[i][j - 1] < tab[i - 1][j] && slopeI[i][j - 1] < maxSlope) {
                         tab[i][j] = calDist(rAllFrame.get(i - 1), storedAllFrame.get(j - 1), rOrigin, storedOrigin) + tab[i][j - 1];
                         //slope is the things that limit the repeated step in DTW
@@ -75,14 +76,16 @@ public class DTW {
                     } else if (tab[i - 1][j] < tab[i - 1][j - 1] && tab[i - 1][j] < tab[i][j - 1] && slopeJ[i - 1][j] < maxSlope) {
                         slopeI[i][j] = 0;
                         slopeJ[i][j] = slopeJ[i - 1][j] + 1;
-                    } else {
-                        tab[i][j] = calDist(rAllFrame.get(i - 1), storedAllFrame.get(j - 1), rOrigin, storedOrigin);
+                    }else {
+                        //tab[i][j] = calDist(rAllFrame.get(i - 1), storedAllFrame.get(j - 1), rOrigin, storedOrigin);
                         slopeI[i][j] = 0;
                         slopeJ[i][j] = 0;
                     }
+                    System.out.println("11111111   " + rAllFrame.get(i-1).fingers().count());
+                    System.out.println("22222222   " + storedAllFrame.get(j - 1));
                 }
             }
-
+            /*
             // this function dynamically find the best ending of the sample for recognition
             // imagine that it just like storedSample unchanged but cutting the frame of rSample
             for (int i = rSize + 1; i > minFrame; i--) {
@@ -94,6 +97,7 @@ public class DTW {
                 bestMatch = localThreshold;
                 result = storedSign.getName();
             }
+            */
         }
     }
 
@@ -114,7 +118,6 @@ public class DTW {
     public double calDist(Frame rFrame, Frame storedFrame, Frame rOrigin, Frame storedOrigin){
 
         double distance = 0.0;
-
         if (rFrame.hands().count() != storedFrame.hands().count()){
             distance = Double.POSITIVE_INFINITY;
             return distance;
@@ -123,12 +126,11 @@ public class DTW {
             distance = Double.POSITIVE_INFINITY;
             return distance;
 
-        }else{
+        }   else{
             FingerList rFingerList = rFrame.fingers();
             FingerList storedFingerList = storedFrame.fingers();
             HandList rHandList  = rFrame.hands();
             HandList storedHandList = storedFrame.hands();
-
             for(int i = 0; i < rFingerList.count(); i++){
                 int handNumber = i/2;   // from 0 to 4 will give 0, from 5 to 9 give 1
                 distance = distance + fingerDist(rFingerList.get(i),storedFingerList.get(i),
@@ -191,6 +193,10 @@ public class DTW {
     public void printResult(){
         System.out.println("The most similar gesture is" + result);
         System.out.println("The minimum cost of DTW is " + bestMatch);
+    }
+
+    public void printInformation(){
+        System.out.println(this.rSample.getAllFrames().get(0).fingers().count());
     }
 }
 

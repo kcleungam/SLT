@@ -160,12 +160,10 @@ public class SLT {
 						while (true) {
 							if (sampleListener.checkFinish()) {
 								if (sampleListener.checkValid()) {
-									if (savePrompt()) {
 
 										rSample.set(sampleListener.returnOneSample());
 										getSample = true;
 
-									}
 								} else {
 									System.out.println("The recording is invalid. ");
 								}
@@ -180,13 +178,24 @@ public class SLT {
 						if(getSample == false){
 							break;
 						}
-
 						DTW dtw = new DTW(rSample);
+						/*
 						for(Sign storedSign : allSigns.getAllSigns().values()){
 							dtw.setStoredSign(storedSign);
 							dtw.calDTW();
 						}
 						dtw.printResult();
+						*/
+						for(Sign a : allSigns.getAllSigns().values()){
+							System.out.println("AAA");
+							for(Sample s : a.getAllSamples()){
+								System.out.println("SSSSS");
+								for(Frame f : s.getAllFrames()){
+									System.out.println("FFFFFFF");
+									System.out.println(f.id());
+								}
+							}
+						}
 
 
 
