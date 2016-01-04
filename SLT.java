@@ -179,13 +179,13 @@ public class SLT {
 							break;
 						}
 						DTW dtw = new DTW(rSample);
-						/*
+
 						for(Sign storedSign : allSigns.getAllSigns().values()){
 							dtw.setStoredSign(storedSign);
 							dtw.calDTW();
 						}
 						dtw.printResult();
-						*/
+
 
 					case 5:
 						db.removeAllSign();

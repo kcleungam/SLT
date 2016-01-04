@@ -74,10 +74,11 @@ public class DTW {
                         slopeI[i][j] = slopeI[i][j - 1] + 1;
                         slopeJ[i][j] = 0;
                     } else if (tab[i - 1][j] < tab[i - 1][j - 1] && tab[i - 1][j] < tab[i][j - 1] && slopeJ[i - 1][j] < maxSlope) {
+                        tab[i][j] = calDist(rAllFrame.get(i - 1), storedAllFrame.get(j - 1), rOrigin, storedOrigin) + tab[i-1][j];
                         slopeI[i][j] = 0;
                         slopeJ[i][j] = slopeJ[i - 1][j] + 1;
                     }else {
-                        //tab[i][j] = calDist(rAllFrame.get(i - 1), storedAllFrame.get(j - 1), rOrigin, storedOrigin);
+                        tab[i][j] = calDist(rAllFrame.get(i - 1), storedAllFrame.get(j - 1), rOrigin, storedOrigin) + tab[i-1][j-1];
                         slopeI[i][j] = 0;
                         slopeJ[i][j] = 0;
                     }
@@ -85,19 +86,19 @@ public class DTW {
                     System.out.println("22222222   " + storedAllFrame.get(j - 1));
                 }
             }
-            /*
+
             // this function dynamically find the best ending of the sample for recognition
             // imagine that it just like storedSample unchanged but cutting the frame of rSample
-            for (int i = rSize + 1; i > minFrame; i--) {
-                if (tab[i][storedSize + 1] < localThreshold) {
-                    localThreshold = tab[i][storedSize + 1];
+            for (int i = rSize; i > minFrame; i--) {
+                if (tab[i][storedSize] < localThreshold) {
+                    localThreshold = tab[i][storedSize];
                 }
             }
             if(localThreshold < bestMatch){
                 bestMatch = localThreshold;
                 result = storedSign.getName();
             }
-            */
+
         }
     }
 
