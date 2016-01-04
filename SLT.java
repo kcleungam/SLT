@@ -33,7 +33,7 @@ public class SLT {
 				while (true) {
 					sampleListener.lostFocus();
 					System.out.println("Please enter your choice\n " + "1. Record new sign\n "
-							+ "2. Train your translator\n " + "3. Print all sign");
+							+ "2. Train your translator\n " + "3. Print all sign\n" + "4. DTW\n" + "5. Remove all Sign(Debug)\n");
 					int i = sc.nextInt();
 					boolean inputValid = true;
 					//Sign sign = new Sign();
@@ -186,17 +186,11 @@ public class SLT {
 						}
 						dtw.printResult();
 						*/
-						for(Sign a : allSigns.getAllSigns().values()){
-							System.out.println("AAA");
-							for(Sample s : a.getAllSamples()){
-								System.out.println("SSSSS");
-								for(Frame f : s.getAllFrames()){
-									System.out.println("FFFFFFF");
-									System.out.println(f.id());
-								}
-							}
-						}
 
+					case 5:
+						db.removeAllSign();
+						allSigns.removeAllSign();
+						break;
 
 
 					default:
@@ -299,6 +293,19 @@ public class SLT {
 			System.out.println("Hand Count  : " + allSigns.getAllSigns().get(key).getHandCount());
 			System.out.println("Hand Type   :" + allSigns.getAllSigns().get(key).getHandType());
 			System.out.println("Finger Count = " + allSigns.getAllSigns().get(key).getFingerCount() + "\n");
+
+			System.out.println("!!!!!--------For debug----------!!!!!");
+			for(Sign a : allSigns.getAllSigns().values()){
+				System.out.println("AAA");
+				for(Sample s : a.getAllSamples()){
+					System.out.println("SSSSS");
+					for(Frame f : s.getAllFrames()){
+						System.out.println("FFFFFFF");
+						System.out.println(f.id());
+					}
+				}
+			}
+
 		}
 
 		System.out.println("All sign are printed");
