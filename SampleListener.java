@@ -98,6 +98,8 @@ public class SampleListener extends Listener {
 
 	public void onExit(Controller controller) {
 		System.out.println("Exited");
+		System.out.println("Cation!!!! Please check the connection between your computer and Leap Motion Controller!!!");
+		System.out.println("Please check if the LMC device connect properly and re-execute this program again!");
 	}
 
 	public void onInit(Controller controller) {
