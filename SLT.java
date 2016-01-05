@@ -161,7 +161,7 @@ public class SLT {
 							if (sampleListener.checkFinish()) {
 								if (sampleListener.checkValid()) {
 
-										rSample.set(sampleListener.returnOneSample());
+										rSample.setSample(sampleListener.returnOneSample());
 										getSample = true;
 
 								} else {
@@ -299,12 +299,9 @@ public class SLT {
 				System.out.println("AAA");
 				for(Sample s : a.getAllSamples()){
 					System.out.println("SSSSS");
-					for(Frame f : s.getAllFrames()){
-						System.out.println("FFFFFFF");
-						System.out.println(f.id());
-					}
 				}
 			}
+			System.out.println(" This part is reserve for the debug of new database structure");
 
 		}
 

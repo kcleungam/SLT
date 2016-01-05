@@ -16,6 +16,12 @@ public class Sample {
     ArrayList<ArrayList<Coordinate>> allFinger;
     ArrayList<ArrayList<Coordinate>> allPalm;
 
+    private int handCount;
+    private String handType;
+
+    //finger
+    private int fingerCount;
+
 
     /**
      * constructor
@@ -36,6 +42,9 @@ public class Sample {
     public Sample(Sample source) {
         this.allPalm = source.allPalm;
         this.allFinger = source.allFinger;
+        this.fingerCount = source.fingerCount;
+        this.handCount = source.handCount;
+        this.handType = source.handType;
     }
 
     public Sample(Collection<Frame> source) throws Exception {
@@ -66,6 +75,43 @@ public class Sample {
             }
         }
 
+
+        int fCount = 0;
+        ArrayList<Frame> frameList = new ArrayList<>();
+        frameList.addAll(source);
+        if (frameList.get(0).hands().count() > 1) {
+            handType = "Both Hand";
+            for (Hand hand : frameList.get(0).hands()) {
+                for (Finger finger : hand.fingers()) {
+                    if (finger.isExtended()) {
+                        fCount++;
+                    }
+                }
+            }
+        } else if (frameList.get(0).hands().count() == 1) {
+            if (frameList.get(0).hands().get(0).isLeft()) {
+                handType = "Left";
+                // doesn't work when hands.get(0) change to hand(0)
+                for (Finger finger : frameList.get(0).hands().get(0).fingers()) {
+                    if (finger.isExtended()) {
+                        fCount++;
+                    }
+                }
+            } else if (frameList.get(0).hands().get(0).isRight()) {
+                handType = "Right";
+                // doesn't work when hands.get(0) change to hand(0)
+                for (Finger finger : frameList.get(0).hands().get(0).fingers()) {
+                    if (finger.isExtended()) {
+                        fCount++;
+                    }
+                }
+            }
+        }
+
+        fingerCount = fCount;
+        handCount = frameList.get(0).hands().count();
+
+
     }
 
     public boolean setSample(Collection<Frame> source) {
@@ -95,6 +141,42 @@ public class Sample {
                 allPalm.add(framePalm);
             }
         }
+
+        int fCount = 0;
+        ArrayList<Frame> frameList = new ArrayList<>();
+        frameList.addAll(source);
+        if (frameList.get(0).hands().count() > 1) {
+            this.setHandType( "Both Hand" );
+            for (Hand hand : frameList.get(0).hands()) {
+                for (Finger finger : hand.fingers()) {
+                    if (finger.isExtended()) {
+                        fCount++;
+                    }
+                }
+            }
+        } else if (frameList.get(0).hands().count() == 1) {
+            if (frameList.get(0).hands().get(0).isLeft()) {
+                this.setHandType( "Left" );
+                // doesn't work when hands.get(0) change to hand(0)
+                for (Finger finger : frameList.get(0).hands().get(0).fingers()) {
+                    if (finger.isExtended()) {
+                        fCount++;
+                    }
+                }
+            } else if (frameList.get(0).hands().get(0).isRight()) {
+                this.setHandType( "Right" );
+                // doesn't work when hands.get(0) change to hand(0)
+                for (Finger finger : frameList.get(0).hands().get(0).fingers()) {
+                    if (finger.isExtended()) {
+                        fCount++;
+                    }
+                }
+            }
+        }
+
+        this.setFingerCount(fCount);
+        this.setHandCount( frameList.get(0).hands().count() );
+
         return true;
     }
 
@@ -114,7 +196,29 @@ public class Sample {
         return allPalm;
     }
 
+    public void setHandCount(int handCount) {
+        this.handCount = handCount;
+    }
 
+    public void setFingerCount(int fingerCount) {
+        this.fingerCount = fingerCount;
+    }
+
+    public void setHandType(String handType) {
+        this.handType = handType;
+    }
+
+    public int getFingerCount() {
+        return fingerCount;
+    }
+
+    public int getHandCount() {
+        return handCount;
+    }
+
+    public String getHandType() {
+        return handType;
+    }
 }
 
 
