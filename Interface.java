@@ -24,17 +24,16 @@ public class Interface {
     private final JTextArea txtrName = new JTextArea();
     private JTextArea textArea;
     private static TextAreaPrintStream ps;
-    private static JButton btnYes, btnNo;
-    private static JLabel label_1, label_2, label_3;
+    private static JLabel label_1, label_2, label_3, label_start;
+
+    //private static boolean recordingMode = false;
+    private volatile static boolean recording = false;
+    private volatile static boolean yes = false, no = false;
 
     private static Database db = new Database("Signs", "HK_Signs");
-
-    static boolean recordingMode = false;
-    static boolean recording = false;
-
-    static SignBank allSigns;
-    SampleListener sampleListener = new SampleListener();
-    Controller controller = new Controller();
+    private static SignBank allSigns;
+    private SampleListener sampleListener = new SampleListener();
+    private Controller controller = new Controller();
 
     /**
      * Launch the application.
@@ -173,48 +172,62 @@ public class Interface {
         new_button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Sign sign;
-                String signName = txtrName.getText();
+                if(!recording){
+                    recording = true;
 
-                if(signName.equals("")){
-                    ps.println("Please enter a name!");
-                    return;
-                }
+                    Runnable NewRunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            Sign sign;
+                            String signName = txtrName.getText();
 
-                if (allSigns.getAllSigns().containsKey(signName)) {
-                    ps.println("The name existed in the database.");
-                } else {
-                    ready();
-                    sampleListener.reset();
-                    sampleListener.gainFocus();
-
-                    try {
-                        while (true) {
-                            if (sampleListener.checkFinish()) {
-                                if (sampleListener.checkValid()) {
-                                    if (savePrompt()) {
-                                        //recordSign(sampleListener.returnOneSample(), signName, sign, allsign);
-                                        sign = new Sign(signName, new Sample(sampleListener.returnOneSample()));
-                                        //ToDo: handle the boolean return value aftter adding the given sign
-                                        allSigns.addSign(signName, sign);
-                                        db.addSign(sign);
-                                        ps.println("New gesture:" + signName);
-                                        listModel.addElement(signName);
-                                    }
-                                } else {
-                                    ps.println("The recording is invalid. ");
-                                }
-                                break;
+                            if(signName.equals("")){
+                                ps.println("Please enter a name!");
+                                recording = false;
+                                return;
                             }
-                            // The current thread is too fast, will fail to
-                            // trace Listener if missing this code
-                            Thread.currentThread().sleep(10);
-                        }
-                    } catch (Exception ex) {
-                        ps.println("Exception caught!");
-                    }
 
-                    sampleListener.lostFocus();
+                            if (allSigns.getAllSigns().containsKey(signName)) {
+                                ps.println("This name is already existed in the database.");
+                            } else {
+                                ready();
+                                sampleListener.reset();
+                                sampleListener.gainFocus();
+
+                                try {
+                                    while (true) {
+                                        if (sampleListener.checkFinish()) {
+                                            if (sampleListener.checkValid()) {
+                                                if (savePrompt()) {
+                                                    //recordSign(sampleListener.returnOneSample(), signName, sign, allsign);
+                                                    sign = new Sign(signName, new Sample(sampleListener.returnOneSample()));
+                                                    //ToDo: handle the boolean return value aftter adding the given sign
+                                                    allSigns.addSign(signName, sign);
+                                                    db.addSign(sign);
+                                                    ps.println("New gesture: " + signName);
+                                                    listModel.addElement(signName);
+                                                }
+                                            } else {
+                                                ps.println("The recording is invalid.");
+                                            }
+                                            break;
+                                        }
+                                        // The current thread is too fast, will fail to
+                                        // trace Listener if missing this code
+                                        Thread.currentThread().sleep(10);
+                                    }
+                                } catch (Exception ex) {
+                                    ps.println("Exception caught!");
+                                }
+
+                                recording = false;
+                                sampleListener.lostFocus();
+                            }
+                        }
+                    };
+
+                    Thread thread = new Thread(NewRunnable);
+                    thread.start();
                 }
             }
         });
@@ -225,67 +238,81 @@ public class Interface {
         button_train.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                Sign sign;
-                Scanner sc = new Scanner(System.in);
+                if(!recording){
+                    recording = true;
 
-                //printTraining();
-                //System.out.println("Please enter the name of the sign you want to train: ");
-                String trainName = (String) list.getSelectedValue();
+                    Runnable TrainRunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            Sign sign;
 
-                if (allSigns.getAllSigns().containsKey(trainName)) {
-                    ps.println("Sign found, ready to start training");
-                    // recordingMode = true;
-                    ready();
+                            //printTraining();
+                            //System.out.println("Please enter the name of the sign you want to train: ");
+                            String trainName = (String) list.getSelectedValue();
 
-                    // SampleListener trainListener = new
-                    // SampleListener(); //new a listener everytime
-                    // controller.addListener(trainListener); // add
-                    // listener, grab data
-                    sampleListener.reset();
-                    sampleListener.gainFocus();
-                    /*
-                     * keep grabbing the frame from controller, check
-                     * whether it is recordable, add to the oneSample if
-                     * it is. """"put it as one sample of specific
-                     * sign"""
-                     */
-                    try{
-                        while (true) {
-                            if (sampleListener.checkFinish()) {
-                                if (sampleListener.checkValid()) {
-                                    if (savePrompt()) {
-                                        //trainOneSign(sampleListener.returnOneSample(), trainName, allsign);
-                                        //ToDo: handle the boolean return type after adding sample to the given sign
-                                        sign = new Sign(trainName,new Sample(sampleListener.returnOneSample()));
-                                        allSigns.addSign(trainName,sign);
-                                        db.addSign(sign);
-                                        ps.println("Training completed!");
+                            if (allSigns.getAllSigns().containsKey(trainName)) {
+                                ps.println("Sign found, ready to start training");
+                                // recordingMode = true;
+                                ready();
+
+                                // SampleListener trainListener = new
+                                // SampleListener(); //new a listener everytime
+                                // controller.addListener(trainListener); // add
+                                // listener, grab data
+                                sampleListener.reset();
+                                sampleListener.gainFocus();
+                                /**
+                                                                 * keep grabbing the frame from controller, check
+                                                                 * whether it is recordable, add to the oneSample if
+                                                                 * it is. """"put it as one sample of specific
+                                                                 * sign"""
+                                                                 */
+                                try{
+                                    while (true) {
+                                        if (sampleListener.checkFinish()) {
+                                            if (sampleListener.checkValid()) {
+                                                if (savePrompt()) {
+                                                    //trainOneSign(sampleListener.returnOneSample(), trainName, allsign);
+                                                    //ToDo: handle the boolean return type after adding sample to the given sign
+                                                    sign = new Sign(trainName,new Sample(sampleListener.returnOneSample()));
+                                                    allSigns.addSign(trainName,sign);
+                                                    db.addSign(sign);
+                                                    ps.println("Training completed!");
+                                                }
+                                            } else {
+                                                ps.println("The recording is invalid!");
+                                            }
+                                            recording = false;
+                                            break;
+                                        }
+                                        // It is necessary, without it, bug occur
+                                        Thread.currentThread().sleep(10);
                                     }
-                                } else {
-                                    ps.println("The recording is invalid!");
+                                }catch(Exception ex){
+                                    ps.println("Exception caught!");
+                                    recording = false;
                                 }
-                                break;
-                            }
-                            // It is necessary, without it, bug occur
-                            Thread.currentThread().sleep(10);
-                        }
-                    }catch(Exception ex){
-                        ps.println("Exception caught!");
-                    }
 
-                    // controller.removeListener(trainListener);
-                    sampleListener.lostFocus();
-							/*
+                                // controller.removeListener(trainListener);
+                                sampleListener.lostFocus();
+							/**
 							 * while (true) { Frame frame = controller.frame();
 							 * if (recordingMode == true) {
 							 * trainOneSign(frame,oneSample,trainName,allsign);
 							 * //recordingMode = false at the end of
 							 * trainOneSign } else { break; } }
 							 */
-                } else { // sign not found
-                    ps.println("Sign not found!");
-                    // recordingMode = false;
+                            } else { // sign not found
+                                ps.println("Please choose a sign!");
+                                recording = false;
+                            }
+                        }
+                    };
+
+                    Thread thread = new Thread(TrainRunnable);
+                    thread.start();
                 }
+
             }
         });
 
@@ -324,13 +351,25 @@ public class Interface {
         });
         frame.getContentPane().add(btnClear);
 
-        btnYes = new JButton("Yes");
+        Button btnYes = new Button("Yes");
         btnYes.setBounds(10, 460, 61, 23);
         frame.getContentPane().add(btnYes);
+        btnYes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                yes = true;
+            }
+        });
 
-        btnNo = new JButton("No");
+        Button btnNo = new Button("No");
         btnNo.setBounds(81, 460, 61, 23);
         frame.getContentPane().add(btnNo);
+        btnNo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                no = true;
+            }
+        });
 
         JLabel lblNewLabel = new JLabel("Name");
         lblNewLabel.setBounds(10, 15, 46, 15);
@@ -362,17 +401,12 @@ public class Interface {
         label_3.setBounds(420, 121, 274, 177);
         frame.getContentPane().add(label_3);
         label_3.setVisible(false);
-    }
 
-    public static void printTraining() {
-        System.out.println("There are " + allSigns.getAllSigns().size() + " sign in database:\n");
-
-        for (String key : allSigns.getAllSigns().keySet()) {
-            System.out.println("Sign Name:  " + key + "   , Consist of "
-                    + allSigns.getAllSigns().get(key).getAllSamples().size() + " Sample");
-        }
-
-        System.out.println("");
+        label_start = new JLabel("Start");
+        label_start.setFont(new Font("Papyrus", Font.PLAIN, 100));
+        label_start.setBounds(313, 121, 274, 177);
+        frame.getContentPane().add(label_start);
+        label_start.setVisible(false);
     }
 
     /**
@@ -393,11 +427,11 @@ public class Interface {
     }
 
     /**
-     * Provide a 3-second countdown.
+     * Provide a 3-second countdown in GUI.
      */
     public static void ready() {
-        /* GUI countdown
-        for (int count = 3; count >= 0; count--) {
+        // GUI countdown
+        for (int count = 3; count >= -1; count--) {
             try {
                 if(count == 3){
                     label_3.setVisible(true);
@@ -407,18 +441,12 @@ public class Interface {
                 }else if(count == 1){
                     label_2.setVisible(false);
                     label_1.setVisible(true);
-                }else{
+                }else if(count == 0){
                     label_1.setVisible(false);
+                    label_start.setVisible(true);
+                }else{
+                    label_start.setVisible(false);
                 }
-                Thread.sleep(1000);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        */
-        for (int count = 3; count >= 0; count--) {
-            try {
-                System.out.println(count);
                 Thread.sleep(1000);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -430,34 +458,19 @@ public class Interface {
      * Give a save prompt
      */
     public static boolean savePrompt() {
-        /* Yes and No Buttons not work yet
-        System.out.println("Save this Sample?");
+        // Reset the variables
+        yes = false;
+        no = false;
+
+        ps.println("Save this Sample?");
 
         while (true) {
-            if (btnYes.getModel().isPressed()) {
-                System.out.println("Done!!!");
-                return true;
-            } else if (btnNo.getModel().isPressed()) {
-                System.out.println("The Sample is not added.");
-                return false;
-            }
-
-        }*/
-
-        System.out.println("Save this Sample? (Y/N)");
-        Scanner sc = new Scanner(System.in);//added
-        String signName=new String();//added
-        while(true){//while (signName = sc.next()) {
-            signName=sc.next();//added
-            if (signName.equals("Y")) {
+            if (yes) {
                 ps.println("The recording is done!");
                 return true;
-            } else if (signName.equals("N")) {
+            } else if (no) {
                 ps.println("The Sample is not added.");
                 return false;
-            } else {
-                System.out.println("Please input Y or N.");
-                System.out.println("Save this Sample? (Y/N)");
             }
         }
     }
