@@ -19,11 +19,14 @@ public class DTW {
     public String result = "";
 
 
-    public DTW(Sample rSample){
+    public DTW(Sample rSample) throws Exception{
+        if(rSample==null)
+            throw new Exception();
         this.rSample = rSample;
     }
 
-    public DTW(Sample rSample, Sign storedSign){
+    public DTW(Sample rSample, Sign storedSign) throws Exception{
+        if(rSample==null||storedSign==null) throw new Exception();
         this.rSample = rSample;
         this.storedSign = storedSign;
     }

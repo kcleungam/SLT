@@ -156,12 +156,12 @@ public class SLT {
 						sampleListener.reset();
 						sampleListener.gainFocus();
 						boolean getSample = false;
-						Sample rSample = new Sample();
+						Sample rSample=new Sample();
 						while (true) {
 							if (sampleListener.checkFinish()) {
 								if (sampleListener.checkValid()) {
 
-										rSample.setSample(sampleListener.returnOneSample());
+										rSample=new Sample(sampleListener.returnOneSample());
 										getSample = true;
 
 								} else {
@@ -178,7 +178,7 @@ public class SLT {
 						if(getSample == false){
 							break;
 						}
-						DTW dtw = new DTW(rSample);
+						DTW dtw = new DTW(rSample);//TODO: if rSample is created by default constructor, error may occurs
 
 						for(Sign storedSign : allSigns.getAllSigns().values()){
 							dtw.setStoredSign(storedSign);

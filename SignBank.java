@@ -65,9 +65,8 @@ public class SignBank {
     }
 
     //remove all signs
-    public boolean removeAllSign(){
-            signs.clear();
-            return true;
+    public void removeAllSign(){
+        signs.clear();
     }
 
 

@@ -6,6 +6,7 @@ import org.jongo.marshall.jackson.oid.MongoObjectId;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class Sign {
 	/** field */
@@ -17,11 +18,9 @@ public class Sign {
 	private HashSet<Sample> samples=new HashSet<Sample>();//samples should not repeat
 
 	/* extra information */
-	//hand
+	//note: the below 3 fields are based on the first frame of the first sample
 	private int handCount;
-	private String handType;
-
-	//finger
+	private Sample.HandType handType;
 	private int fingerCount;
 
 
@@ -36,40 +35,38 @@ public class Sign {
 
 	//basic constructor with 1 sample only
 	public Sign(String SignName,Sample sample) throws Exception {
+		//Valid sign name is required
 		if(SignName==null||isNameInvalid(SignName)||sample==null)
 			throw new Exception();
-		this.name=SignName;
-		setHandCount(sample.getHandCount());
-		setHandType(sample.getHandType());
-		setFingerCount(sample.getFingerCount());
 
+		this.name=SignName;
+		setHandCount(sample.allHands.count);
+		setHandType(sample.allHands.type);
+		setFingerCount(sample.allFingers.count);
 		this.samples.add(sample);
 	}
 
 	//basic constructor with a sequence of samples
 	public Sign(String SignName, Collection<Sample> samples) throws Exception {
+		//Valid sign name is required & non-empty samples
 		if(SignName==null||isNameInvalid(SignName)||samples==null||samples.isEmpty())
 			throw new Exception();
+
 		this.name=SignName;
-		this.samples.addAll(samples);
+		setAllSamples(samples);
 	}
 
 	//advanced constructor
-	public Sign(String SignName, Collection<Sample> samples,int HandCount,String HandType,int FingerCount) throws Exception {
+	public Sign(String SignName, Collection<Sample> samples,int HandCount,Sample.HandType HandType,int FingerCount) throws Exception {
+		//Valid sign name is required & non-empty samples
 		if(SignName==null||isNameInvalid(SignName)||samples==null||samples.isEmpty())
 			throw new Exception();
+
 		this.name =SignName;
 		this.samples.addAll(samples);
-
-		if(HandCount<1||HandCount>2) throw new Exception();
-		this.handCount = HandCount;
-
-		//ToDo: restrict the values
-		if(HandType==null||HandType.isEmpty()) throw new Exception();
-		this.handType=HandType;
-
-		if(FingerCount<0||FingerCount>10) throw new Exception();
-		this.fingerCount=FingerCount;
+		setHandCount(HandCount);
+		setHandType(HandType);
+		setFingerCount(FingerCount);
 	}
 
 
@@ -80,9 +77,13 @@ public class Sign {
 	public boolean setAllSamples(Collection<Sample> source){
 		if(source==null||source.isEmpty())
 			return false;
-		//make it to be HashSet
+
 		samples.clear();
-		this.samples.addAll(source);
+		this.samples.addAll(samples);
+		Sample first=samples.iterator().next();
+		this.handCount=first.allHands.count;
+		this.handType=first.allHands.type;
+		this.fingerCount=first.allFingers.count;
 		return true;
 	}
 
@@ -129,9 +130,9 @@ public class Sign {
 		return true;
 	}
 
-	public boolean setHandType(String HandType) {
+	public boolean setHandType(Sample.HandType HandType) {
 		//ToDo: restrict the values
-		if(HandType==null||HandType.isEmpty())
+		if(HandType==null)
 			return false;
 		this.handType=HandType;
 		return true;
@@ -145,14 +146,14 @@ public class Sign {
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public int getFingerCount() {
 		return fingerCount;
 	}
 
-	public String getHandType() {
+	public Sample.HandType getHandType() {
 		return handType;
 	}
 

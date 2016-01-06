@@ -115,10 +115,8 @@ public class Database {
 	}
 
     //remove all signs
-    public boolean removeAllSign() throws Exception {
+    public void removeAllSign() throws Exception {
         Jcoll.remove("{}");
-        return true;
-
     }
 
 	//ToDo: maybe use Enum to simplify the following query operations
@@ -140,7 +138,7 @@ public class Database {
 	}
 
 	// Search by the handType
-	public HashMap<String,Sign> getSignsByHandType(String hand_type) throws IOException {
+	public HashMap<String,Sign> getSignsByHandType(Sample.HandType hand_type) throws IOException {
 		HashMap<String,Sign> result=new HashMap<String,Sign>();
 		Sign temp;
 
@@ -156,7 +154,7 @@ public class Database {
 	}
 
 	// Search by both handType and the number of finger(s)
-	public HashMap<String, Sign> getSignsByBoth(int fingers, String hand_type) throws IOException {
+	public HashMap<String, Sign> getSignsByBoth(int fingers, Sample.HandType hand_type) throws IOException {
 		HashMap<String, Sign> result = new HashMap<String, Sign>();
 		Sign temp;
 
