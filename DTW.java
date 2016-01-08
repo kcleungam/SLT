@@ -1,5 +1,3 @@
-import com.leapmotion.leap.*;
-
 import java.util.ArrayList;
 
 /**
@@ -43,16 +41,12 @@ public class DTW {
      *
      */
     public void calDTW(){
-        System.out.println("--------In---------");
-        ArrayList<Frame> rAllFrame = rSample.getAllFrames();
-        Frame rOrigin = rAllFrame.get(0);
+
         for(Sample storedSample: storedSign.getAllSamples()) {
             System.out.println("Looping");
-            ArrayList<Frame> storedAllFrame = storedSample.getAllFrames();
-            Frame storedOrigin = storedAllFrame.get(0);
 
-            int rSize = rAllFrame.size();
-            int storedSize = storedAllFrame.size();
+            int rSize = rSample.allFingers.coordinateSeq.size();
+            int storedSize = storedSample.allFingers.coordinateSeq.size();
             // +1 is for the last frame as you need extra 1 more space to compare the last
             double[][] tab = new double[rSize + 1][storedSize + 1];
             int[][] slopeI = new int[rSize + 1][storedSize + 1];
@@ -72,21 +66,25 @@ public class DTW {
                 for (int j = 1; j < storedSize + 1; j++) {
                     System.out.println("Check point 2 ");
                     if (tab[i][j - 1] < tab[i - 1][j - 1] && tab[i][j - 1] < tab[i - 1][j] && slopeI[i][j - 1] < maxSlope) {
-                        tab[i][j] = calDist(rAllFrame.get(i - 1), storedAllFrame.get(j - 1), rOrigin, storedOrigin) + tab[i][j - 1];
-                        //slope is the things that limit the repeated step in DTW
+
+                        tab[i][j] = calDist(rSample, i - 1, storedSample,  j -1) + tab[i][ j - 1 ];
                         slopeI[i][j] = slopeI[i][j - 1] + 1;
                         slopeJ[i][j] = 0;
+                        //slope is the things that limit the repeated step in DTW
+
                     } else if (tab[i - 1][j] < tab[i - 1][j - 1] && tab[i - 1][j] < tab[i][j - 1] && slopeJ[i - 1][j] < maxSlope) {
-                        tab[i][j] = calDist(rAllFrame.get(i - 1), storedAllFrame.get(j - 1), rOrigin, storedOrigin) + tab[i-1][j];
+
+                        tab[i][j] = calDist(rSample, i - 1, storedSample, j - 1) + tab[i-1][j];
                         slopeI[i][j] = 0;
                         slopeJ[i][j] = slopeJ[i - 1][j] + 1;
+
                     }else {
-                        tab[i][j] = calDist(rAllFrame.get(i - 1), storedAllFrame.get(j - 1), rOrigin, storedOrigin) + tab[i-1][j-1];
+
+                        tab[i][j] = calDist(rSample, i - 1, storedSample, j - 1) + tab[i-1][j-1];
                         slopeI[i][j] = 0;
                         slopeJ[i][j] = 0;
+
                     }
-                    System.out.println("11111111   " + rAllFrame.get(i-1).fingers().count());
-                    System.out.println("22222222   " + storedAllFrame.get(j - 1));
                 }
             }
 
@@ -115,53 +113,81 @@ public class DTW {
      *          The reason why finger use square but palm not is to make distance between finger become dominant
      *
      *
-     * @param rFrame
-     * @param storedFrame
+     * @param rPosition         = the  frame number in r sample
+     * @param storedPosition = the frame number in storedSample
+     *
+     *                       This function focus on   """   one  """"     frame, calculate the distance between the finger of storedSample and  rSample
+     *
+     *
      * @return
      */
-    public double calDist(Frame rFrame, Frame storedFrame, Frame rOrigin, Frame storedOrigin){
+    public double calDist(Sample rSample, int rPosition, Sample storedSample, int storedPosition){
 
         double distance = 0.0;
-        if (rFrame.hands().count() != storedFrame.hands().count()){
+        if (rSample.allPalms.coordinateSeq.get(rPosition).size() != storedSample.allPalms.coordinateSeq.get(storedPosition).size()){
             distance = Double.POSITIVE_INFINITY;
             return distance;
 
-        }else if(rFrame.fingers().count() != storedFrame.fingers().count()){
+        }else if(rSample.allFingers.coordinateSeq.get(rPosition).size() != storedSample.allFingers.coordinateSeq.get(storedPosition).size()){
             distance = Double.POSITIVE_INFINITY;
             return distance;
 
         }   else{
-            FingerList rFingerList = rFrame.fingers();
-            FingerList storedFingerList = storedFrame.fingers();
-            HandList rHandList  = rFrame.hands();
-            HandList storedHandList = storedFrame.hands();
-            for(int i = 0; i < rFingerList.count(); i++){
-                int handNumber = i/2;   // from 0 to 4 will give 0, from 5 to 9 give 1
-                distance = distance + fingerDist(rFingerList.get(i),storedFingerList.get(i),
-                        rHandList.get(handNumber), storedHandList.get(handNumber));
 
+            ArrayList<Coordinate> rFingerList = rSample.allFingers.coordinateSeq.get(rPosition);
+            ArrayList<Coordinate> storedFingerList = storedSample.allFingers.coordinateSeq.get(storedPosition);
+            ArrayList<Coordinate> rPalmList  = rSample.allPalms.coordinateSeq.get(rPosition);
+            ArrayList<Coordinate> storedPalmList = storedSample.allPalms.coordinateSeq.get(storedPosition);
+
+            for(int i = 0; i < rSample.allFingers.coordinateSeq.get(rPosition).size(); i++){
+
+                int handNumber = i/2;   // from 0 to 4 will give 0, from 5 to 9 give 1
+                // Hand number indicate the finger is left hand finger or right hand finger
+                // Then we can get the normalize coordinate by FingerCoor - PalmCoor
+
+                distance = distance + fingerDist(rFingerList.get(i), rPalmList.get(handNumber), storedFingerList.get(i),storedPalmList.get(handNumber));
+                //Calculate Finger by Finger, remember to put the correct handNumber
             }
-            for(int j = 0; j < rHandList.count(); j++){
-                distance = distance + palmDist(rHandList.get(j), storedHandList.get(j), rOrigin.hands().get(j), storedOrigin.hands().get(j));
+
+            for(int j = 0; j < rPalmList.size(); j++){
+                Coordinate rPalmOrigin = rSample.allPalms.coordinateSeq.get(0).get(j);  // Get the "Frame 0" Palm
+                Coordinate storedPalmOrigin = storedSample.allPalms.coordinateSeq.get(0).get(j);
+                distance = distance + palmDist(rPalmList.get(j), rPalmOrigin,storedPalmList.get(j), storedPalmOrigin);
             }
         }
 
         return distance;
     }
 
-    public double fingerDist(Finger rFinger, Finger storedFinger, Hand rHand, Hand storedHand){
+    /**
+     *
+     * @param rFinger
+     * @param rPalm
+     * @param storedFinger
+     * @param storedPalm
+     *
+     *          We first calculate the normalize coordinate of finger, we use relative coordinate between finger and palm
+     *          ie.    Finger coordinate  -  Palm Coordinate =  normalize coordinate
+     *          This can preserve the Finger movement but losing the Palm movement ,  and that's what I want
+     *
+     *          Then calculate the distance between normalized rFinger and normalized storedFinger
+     *
+     * @return
+     */
+
+    public double fingerDist(Coordinate rFinger, Coordinate rPalm, Coordinate storedFinger, Coordinate storedPalm){
 
         double distance = 0.0;
         // R = recognizing, X = x coordinate, N = normalize
         // Actually, it is the relative coordinate between finger and palm
-        double RXN = rFinger.tipPosition().getX() - rHand.palmPosition().getX();
-        double RYN = rFinger.tipPosition().getY() - rHand.palmPosition().getY();
-        double RZN = rFinger.tipPosition().getZ() - rHand.palmPosition().getZ();
+        double RXN = rFinger.getX()- rPalm.getX();
+        double RYN = rFinger.getY() - rPalm.getY();
+        double RZN = rFinger.getZ() - rPalm.getZ();
 
         // S = stored
-        double SXN = storedFinger.tipPosition().getX() - storedHand.palmPosition().getX();
-        double SYN = storedFinger.tipPosition().getY() - storedHand.palmPosition().getY();
-        double SZN = storedFinger.tipPosition().getZ() - storedHand.palmPosition().getZ();
+        double SXN = storedFinger.getX() - storedPalm.getX();
+        double SYN = storedFinger.getY() - storedPalm.getY();
+        double SZN = storedFinger.getZ() - storedPalm.getZ();
 
 
         distance = Math.pow(RXN - SXN, 2) +
@@ -171,19 +197,35 @@ public class DTW {
         return distance;
     }
 
-    public double palmDist(Hand rHand, Hand rHandOrigin, Hand storedHand, Hand storedHandOrigin){
+    /**
+     *
+     * @param rPalm
+     * @param rPalmOrigin
+     * @param storedPalm
+     * @param storedPalmOrigin
+     *
+     *              We first calculate the normalized coordinate of Palm, we use relative coordinate between the Palm in " Current frame " and Palm in " Frame 0 "
+     *              ie.   Current Palm coordinate - Frame 0 Palm coordinate
+     *              This can preserve the movement  of Palm
+     *
+     *              Then calculate the distance between the normalized rPalm and normalized storedPalm
+     *
+     * @return
+     */
+
+    public double palmDist(Coordinate rPalm, Coordinate rPalmOrigin, Coordinate storedPalm, Coordinate storedPalmOrigin){
 
         double distance = 0.0;
 
         // R = recognizing, X = x coordinate, N = normalize
         // It is the relative coordinate between palm in current frame and frame0
-        double RXN = rHand.palmPosition().getX() - rHandOrigin.palmPosition().getX();
-        double RYN = rHand.palmPosition().getY() - rHandOrigin.palmPosition().getY();
-        double RZN = rHand.palmPosition().getZ() - rHandOrigin.palmPosition().getZ();
+        double RXN = rPalm.getX() - rPalmOrigin.getX();
+        double RYN = rPalm.getY() - rPalmOrigin.getY();
+        double RZN = rPalm.getZ() - rPalmOrigin.getZ();
 
-        double SXN = storedHand.palmPosition().getX() - storedHandOrigin.palmPosition().getX();
-        double SYN = storedHand.palmPosition().getY() - storedHandOrigin.palmPosition().getY();
-        double SZN = storedHand.palmPosition().getZ() - storedHandOrigin.palmPosition().getZ();
+        double SXN = storedPalm.getX() - storedPalmOrigin.getX();
+        double SYN = storedPalm.getY() - storedPalmOrigin.getY();
+        double SZN = storedPalm.getZ() - storedPalmOrigin.getZ();
 
         distance = Math.sqrt(
                 Math.pow(RXN - SXN, 2) +
@@ -199,8 +241,5 @@ public class DTW {
         System.out.println("The minimum cost of DTW is " + bestMatch);
     }
 
-    public void printInformation(){
-        System.out.println(this.rSample.getAllFrames().get(0).fingers().count());
-    }
 }
 
