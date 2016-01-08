@@ -181,11 +181,12 @@ public class SLT {
 						DTW dtw = new DTW(rSample);//TODO: if rSample is created by default constructor, error may occurs
 
 						for(Sign storedSign : allSigns.getAllSigns().values()){
+							System.out.println("Checking : " + storedSign.getName());
 							dtw.setStoredSign(storedSign);
 							dtw.calDTW();
+							dtw.printResult();
 						}
-						dtw.printResult();
-
+						break;
 
 					case 5:
 						db.removeAllSign();
@@ -293,16 +294,6 @@ public class SLT {
 			System.out.println("Hand Count  : " + allSigns.getAllSigns().get(key).getHandCount());
 			System.out.println("Hand Type   :" + allSigns.getAllSigns().get(key).getHandType());
 			System.out.println("Finger Count = " + allSigns.getAllSigns().get(key).getFingerCount() + "\n");
-
-			System.out.println("!!!!!--------For debug----------!!!!!");
-			for(Sign a : allSigns.getAllSigns().values()){
-				System.out.println("AAA");
-				for(Sample s : a.getAllSamples()){
-					System.out.println("SSSSS");
-				}
-			}
-			System.out.println(" This part is reserve for the debug of new database structure");
-
 		}
 
 		System.out.println("All sign are printed");

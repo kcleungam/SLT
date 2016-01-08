@@ -9,10 +9,10 @@ public class DTW {
     public static Sign storedSign; // Sample from database
     public static int maxSlope = 3;    // the maximum number of slope
     public static int minFrame = 30;
-    public static double globalThreshold; // The maximum distance between sample and stored sample which can be recognize
+    public static double globalThreshold = Double.POSITIVE_INFINITY; // The maximum distance between sample and stored sample which can be recognize
                                     // If the bestMatch > globalThreshold, then unknown gesture
 
-    public double localThreshold;   // The distance between sample and one of the stored sample
+    public double localThreshold = Double.POSITIVE_INFINITY;   // The distance between sample and one of the stored sample
 
     public String result = "";
 
@@ -43,7 +43,6 @@ public class DTW {
     public void calDTW(){
 
         for(Sample storedSample: storedSign.getAllSamples()) {
-            System.out.println("Looping");
 
             int rSize = rSample.allFingers.coordinateSeq.size();
             int storedSize = storedSample.allFingers.coordinateSeq.size();
@@ -58,13 +57,11 @@ public class DTW {
                     slopeJ[i][j] = 0;
                 }
             }
-            System.out.println("Check point 1 ");
             tab[0][0] = 0;  // We don't compare the first frame of rSample and storedSample
 
             // I will try to do things at once
             for (int i = 1; i < rSize + 1; i++) {
                 for (int j = 1; j < storedSize + 1; j++) {
-                    System.out.println("Check point 2 ");
                     if (tab[i][j - 1] < tab[i - 1][j - 1] && tab[i][j - 1] < tab[i - 1][j] && slopeI[i][j - 1] < maxSlope) {
 
                         tab[i][j] = calDist(rSample, i - 1, storedSample,  j -1) + tab[i][ j - 1 ];
@@ -138,13 +135,11 @@ public class DTW {
             ArrayList<Coordinate> storedFingerList = storedSample.allFingers.coordinateSeq.get(storedPosition);
             ArrayList<Coordinate> rPalmList  = rSample.allPalms.coordinateSeq.get(rPosition);
             ArrayList<Coordinate> storedPalmList = storedSample.allPalms.coordinateSeq.get(storedPosition);
-
             for(int i = 0; i < rSample.allFingers.coordinateSeq.get(rPosition).size(); i++){
 
-                int handNumber = i/2;   // from 0 to 4 will give 0, from 5 to 9 give 1
+                int handNumber = i/5;   // from 0 to 4 will give 0, from 5 to 9 give 1
                 // Hand number indicate the finger is left hand finger or right hand finger
                 // Then we can get the normalize coordinate by FingerCoor - PalmCoor
-
                 distance = distance + fingerDist(rFingerList.get(i), rPalmList.get(handNumber), storedFingerList.get(i),storedPalmList.get(handNumber));
                 //Calculate Finger by Finger, remember to put the correct handNumber
             }
@@ -155,6 +150,8 @@ public class DTW {
                 distance = distance + palmDist(rPalmList.get(j), rPalmOrigin,storedPalmList.get(j), storedPalmOrigin);
             }
         }
+
+        System.out.println(distance);
 
         return distance;
     }
@@ -237,7 +234,7 @@ public class DTW {
     }
 
     public void printResult(){
-        System.out.println("The most similar gesture is" + result);
+        System.out.println("The most similar gesture is " + result);
         System.out.println("The minimum cost of DTW is " + bestMatch);
     }
 
