@@ -156,12 +156,12 @@ public class SLT {
 						sampleListener.reset();
 						sampleListener.gainFocus();
 						boolean getSample = false;
-						Sample rSample=new Sample();
+						Sample rSample = new Sample();
 						while (true) {
 							if (sampleListener.checkFinish()) {
 								if (sampleListener.checkValid()) {
 
-										rSample=new Sample(sampleListener.returnOneSample());
+										rSample = new Sample(sampleListener.returnOneSample());
 										getSample = true;
 
 								} else {
