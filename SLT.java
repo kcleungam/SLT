@@ -28,6 +28,8 @@ public class SLT {
 		sampleListener.lostFocus();
 		// Add listener, grab data
 		controller.addListener(sampleListener);
+		DTW dtw = new DTW();
+
 		while (true) {
 			if (controller.isConnected() == true) {
 				while (true) {
@@ -178,14 +180,16 @@ public class SLT {
 						if(getSample == false){
 							break;
 						}
-						DTW dtw = new DTW(rSample);//TODO: if rSample is created by default constructor, error may occurs
+
+						dtw.setRSample(rSample);//TODO: if rSample is created by default constructor, error may occurs
 
 						for(Sign storedSign : allSigns.getAllSigns().values()){
 							System.out.println("Checking : " + storedSign.getName());
 							dtw.setStoredSign(storedSign);
 							dtw.calDTW();
-							dtw.printResult();
 						}
+						dtw.printResult();
+						dtw.reset();
 						break;
 
 					case 5:

@@ -9,8 +9,9 @@
  * argument of the constructor of the class.
  **/
 
-import java.io.*;
 import javax.swing.*;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 public class TextAreaPrintStream extends PrintStream {
 
@@ -20,8 +21,8 @@ public class TextAreaPrintStream extends PrintStream {
     /**
      * Method TextAreaPrintStream
      * The constructor of the class.
-     * @param the JTextArea to wich the output stream will be redirected.
-     * @param a standard output stream (needed by super method)
+     * @param area the JTextArea to wich the output stream will be redirected.
+     * @param out a standard output stream (needed by super method)
      **/
     public TextAreaPrintStream(JTextArea area, OutputStream out) {
         super(out);
@@ -30,7 +31,7 @@ public class TextAreaPrintStream extends PrintStream {
 
     /**
      * Method println
-     * @param the String to be output in the JTextArea textArea (private
+     * @param string the String to be output in the JTextArea textArea (private
      * attribute of the class).
      * After having printed such a String, prints a new line.
      **/
@@ -40,7 +41,7 @@ public class TextAreaPrintStream extends PrintStream {
 
     /**
      * Method print
-     * @param the String to be output in the JTextArea textArea (private
+     * @param string the String to be output in the JTextArea textArea (private
      * attribute of the class).
      **/
     public void print(String string) {
