@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * Created by Krauser on 21/12/2015.
  */
-public class DTW {
+public class DTW{
     public static double bestMatch = Double.POSITIVE_INFINITY;
     public static Sample rSample;       // Sample for recognize
     public static Sign storedSign; // Sample from database
@@ -11,17 +11,21 @@ public class DTW {
     public static int minFrame = 30;
     public static int cutFrame = 10;   // The number of frame can be cut off on order to find the best ending of Sample
 
-    public static double globalThreshold = Double.POSITIVE_INFINITY; // The maximum distance between sample and stored sample which can be recognize
+    public static double globalThreshold = Double.POSITIVE_INFINITY; // The maximum distance between rSample and stored sample which can be recognize
                                     // If the bestMatch > globalThreshold, then unknown gesture
 
     public double localThreshold = Double.POSITIVE_INFINITY;   // The distance between sample and one of the stored sample
 
-    public double adjust = 0.4;
+    public double adjust = 100;
+    public double palmTolerance = 100;      // The maximum distance of palm distance between rSample and storedSample can be accepted
 
     public String result = "GestureNotExist";
 
 
-    public DTW(){}
+    public DTW(){
+        this.rSample = null;
+        this.storedSign = null;
+    }
 
     public DTW(Sample rSample) throws Exception{
         if(rSample==null)
@@ -190,9 +194,14 @@ public class DTW {
                 palmDistance = palmDistance + palmDist(rPalmList.get(j), rPalmOrigin,storedPalmList.get(j), storedPalmOrigin);
             }
 
-            distance = adjust * fingerDistance   +   (1 - adjust) * palmDistance;
+            if(palmDistance > palmTolerance*rPalmList.size()){
+                palmDistance = Double.POSITIVE_INFINITY;
+                // If the difference of palm between rSample and StoredSample > palmTolerance, we don't consider it
+            }
+
+            distance = fingerDistance   +   (Math.pow(palmDistance, 2)/Math.pow(adjust, 2))* palmDistance;
             System.out.println("Finger part = " + fingerDistance);
-            System.out.println("Palm part = " + palmDistance);
+            System.out.println("Palm part = " + (Math.pow(palmDistance,2)/Math.pow(adjust,2))*palmDistance);
         }
 
         return distance;
@@ -287,6 +296,8 @@ public class DTW {
         bestMatch = Double.POSITIVE_INFINITY;
         result = "GestureNotExist";
     }
+
+    public void run(){}
 
 }
 

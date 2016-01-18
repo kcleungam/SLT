@@ -3,20 +3,11 @@
  */
 import com.leapmotion.leap.Controller;
 
-import java.awt.EventQueue;
-
 import javax.swing.*;
-import java.awt.Button;
-import java.awt.BorderLayout;
-import javax.swing.GroupLayout.Alignment;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.*;
-import java.awt.Panel;
-import java.awt.Font;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Scanner;
-import java.util.concurrent.ExecutionException;
 
 public class Interface {
     /* Setting window */
@@ -194,6 +185,7 @@ public class Interface {
     private static SignBank allSigns;
     private SampleListener sampleListener = new SampleListener();
     private Controller controller = new Controller();
+    private DTW dtw = new DTW();
 
     /**
      * Launch the application.
@@ -365,7 +357,7 @@ public class Interface {
 
                             if(signName.equals("")){
                                 ps.println("Please enter a name!");
-                                recording = false;
+                                //recording = false;
                                 return;
                             }
 
@@ -402,7 +394,7 @@ public class Interface {
                                     ps.println("Exception caught!");
                                 }
 
-                                recording = false;
+                                //recording = false;
                                 sampleListener.lostFocus();
                             }
                         }
@@ -444,11 +436,11 @@ public class Interface {
                                 sampleListener.reset();
                                 sampleListener.gainFocus();
                                 /**
-                                                                 * keep grabbing the frame from controller, check
-                                                                 * whether it is recordable, add to the oneSample if
-                                                                 * it is. """"put it as one sample of specific
-                                                                 * sign"""
-                                                                 */
+                                 * keep grabbing the frame from controller, check
+                                 * whether it is recordable, add to the oneSample if
+                                 * it is. """"put it as one sample of specific
+                                 * sign"""
+                                 */
                                 try{
                                     while (true) {
                                         if (sampleListener.checkFinish()) {
@@ -510,52 +502,55 @@ public class Interface {
                     Runnable DTWRunnable = new Runnable() {
                         @Override
                         public void run() {
-                            ready();
-                            sampleListener.reset();
-                            sampleListener.gainFocus();
+                            //ready();
+                            while (true) {
+                                sampleListener.reset();
+                                sampleListener.gainFocus();
 
-                            Sample rSample = new Sample();
+                                Sample rSample = new Sample();
 
-                            try{
-                                while (true) {
-                                    if (sampleListener.checkFinish()) {
-                                        if (sampleListener.checkValid()) {
+                                try {
+                                    while (true) {
+                                        if (sampleListener.checkFinish()) {
+                                            if (sampleListener.checkValid()) {
 
-                                            rSample = new Sample(sampleListener.returnOneSample());
+                                                rSample = new Sample(sampleListener.returnOneSample());
 
-                                        } else {
-                                            ps.println("The recording is invalid. ");
-                                            recording = false;
-                                            return;
+                                            } else {
+                                                ps.println("The recording is invalid. ");
+                                                recording = false;
+                                            }
+
+                                            break;
                                         }
-
-                                        break;
+                                        // The current thread is too fast, will fail to
+                                        // trace Listener if missing this code
+                                        Thread.currentThread().sleep(10);
                                     }
-                                    // The current thread is too fast, will fail to
-                                    // trace Listener if missing this code
-                                    Thread.currentThread().sleep(10);
-                                }
-                                sampleListener.lostFocus();
+                                    sampleListener.lostFocus();
 
-                                DTW dtw = new DTW(rSample);//TODO: if rSample is created by default constructor, error may occurs
+                                    dtw.setRSample(rSample);//TODO: if rSample is created by default constructor, error may occurs
 
-                                for(Sign storedSign : allSigns.getAllSigns().values()){
-                                    ps.println("Checking : " + storedSign.getName());
-                                    dtw.setStoredSign(storedSign);
-                                    dtw.calDTW();
+                                    for (Sign storedSign : allSigns.getAllSigns().values()) {
+                                        ps.println("Checking : " + storedSign.getName());
+                                        dtw.setStoredSign(storedSign);
+                                        dtw.calDTW();
+                                    }
                                     dtw.printResult();
+                                    ps.println("The most similar gesture is " + dtw.result);
+                                    ps.println("The minimum cost of DTW is " + dtw.bestMatch);
+                                    dtw.reset();
+                                } catch (Exception e) {
+                                    ps.println("Exception caught!");
+                                    recording = false;
                                 }
 
-                                ps.println("The most similar gesture is " + dtw.result);
-                                ps.println("The minimum cost of DTW is " + dtw.bestMatch);
-                            }catch(Exception e){
-                                ps.println("Exception caught!");
                                 recording = false;
                             }
-
-                            recording = false;
                         }
-                    };
+                    }
+
+                            ;
 
                     Thread thread = new Thread(DTWRunnable);
                     thread.start();
