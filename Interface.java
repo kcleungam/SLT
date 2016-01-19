@@ -187,6 +187,10 @@ public class Interface {
     private Controller controller = new Controller();
     private DTW dtw = new DTW();
 
+    // the visualizer applet
+ 	//private Visualizer visualizer = new Visualizer();
+ 	// TODO:uncomment this
+    
     /**
      * Launch the application.
      */
@@ -608,7 +612,27 @@ public class Interface {
 
             }
         });
-
+        
+        
+        //TODO: uncomment it
+       /* visualizer.setBounds(160, 10, 610, 340);
+		frame.getContentPane().add(visualizer);
+		Runnable traceHand = new Runnable() {
+			@Override
+			public void run() {
+				while (true) {
+					try {
+						visualizer.traceLM(controller.frame());
+						Thread.sleep(50);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		};
+		Thread thread = new Thread(traceHand);
+		thread.start();
+*/
         Button btnClear = new Button("Clear");
         btnClear.setBounds(152, 460, 61, 23);
         btnClear.addActionListener(new ActionListener() {
