@@ -67,10 +67,6 @@ public class Visualizer extends Applet {
 			//scene.addChild(palms[i]);
 		}
 
-		
-		//transscene.addChild(new Sphere(0.15f));
-		//scene.addChild(transscene);
-
 		// and attach it to the virtual universe
 		u = new SimpleUniverse(c);
 		u.getViewingPlatform().setNominalViewingTransform();
