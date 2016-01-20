@@ -188,8 +188,7 @@ public class Interface {
     private DTW dtw = new DTW();
 
     // the visualizer applet
- 	//private Visualizer visualizer = new Visualizer();
- 	// TODO:uncomment this
+ 	private Visualizer visualizer = new Visualizer();
     
     /**
      * Launch the application.
@@ -614,8 +613,7 @@ public class Interface {
         });
         
         
-        //TODO: uncomment it
-       /* visualizer.setBounds(160, 10, 610, 340);
+        visualizer.setBounds(160, 10, 610, 340);
 		frame.getContentPane().add(visualizer);
 		Runnable traceHand = new Runnable() {
 			@Override
@@ -632,7 +630,7 @@ public class Interface {
 		};
 		Thread thread = new Thread(traceHand);
 		thread.start();
-*/
+
         Button btnClear = new Button("Clear");
         btnClear.setBounds(152, 460, 61, 23);
         btnClear.addActionListener(new ActionListener() {
