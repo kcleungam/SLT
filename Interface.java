@@ -233,7 +233,7 @@ public class Interface {
 
         frame = new JFrame();
         frame.getContentPane().setFont(new Font("Arial", Font.PLAIN, 12));
-        frame.setBounds(100, 100, 797, 560);
+        frame.setBounds(10, 10, 690, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Sign Language Translator");
 
@@ -277,15 +277,15 @@ public class Interface {
         txtrName.setBounds(52, 10, 96, 23);
         frame.getContentPane().add(txtrName);
 
-        JList list = new JList();
+        final JList list = new JList();
         list.setBounds(10, 94, 138, 256);
         frame.getContentPane().add(list);
 
         JScrollPane listScrollPane = new JScrollPane(list);
-        listScrollPane.setBounds(10, 94, 138, 256);
+        listScrollPane.setBounds(10, 94, 138, 380);
         frame.add(listScrollPane);
 
-        DefaultListModel listModel = new DefaultListModel();
+        final DefaultListModel listModel = new DefaultListModel();
         list.setModel(listModel);
 
         for (String key : allSigns.getAllSigns().keySet()) {
@@ -303,6 +303,9 @@ public class Interface {
                     ps.println("Hand Count  : " + sign.getHandCount());
                     ps.println("Hand Type   :" + sign.getHandType());
                     ps.println("Finger Count = " + sign.getFingerCount() + "\n");
+                    
+                    // TODO: mod this..
+                    visualizer.traceLM(controller.frame());
                 }
             }
         };
@@ -562,14 +565,14 @@ public class Interface {
         });
 
         Button btnRemove = new Button("Remove");
-        btnRemove.setBounds(48, 356, 61, 23);
+        btnRemove.setBounds(48, 490, 61, 23);
         frame.getContentPane().add(btnRemove);
         btnRemove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Get the corresponding sign name
-                String signName = (String) list.getSelectedValue();
-                int index = list.getSelectedIndex();
+                final String signName = (String) list.getSelectedValue();
+                final int index = list.getSelectedIndex();
 
                 if(signName == null){
                     ps.println("Please select a sign.");
@@ -613,7 +616,7 @@ public class Interface {
         });
         
         
-        visualizer.setBounds(160, 10, 610, 340);
+        visualizer.setBounds(160, 10, 500, 500);
 		frame.getContentPane().add(visualizer);
 		Runnable traceHand = new Runnable() {
 			@Override
@@ -621,7 +624,7 @@ public class Interface {
 				while (true) {
 					try {
 						visualizer.traceLM(controller.frame());
-						Thread.sleep(50);
+						Thread.sleep(100);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -632,7 +635,7 @@ public class Interface {
 		thread.start();
 
         Button btnClear = new Button("Clear");
-        btnClear.setBounds(152, 460, 61, 23);
+        btnClear.setBounds(152, 600, 61, 23);
         btnClear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -642,7 +645,7 @@ public class Interface {
         frame.getContentPane().add(btnClear);
 
         Button btnYes = new Button("Yes");
-        btnYes.setBounds(10, 460, 61, 23);
+        btnYes.setBounds(10, 600, 61, 23);
         frame.getContentPane().add(btnYes);
         btnYes.addActionListener(new ActionListener() {
             @Override
@@ -652,7 +655,7 @@ public class Interface {
         });
 
         Button btnNo = new Button("No");
-        btnNo.setBounds(81, 460, 61, 23);
+        btnNo.setBounds(81, 600, 61, 23);
         frame.getContentPane().add(btnNo);
         btnNo.addActionListener(new ActionListener() {
             @Override
@@ -671,7 +674,7 @@ public class Interface {
         textArea.setColumns(10);
 
         JScrollPane textScrollPane = new JScrollPane(textArea);
-        textScrollPane.setBounds(10, 385, 761, 68);
+        textScrollPane.setBounds(10, 520, 655, 73);
         frame.add(textScrollPane);
 
         label_1 = new JLabel("1");
