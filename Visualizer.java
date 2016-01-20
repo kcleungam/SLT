@@ -129,7 +129,7 @@ public class Visualizer extends Applet {
 
 	public void moveSphere(TransformGroup tg) {
 		Transform3D pos1 = new Transform3D();
-		pos1.setTranslation(new Vector3d(0.0, 0.0, 4.0));// invisible
+		pos1.setTranslation(new Vector3d(0.0, 0.0, 14.0));// invisible
 		tg.setTransform(pos1);
 	}
 
@@ -154,7 +154,6 @@ public class Visualizer extends Applet {
 		} else if (hands.count() == 1) {
 			for (int j = 0; j < 5; j++) {
 				moveSphere(hands.get(0).finger(j).tipPosition(), fingers[0][j]);
-				//System.out.println(j);
 			}
 			moveSphere(hands.get(0).palmPosition(), palms[0]);
 			for (int j = 0; j < 5; j++) {
@@ -208,7 +207,7 @@ public class Visualizer extends Applet {
 		MainFrame mf = new MainFrame(visualizer, 512, 512);
 		while (true) {
 			try {
-				visualizer.traceLM1(controller.frame());
+				visualizer.traceLM(controller.frame());
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
