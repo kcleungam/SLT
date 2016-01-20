@@ -115,6 +115,19 @@ public class Visualizer extends Applet {
 		}
 		transscene.addChild(transgp);
 	}
+	
+	public void addSphere(Vector3d coordinate, float size) {
+		Transform3D pos1 = new Transform3D();
+		pos1.setTranslation(new Vector3d(coordinate));
+		TransformGroup transgp = new TransformGroup(pos1);
+		transgp.addChild(new Sphere(size));
+		transscene.addChild(transgp);
+	}
+	
+	public void addSphere(Vector3f coordinate, float size) {
+		Vector3d transcoor = new Vector3d(coordinate);
+		addSphere(transcoor, size);
+	}
 
 	/*
 	 * move spheres
