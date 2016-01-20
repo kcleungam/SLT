@@ -116,6 +116,8 @@ public class Visualizer extends Applet {
 		transscene.addChild(transgp);
 	}
 	
+	// Warning: you may need to use clear().
+	// Warning2: this "coordinate" take counts in the range -1.0f<x,y<1.0f
 	public void addSphere(Vector3d coordinate, float size) {
 		Transform3D pos1 = new Transform3D();
 		pos1.setTranslation(new Vector3d(coordinate));
