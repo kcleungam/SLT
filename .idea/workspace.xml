@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9273cb61-097c-4eb3-84ac-3a458ed1eb63" name="Default" comment="">
+      <change type="DELETED" beforePath="C:\Users\KaChun\Documents\GitHub\SLT\out\production\SLT\Interface$9$1.class" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/DTW.class" afterPath="$PROJECT_DIR$/out/production/SLT/DTW.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$10$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$10$1.class" />
@@ -19,11 +20,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$7.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$7.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$8$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$8$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$8.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$8.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$9$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$9$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$9.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$Setting$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$Setting$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$Setting.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$Setting.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Visualizer.class" afterPath="$PROJECT_DIR$/out/production/SLT/Visualizer.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DTW.java" afterPath="$PROJECT_DIR$/DTW.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Interface.java" afterPath="$PROJECT_DIR$/Interface.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -48,67 +47,59 @@
     <favorites_list name="SLT" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf>
-          <file leaf-file-name="SLT.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/SLT.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-7.9333334">
-                  <caret line="180" column="34" selection-start-line="180" selection-start-column="34" selection-end-line="180" selection-end-column="34" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Interface.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/Interface.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.34158415">
-                  <caret line="542" column="36" selection-start-line="542" selection-start-column="36" selection-end-line="542" selection-end-column="36" />
-                  <folding>
-                    <element signature="e#24735#24736#0" expanded="true" />
-                    <element signature="e#24787#24788#0" expanded="true" />
-                    <element signature="e#25111#25112#0" expanded="true" />
-                    <element signature="e#25153#25154#0" expanded="true" />
-                    <element signature="e#25426#25427#0" expanded="true" />
-                    <element signature="e#25467#25468#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="DTW.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/DTW.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-4.766667">
-                  <caret line="131" column="48" selection-start-line="131" selection-start-column="48" selection-end-line="131" selection-end-column="48" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="SLT.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/SLT.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-0.06930693">
-                  <caret line="187" column="44" selection-start-line="187" selection-start-column="44" selection-end-line="187" selection-end-column="44" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file leaf-file-name="SLT.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SLT.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="180" column="34" selection-start-line="180" selection-start-column="34" selection-end-line="180" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Interface.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Interface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="9.644341">
+              <caret line="707" column="48" selection-start-line="707" selection-start-column="48" selection-end-line="707" selection-end-column="48" />
+              <folding>
+                <element signature="e#8903#8904#0" expanded="true" />
+                <element signature="e#8952#8953#0" expanded="true" />
+                <element signature="e#25774#25775#0" expanded="true" />
+                <element signature="e#25826#25827#0" expanded="true" />
+                <element signature="e#26150#26151#0" expanded="true" />
+                <element signature="e#26192#26193#0" expanded="true" />
+                <element signature="e#26465#26466#0" expanded="true" />
+                <element signature="e#26506#26507#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Visualizer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Visualizer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="64" column="47" selection-start-line="64" selection-start-column="47" selection-end-line="64" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DTW.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DTW.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="203" column="23" selection-start-line="203" selection-start-column="23" selection-end-line="203" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -183,6 +174,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -203,8 +196,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -500,7 +491,13 @@
       <option name="project" value="LOCAL" />
       <updated>1452693689595</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="DTW can run as a thread, still improving">
+      <created>1453129633707</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1453129633707</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -515,7 +512,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29248366" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19607843" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14599092" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -554,7 +551,8 @@
     <MESSAGE value="clear all syntax error, have't test any bugs in new database" />
     <MESSAGE value="clear all syntax error in DTW, but fail to run as I don't know how to clear the old data in Mongo" />
     <MESSAGE value="DTW updated. Also clear the syntax error in visualizer and TextAreaPrintStream. Please check if there is any syntax error before git" />
-    <option name="LAST_COMMIT_MESSAGE" value="DTW updated. Also clear the syntax error in visualizer and TextAreaPrintStream. Please check if there is any syntax error before git" />
+    <MESSAGE value="DTW can run as a thread, still improving" />
+    <option name="LAST_COMMIT_MESSAGE" value="DTW can run as a thread, still improving" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -565,6 +563,41 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Interface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="542" column="36" selection-start-line="542" selection-start-column="36" selection-end-line="542" selection-end-column="36" />
+          <folding>
+            <element signature="e#8903#8904#0" expanded="true" />
+            <element signature="e#8952#8953#0" expanded="true" />
+            <element signature="e#25774#25775#0" expanded="true" />
+            <element signature="e#25826#25827#0" expanded="true" />
+            <element signature="e#26150#26151#0" expanded="true" />
+            <element signature="e#26192#26193#0" expanded="true" />
+            <element signature="e#26465#26466#0" expanded="true" />
+            <element signature="e#26506#26507#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DTW.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="131" column="48" selection-start-line="131" selection-start-column="48" selection-end-line="131" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SLT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="180" column="34" selection-start-line="180" selection-start-column="34" selection-end-line="180" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/SLT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -580,12 +613,14 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="502" column="43" selection-start-line="502" selection-start-column="43" selection-end-line="502" selection-end-column="43" />
           <folding>
-            <element signature="e#24735#24736#0" expanded="true" />
-            <element signature="e#24787#24788#0" expanded="true" />
-            <element signature="e#25111#25112#0" expanded="true" />
-            <element signature="e#25153#25154#0" expanded="true" />
-            <element signature="e#25426#25427#0" expanded="true" />
-            <element signature="e#25467#25468#0" expanded="true" />
+            <element signature="e#8903#8904#0" expanded="true" />
+            <element signature="e#8952#8953#0" expanded="true" />
+            <element signature="e#25774#25775#0" expanded="true" />
+            <element signature="e#25826#25827#0" expanded="true" />
+            <element signature="e#26150#26151#0" expanded="true" />
+            <element signature="e#26192#26193#0" expanded="true" />
+            <element signature="e#26465#26466#0" expanded="true" />
+            <element signature="e#26506#26507#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -613,12 +648,14 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="502" column="43" selection-start-line="502" selection-start-column="43" selection-end-line="502" selection-end-column="43" />
           <folding>
-            <element signature="e#24735#24736#0" expanded="true" />
-            <element signature="e#24787#24788#0" expanded="true" />
-            <element signature="e#25111#25112#0" expanded="true" />
-            <element signature="e#25153#25154#0" expanded="true" />
-            <element signature="e#25426#25427#0" expanded="true" />
-            <element signature="e#25467#25468#0" expanded="true" />
+            <element signature="e#8903#8904#0" expanded="true" />
+            <element signature="e#8952#8953#0" expanded="true" />
+            <element signature="e#25774#25775#0" expanded="true" />
+            <element signature="e#25826#25827#0" expanded="true" />
+            <element signature="e#26150#26151#0" expanded="true" />
+            <element signature="e#26192#26193#0" expanded="true" />
+            <element signature="e#26465#26466#0" expanded="true" />
+            <element signature="e#26506#26507#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -646,12 +683,14 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#24735#24736#0" expanded="true" />
-            <element signature="e#24787#24788#0" expanded="true" />
-            <element signature="e#25111#25112#0" expanded="true" />
-            <element signature="e#25153#25154#0" expanded="true" />
-            <element signature="e#25426#25427#0" expanded="true" />
-            <element signature="e#25467#25468#0" expanded="true" />
+            <element signature="e#8903#8904#0" expanded="true" />
+            <element signature="e#8952#8953#0" expanded="true" />
+            <element signature="e#25774#25775#0" expanded="true" />
+            <element signature="e#25826#25827#0" expanded="true" />
+            <element signature="e#26150#26151#0" expanded="true" />
+            <element signature="e#26192#26193#0" expanded="true" />
+            <element signature="e#26465#26466#0" expanded="true" />
+            <element signature="e#26506#26507#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -671,12 +710,14 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#24735#24736#0" expanded="true" />
-            <element signature="e#24787#24788#0" expanded="true" />
-            <element signature="e#25111#25112#0" expanded="true" />
-            <element signature="e#25153#25154#0" expanded="true" />
-            <element signature="e#25426#25427#0" expanded="true" />
-            <element signature="e#25467#25468#0" expanded="true" />
+            <element signature="e#8903#8904#0" expanded="true" />
+            <element signature="e#8952#8953#0" expanded="true" />
+            <element signature="e#25774#25775#0" expanded="true" />
+            <element signature="e#25826#25827#0" expanded="true" />
+            <element signature="e#26150#26151#0" expanded="true" />
+            <element signature="e#26192#26193#0" expanded="true" />
+            <element signature="e#26465#26466#0" expanded="true" />
+            <element signature="e#26506#26507#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -706,12 +747,14 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="502" column="43" selection-start-line="502" selection-start-column="43" selection-end-line="502" selection-end-column="43" />
           <folding>
-            <element signature="e#24735#24736#0" expanded="true" />
-            <element signature="e#24787#24788#0" expanded="true" />
-            <element signature="e#25111#25112#0" expanded="true" />
-            <element signature="e#25153#25154#0" expanded="true" />
-            <element signature="e#25426#25427#0" expanded="true" />
-            <element signature="e#25467#25468#0" expanded="true" />
+            <element signature="e#8903#8904#0" expanded="true" />
+            <element signature="e#8952#8953#0" expanded="true" />
+            <element signature="e#25774#25775#0" expanded="true" />
+            <element signature="e#25826#25827#0" expanded="true" />
+            <element signature="e#26150#26151#0" expanded="true" />
+            <element signature="e#26192#26193#0" expanded="true" />
+            <element signature="e#26465#26466#0" expanded="true" />
+            <element signature="e#26506#26507#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -831,14 +874,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TextAreaPrintStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.6842105">
-          <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Sample.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2631579">
@@ -846,24 +881,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Visualizer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.6842105">
-          <caret line="58" column="19" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DTW.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.766667">
-          <caret line="131" column="48" selection-start-line="131" selection-start-column="48" selection-end-line="131" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SLT.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.9333334">
+        <state vertical-scroll-proportion="0.0">
           <caret line="180" column="34" selection-start-line="180" selection-start-column="34" selection-end-line="180" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -871,17 +891,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/DTW.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="203" column="23" selection-start-line="203" selection-start-column="23" selection-end-line="203" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TextAreaPrintStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6481481">
+          <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Visualizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="47" selection-start-line="64" selection-start-column="47" selection-end-line="64" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Interface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34158415">
-          <caret line="542" column="36" selection-start-line="542" selection-start-column="36" selection-end-line="542" selection-end-column="36" />
+        <state vertical-scroll-proportion="9.644341">
+          <caret line="707" column="48" selection-start-line="707" selection-start-column="48" selection-end-line="707" selection-end-column="48" />
           <folding>
-            <element signature="e#24735#24736#0" expanded="true" />
-            <element signature="e#24787#24788#0" expanded="true" />
-            <element signature="e#25111#25112#0" expanded="true" />
-            <element signature="e#25153#25154#0" expanded="true" />
-            <element signature="e#25426#25427#0" expanded="true" />
-            <element signature="e#25467#25468#0" expanded="true" />
+            <element signature="e#8903#8904#0" expanded="true" />
+            <element signature="e#8952#8953#0" expanded="true" />
+            <element signature="e#25774#25775#0" expanded="true" />
+            <element signature="e#25826#25827#0" expanded="true" />
+            <element signature="e#26150#26151#0" expanded="true" />
+            <element signature="e#26192#26193#0" expanded="true" />
+            <element signature="e#26465#26466#0" expanded="true" />
+            <element signature="e#26506#26507#0" expanded="true" />
           </folding>
         </state>
       </provider>

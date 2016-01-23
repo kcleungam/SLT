@@ -16,7 +16,7 @@ public class DTW{
 
     public double localThreshold = Double.POSITIVE_INFINITY;   // The distance between sample and one of the stored sample
 
-    public double adjust = 100;
+    public double adjust = 70;
     public double palmTolerance = 100;      // The maximum distance of palm distance between rSample and storedSample can be accepted
 
     public String result = "GestureNotExist";
@@ -194,10 +194,12 @@ public class DTW{
                 palmDistance = palmDistance + palmDist(rPalmList.get(j), rPalmOrigin,storedPalmList.get(j), storedPalmOrigin);
             }
 
+            /*
             if(palmDistance > palmTolerance*rPalmList.size()){
                 palmDistance = Double.POSITIVE_INFINITY;
                 // If the difference of palm between rSample and StoredSample > palmTolerance, we don't consider it
             }
+            */
 
             distance = fingerDistance   +   (Math.pow(palmDistance, 2)/Math.pow(adjust, 2))* palmDistance;
             System.out.println("Finger part = " + fingerDistance);
