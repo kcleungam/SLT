@@ -2,29 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9273cb61-097c-4eb3-84ac-3a458ed1eb63" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$10.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$10.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$11.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$11.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$12.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$12.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$13.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$13.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$2.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$3.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$4.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$5.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$6.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$7$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$7$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$7.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$7.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$8$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$8$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$8.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$8.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$9.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface$9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Interface.class" afterPath="$PROJECT_DIR$/out/production/SLT/Interface.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/SLT.class" afterPath="$PROJECT_DIR$/out/production/SLT/SLT.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/Visualizer.class" afterPath="$PROJECT_DIR$/out/production/SLT/Visualizer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Interface.java" afterPath="$PROJECT_DIR$/Interface.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/libraries/lib.xml" afterPath="$PROJECT_DIR$/out/production/SLT/.idea/libraries/lib.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/workspace.xml" afterPath="$PROJECT_DIR$/out/production/SLT/.idea/workspace.xml" />
     </list>
     <ignored path="SLT.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -49,22 +27,12 @@
       <file leaf-file-name="Interface.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Interface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.18728323">
-              <caret line="693" column="0" selection-start-line="693" selection-start-column="0" selection-end-line="693" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.34104046">
+              <caret line="772" column="45" selection-start-line="772" selection-start-column="45" selection-end-line="772" selection-end-column="45" />
               <folding>
-                <element signature="e#31263#31264#0" expanded="true" />
-                <element signature="e#31315#31316#0" expanded="true" />
+                <element signature="e#27027#27028#0" expanded="true" />
+                <element signature="e#27079#27080#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SLT.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SLT.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="310" column="17" selection-start-line="310" selection-start-column="17" selection-end-line="310" selection-end-column="17" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -101,8 +69,8 @@
         <option value="$PROJECT_DIR$/Sample.java" />
         <option value="$PROJECT_DIR$/DTW.java" />
         <option value="$PROJECT_DIR$/Visualizer.java" />
-        <option value="$PROJECT_DIR$/Interface.java" />
         <option value="$PROJECT_DIR$/SLT.java" />
+        <option value="$PROJECT_DIR$/Interface.java" />
       </list>
     </option>
   </component>
@@ -644,8 +612,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#31263#31264#0" expanded="true" />
-            <element signature="e#31315#31316#0" expanded="true" />
+            <element signature="e#27027#27028#0" expanded="true" />
+            <element signature="e#27079#27080#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -655,8 +623,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#31263#31264#0" expanded="true" />
-            <element signature="e#31315#31316#0" expanded="true" />
+            <element signature="e#27027#27028#0" expanded="true" />
+            <element signature="e#27079#27080#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -666,7 +634,7 @@
         <state vertical-scroll-proportion="0.6368715">
           <caret line="35" column="30" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -681,19 +649,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SLT.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.7794118">
           <caret line="310" column="17" selection-start-line="310" selection-start-column="17" selection-end-line="310" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TextAreaPrintStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4101307">
+          <caret line="32" column="21" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Interface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18728323">
-          <caret line="693" column="0" selection-start-line="693" selection-start-column="0" selection-end-line="693" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.34104046">
+          <caret line="772" column="45" selection-start-line="772" selection-start-column="45" selection-end-line="772" selection-end-column="45" />
           <folding>
-            <element signature="e#31263#31264#0" expanded="true" />
-            <element signature="e#31315#31316#0" expanded="true" />
+            <element signature="e#27027#27028#0" expanded="true" />
+            <element signature="e#27079#27080#0" expanded="true" />
           </folding>
         </state>
       </provider>

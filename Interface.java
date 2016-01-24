@@ -173,8 +173,8 @@ public class Interface {
 
     private JFrame frame;
     private final JTextArea txtrName = new JTextArea();
-    private JTextArea textArea;
-    private JScrollPane textScrollPane;
+    private static JTextArea textArea;
+    private static JScrollPane textScrollPane;
     private static TextAreaPrintStream ps;
     private static JLabel label_1, label_2, label_3, label_start;
 
@@ -259,10 +259,7 @@ public class Interface {
         mntmInfo.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 printAllDetails();
-
-                // Auto scroll down
-                int height = (int)textArea.getPreferredSize().getHeight();
-                textScrollPane.getVerticalScrollBar().setValue(height);
+                autoScrollDown();
             }
         });
 
@@ -328,9 +325,7 @@ public class Interface {
                     ps.println("Hand Type   :" + sign.getHandType());
                     ps.println("Finger Count = " + sign.getFingerCount() + "\n");
 
-                    // Auto scroll down
-                    int height = (int)textArea.getPreferredSize().getHeight();
-                    textScrollPane.getVerticalScrollBar().setValue(height);
+                    autoScrollDown();
                     
                     // TODO: mod this..
                     //visualizer.traceLM(controller.frame());
@@ -349,18 +344,12 @@ public class Interface {
                     @Override
                     public void run() {
                         ps.println("Reset database?");
-
-                        // Auto scroll down
-                        int height = (int)textArea.getPreferredSize().getHeight();
-                        textScrollPane.getVerticalScrollBar().setValue(height);
+                        autoScrollDown();
 
                         while (true) {
                             if (no) {
                                 ps.println("Operation cancelled!");
-
-                                // Auto scroll down
-                                height = (int)textArea.getPreferredSize().getHeight();
-                                textScrollPane.getVerticalScrollBar().setValue(height);
+                                autoScrollDown();
 
                                 return;
                             } else if (yes) {
@@ -374,10 +363,7 @@ public class Interface {
                             listModel.removeAllElements();
                         }catch(Exception ex){
                             ps.println("Exception caught!");
-
-                            // Auto scroll down
-                            height = (int)textArea.getPreferredSize().getHeight();
-                            textScrollPane.getVerticalScrollBar().setValue(height);
+                            autoScrollDown();
                         }
                     }
                 };
@@ -403,21 +389,14 @@ public class Interface {
 
                             if(signName.equals("")){
                                 ps.println("Please enter a name!");
-
-                                // Auto scroll down
-                                int height = (int)textArea.getPreferredSize().getHeight();
-                                textScrollPane.getVerticalScrollBar().setValue(height);
-
+                                autoScrollDown();
                                 recording = false;
                                 return;
                             }
 
                             if (allSigns.getAllSigns().containsKey(signName)) {
                                 ps.println("This name is already existed in the database.");
-
-                                // Auto scroll down
-                                int height = (int)textArea.getPreferredSize().getHeight();
-                                textScrollPane.getVerticalScrollBar().setValue(height);
+                                autoScrollDown();
                             } else {
                                 ready();
                                 sampleListener.reset();
@@ -435,18 +414,12 @@ public class Interface {
                                                     allSigns.addSign(signName, sign);
                                                     db.addSign(sign);
                                                     ps.println("New gesture: " + signName);
-
-                                                    // Auto scroll down
-                                                    int height = (int)textArea.getPreferredSize().getHeight();
-                                                    textScrollPane.getVerticalScrollBar().setValue(height);
+                                                    autoScrollDown();
                                                     listModel.addElement(signName);
                                                 }
                                             } else {
                                                 ps.println("The recording is invalid.");
-
-                                                // Auto scroll down
-                                                int height = (int)textArea.getPreferredSize().getHeight();
-                                                textScrollPane.getVerticalScrollBar().setValue(height);
+                                                autoScrollDown();
                                             }
                                             break;
                                         }
@@ -456,10 +429,7 @@ public class Interface {
                                     }
                                 } catch (Exception ex) {
                                     ps.println("Exception caught!");
-
-                                    // Auto scroll down
-                                    int height = (int)textArea.getPreferredSize().getHeight();
-                                    textScrollPane.getVerticalScrollBar().setValue(height);
+                                    autoScrollDown();
                                     recording =false;
                                 }
 
@@ -495,10 +465,7 @@ public class Interface {
 
                             if (allSigns.getAllSigns().containsKey(trainName)) {
                                 ps.println("Sign found, ready to start training");
-
-                                // Auto scroll down
-                                int height = (int)textArea.getPreferredSize().getHeight();
-                                textScrollPane.getVerticalScrollBar().setValue(height);
+                                autoScrollDown();
 
                                 // recordingMode = true;
                                 ready();
@@ -526,17 +493,11 @@ public class Interface {
                                                     allSigns.addSign(trainName,sign);
                                                     db.addSign(sign);
                                                     ps.println("Training completed!");
-
-                                                    // Auto scroll down
-                                                    height = (int)textArea.getPreferredSize().getHeight();
-                                                    textScrollPane.getVerticalScrollBar().setValue(height);
+                                                    autoScrollDown();
                                                 }
                                             } else {
                                                 ps.println("The recording is invalid!");
-
-                                                // Auto scroll down
-                                                height = (int)textArea.getPreferredSize().getHeight();
-                                                textScrollPane.getVerticalScrollBar().setValue(height);
+                                                autoScrollDown();
                                             }
                                             recording = false;
                                             break;
@@ -546,10 +507,7 @@ public class Interface {
                                     }
                                 }catch(Exception ex){
                                     ps.println("Exception caught!");
-
-                                    // Auto scroll down
-                                    height = (int)textArea.getPreferredSize().getHeight();
-                                    textScrollPane.getVerticalScrollBar().setValue(height);
+                                    autoScrollDown();
 
                                     recording = false;
                                 }
@@ -565,10 +523,7 @@ public class Interface {
 							 */
                             } else { // sign not found
                                 ps.println("Please choose a sign!");
-
-                                // Auto scroll down
-                                int height = (int)textArea.getPreferredSize().getHeight();
-                                textScrollPane.getVerticalScrollBar().setValue(height);
+                                autoScrollDown();
 
                                 recording = false;
                             }
@@ -613,10 +568,7 @@ public class Interface {
 
                                                 } else {
                                                     ps.println("The recording is invalid. ");
-
-                                                    // Auto scroll down
-                                                    int height = (int)textArea.getPreferredSize().getHeight();
-                                                    textScrollPane.getVerticalScrollBar().setValue(height);
+                                                    autoScrollDown();
                                                 }
 
                                                 break;
@@ -637,18 +589,12 @@ public class Interface {
                                         dtw.printResult();
                                         ps.println("The most similar gesture is " + dtw.result);
                                         ps.println("The minimum cost of DTW is " + dtw.bestMatch);
-
-                                        // Auto scroll down
-                                        int height = (int)textArea.getPreferredSize().getHeight();
-                                        textScrollPane.getVerticalScrollBar().setValue(height);
+                                        autoScrollDown();
 
                                         dtw.reset();
                                     } catch (Exception e) {
                                         ps.println("Exception caught!");
-
-                                        // Auto scroll down
-                                        int height = (int)textArea.getPreferredSize().getHeight();
-                                        textScrollPane.getVerticalScrollBar().setValue(height);
+                                        autoScrollDown();
                                     }
 
                                 }else {
@@ -680,10 +626,7 @@ public class Interface {
 
                 if(signName == null){
                     ps.println("Please select a sign.");
-
-                    // Auto scroll down
-                    int height = (int)textArea.getPreferredSize().getHeight();
-                    textScrollPane.getVerticalScrollBar().setValue(height);
+                    autoScrollDown();
 
                     return;
                 }
@@ -696,18 +639,12 @@ public class Interface {
                     @Override
                     public void run() {
                         ps.println("Remove Sign '" + signName + "'?");
-
-                        // Auto scroll down
-                        int height = (int)textArea.getPreferredSize().getHeight();
-                        textScrollPane.getVerticalScrollBar().setValue(height);
+                        autoScrollDown();
 
                         while (true) {
                             if (no) {
                                 ps.println("Operation cancelled!");
-
-                                // Auto scroll down
-                                height = (int)textArea.getPreferredSize().getHeight();
-                                textScrollPane.getVerticalScrollBar().setValue(height);
+                                autoScrollDown();
 
                                 return;
                             } else if (yes) {
@@ -721,16 +658,10 @@ public class Interface {
                             allSigns.removeSign(signName);
                             listModel.removeElementAt(index);
                             ps.println("Sign '" + signName + "' is removed.");
-
-                            // Auto scroll down
-                            height = (int)textArea.getPreferredSize().getHeight();
-                            textScrollPane.getVerticalScrollBar().setValue(height);
+                            autoScrollDown();
                         }catch(Exception ex){
                             ps.println("Exception caught!");
-
-                            // Auto scroll down
-                            height = (int)textArea.getPreferredSize().getHeight();
-                            textScrollPane.getVerticalScrollBar().setValue(height);
+                            autoScrollDown();
                         }
                     }
                 };
@@ -831,35 +762,17 @@ public class Interface {
     }
 
     /**
-     * Provide a 3-second countdown in GUI.
+     * Provide a 3-second countdown.
      */
     public static void ready() {
-        /*// GUI countdown
-        for (int count = 3; count >= -1; count--) {
-            try {
-                if(count == 3){
-                    label_3.setVisible(true);
-                }else if(count == 2){
-                    label_3.setVisible(false);
-                    label_2.setVisible(true);
-                }else if(count == 1){
-                    label_2.setVisible(false);
-                    label_1.setVisible(true);
-                }else if(count == 0){
-                    label_1.setVisible(false);
-                    label_start.setVisible(true);
-                }else{
-                    label_start.setVisible(false);
-                }
-                Thread.sleep(1000);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }*/
+        ps.println("Countdown!");
+        autoScrollDown();
 
         for (int count = 3; count >= 0; count--) {
             try {
-                ps.println(count);
+                String countStr = "" + count;
+                ps.println(countStr);
+                autoScrollDown();
                 Thread.sleep(1000);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -886,6 +799,14 @@ public class Interface {
                 return false;
             }
         }
+    }
+
+    /**
+     *  Auto Scroll down
+     */
+    public static void autoScrollDown() {
+        int height = (int)textArea.getPreferredSize().getHeight();
+        textScrollPane.getVerticalScrollBar().setValue(height);
     }
 
 }
