@@ -102,14 +102,14 @@ public class Visualizer extends Applet {
 	/*
 	 * add spheres
 	 */
-	public void addSphere(Vector coordinate, String type) {
-		float[] graphvec = new float[] { coordinate.getX(), coordinate.getY(), coordinate.getZ() };
+	public void addSphere(Vector lmcoordinate, String type) {
+		float[] graphvec = new float[] { lmcoordinate.getX(), lmcoordinate.getY(), lmcoordinate.getZ() };
 		double[] appCoor = rangeConvert(graphvec);
 		Transform3D pos1 = new Transform3D();
 		pos1.setTranslation(new Vector3d(appCoor));
 		TransformGroup transgp = new TransformGroup(pos1);
 		if (type == "fingertip") {
-			transgp.addChild(new Sphere(0.05f));
+			transgp.addChild(new Sphere(0.03f));
 		} else if (type == "palm") {
 			transgp.addChild(new Sphere(0.07f));
 		}
@@ -117,7 +117,7 @@ public class Visualizer extends Applet {
 	}
 	
 	// Warning: you may need to use clear().
-	// Warning2: this "coordinate" take counts in the range -1.0f<x,y<1.0f
+	// Warning2: this "coordinate" take in the range -1.0f<x,y,z<1.0f
 	public void addSphere(Vector3d coordinate, float size) {
 		Transform3D pos1 = new Transform3D();
 		pos1.setTranslation(new Vector3d(coordinate));
@@ -186,7 +186,6 @@ public class Visualizer extends Applet {
 	}
 
 	public void traceLM(Frame frame) { 
-		// clear(); 
 		scene.detach();
 		scene.removeChild(transscene);
 		transscene.removeAllChildren();
@@ -202,15 +201,17 @@ public class Visualizer extends Applet {
 	}
 
 	public double[] rangeConvert(float[] LeapValue) {
-		double[] appValue = new double[3];
+		double[] temp = new double[3];
 		for (int i = 0; i < 3; i++) {
-			appValue[i] = (LeapValue[i] - leapStart[i]) * 2.0f / (leapEnd[i] - leapStart[i]) + appStart[i];
-			if (appValue[i] > appEnd[i]) {
-				appValue[i] = appEnd[i];
-			} else if (appValue[i] < appStart[i]) {
-				appValue[i] = appStart[i];
+			temp[i] = (LeapValue[i] - leapStart[i]) * 2.0f / (leapEnd[i] - leapStart[i]) + appStart[i];
+			if (temp[i] > appEnd[i]) {
+				temp[i] = appEnd[i];
+			} else if (temp[i] < appStart[i]) {
+				temp[i] = appStart[i];
 			}
 		}
+		double[] appValue = {temp[0], temp[2], temp[1]};
+
 		return appValue;
 	}
 

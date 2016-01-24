@@ -292,6 +292,24 @@ public class Interface {
         for (String key : allSigns.getAllSigns().keySet()) {
             listModel.addElement(key);
         }
+        
+        visualizer.setBounds(160, 10, 500, 500);
+		frame.getContentPane().add(visualizer);
+		Runnable traceHand = new Runnable() {
+			@Override
+			public void run() {
+				while (true) {
+					try {
+						visualizer.traceLM(controller.frame());
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		};
+		Thread thread = new Thread(traceHand);
+		thread.start();
 
         MouseListener mouseListener = new MouseAdapter() {
             public void mouseClicked(MouseEvent e){
@@ -306,7 +324,7 @@ public class Interface {
                     ps.println("Finger Count = " + sign.getFingerCount() + "\n");
                     
                     // TODO: mod this..
-                    visualizer.traceLM(controller.frame());
+                    //visualizer.traceLM(controller.frame());
                 }
             }
         };
@@ -621,25 +639,6 @@ public class Interface {
 
             }
         });
-        
-        
-        visualizer.setBounds(160, 10, 500, 500);
-		frame.getContentPane().add(visualizer);
-		Runnable traceHand = new Runnable() {
-			@Override
-			public void run() {
-				while (true) {
-					try {
-						visualizer.traceLM(controller.frame());
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		};
-		Thread thread = new Thread(traceHand);
-		thread.start();
 
         Button btnClear = new Button("Clear");
         btnClear.setBounds(152, 600, 61, 23);
