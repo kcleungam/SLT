@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
 
 public class Interface {
     /* Setting window */
@@ -189,9 +190,9 @@ public class Interface {
     private DTW dtw = new DTW();
 
     // the visualizer applet
- 	private Visualizer visualizer = new Visualizer();
+    private Visualizer visualizer = new Visualizer();
 
-    
+
     /**
      * Launch the application.
      */
@@ -294,24 +295,24 @@ public class Interface {
         for (String key : allSigns.getAllSigns().keySet()) {
             listModel.addElement(key);
         }
-        
+
         visualizer.setBounds(160, 10, 500, 500);
-		frame.getContentPane().add(visualizer);
-		Runnable traceHand = new Runnable() {
-			@Override
-			public void run() {
-				while (true) {
-					try {
-						visualizer.traceLM(controller.frame());
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		};
-		Thread thread = new Thread(traceHand);
-		thread.start();
+        frame.getContentPane().add(visualizer);
+        Runnable traceHand = new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        visualizer.traceLM(controller.frame());
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        Thread thread = new Thread(traceHand);
+        thread.start();
 
         MouseListener mouseListener = new MouseAdapter() {
             public void mouseClicked(MouseEvent e){
@@ -326,7 +327,7 @@ public class Interface {
                     ps.println("Finger Count = " + sign.getFingerCount() + "\n");
 
                     autoScrollDown();
-                    
+
                     // TODO: mod this..
                     //visualizer.traceLM(controller.frame());
                 }
@@ -372,6 +373,8 @@ public class Interface {
                 thread.start();
             }
         });
+
+        //TODO  --------   New
 
         Button new_button = new Button("New");
         new_button.setBounds(10, 54, 39, 23);
@@ -444,6 +447,8 @@ public class Interface {
                 }
             }
         });
+
+        //TODO  --------   Train
 
         Button button_train = new Button("Train");
         button_train.setBounds(58, 54, 42, 23);
@@ -546,72 +551,81 @@ public class Interface {
             public void actionPerformed(ActionEvent e) {
             */
 
-                    //recording = true;
+        //TODO  --------   DTW
 
-                    Runnable DTWRunnable = new Runnable() {
-                        @Override
-                        public void run() {
-                            //ready();
+        Runnable DTWRunnable = new Runnable() {
+            @Override
+            public void run() {
+                //ready();
+                Boolean validRec = false;
+                while (true) {
+                    if (!recording) {
+                        sampleListener.reset();
+                        sampleListener.gainFocus();
+
+                        Sample rSample = new Sample();
+
+                        try {
                             while (true) {
                                 if (!recording) {
-                                    sampleListener.reset();
-                                    sampleListener.gainFocus();
+                                    if (sampleListener.checkFinish()) {
+                                        if (sampleListener.checkValid()) {
 
-                                    Sample rSample = new Sample();
+                                            rSample = new Sample(sampleListener.returnOneSample());
+                                            validRec = true;
 
-                                    try {
-                                        while (true) {
-                                            if (sampleListener.checkFinish()) {
-                                                if (sampleListener.checkValid()) {
-
-                                                    rSample = new Sample(sampleListener.returnOneSample());
-
-                                                } else {
-                                                    ps.println("The recording is invalid. ");
-                                                    autoScrollDown();
-                                                }
-
-                                                break;
-                                            }
-                                            // The current thread is too fast, will fail to
-                                            // trace Listener if missing this code
+                                        } else {
+                                            ps.println("The recording is invalid. ");
+                                            validRec = false;
+                                            autoScrollDown();
                                             Thread.currentThread().sleep(10);
                                         }
-                                        sampleListener.lostFocus();
-
-                                        dtw.setRSample(rSample);//TODO: if rSample is created by default constructor, error may occurs
-
-                                        for (Sign storedSign : allSigns.getAllSigns().values()) {
-                                            ps.println("Checking : " + storedSign.getName());
-                                            dtw.setStoredSign(storedSign);
-                                            dtw.calDTW();
-                                        }
-                                        dtw.printResult();
-                                        ps.println("The most similar gesture is " + dtw.result);
-                                        ps.println("The minimum cost of DTW is " + dtw.bestMatch);
-                                        autoScrollDown();
-
-                                        dtw.reset();
-                                    } catch (Exception e) {
-                                        ps.println("Exception caught!");
-                                        autoScrollDown();
+                                        break;
                                     }
-
-                                }else {
-                                    try{
-                                        Thread.currentThread().sleep(10);
-                                    }catch (Exception ex){}
+                                    // The current thread is too fast, will fail to
+                                    // trace Listener if missing this code
+                                    Thread.currentThread().sleep(10);
                                 }
                             }
-                        }
-                    };
 
-                    Thread dtwThread = new Thread(DTWRunnable);
-                    dtwThread.start();
-/*
+                            sampleListener.lostFocus();
+                            if (validRec == true) {
+                                dtw.setRSample(rSample);//TODO: if rSample is created by default constructor, error may occurs
+
+                                // Retrieve Sign with finger count and hand type
+                                HashMap<String, Sign> signByBoth = db.getSignsByBoth(rSample.allFingers.count, rSample.allHands.type);
+
+                                for (Sign storedSign : signByBoth.values()) {
+                                    dtw.setStoredSign(storedSign);
+                                    dtw.calDTW();
+                                }
+
+                                dtw.printResult();
+                                ps.println("The most similar gesture is " + dtw.result);
+                                autoScrollDown();
+                                ps.println("The minimum cost of DTW is " + dtw.bestMatch);
+                                autoScrollDown();
+
+                                dtw.reset();
+                            } else{}        //   do nothing
+                        }catch(Exception e){
+                            ps.println("Exception caught!");
+                            autoScrollDown();
+                        }
+
+                    }else{
+                        try {
+                            Thread.currentThread().sleep(10);
+                        } catch (Exception ex) {
+                        }
+                    }
+                }
             }
-        });
-        */
+        };
+
+        Thread dtwThread = new Thread(DTWRunnable);
+        dtwThread.start();
+
 
 
         Button btnRemove = new Button("Remove");
@@ -789,13 +803,16 @@ public class Interface {
         no = false;
 
         ps.println("Save this Sample?");
+        autoScrollDown();
 
         while (true) {
             if (yes) {
                 ps.println("The recording is done!");
+                autoScrollDown();
                 return true;
             } else if (no) {
                 ps.println("The Sample is not added.");
+                autoScrollDown();
                 return false;
             }
         }
