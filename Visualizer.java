@@ -59,12 +59,12 @@ public class Visualizer extends Applet {
 				fingers[i][j] = new TransformGroup();
 				fingers[i][j].setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
 				fingers[i][j].addChild(new Sphere(0.05f));
-				//scene.addChild(fingers[i][j]);
+				scene.addChild(fingers[i][j]);
 			}
 			palms[i] = new TransformGroup();
 			palms[i].setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
 			palms[i].addChild(new Sphere(0.07f));
-			//scene.addChild(palms[i]);
+			scene.addChild(palms[i]);
 		}
 
 		// and attach it to the virtual universe
@@ -157,18 +157,18 @@ public class Visualizer extends Applet {
 		u.addBranchGraph(scene);
 	}
 
-	public void traceLM1(Frame frame) {
+	public void traceLM(Frame frame) {
 		HandList hands = frame.hands();
 		if (hands.count() == 2) {
 			for (int i = 0; i < 2; i++) {
 				for (int j = 0; j < 5; j++) {
-					moveSphere(hands.get(i).finger(j).tipPosition(), fingers[i][j]);
+					moveSphere(hands.get(i).fingers().get(j).tipPosition(), fingers[i][j]);
 				}
 				moveSphere(hands.get(i).palmPosition(), palms[i]);
 			}
 		} else if (hands.count() == 1) {
 			for (int j = 0; j < 5; j++) {
-				moveSphere(hands.get(0).finger(j).tipPosition(), fingers[0][j]);
+				moveSphere(hands.get(0).fingers().get(j).tipPosition(), fingers[0][j]);
 			}
 			moveSphere(hands.get(0).palmPosition(), palms[0]);
 			for (int j = 0; j < 5; j++) {
@@ -185,7 +185,7 @@ public class Visualizer extends Applet {
 		}
 	}
 
-	public void traceLM(Frame frame) { 
+	public void traceLM1(Frame frame) { 
 		scene.detach();
 		scene.removeChild(transscene);
 		transscene.removeAllChildren();

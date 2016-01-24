@@ -298,7 +298,7 @@ public class Interface {
 
         visualizer.setBounds(160, 10, 500, 500);
         frame.getContentPane().add(visualizer);
-        Runnable traceHand = new Runnable() {
+        Runnable liveHand = new Runnable() {
             @Override
             public void run() {
                 while (true) {
@@ -311,7 +311,7 @@ public class Interface {
                 }
             }
         };
-        Thread thread = new Thread(traceHand);
+        Thread livevisual = new Thread(traceHand);
         thread.start();
 
         MouseListener mouseListener = new MouseAdapter() {
