@@ -311,8 +311,8 @@ public class Interface {
                 }
             }
         };
-        Thread livevisual = new Thread(traceHand);
-        thread.start();
+        Thread livevisual = new Thread(liveHand);
+        livevisual.start();
 
         MouseListener mouseListener = new MouseAdapter() {
             public void mouseClicked(MouseEvent e){
