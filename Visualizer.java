@@ -210,7 +210,7 @@ public class Visualizer extends Applet {
 				temp[i] = appStart[i];
 			}
 		}
-		double[] appValue = {temp[0], temp[2], temp[1]};
+		double[] appValue = {temp[0], -temp[2], temp[1]};
 
 		return appValue;
 	}
