@@ -11,15 +11,14 @@ public class DTW{
     public static int minFrame = 30;
     public static int cutFrame = 10;   // The number of frame can be cut off on order to find the best ending of Sample
 
-    public static double globalThreshold = Double.POSITIVE_INFINITY; // The maximum distance between rSample and stored sample which can be recognize
+    public static double globalThreshold = 450; // The maximum distance between rSample and stored sample which can be recognize
                                     // If the bestMatch > globalThreshold, then unknown gesture
 
     public double localThreshold = Double.POSITIVE_INFINITY;   // The distance between sample and one of the stored sample
 
-    public double adjust = 70;
-    public double palmTolerance = 100;      // The maximum distance of palm distance between rSample and storedSample can be accepted
+    public double adjust = 60;     // The adjustment according to the palm, 60 = 6 cm
 
-    public String result = "GestureNotExist";
+    public String result = "Unknown Gesture !";
 
 
     public DTW(){
@@ -139,6 +138,11 @@ public class DTW{
             }
 
         }
+
+        if(bestMatch > globalThreshold){
+            result = "Unknown Gesture !";
+        }
+
     }
 
     public double getCost(){
@@ -289,14 +293,18 @@ public class DTW{
     }
 
     public void printResult(){
-        System.out.println("------------Result of DTW-----------");
-        System.out.println("The most similar gesture is -- " + result);
-        System.out.println("The minimum cost of DTW is " + bestMatch);
+        if(result.equals("Unknown Gesture !")){
+            System.out.println("Unknown Gesture !");
+        }else {
+            System.out.println("------------Result of DTW-----------");
+            System.out.println("The most similar gesture is -- " + result);
+            System.out.println("The minimum cost of DTW is " + bestMatch);
+        }
     }
 
     public void reset(){
         bestMatch = Double.POSITIVE_INFINITY;
-        result = "GestureNotExist";
+        result = "Unknown Gesture !";
     }
 
     public void run(){}

@@ -424,6 +424,7 @@ public class Interface {
                                                 ps.println("The recording is invalid.");
                                                 autoScrollDown();
                                             }
+                                            recording = false;
                                             break;
                                         }
                                         // The current thread is too fast, will fail to
@@ -433,7 +434,7 @@ public class Interface {
                                 } catch (Exception ex) {
                                     ps.println("Exception caught!");
                                     autoScrollDown();
-                                    recording =false;
+                                    recording = false;
                                 }
 
                                 recording = false;
@@ -532,6 +533,7 @@ public class Interface {
 
                                 recording = false;
                             }
+                            recording = false;
                             return;
                         }
                     };
@@ -556,7 +558,6 @@ public class Interface {
         Runnable DTWRunnable = new Runnable() {
             @Override
             public void run() {
-                //ready();
                 Boolean validRec = false;
                 while (true) {
                     if (!recording) {
@@ -585,29 +586,42 @@ public class Interface {
                                     // The current thread is too fast, will fail to
                                     // trace Listener if missing this code
                                     Thread.currentThread().sleep(10);
+                                }else{
+                                    Thread.currentThread().sleep(10);       // !!!!!!Remember to add else and add sleep, I spend a lot of time to find this bug!!!!!
                                 }
                             }
 
                             sampleListener.lostFocus();
-                            if (validRec == true) {
-                                dtw.setRSample(rSample);//TODO: if rSample is created by default constructor, error may occurs
+                            if (!recording) {
+                                if (validRec == true) {
+                                    dtw.setRSample(rSample);//TODO: if rSample is created by default constructor, error may occurs
 
-                                // Retrieve Sign with finger count and hand type
-                                HashMap<String, Sign> signByBoth = db.getSignsByBoth(rSample.allFingers.count, rSample.allHands.type);
+                                    // Retrieve Sign with finger count and hand type
+                                    HashMap<String, Sign> signByBoth = db.getSignsByBoth(rSample.allFingers.count, rSample.allHands.type);
 
-                                for (Sign storedSign : signByBoth.values()) {
-                                    dtw.setStoredSign(storedSign);
-                                    dtw.calDTW();
-                                }
+                                    for (Sign storedSign : signByBoth.values()) {
+                                        dtw.setStoredSign(storedSign);
+                                        dtw.calDTW();
+                                    }
 
-                                dtw.printResult();
-                                ps.println("The most similar gesture is " + dtw.result);
-                                autoScrollDown();
-                                ps.println("The minimum cost of DTW is " + dtw.bestMatch);
-                                autoScrollDown();
+                                    dtw.printResult();
+                                    if (dtw.result.equals("Unknown Gesture !")) {
+                                        ps.println("Unknown Gesture !");
+                                        autoScrollDown();
+                                    } else {
+                                        ps.println("The most similar gesture is " + dtw.result);
+                                        autoScrollDown();
+                                        ps.println("The minimum cost of DTW is " + dtw.bestMatch);
+                                        autoScrollDown();
+                                    }
 
-                                dtw.reset();
-                            } else{}        //   do nothing
+                                    dtw.reset();
+                                    Thread.currentThread().sleep(20);
+                                } else {
+                                    dtw.reset();
+                                    Thread.currentThread().sleep(20);
+                                }        //   do nothing
+                            }
                         }catch(Exception e){
                             ps.println("Exception caught!");
                             autoScrollDown();
