@@ -10,9 +10,10 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InterfaceFXController">
    <children>
       <Button layoutX="165.0" layoutY="650.0" mnemonicParsing="false" onAction="#newButtonAction" prefHeight="40.0" prefWidth="65.0" text="New" />
-      <Button layoutX="230.0" layoutY="650.0" mnemonicParsing="false" onAction="#trainButtonAction" prefHeight="40.0" prefWidth="65.0" text="Train" />
-      <Button layoutX="1120.0" layoutY="650.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="65.0" text="System" />
-      <TextField layoutX="15.0" layoutY="650.0" prefHeight="40.0" prefWidth="150.0" promptText="Gesture Name">
+      <Button layoutX="15.0" layoutY="605.0" mnemonicParsing="false" onAction="#trainButtonAction" prefHeight="40.0" prefWidth="65.0" text="Train" />
+      <Button layoutX="100.0" layoutY="605.0" mnemonicParsing="false" onAction="#removeButtonAction" prefHeight="40.0" prefWidth="65.0" text="Remove" />
+      <Button layoutX="1120.0" layoutY="650.0" mnemonicParsing="false" onAction="#systemButtonAction" prefHeight="40.0" prefWidth="65.0" text="System" />
+      <TextField fx:id="txtfName" layoutX="15.0" layoutY="650.0" prefHeight="40.0" prefWidth="150.0" promptText="Gesture Name">
          <font>
             <Font size="14.0" />
          </font>
@@ -21,6 +22,6 @@
          <font>
             <Font name="SansSerif Regular" size="14.0" />
          </font></Label>
-      <ListView layoutX="15.0" layoutY="14.0" prefHeight="624.0" prefWidth="150.0" />
+      <ListView fx:id="gestureList" layoutX="15.0" layoutY="14.0" prefHeight="588.0" prefWidth="150.0" />
    </children>
 </Pane>
