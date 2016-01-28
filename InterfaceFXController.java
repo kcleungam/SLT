@@ -82,7 +82,7 @@ public class InterfaceFXController implements Initializable{
                                                     validRec = true;
 
                                                 } else {
-                                                    System.out.println("DTW: The recording is invalid. ");
+                                                    System.out.println("The recording is invalid. ");
                                                     validRec = false;
                                                     Thread.currentThread().sleep(10);
                                                 }
@@ -110,10 +110,10 @@ public class InterfaceFXController implements Initializable{
                                             }
 
                                             dtw.printResult();
-                                            if (dtw.result.equals("Unknown Gesture !")) {
-                                                System.out.println("DTW: Unknown Gesture !");
+                                            if (dtw.result.equals("Unknown Gesture")) {
+                                                System.out.println("Unknown Gesture!");
                                             } else {
-                                                message.setText("The most similar gesture is " + dtw.result);
+                                                updateMessage("The most similar gesture is " + dtw.result);
                                                 System.out.println("The most similar gesture is " + dtw.result);
                                                 System.out.println("The minimum cost of DTW is " + dtw.bestMatch);
                                             }
@@ -141,8 +141,7 @@ public class InterfaceFXController implements Initializable{
             }
         };
 
-        //message.textProperty().bind(dtwThread.messageProperty());
-
+        message.textProperty().bind(dtwThread.messageProperty());
         dtwThread.start();
     }
 
@@ -153,6 +152,8 @@ public class InterfaceFXController implements Initializable{
                 return new Task<Void>() {
                     @Override
                     protected Void call() throws Exception {
+                        message.textProperty().unbind();
+
                         if (!recording) {
                             recording = true;
 
@@ -160,13 +161,13 @@ public class InterfaceFXController implements Initializable{
                             String signName = txtfName.getText();
 
                             if (signName.equals("")) {
-                                message.setText("Please enter a name!");
+                                updateMessage("Please enter a name!");
                                 recording = false;
                                 return null;
                             }
 
                             if (allSigns.getAllSigns().containsKey(signName)) {
-                                message.setText("This name is already existed in the database.");
+                                updateMessage("This name is already existed in the database.");
                             } else {
                                 //ready();
                                 sampleListener.reset();
@@ -183,11 +184,11 @@ public class InterfaceFXController implements Initializable{
                                                 //ToDo: handle the boolean return value aftter adding the given sign
                                                 allSigns.addSign(signName, sign);
                                                 db.addSign(sign);
-                                                message.setText("New gesture " + signName + " is created!");
+                                                updateMessage("New gesture " + signName + " is created!");
                                                 gestures.add(signName);
                                                 //}
                                             } else {
-                                                message.setText("The recording is invalid.");
+                                                updateMessage("The recording is invalid.");
                                             }
                                             recording = false;
                                             break;
@@ -197,7 +198,7 @@ public class InterfaceFXController implements Initializable{
                                         Thread.currentThread().sleep(10);
                                     }
                                 } catch (Exception e) {
-                                    message.setText("Exception caught!");
+                                    updateMessage("Exception caught!");
                                     e.printStackTrace();
                                     recording = false;
                                 }
@@ -217,15 +218,116 @@ public class InterfaceFXController implements Initializable{
             @Override
             public void handle(WorkerStateEvent event) {
                 message.textProperty().unbind();
+                message.textProperty().bind(dtwThread.messageProperty());
             }
         });
 
         message.textProperty().bind(newThread.messageProperty());
-        newThread.restart();
+        newThread.start();
     }
 
-        @FXML protected void trainButtonAction (ActionEvent event){
-            message.setText("Train button pressed");
+        @FXML protected void trainButtonAction (ActionEvent event) {
+            Service<Void> trainThread = new Service<Void>() {
+                @Override
+                protected Task<Void> createTask() {
+                    return new Task<Void>() {
+                        @Override
+                        protected Void call() throws Exception {
+                            message.textProperty().unbind();
+
+                            if (!recording) {
+                                recording = true;
+
+                                Runnable TrainRunnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Sign sign;
+
+                                        //printTraining();
+                                        //System.out.println("Please enter the name of the sign you want to train: ");
+                                        String trainName = (String) gestureList.getSelectionModel().getSelectedItem();
+
+                                        if (allSigns.getAllSigns().containsKey(trainName)) {
+                                            updateMessage("Sign found, ready to start training");
+
+                                            // recordingMode = true;
+                                            ready();
+
+                                            // SampleListener trainListener = new
+                                            // SampleListener(); //new a listener everytime
+                                            // controller.addListener(trainListener); // add
+                                            // listener, grab data
+                                            sampleListener.reset();
+                                            sampleListener.gainFocus();
+                                            /**
+                                             * keep grabbing the frame from controller, check
+                                             * whether it is recordable, add to the oneSample if
+                                             * it is. """"put it as one sample of specific
+                                             * sign"""
+                                             */
+                                            try {
+                                                while (true) {
+                                                    if (sampleListener.checkFinish()) {
+                                                        if (sampleListener.checkValid()) {
+                                                            //if (savePrompt()) {
+                                                            //trainOneSign(sampleListener.returnOneSample(), trainName, allsign);
+                                                            //ToDo: handle the boolean return type after adding sample to the given sign
+                                                            sign = new Sign(trainName, new Sample(sampleListener.returnOneSample()));
+                                                            allSigns.addSign(trainName, sign);
+                                                            db.addSign(sign);
+                                                            updateMessage("Training completed!");
+                                                            //}
+                                                        } else {
+                                                            updateMessage("The recording is invalid!");
+                                                        }
+                                                        recording = false;
+                                                        break;
+                                                    }
+                                                    // It is necessary, without it, bug occur
+                                                    Thread.currentThread().sleep(10);
+                                                }
+                                            } catch (Exception e) {
+                                                updateMessage("Exception caught!");
+                                                e.printStackTrace();
+
+                                                recording = false;
+                                            }
+
+                                            // controller.removeListener(trainListener);
+                                            sampleListener.lostFocus();
+							/*
+							 * while (true) { Frame frame = controller.frame();
+							 * if (recordingMode == true) {
+							 * trainOneSign(frame,oneSample,trainName,allsign);
+							 * //recordingMode = false at the end of
+							 * trainOneSign } else { break; } }
+							 */
+                                        } else { // sign not found
+                                            updateMessage("Please choose a sign!");
+                                            recording = false;
+                                        }
+                                        recording = false;
+                                        return;
+                                    }
+                                };
+                            }
+
+                            return null;
+                        }
+                    };
+                }
+            };
+
+            trainThread.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                @Override
+                public void handle(WorkerStateEvent event) {
+                    message.textProperty().unbind();
+                    message.textProperty().bind(dtwThread.messageProperty());
+                }
+            });
+
+            message.textProperty().bind(trainThread.messageProperty());
+            trainThread.start();
         }
 
         @FXML protected void removeButtonAction (ActionEvent event){
