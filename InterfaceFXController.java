@@ -16,6 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.concurrent.*;
+import javafx.scene.layout.Pane;
+
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -32,6 +34,8 @@ public class InterfaceFXController implements Initializable {
     private static boolean recording = false;
 
     @FXML
+    private Pane mainPane;
+    @FXML
     private Label message;
     @FXML
     private TextField txtfName;
@@ -39,6 +43,9 @@ public class InterfaceFXController implements Initializable {
     private ListView gestureList;
     private ObservableList<String> gestures;
     private Service<Void> dtwThread;
+
+    // the visualizer applet
+    private Visualizer visualizer = new Visualizer();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -58,6 +65,24 @@ public class InterfaceFXController implements Initializable {
             message.setText("Exception caught when initializing the system!");
             e.printStackTrace();
         }
+
+        /*visualizer.setBounds(160, 10, 500, 500);
+        mainPane.get
+        Runnable liveHand = new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        visualizer.traceLM(controller.frame());
+                        Thread.sleep(50);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        Thread livevisual = new Thread(liveHand);
+        livevisual.start();*/
 
         // Service responsible for DTW
         dtwThread = new Service<Void>() {
@@ -250,9 +275,9 @@ public class InterfaceFXController implements Initializable {
             recording = true;
             String trainName = (String) gestureList.getSelectionModel().getSelectedItem();
 
-            if (!allSigns.getAllSigns().containsKey(trainName)) {
-                // sign not found
-                message.setText("Please choose a gesture!");
+            if (trainName == null) {
+                // Detect if any gesture is selected
+                message.setText("Please select a gesture.");
                 recording = false;
             } else {
                 Service<Void> trainThread = new Service<Void>() {
@@ -357,6 +382,7 @@ public class InterfaceFXController implements Initializable {
     protected void removeButtonAction(ActionEvent event) {
         String signName = (String) gestureList.getSelectionModel().getSelectedItem();
 
+        // Detect if any gesture is selected
         if (signName == null) {
             message.setText("Please select a gesture.");
             return;
