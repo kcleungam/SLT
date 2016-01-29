@@ -389,6 +389,18 @@ public class InterfaceFXController implements Initializable {
     }
 
     @FXML
+    protected void infoButtonAction(ActionEvent event){
+        String signName = (String) gestureList.getSelectionModel().getSelectedItem();
+        Sign sign = allSigns.getSign(signName);
+
+        message.setText("Gesture Name: " + sign.getName()
+                + " Sample Size: " + sign.getAllSamples().size()
+                + " Hand Count: " + sign.getHandCount()
+                + " Hand Type: " + sign.getHandType()
+                + " Finger Count: " + sign.getFingerCount());
+    }
+
+    @FXML
     protected void removeButtonAction(ActionEvent event) {
         String signName = (String) gestureList.getSelectionModel().getSelectedItem();
 
@@ -442,7 +454,7 @@ public class InterfaceFXController implements Initializable {
     protected void switchButtonAction(ActionEvent event){
         if (recognition){
             recognition = false;
-            
+
             dtwThread.cancel();
             message.setText("The recognition mode is switched off!");
         } else {
