@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9273cb61-097c-4eb3-84ac-3a458ed1eb63" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController$1$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController$1$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController.class" afterPath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InterfaceFXController.java" afterPath="$PROJECT_DIR$/InterfaceFXController.java" />
     </list>
     <ignored path="SLT.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,15 +28,9 @@
         <entry file="file://$PROJECT_DIR$/Interface.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="445" column="60" selection-start-line="445" selection-start-column="60" selection-end-line="445" selection-end-column="60" />
+              <caret line="459" column="25" selection-start-line="459" selection-start-column="16" selection-end-line="537" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#28309#28310#0" expanded="true" />
-                <element signature="e#28361#28362#0" expanded="true" />
-                <element signature="e#28685#28686#0" expanded="true" />
-                <element signature="e#28727#28728#0" expanded="true" />
-                <element signature="e#29000#29001#0" expanded="true" />
-                <element signature="e#29041#29042#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -52,8 +42,8 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="imports" expanded="true" />
+                <element signature="e#285#286#0" expanded="false" />
+                <element signature="e#313#314#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -62,15 +52,11 @@
       <file leaf-file-name="InterfaceFXController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/InterfaceFXController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.17299107">
-              <caret line="76" column="16" selection-start-line="76" selection-start-column="16" selection-end-line="79" selection-end-column="42" />
+            <state vertical-scroll-proportion="1.4441965">
+              <caret line="305" column="83" selection-start-line="305" selection-start-column="83" selection-end-line="305" selection-end-column="83" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#4207#4208#0" expanded="true" />
-                <element signature="e#4270#4271#0" expanded="true" />
-                <element signature="e#6117#6118#0" expanded="true" />
-                <element signature="e#6181#6182#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -80,7 +66,7 @@
         <entry file="file://$PROJECT_DIR$/interfaceFX.fxml">
           <provider editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="14" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
+              <caret line="25" column="7" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -123,8 +109,8 @@
         <option value="$PROJECT_DIR$/DTW.java" />
         <option value="$PROJECT_DIR$/Visualizer.java" />
         <option value="$PROJECT_DIR$/SLT.java" />
-        <option value="$PROJECT_DIR$/Interface.java" />
         <option value="$PROJECT_DIR$/InterfaceFX.java" />
+        <option value="$PROJECT_DIR$/Interface.java" />
         <option value="$PROJECT_DIR$/interfaceFX.fxml" />
         <option value="$PROJECT_DIR$/InterfaceFXController.java" />
       </list>
@@ -168,7 +154,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -190,7 +176,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -626,7 +612,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30627707" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.4978678" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12579957" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12686567" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -688,15 +674,9 @@
     <entry file="file://$PROJECT_DIR$/Interface.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="445" column="60" selection-start-line="445" selection-start-column="60" selection-end-line="445" selection-end-column="60" />
+          <caret line="459" column="25" selection-start-line="459" selection-start-column="16" selection-end-line="537" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#28309#28310#0" expanded="true" />
-            <element signature="e#28361#28362#0" expanded="true" />
-            <element signature="e#28685#28686#0" expanded="true" />
-            <element signature="e#28727#28728#0" expanded="true" />
-            <element signature="e#29000#29001#0" expanded="true" />
-            <element signature="e#29041#29042#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -706,8 +686,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="imports" expanded="true" />
+            <element signature="e#285#286#0" expanded="false" />
+            <element signature="e#313#314#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -719,10 +699,49 @@
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#4207#4208#0" expanded="true" />
-            <element signature="e#4270#4271#0" expanded="true" />
-            <element signature="e#6117#6118#0" expanded="true" />
-            <element signature="e#6181#6182#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interfaceFX.fxml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="7" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Interface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="445" column="60" selection-start-line="445" selection-start-column="60" selection-end-line="445" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/InterfaceFX.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="e#285#286#0" expanded="false" />
+            <element signature="e#313#314#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/InterfaceFXController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -745,26 +764,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Interface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="445" column="60" selection-start-line="445" selection-start-column="60" selection-end-line="445" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#28309#28310#0" expanded="true" />
-            <element signature="e#28361#28362#0" expanded="true" />
-            <element signature="e#28685#28686#0" expanded="true" />
-            <element signature="e#28727#28728#0" expanded="true" />
-            <element signature="e#29000#29001#0" expanded="true" />
-            <element signature="e#29041#29042#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/interfaceFX.fxml">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="14" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
+          <caret line="25" column="7" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
           <folding />
         </state>
       </provider>
@@ -772,12 +775,30 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65849674">
+          <caret line="157" column="67" selection-start-line="157" selection-start-column="67" selection-end-line="157" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/InterfaceFX.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#285#286#0" expanded="false" />
+            <element signature="e#313#314#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Interface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="459" column="25" selection-start-line="459" selection-start-column="16" selection-end-line="537" selection-end-column="25" />
+          <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -785,15 +806,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/InterfaceFXController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17299107">
-          <caret line="76" column="16" selection-start-line="76" selection-start-column="16" selection-end-line="79" selection-end-column="42" />
+        <state vertical-scroll-proportion="1.4441965">
+          <caret line="305" column="83" selection-start-line="305" selection-start-column="83" selection-end-line="305" selection-end-column="83" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#4207#4208#0" expanded="true" />
-            <element signature="e#4270#4271#0" expanded="true" />
-            <element signature="e#6117#6118#0" expanded="true" />
-            <element signature="e#6181#6182#0" expanded="true" />
           </folding>
         </state>
       </provider>

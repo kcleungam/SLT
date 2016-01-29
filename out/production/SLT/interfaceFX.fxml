@@ -15,7 +15,7 @@
       <Button layoutX="1120.0" layoutY="650.0" mnemonicParsing="false" onAction="#systemButtonAction" prefHeight="40.0" prefWidth="65.0" text="System" />
       <TextField fx:id="txtfName" layoutX="15.0" layoutY="650.0" prefHeight="40.0" prefWidth="150.0" promptText="Gesture Name">
          <font>
-            <Font size="14.0" />
+            <Font name="SansSerif Regular" size="14.0" />
          </font>
       </TextField>
       <Label fx:id="message" alignment="CENTER" layoutX="303.0" layoutY="650.0" prefHeight="40.0" prefWidth="655.0">
