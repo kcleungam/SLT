@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9273cb61-097c-4eb3-84ac-3a458ed1eb63" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InterfaceFXController.java" afterPath="$PROJECT_DIR$/InterfaceFXController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InterfaceStyle.css" afterPath="$PROJECT_DIR$/InterfaceStyle.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/interfaceFX.fxml" afterPath="$PROJECT_DIR$/interfaceFX.fxml" />
     </list>
     <ignored path="SLT.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,15 +52,15 @@
       <file leaf-file-name="InterfaceFXController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/InterfaceFXController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5329609">
-              <caret line="399" column="61" selection-start-line="399" selection-start-column="61" selection-end-line="399" selection-end-column="61" />
+            <state vertical-scroll-proportion="0.4055866">
+              <caret line="401" column="8" selection-start-line="401" selection-start-column="8" selection-end-line="401" selection-end-column="8" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
                 <element signature="e#7443#7444#0" expanded="true" />
                 <element signature="e#7514#7515#0" expanded="true" />
-                <element signature="e#20079#20080#0" expanded="true" />
-                <element signature="e#20127#20128#0" expanded="true" />
+                <element signature="e#20253#20254#0" expanded="true" />
+                <element signature="e#20301#20302#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -637,7 +634,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -737,8 +734,8 @@
             <element signature="imports" expanded="true" />
             <element signature="e#7443#7444#0" expanded="true" />
             <element signature="e#7514#7515#0" expanded="true" />
-            <element signature="e#20079#20080#0" expanded="true" />
-            <element signature="e#20127#20128#0" expanded="true" />
+            <element signature="e#20253#20254#0" expanded="true" />
+            <element signature="e#20301#20302#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -792,8 +789,8 @@
             <element signature="imports" expanded="true" />
             <element signature="e#7443#7444#0" expanded="true" />
             <element signature="e#7514#7515#0" expanded="true" />
-            <element signature="e#20079#20080#0" expanded="true" />
-            <element signature="e#20127#20128#0" expanded="true" />
+            <element signature="e#20253#20254#0" expanded="true" />
+            <element signature="e#20301#20302#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -839,8 +836,8 @@
             <element signature="imports" expanded="true" />
             <element signature="e#7443#7444#0" expanded="true" />
             <element signature="e#7514#7515#0" expanded="true" />
-            <element signature="e#20079#20080#0" expanded="true" />
-            <element signature="e#20127#20128#0" expanded="true" />
+            <element signature="e#20253#20254#0" expanded="true" />
+            <element signature="e#20301#20302#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -913,15 +910,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/InterfaceFXController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5329609">
-          <caret line="399" column="61" selection-start-line="399" selection-start-column="61" selection-end-line="399" selection-end-column="61" />
+        <state vertical-scroll-proportion="0.4055866">
+          <caret line="401" column="8" selection-start-line="401" selection-start-column="8" selection-end-line="401" selection-end-column="8" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
             <element signature="e#7443#7444#0" expanded="true" />
             <element signature="e#7514#7515#0" expanded="true" />
-            <element signature="e#20079#20080#0" expanded="true" />
-            <element signature="e#20127#20128#0" expanded="true" />
+            <element signature="e#20253#20254#0" expanded="true" />
+            <element signature="e#20301#20302#0" expanded="true" />
           </folding>
         </state>
       </provider>

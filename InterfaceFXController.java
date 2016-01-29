@@ -391,8 +391,15 @@ public class InterfaceFXController implements Initializable {
     @FXML
     protected void infoButtonAction(ActionEvent event){
         String signName = (String) gestureList.getSelectionModel().getSelectedItem();
-        Sign sign = allSigns.getSign(signName);
 
+        // Detect if any gesture is selected
+        if (signName == null) {
+            message.setText("Please select a gesture.");
+            return;
+        }
+
+        Sign sign = allSigns.getSign(signName);
+        
         message.setText("Gesture Name: " + sign.getName()
                 + " Sample Size: " + sign.getAllSamples().size()
                 + " Hand Count: " + sign.getHandCount()
