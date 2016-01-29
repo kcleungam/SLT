@@ -17,13 +17,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.concurrent.*;
 import javafx.scene.layout.Pane;
-
+import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.CountDownLatch;
 
 public class InterfaceFXController implements Initializable {
     private static Database db = new Database("Signs", "HK_Signs");
@@ -32,9 +29,12 @@ public class InterfaceFXController implements Initializable {
     private Controller controller = new Controller();
     private DTW dtw = new DTW();
     private static boolean recording = false;
+    private static boolean recognition = false;
 
     @FXML
     private Pane mainPane;
+    @FXML
+    private VBox systemBox;
     @FXML
     private Label message;
     @FXML
@@ -92,6 +92,8 @@ public class InterfaceFXController implements Initializable {
                     @Override
                     protected Void call() throws Exception {
                         Boolean validRec = false;
+
+                        updateMessage("Switch to recognition mode!");
 
                         while (true) {
                             if (!recording) {
@@ -169,12 +171,20 @@ public class InterfaceFXController implements Initializable {
             }
         };
 
+        dtwThread.setOnCancelled(new EventHandler<WorkerStateEvent>() {
+                         @Override
+                public void handle(WorkerStateEvent event) {
+                    message.textProperty().unbind();
+                }
+            }
+        );
+
         //message.textProperty().bind(dtwThread.messageProperty());
         //dtwThread.start();
     }
 
     @FXML
-    protected void newButtonAction(ActionEvent event) {
+    protected void createButtonAction(ActionEvent event) {
         if (!recording) {
             message.textProperty().unbind();
             recording = true;
@@ -402,8 +412,46 @@ public class InterfaceFXController implements Initializable {
 
     @FXML
     protected void systemButtonAction(ActionEvent event) {
-        //message.textProperty().unbind();
-        message.setText("System button pressed");
+        // Show or hide the system menu
+        if(systemBox.isVisible())
+            systemBox.setVisible(false);
+        else
+            systemBox.setVisible(true);
+    }
+
+    @FXML
+    protected void resetButtonAction(ActionEvent event){
+        try{
+            db.removeAllSign();
+            allSigns.removeAllSign();
+            gestures.removeAll();
+            // TODO: BUG: the listview is not updated
+
+            message.setText("Database has been reset!");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    protected void settingButtonAction(ActionEvent event){
+        message.setText("Open setting!");
+    }
+
+    @FXML
+    protected void switchButtonAction(ActionEvent event){
+        if (recognition){
+            recognition = false;
+            
+            dtwThread.cancel();
+            message.setText("The recognition mode is switched off!");
+        } else {
+            recognition = true;
+
+            message.textProperty().bind(dtwThread.messageProperty());
+            dtwThread.start();
+        }
+
     }
 
 }

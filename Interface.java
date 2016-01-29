@@ -362,6 +362,7 @@ public class Interface {
                             db.removeAllSign();
                             allSigns.removeAllSign();
                             listModel.removeAllElements();
+                            ps.println("Database has been reset!");
                         }catch(Exception ex){
                             ps.println("Exception caught!");
                             autoScrollDown();
