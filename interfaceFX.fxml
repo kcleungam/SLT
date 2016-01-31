@@ -64,5 +64,7 @@
             <Insets />
          </opaqueInsets>
       </VBox>
+      <Button fx:id="btnYes" layoutX="851.0" layoutY="657.0" mnemonicParsing="false" onAction="#yesButtonAction" prefWidth="45.0" text="Yes" visible="false" />
+      <Button fx:id="btnNo" layoutX="905.0" layoutY="657.0" mnemonicParsing="false" onAction="#noButtonAction" prefHeight="26.0" prefWidth="45.0" text="No" visible="false" />
    </children>
 </Pane>

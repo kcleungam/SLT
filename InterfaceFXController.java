@@ -12,9 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.concurrent.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -30,15 +28,22 @@ public class InterfaceFXController implements Initializable {
     private DTW dtw = new DTW();
     private static boolean recording = false;
     private static boolean recognition = false;
+    private static volatile boolean yes = false, no = false;
 
     @FXML
     private Pane mainPane;
+    @FXML
+    private Pane dialogPane;
     @FXML
     private VBox systemBox;
     @FXML
     private Label message;
     @FXML
     private TextField txtfName;
+    @FXML
+    private Button btnYes;
+    @FXML
+    private Button btnNo;
     @FXML
     private ListView gestureList;
     private ObservableList<String> gestures;
@@ -230,16 +235,31 @@ public class InterfaceFXController implements Initializable {
                                     while (true) {
                                         if (sampleListener.checkFinish()) {
                                             if (sampleListener.checkValid()) {
-                                                System.out.println(recording);
-                                                //if (savePrompt()) {
-                                                //recordSign(sampleListener.returnOneSample(), signName, sign, allsign);
-                                                sign = new Sign(signName, new Sample(sampleListener.returnOneSample()));
-                                                //ToDo: handle the boolean return value aftter adding the given sign
-                                                allSigns.addSign(signName, sign);
-                                                db.addSign(sign);
-                                                updateMessage("New gesture " + signName + " is created!");
-                                                gestures.add(signName);
-                                                //}
+                                                // Reset the variables
+                                                yes = false;
+                                                no = false;
+
+                                                // Set the buttons visible
+                                                btnYes.setVisible(true);
+                                                btnNo.setVisible(true);
+
+                                                updateMessage("Do you want to save this sample?");
+
+                                                while (true){
+                                                    if (yes) {
+                                                        //recordSign(sampleListener.returnOneSample(), signName, sign, allsign);
+                                                        sign = new Sign(signName, new Sample(sampleListener.returnOneSample()));
+                                                        //ToDo: handle the boolean return value aftter adding the given sign
+                                                        allSigns.addSign(signName, sign);
+                                                        db.addSign(sign);
+                                                        updateMessage("New gesture " + signName + " is created!");
+                                                        gestures.add(signName);
+                                                        break;
+                                                    } else if (no){
+                                                        updateMessage("This gesture is not saved.");
+                                                        break;
+                                                    }
+                                                }
                                             } else {
                                                 updateMessage("The recording is invalid.");
                                             }
@@ -331,14 +351,30 @@ public class InterfaceFXController implements Initializable {
                                     while (true) {
                                         if (sampleListener.checkFinish()) {
                                             if (sampleListener.checkValid()) {
-                                                //if (savePrompt()) {
-                                                //trainOneSign(sampleListener.returnOneSample(), trainName, allsign);
-                                                //ToDo: handle the boolean return type after adding sample to the given sign
-                                                sign = new Sign(trainName, new Sample(sampleListener.returnOneSample()));
-                                                allSigns.addSign(trainName, sign);
-                                                db.addSign(sign);
-                                                updateMessage("Training of gesture " + trainName + " completed!");
-                                                //}
+                                                // Reset the variables
+                                                yes = false;
+                                                no = false;
+
+                                                // Set the buttons visible
+                                                btnYes.setVisible(true);
+                                                btnNo.setVisible(true);
+
+                                                updateMessage("Do you want to save this sample?");
+
+                                                while (true){
+                                                    if (yes) {
+                                                        //trainOneSign(sampleListener.returnOneSample(), trainName, allsign);
+                                                        //ToDo: handle the boolean return type after adding sample to the given sign
+                                                        sign = new Sign(trainName, new Sample(sampleListener.returnOneSample()));
+                                                        allSigns.addSign(trainName, sign);
+                                                        db.addSign(sign);
+                                                        updateMessage("Training of gesture " + trainName + " completed!");
+                                                        break;
+                                                    } else if (no){
+                                                        updateMessage("This sample is not saved!");
+                                                        break;
+                                                    }
+                                                }
                                             } else {
                                                 updateMessage("The recording is invalid!");
                                             }
@@ -399,7 +435,7 @@ public class InterfaceFXController implements Initializable {
         }
 
         Sign sign = allSigns.getSign(signName);
-        
+
         message.setText("Gesture Name: " + sign.getName()
                 + " Sample Size: " + sign.getAllSamples().size()
                 + " Hand Count: " + sign.getHandCount()
@@ -417,16 +453,57 @@ public class InterfaceFXController implements Initializable {
             return;
         }
 
-        try {
-            Sign sign = db.getSignsByName(signName);
-            db.removeSign(sign);
-            allSigns.removeSign(signName);
-            gestures.remove(signName);
-            message.setText("Gesture " + signName + " is removed!");
-        } catch (Exception e) {
-            message.setText("Exception caught!");
-            e.printStackTrace();
-        }
+        // Reset the variables
+        yes = false;
+        no = false;
+
+        // Set the buttons visible
+        btnYes.setVisible(true);
+        btnNo.setVisible(true);
+
+        Service<Void> removeThread = new Service<Void>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        updateMessage("Are you sure to remove gesture " + signName + "?");
+
+                        while (true){
+                            if (yes){
+                                try {
+                                    Sign sign = db.getSignsByName(signName);
+                                    db.removeSign(sign);
+                                    allSigns.removeSign(signName);
+                                    gestures.remove(signName);
+                                    updateMessage("Gesture " + signName + " is removed.");
+                                } catch (Exception e) {
+                                    updateMessage("Exception caught!");
+                                    e.printStackTrace();
+                                }
+                                break;
+                            } else if (no){
+                                updateMessage("Gesture " + signName + " is not removed.");
+                                break;
+                            }
+
+                        }
+
+                        return null;
+                    }
+                };
+            }
+        };
+
+        removeThread.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                message.textProperty().unbind();
+            }
+        });
+
+        message.textProperty().bind(removeThread.messageProperty());
+        removeThread.start();
     }
 
     @FXML
@@ -440,16 +517,55 @@ public class InterfaceFXController implements Initializable {
 
     @FXML
     protected void resetButtonAction(ActionEvent event){
-        try{
-            db.removeAllSign();
-            allSigns.removeAllSign();
-            gestures.removeAll();
-            // TODO: BUG: the listview is not updated
+        // Reset the variables
+        yes = false;
+        no = false;
 
-            message.setText("Database has been reset!");
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        // Set the buttons visible
+        btnYes.setVisible(true);
+        btnNo.setVisible(true);
+
+        Service<Void> resetThread = new Service<Void>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        updateMessage("Are you sure you want to reset the database?");
+                        while (true){
+                            if (yes){
+                                try{
+                                    db.removeAllSign();
+                                    allSigns.removeAllSign();
+                                    gestures.removeAll();
+                                    // TODO: BUG: the listview is not updated
+
+                                    updateMessage("Database has been reset!");
+                                    break;
+                                }catch(Exception e){
+                                    e.printStackTrace();
+                                }
+                            }else if (no){
+                                updateMessage("The operation is cancelled!");
+                                break;
+                            }
+                        }
+
+                        return null;
+                    }
+                };
+            }
+        };
+
+        resetThread.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                message.textProperty().unbind();
+            }
+        });
+
+        message.textProperty().bind(resetThread.messageProperty());
+        resetThread.start();
     }
 
     @FXML
@@ -473,4 +589,17 @@ public class InterfaceFXController implements Initializable {
 
     }
 
+    @FXML
+    protected void yesButtonAction(ActionEvent event){
+        yes = true;
+        btnYes.setVisible(false);
+        btnNo.setVisible(false);
+    }
+
+    @FXML
+    protected void noButtonAction(ActionEvent event){
+        no = true;
+        btnYes.setVisible(false);
+        btnNo.setVisible(false);
+    }
 }
