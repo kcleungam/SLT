@@ -17,6 +17,7 @@ public class DTW{
     public double localThreshold = Double.POSITIVE_INFINITY;   // The distance between sample and one of the stored sample
 
     public double adjust = 60;     // The adjustment according to the palm, 60 = 6 cm
+    public double punishment = 200; // The number which add to distance if the number of hands are different
 
     public String result = "Unknown Gesture !";
 
@@ -80,7 +81,7 @@ public class DTW{
 
             for(int i = 1; i < rSize + 1; i++){
                 for(int j = 1; j < storedSize + 1; j++) {
-                        costTab[i][j] = calDist(rSample, i - 1, storedSample, j - 1);
+                        costTab[i][j] = calDist(rSample.allFrame.get( i - 1 ), storedSample.allFrame.get( j - 1 ), rSample, storedSample );
                 }
             }
 
@@ -155,33 +156,27 @@ public class DTW{
      *          The reason why finger use square but palm not is to make distance between finger become dominant
      *
      *
-     * @param rPosition         = the  frame number in r sample
-     * @param storedPosition = the frame number in storedSample
+     * @param rFrame         = the  frame in r sample
+     * @param storedFrame = the frame in storedSample
      *
      *                       This function focus on   """   one  """"     frame, calculate the distance between the finger of storedSample and  rSample
      *
      *
      * @return
      */
-    public double calDist(Sample rSample, int rPosition, Sample storedSample, int storedPosition){
+    public double calDist(Sample.OneFrame rFrame, Sample.OneFrame storedFrame, Sample rSample, Sample storedSample){
+
+        ArrayList<Coordinate> rFingerList = rFrame.fingerData.coordinates;
+        ArrayList<Coordinate> storedFingerList = storedFrame.fingerData.coordinates;
+        ArrayList<Coordinate> rPalmList  = rFrame.palmData.coordinates;
+        ArrayList<Coordinate> storedPalmList = storedFrame.palmData.coordinates;
+        double fingerDistance = 0;
+        double palmDistance = 0;
 
         double distance = Double.POSITIVE_INFINITY;
-        if (rSample.allFrame.get(rPosition).palmData.count != storedSample.allFrame.get(storedPosition).palmData.count){
-            distance = Double.POSITIVE_INFINITY;
-            return distance;
 
-        }else if(rSample.allFrame.get(rPosition).fingerData.count != storedSample.allFrame.get(storedPosition).palmData.count){
-            distance = Double.POSITIVE_INFINITY;
-            return distance;
 
-        }   else{
-
-            ArrayList<Coordinate> rFingerList = rSample.allFrame.get(rPosition).fingerData.coordinates;
-            ArrayList<Coordinate> storedFingerList = storedSample.allFrame.get(storedPosition).fingerData.coordinates;
-            ArrayList<Coordinate> rPalmList  = rSample.allFrame.get(rPosition).palmData.coordinates;
-            ArrayList<Coordinate> storedPalmList = storedSample.allFrame.get(storedPosition).palmData.coordinates;
-            double fingerDistance = 0;
-            double palmDistance = 0;
+        if (rFrame.palmData.count == storedFrame.palmData.count){
 
             for(int i = 0; i < rFingerList.size(); i++){
 
@@ -198,16 +193,92 @@ public class DTW{
                 palmDistance = palmDistance + palmDist(rPalmList.get(j), rPalmOrigin,storedPalmList.get(j), storedPalmOrigin);
             }
 
-            /*
-            if(palmDistance > palmTolerance*rPalmList.size()){
-                palmDistance = Double.POSITIVE_INFINITY;
-                // If the difference of palm between rSample and StoredSample > palmTolerance, we don't consider it
-            }
-            */
 
             distance = fingerDistance   +   (Math.pow(palmDistance, 2)/Math.pow(adjust, 2))* palmDistance;
             System.out.println("Finger part = " + fingerDistance);
             System.out.println("Palm part = " + (Math.pow(palmDistance,2)/Math.pow(adjust,2))*palmDistance);
+
+
+        }else{          //TODO   Different in hand number
+
+            int rHandNumber = 0;
+            int storedHandNumber = 0;
+            int rFingerNumber = 0;
+            int storedFingerNumber = 0;
+
+            if(rFrame.palmData.count == 1 && storedFrame.palmData.count ==2){
+
+                for(int i = 0; i < rFrame.fingerData.count; i++){        // suppose to be 5
+                    if(rFrame.handType == Sample.HandType.LEFT){
+                        rHandNumber = 0;
+                        storedHandNumber = 0;
+                        rFingerNumber = 0;
+                        storedFingerNumber = 0;
+                    }else{                          // Right hand case, then take right hand data of storedFrame
+                        rHandNumber = 0;
+                        storedHandNumber = 1;       // right hand
+                        rFingerNumber = 0;
+                        storedFingerNumber = 5;     // finger in right hand
+                    }
+                    fingerDistance = fingerDistance + fingerDist(rFingerList.get(i + rFingerNumber), rPalmList.get(rHandNumber),
+                            storedFingerList.get(i + storedFingerNumber),storedPalmList.get(storedHandNumber));
+                }
+
+                for(int j = 0; j < rPalmList.size(); j++){      // rPalmList.size() suppose to be 1
+                    Coordinate rPalmOrigin = rSample.allFrame.get(0).palmData.coordinates.get(j);  // Get the "Frame 0" Palm
+                    Coordinate storedPalmOrigin = storedSample.allFrame.get(0).palmData.coordinates.get(j);
+                    palmDistance = palmDistance + palmDist(rPalmList.get(j), rPalmOrigin,storedPalmList.get(j), storedPalmOrigin);
+                }
+
+
+                distance = fingerDistance   +   (Math.pow(palmDistance, 2)/Math.pow(adjust, 2))* palmDistance;
+                // TODO    Punishment is the value added to distance due to different number of hand
+                distance = distance + punishment;
+
+                System.out.println("Finger part = " + fingerDistance);
+                System.out.println("Palm part = " + (Math.pow(palmDistance,2)/Math.pow(adjust,2))*palmDistance);
+                System.out.println("With punishment " + punishment);
+
+            } else if(rFrame.palmData.count == 2 && storedFrame.palmData.count == 1) {
+
+                for (int i = 0; i < storedFrame.fingerData.count; i++) {        // suppose to be 5
+
+                    if (storedFrame.handType == Sample.HandType.LEFT) {   // Left hand case
+                        rHandNumber = 0;
+                        storedHandNumber = 0;
+                        rFingerNumber = 0;
+                        storedFingerNumber = 0;
+                    } else {                          // Right hand case, then take right hand data of storedFrame
+                        rHandNumber = 1;            // right hand
+                        storedHandNumber = 0;
+                        rFingerNumber = 5;          // finger in right hand
+                        storedFingerNumber = 0;
+                    }
+
+                    fingerDistance = fingerDistance + fingerDist(rFingerList.get( i + rFingerNumber ), rPalmList.get(rHandNumber),
+                            storedFingerList.get( i + storedFingerNumber ), storedPalmList.get(storedHandNumber));
+                }
+
+                for (int j = 0; j < storedPalmList.size(); j++) {      // rPalmList.size() suppose to be 1
+                    Coordinate rPalmOrigin = rSample.allFrame.get(0).palmData.coordinates.get( j + rHandNumber);  // Get the "Frame 0" Palm
+                    Coordinate storedPalmOrigin = storedSample.allFrame.get(0).palmData.coordinates.get(j + storedHandNumber);
+
+                    palmDistance = palmDistance + palmDist(rPalmList.get(j + rHandNumber), rPalmOrigin
+                            , storedPalmList.get( j + storedHandNumber), storedPalmOrigin);
+                }
+
+
+                distance = fingerDistance + (Math.pow(palmDistance, 2) / Math.pow(adjust, 2)) * palmDistance;
+                // TODO    Punishment is the value added to distance due to different number of hand
+                distance = distance + punishment;
+
+                System.out.println("Finger part = " + fingerDistance);
+                System.out.println("Palm part = " + (Math.pow(palmDistance, 2) / Math.pow(adjust, 2)) * palmDistance);
+                System.out.println("With punishment " + punishment);
+            }
+
+            return distance;
+
         }
 
         return distance;

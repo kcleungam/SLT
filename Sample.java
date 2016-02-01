@@ -9,6 +9,13 @@ import java.util.Collection;
 /**
  * Manage all samples here.
  */
+
+/**
+*       In this class, If there is two hand, I put all left hand data at 0 position and right hand data at 1 position
+ *       If it is the finger case, 0-4 will be the fingers of left hand, 5-9 will be fingers of right hand
+ */
+
+
 public class Sample {
 
     class OneFrame{
@@ -49,10 +56,27 @@ public class Sample {
                 }
 
                 //iterate finger by finger to get the coordinates of the finger(s)
+                // If single hand, put it directly
+                // otherwise, put finger in left hand first( position 0-4) and then right hand (position 5-9)
                 if (frame.fingers().count() > 0) {
-                    for (Finger finger : frame.fingers()) {
-                        Coordinate cor = new Coordinate(finger.tipPosition().getX(), finger.tipPosition().getY(), finger.tipPosition().getZ());
-                        coordinates.add(cor);
+                    if(frame.fingers().count() == 5){
+                        for (Finger finger : frame.fingers()) {
+                            Coordinate cor = new Coordinate(finger.tipPosition().getX(), finger.tipPosition().getY(), finger.tipPosition().getZ());
+                            coordinates.add(cor);
+                        }
+                    }else if(frame.fingers().count() == 10){
+                        int label = 0;
+                        for(Hand hand : frame.hands()){
+                            if(hand.isLeft()){
+                                label = 0;
+                            }else {
+                                label = 5;
+                            }
+                            for(Finger finger : hand.fingers()){
+                                Coordinate cor = new Coordinate(finger.tipPosition().getX(), finger.tipPosition().getY(), finger.tipPosition().getZ());
+                                coordinates.set(label,cor);
+                            }
+                        }
                     }
                 }
             }
@@ -65,10 +89,22 @@ public class Sample {
             public PalmData(Frame frame) {
                 this.count = frame.hands().count();
                 if (this.count > 0) {
-                    for (Hand hand : frame.hands()) {
-                        Coordinate cor = new Coordinate(hand.palmPosition().getX(), hand.palmPosition().getY(), hand.palmPosition().getZ());
-                        coordinates.add(cor);
+                    if(this.count == 1){
+                        for (Hand hand : frame.hands()) {
+                            Coordinate cor = new Coordinate(hand.palmPosition().getX(), hand.palmPosition().getY(), hand.palmPosition().getZ());
+                            coordinates.add(cor);
+                        }
+                    }else if(this.count == 2){
+                        for(Hand hand : frame.hands()){
+                            Coordinate cor = new Coordinate(hand.palmPosition().getX(), hand.palmPosition().getY(), hand.palmPosition().getZ());
+                            if(hand.isLeft()){
+                                coordinates.set(0, cor);
+                            }else{
+                                coordinates.set(1, cor);
+                            }
+                        }
                     }
+
                 }
 
             }
