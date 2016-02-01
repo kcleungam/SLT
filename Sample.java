@@ -10,7 +10,84 @@ import java.util.Collection;
  * Manage all samples here.
  */
 public class Sample {
+
+    class OneFrame{
+        FingerData fingerData;
+        PalmData palmData;
+        HandType handType;
+
+        class FingerData{
+            public int count = 0;
+            public ArrayList<Coordinate> coordinates = new ArrayList<>();
+
+            public FingerData(){};
+
+            public FingerData(Frame frame){
+
+                HandList first=frame.hands();
+
+                //the code should be safe as Leap Motion controller won't recognise more than 2 hands
+                if (first.count() > 1) {
+                    handType = HandType.BOTH;
+                } else if (first.get(0).isLeft()) {
+                    handType = HandType.LEFT;
+                } else{
+                    handType = HandType.RIGHT;
+                }
+
+                count=0;
+                if(handType == HandType.BOTH){
+                    for(Hand hand:first){
+                        for (Finger finger : hand.fingers())
+                            if (finger.isExtended()) count++;
+                    }
+                }else{
+                    // doesn't work when hands.get(0) change to hand(0)
+                    for (Finger finger : first.get(0).fingers())
+                        if (finger.isExtended())
+                            count++;
+                }
+
+                //iterate finger by finger to get the coordinates of the finger(s)
+                if (frame.fingers().count() > 0) {
+                    for (Finger finger : frame.fingers()) {
+                        Coordinate cor = new Coordinate(finger.tipPosition().getX(), finger.tipPosition().getY(), finger.tipPosition().getZ());
+                        coordinates.add(cor);
+                    }
+                }
+            }
+        }
+
+        class PalmData{
+            public int count = 0;
+            public ArrayList<Coordinate> coordinates = new ArrayList<>();
+
+            public PalmData(Frame frame) {
+                this.count = frame.hands().count();
+                if (this.count > 0) {
+                    for (Hand hand : frame.hands()) {
+                        Coordinate cor = new Coordinate(hand.palmPosition().getX(), hand.palmPosition().getY(), hand.palmPosition().getZ());
+                        coordinates.add(cor);
+                    }
+                }
+
+            }
+        }
+
+        public OneFrame(){}
+
+        public OneFrame(Frame frame) throws Exception{
+            if (frame == null) {
+                throw new Exception();
+            }
+
+            fingerData = new FingerData(frame);
+            palmData = new PalmData(frame);
+        }
+    }
+
     /* inner class */
+    /*
     class FingerData{
         public int count;
         public ArrayList< ArrayList<Coordinate> > coordinateSeq=new ArrayList<>();// sequence of coordinates frame by frame
@@ -91,16 +168,21 @@ public class Sample {
         }
     }
 
+    */
 
     /**
      * field
      */
-    static enum HandType{LEFT,RIGHT,BOTH}
 
+    /*
     FingerData allFingers;
     PalmData allPalms;
     HandData allHands;
+    */
 
+
+    static enum HandType{LEFT,RIGHT,BOTH}
+    ArrayList<OneFrame> allFrame;
 
 
     /**
@@ -113,16 +195,17 @@ public class Sample {
 	 */
     // for Jongo exclusively
     public Sample() {
+        /*
         allFingers = new FingerData();
         allPalms = new PalmData();
         allHands=new HandData();
+        */
+        allFrame = new ArrayList<>();
     }
 
     //copy constructor
     public Sample(Sample source) {
-        this.allFingers=source.allFingers;
-        this.allPalms=source.allPalms;
-        this.allHands=source.allHands;
+        this.allFrame = source.allFrame;
     }
 
     public Sample(Collection<Frame> source) throws Exception {
@@ -133,9 +216,19 @@ public class Sample {
         //become the Array List type
         ArrayList<Frame> frames= new ArrayList<Frame>();frames.addAll(source);
 
+        /*
         allHands=new HandData(frames);
         allPalms=new PalmData(frames);
         allFingers=new FingerData(frames);
+        */
+
+        for(Frame frame : frames){
+            if(frame == null){
+                throw new Exception();
+            }
+            OneFrame oneFrame = new OneFrame(frame);
+            this.allFrame.add(oneFrame);
+        }
     }
 }
 
