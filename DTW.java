@@ -209,7 +209,7 @@ public class DTW{
             if(rFrame.palmData.count == 1 && storedFrame.palmData.count ==2){
 
                 for(int i = 0; i < rFrame.fingerData.count; i++){        // suppose to be 5
-                    if(rFrame.handType == Sample.HandType.LEFT){
+                    if(rFrame.handType ==HandType.LEFT){
                         rHandNumber = 0;
                         storedHandNumber = 0;
                         rFingerNumber = 0;
@@ -243,7 +243,7 @@ public class DTW{
 
                 for (int i = 0; i < storedFrame.fingerData.count; i++) {        // suppose to be 5
 
-                    if (storedFrame.handType == Sample.HandType.LEFT) {   // Left hand case
+                    if (storedFrame.handType == HandType.LEFT) {   // Left hand case
                         rHandNumber = 0;
                         storedHandNumber = 0;
                         rFingerNumber = 0;

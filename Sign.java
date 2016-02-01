@@ -19,9 +19,9 @@ public class Sign {
 
 	/* extra information */
 	//note: the below 3 fields are based on the first frame of the first sample
-	private int handCount;
-	private Sample.HandType handType;
-	private int fingerCount;
+	private int initialPalmCount;
+	private HandType handType;
+	private int initialFingerCount;
 
 
 
@@ -40,9 +40,8 @@ public class Sign {
 			throw new Exception();
 
 		this.name=SignName;
-		setHandCount(sample.allHands.count);
-		setHandType(sample.allHands.type);
-		setFingerCount(sample.allFingers.count);
+		this.initialFingerCount=sample.initialFingerCount;
+		this.initialPalmCount=sample.initialPalmCount;
 		this.samples.add(sample);
 	}
 
@@ -57,16 +56,16 @@ public class Sign {
 	}
 
 	//advanced constructor
-	public Sign(String SignName, Collection<Sample> samples,int HandCount,Sample.HandType HandType,int FingerCount) throws Exception {
+	public Sign(String SignName, Collection<Sample> samples,int HandCount,HandType HandType,int FingerCount) throws Exception {
 		//Valid sign name is required & non-empty samples
 		if(SignName==null||isNameInvalid(SignName)||samples==null||samples.isEmpty())
 			throw new Exception();
 
 		this.name =SignName;
 		this.samples.addAll(samples);
-		setHandCount(HandCount);
-		setHandType(HandType);
-		setFingerCount(FingerCount);
+		setInitialPalmCount(HandCount);
+		setInitialHandType(HandType);
+		setInitialFingerCount(FingerCount);
 	}
 
 
@@ -81,9 +80,9 @@ public class Sign {
 		samples.clear();
 		this.samples.addAll(samples);
 		Sample first=samples.iterator().next();
-		this.handCount=first.allHands.count;
-		this.handType=first.allHands.type;
-		this.fingerCount=first.allFingers.count;
+		this.initialPalmCount=first.initialPalmCount;
+		this.handType=first.initialHandType;
+		this.initialFingerCount=first.initialFingerCount;
 		return true;
 	}
 
@@ -123,25 +122,24 @@ public class Sign {
 		return true;
 	}
 
-	public boolean setHandCount(int HandCount) {
-		if(HandCount<1||HandCount>2)
+	public boolean setInitialPalmCount(int PalmCount) {
+		if(PalmCount<1||PalmCount>2)
 			return false;
-		this.handCount=HandCount;
+		this.initialPalmCount=PalmCount;
 		return true;
 	}
 
-	public boolean setHandType(Sample.HandType HandType) {
-		//ToDo: restrict the values
+	public boolean setInitialHandType(HandType HandType) {
 		if(HandType==null)
 			return false;
 		this.handType=HandType;
 		return true;
 	}
 
-	public boolean setFingerCount(int FingerCount) {
+	public boolean setInitialFingerCount(int FingerCount) {
 		if(FingerCount<0||FingerCount>10)
 			return false;
-		this.fingerCount=FingerCount;
+		this.initialFingerCount=FingerCount;
 		return true;
 	}
 
@@ -149,21 +147,22 @@ public class Sign {
 		return name;
 	}
 
-	public int getFingerCount() {
-		return fingerCount;
+	public int getInitialFingerCount() {
+		return initialFingerCount;
 	}
 
-	public Sample.HandType getHandType() {
+	public HandType getInitialHandType() {
 		return handType;
 	}
 
-	public int getHandCount() {
-		return handCount;
+	public int getInitialPalmCount() {
+		return initialPalmCount;
 	}
 
 	public HashSet<Sample> getAllSamples() {
 		return this.samples;
 	}
+
 
 
 	/** helper function */

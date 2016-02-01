@@ -140,7 +140,7 @@ public class InterfaceFXController implements Initializable {
                                             dtw.setRSample(rSample);//TODO: if rSample is created by default constructor, error may occurs
 
                                             // Retrieve Sign with finger count and hand type
-                                            HashMap<String, Sign> signByBoth = db.getSignsByBoth(rSample.fingerCount, rSample.handType);
+                                            HashMap<String, Sign> signByBoth = db.getSignsByBoth(rSample.initialFingerCount, rSample.initialHandType);
 
                                             for (Sign storedSign : signByBoth.values()) {
                                                 dtw.setStoredSign(storedSign);
@@ -441,9 +441,9 @@ public class InterfaceFXController implements Initializable {
 
         message.setText("Gesture Name: " + sign.getName()
                 + " Sample Size: " + sign.getAllSamples().size()
-                + " Hand Count: " + sign.getHandCount()
-                + " Hand Type: " + sign.getHandType()
-                + " Finger Count: " + sign.getFingerCount());
+                + " Initial Palm Count: " + sign.getInitialPalmCount()
+                + " Initial Hand Type: " + sign.getInitialHandType()
+                + " Initial Finger Count: " + sign.getInitialFingerCount());
     }
 
     @FXML

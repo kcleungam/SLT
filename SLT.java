@@ -295,9 +295,9 @@ public class SLT {
 		for (String key : allSigns.getAllSigns().keySet()) {
 			System.out.println("Sign Name   : " + key + " ,   Consist of "
 					+ allSigns.getAllSigns().get(key).getAllSamples().size() + " Sample");
-			System.out.println("Hand Count  : " + allSigns.getAllSigns().get(key).getHandCount());
-			System.out.println("Hand Type   :" + allSigns.getAllSigns().get(key).getHandType());
-			System.out.println("Finger Count = " + allSigns.getAllSigns().get(key).getFingerCount() + "\n");
+			System.out.println("Initial Palm Count  : " + allSigns.getAllSigns().get(key).getInitialPalmCount());
+			System.out.println("Initial Hand Type   :" + allSigns.getAllSigns().get(key).getInitialHandType());
+			System.out.println("Initial Finger Count = " + allSigns.getAllSigns().get(key).getInitialFingerCount() + "\n");
 		}
 
 		System.out.println("All sign are printed");

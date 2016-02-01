@@ -138,7 +138,7 @@ public class Database {
 	}
 
 	// Search by the handType
-	public HashMap<String,Sign> getSignsByHandType(Sample.HandType hand_type) throws IOException {
+	public HashMap<String,Sign> getSignsByHandType(HandType hand_type) throws IOException {
 		HashMap<String,Sign> result=new HashMap<String,Sign>();
 		Sign temp;
 
@@ -154,7 +154,7 @@ public class Database {
 	}
 
 	// Search by both handType and the number of finger(s)
-	public HashMap<String, Sign> getSignsByBoth(int fingers, Sample.HandType hand_type) throws IOException {
+	public HashMap<String, Sign> getSignsByBoth(int fingers, HandType hand_type) throws IOException {
 		HashMap<String, Sign> result = new HashMap<String, Sign>();
 		Sign temp;
 

@@ -322,9 +322,9 @@ public class Interface {
 
                     ps.println("Sign Name   : " + sign.getName() + " ,   Consist of "
                             + sign.getAllSamples().size() + " Sample");
-                    ps.println("Hand Count  : " + sign.getHandCount());
-                    ps.println("Hand Type   :" + sign.getHandType());
-                    ps.println("Finger Count = " + sign.getFingerCount() + "\n");
+                    ps.println("Initial Palm Count  : " + sign.getInitialPalmCount());
+                    ps.println("Initial Hand Type   :" + sign.getInitialHandType());
+                    ps.println("Initial Finger Count = " + sign.getInitialFingerCount() + "\n");
 
                     autoScrollDown();
 
@@ -598,7 +598,7 @@ public class Interface {
                                     dtw.setRSample(rSample);//TODO: if rSample is created by default constructor, error may occurs
 
                                     // Retrieve Sign with finger count and hand type
-                                    HashMap<String, Sign> signByBoth = db.getSignsByBoth(rSample.fingerCount, rSample.handType);
+                                    HashMap<String, Sign> signByBoth = db.getSignsByBoth(rSample.initialFingerCount, rSample.initialHandType);
 
                                     for (Sign storedSign : signByBoth.values()) {
                                         dtw.setStoredSign(storedSign);
@@ -782,9 +782,9 @@ public class Interface {
         for (String key : allSigns.getAllSigns().keySet()) {
             ps.println("Sign Name: " + key + " ,   Consist of "
                     + allSigns.getAllSigns().get(key).getAllSamples().size() + " Sample");
-            ps.println("Hand Count: " + allSigns.getAllSigns().get(key).getHandCount());
-            ps.println("Hand Type: " + allSigns.getAllSigns().get(key).getHandType());
-            ps.println("Finger Count: " + allSigns.getAllSigns().get(key).getFingerCount() + "\n");
+            ps.println("Initial Palm Count: " + allSigns.getAllSigns().get(key).getInitialPalmCount());
+            ps.println("Initial Hand Type: " + allSigns.getAllSigns().get(key).getInitialHandType());
+            ps.println("Initial Finger Count: " + allSigns.getAllSigns().get(key).getInitialFingerCount() + "\n");
         }
 
         ps.println("All sign are printed");
