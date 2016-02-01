@@ -101,7 +101,7 @@ public class InterfaceFXController implements Initializable {
                     protected Void call() throws Exception {
                         Boolean validRec = false;
 
-                        updateMessage("Switch to recognition mode!");
+                        updateMessage("Switch to recognition mode.");
 
                         while (true) {
                             if (!recording) {
@@ -151,7 +151,7 @@ public class InterfaceFXController implements Initializable {
                                             if (dtw.result.equals("Unknown Gesture")) {
                                                 System.out.println("Unknown Gesture!");
                                             } else {
-                                                updateMessage("The most similar gesture is " + dtw.result);
+                                                updateMessage("The most similar gesture is " + dtw.result + ".");
                                                 System.out.println("The most similar gesture is " + dtw.result);
                                                 System.out.println("The minimum cost of DTW is " + dtw.bestMatch);
                                             }
@@ -199,7 +199,7 @@ public class InterfaceFXController implements Initializable {
             String signName = txtfName.getText();
 
             if (signName.equals("")) {
-                message.setText("Please enter a name!");
+                message.setText("Please enter a name.");
                 //message.textProperty().bind(dtwThread.messageProperty());
                 recording = false;
 
@@ -222,15 +222,15 @@ public class InterfaceFXController implements Initializable {
                                 for (int count = 3; count > 0; count--) {
                                     try {
                                         if (count != 1)
-                                            updateMessage("The recording of gesture " + signName + " will start in " + count + " seconds!");
+                                            updateMessage("The recording of gesture " + signName + " will start in " + count + " seconds.");
                                         else
-                                            updateMessage("The recording of gesture " + signName + " will start in " + count + " second!");
+                                            updateMessage("The recording of gesture " + signName + " will start in " + count + " second.");
                                         Thread.sleep(1000);
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
                                 }
-                                updateMessage("The recording of gesture " + signName + " started!");
+                                updateMessage("The recording of gesture " + signName + " started.");
                                 sampleListener.reset();
                                 sampleListener.gainFocus();
 
@@ -255,7 +255,7 @@ public class InterfaceFXController implements Initializable {
                                                         //ToDo: handle the boolean return value aftter adding the given sign
                                                         allSigns.addSign(signName, sign);
                                                         db.addSign(sign);
-                                                        updateMessage("New gesture " + signName + " is created!");
+                                                        updateMessage("New gesture " + signName + " is created.");
                                                         gestures.add(signName);
                                                         break;
                                                     } else if (no){
@@ -325,15 +325,15 @@ public class InterfaceFXController implements Initializable {
                                 for (int count = 3; count > 0; count--) {
                                     try {
                                         if (count != 1)
-                                            updateMessage("The training of gesture " + trainName + " will start in " + count + " seconds!");
+                                            updateMessage("The training of gesture " + trainName + " will start in " + count + " seconds.");
                                         else
-                                            updateMessage("The training of gesture " + trainName + " will start in " + count + " second!");
+                                            updateMessage("The training of gesture " + trainName + " will start in " + count + " second.");
                                         Thread.sleep(1000);
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
                                 }
-                                updateMessage("The training of gesture " + trainName + " started!");
+                                updateMessage("The training of gesture " + trainName + " started.");
 
                                 // recordingMode = true;
 
@@ -371,15 +371,15 @@ public class InterfaceFXController implements Initializable {
                                                         sign = new Sign(trainName, new Sample(sampleListener.returnOneSample()));
                                                         allSigns.addSign(trainName, sign);
                                                         db.addSign(sign);
-                                                        updateMessage("Training of gesture " + trainName + " completed!");
+                                                        updateMessage("Training of gesture " + trainName + " completed.");
                                                         break;
                                                     } else if (no){
-                                                        updateMessage("This sample is not saved!");
+                                                        updateMessage("This sample is not saved.");
                                                         break;
                                                     }
                                                 }
                                             } else {
-                                                updateMessage("The recording is invalid!");
+                                                updateMessage("The recording is invalid.");
                                             }
                                             recording = false;
                                             break;
@@ -543,13 +543,13 @@ public class InterfaceFXController implements Initializable {
                                     gestures.removeAll();
                                     // TODO: BUG: the listview is not updated
 
-                                    updateMessage("Database has been reset!");
+                                    updateMessage("Database has been reset.");
                                     break;
                                 }catch(Exception e){
                                     e.printStackTrace();
                                 }
                             }else if (no){
-                                updateMessage("The operation is cancelled!");
+                                updateMessage("The reset has been cancelled.");
                                 break;
                             }
                         }
@@ -582,7 +582,7 @@ public class InterfaceFXController implements Initializable {
             recognition = false;
 
             dtwThread.cancel();
-            message.setText("The recognition mode is switched off!");
+            message.setText("The recognition mode is switched off.");
         } else {
             recognition = true;
 
