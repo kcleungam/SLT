@@ -58,8 +58,8 @@ public class DTW{
 
         for(Sample storedSample: storedSign.getAllSamples()) {
 
-            int rSize = rSample.allFingers.coordinateSeq.size();
-            int storedSize = storedSample.allFingers.coordinateSeq.size();
+            int rSize = rSample.allFrame.size();
+            int storedSize = storedSample.allFrame.size();
             // +1 is for the last frame as you need extra 1 more space to compare the last
             double[][] costTab = new double[rSize + 1][storedSize + 1];
             double[][] accuTab = new double[rSize + 1][storedSize + 1];
@@ -166,24 +166,24 @@ public class DTW{
     public double calDist(Sample rSample, int rPosition, Sample storedSample, int storedPosition){
 
         double distance = Double.POSITIVE_INFINITY;
-        if (rSample.allPalms.coordinateSeq.get(rPosition).size() != storedSample.allPalms.coordinateSeq.get(storedPosition).size()){
+        if (rSample.allFrame.get(rPosition).palmData.count != storedSample.allFrame.get(storedPosition).palmData.count){
             distance = Double.POSITIVE_INFINITY;
             return distance;
 
-        }else if(rSample.allFingers.coordinateSeq.get(rPosition).size() != storedSample.allFingers.coordinateSeq.get(storedPosition).size()){
+        }else if(rSample.allFrame.get(rPosition).fingerData.count != storedSample.allFrame.get(storedPosition).palmData.count){
             distance = Double.POSITIVE_INFINITY;
             return distance;
 
         }   else{
 
-            ArrayList<Coordinate> rFingerList = rSample.allFingers.coordinateSeq.get(rPosition);
-            ArrayList<Coordinate> storedFingerList = storedSample.allFingers.coordinateSeq.get(storedPosition);
-            ArrayList<Coordinate> rPalmList  = rSample.allPalms.coordinateSeq.get(rPosition);
-            ArrayList<Coordinate> storedPalmList = storedSample.allPalms.coordinateSeq.get(storedPosition);
+            ArrayList<Coordinate> rFingerList = rSample.allFrame.get(rPosition).fingerData.coordinates;
+            ArrayList<Coordinate> storedFingerList = storedSample.allFrame.get(storedPosition).fingerData.coordinates;
+            ArrayList<Coordinate> rPalmList  = rSample.allFrame.get(rPosition).palmData.coordinates;
+            ArrayList<Coordinate> storedPalmList = storedSample.allFrame.get(storedPosition).palmData.coordinates;
             double fingerDistance = 0;
             double palmDistance = 0;
 
-            for(int i = 0; i < rSample.allFingers.coordinateSeq.get(rPosition).size(); i++){
+            for(int i = 0; i < rFingerList.size(); i++){
 
                 int handNumber = i/5;   // from 0 to 4 will give 0, from 5 to 9 give 1
                 // Hand number indicate the finger is left hand finger or right hand finger
@@ -193,8 +193,8 @@ public class DTW{
             }
 
             for(int j = 0; j < rPalmList.size(); j++){
-                Coordinate rPalmOrigin = rSample.allPalms.coordinateSeq.get(0).get(j);  // Get the "Frame 0" Palm
-                Coordinate storedPalmOrigin = storedSample.allPalms.coordinateSeq.get(0).get(j);
+                Coordinate rPalmOrigin = rSample.allFrame.get(0).palmData.coordinates.get(j);  // Get the "Frame 0" Palm
+                Coordinate storedPalmOrigin = storedSample.allFrame.get(0).palmData.coordinates.get(j);
                 palmDistance = palmDistance + palmDist(rPalmList.get(j), rPalmOrigin,storedPalmList.get(j), storedPalmOrigin);
             }
 

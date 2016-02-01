@@ -183,6 +183,8 @@ public class Sample {
 
     static enum HandType{LEFT,RIGHT,BOTH}
     ArrayList<OneFrame> allFrame;
+    int fingerCount = 0;
+    HandType handType;
 
 
     /**
@@ -229,6 +231,9 @@ public class Sample {
             OneFrame oneFrame = new OneFrame(frame);
             this.allFrame.add(oneFrame);
         }
+
+        this.fingerCount = this.allFrame.get(0).fingerData.count;
+        this.handType = this.allFrame.get(0).handType;
     }
 }
 

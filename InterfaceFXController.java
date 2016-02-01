@@ -3,19 +3,22 @@
  */
 
 import com.leapmotion.leap.Controller;
-import com.sun.javafx.tk.Toolkit;
-import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.concurrent.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -137,7 +140,7 @@ public class InterfaceFXController implements Initializable {
                                             dtw.setRSample(rSample);//TODO: if rSample is created by default constructor, error may occurs
 
                                             // Retrieve Sign with finger count and hand type
-                                            HashMap<String, Sign> signByBoth = db.getSignsByBoth(rSample.allFingers.count, rSample.allHands.type);
+                                            HashMap<String, Sign> signByBoth = db.getSignsByBoth(rSample.fingerCount, rSample.handType);
 
                                             for (Sign storedSign : signByBoth.values()) {
                                                 dtw.setStoredSign(storedSign);

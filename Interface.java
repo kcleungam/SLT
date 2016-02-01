@@ -598,7 +598,7 @@ public class Interface {
                                     dtw.setRSample(rSample);//TODO: if rSample is created by default constructor, error may occurs
 
                                     // Retrieve Sign with finger count and hand type
-                                    HashMap<String, Sign> signByBoth = db.getSignsByBoth(rSample.allFingers.count, rSample.allHands.type);
+                                    HashMap<String, Sign> signByBoth = db.getSignsByBoth(rSample.fingerCount, rSample.handType);
 
                                     for (Sign storedSign : signByBoth.values()) {
                                         dtw.setStoredSign(storedSign);
