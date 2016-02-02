@@ -1,8 +1,6 @@
 import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.Hand;
 
-import java.util.ArrayList;
-
 /**
  * Created by alex on 2/2/2016.
  */
@@ -19,6 +17,11 @@ public class PalmData extends Data{
                 coordinates.add(cor);
             }
         }else if(this.count == 2){
+            for(int i = 0; i < 2; i++){
+                Coordinate cor = new Coordinate(0,0,0);
+                coordinates.add(cor);   // initialize and ready to set the value below
+            }
+
             for(Hand hand : frame.hands()){
                 Coordinate cor = new Coordinate(hand.palmPosition().getX(), hand.palmPosition().getY(), hand.palmPosition().getZ());
                 if(hand.isLeft()){

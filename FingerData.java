@@ -3,8 +3,6 @@ import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.Hand;
 import com.leapmotion.leap.HandList;
 
-import java.util.ArrayList;
-
 /**
  * Created by alex on 1/2/2016.
  */
@@ -38,6 +36,11 @@ public class FingerData extends Data {
             }
         } else if (count == 10) {
             int label = 0;
+            for(int i = 0; i < 10; i++){
+                Coordinate cor = new Coordinate(0,0,0);
+                coordinates.add(cor);     // init the coordinates arraylist and ready to set below
+            }
+
             for (Hand hand : frame.hands()) {
                 label=(hand.isLeft())?0:5;
                 for (Finger finger : hand.fingers()) {

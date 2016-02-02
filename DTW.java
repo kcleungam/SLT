@@ -277,8 +277,6 @@ public class DTW{
                 System.out.println("With punishment " + punishment);
             }
 
-            return distance;
-
         }
 
         return distance;
