@@ -139,8 +139,10 @@ public class InterfaceFXController implements Initializable {
                                         if (validRec == true) {
                                             dtw.setRSample(rSample);//TODO: if rSample is created by default constructor, error may occurs
 
-                                            // Retrieve Sign with finger count and hand type
+                                            // Retrieve Sign with finger count and hand type with fingerCount tolerance
                                             HashMap<String, Sign> signByBoth = db.getSignsByBoth(rSample.initialFingerCount, rSample.initialHandType);
+                                            signByBoth.putAll(db.getSignsByBoth(rSample.initialFingerCount - 1, rSample.initialHandType));
+                                            signByBoth.putAll(db.getSignsByBoth(rSample.initialFingerCount + 1, rSample.initialHandType));
 
                                             for (Sign storedSign : signByBoth.values()) {
                                                 dtw.setStoredSign(storedSign);
