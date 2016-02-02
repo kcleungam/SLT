@@ -74,7 +74,7 @@ public class Database {
 			}
 		}
 
-		// else, duplication, database get a serious problem
+		// else, duplication, database gets a serious problem
 		throw new Exception("Duplicated Signs:\t" + sign.getName());
 	}
 
@@ -122,11 +122,11 @@ public class Database {
 	//ToDo: maybe use Enum to simplify the following query operations
 
 	//search by the number of finger(s)
-	public HashMap<String,Sign> getSignsByFingers(int fingers) throws IOException {
+	public HashMap<String,Sign> getSignsByInitialFingerCount(int fingers) throws IOException {
 		HashMap<String,Sign> result=new HashMap<String,Sign>();
 		Sign temp;
 
-		MongoCursor<Sign> all = Jcoll.find("{fingerCount:#}",fingers).as(Sign.class);
+		MongoCursor<Sign> all = Jcoll.find("{initialFingerCount:#}",fingers).as(Sign.class);
 		while(all.hasNext()) {
 			temp=all.next();
 			result.put(temp.getName(),temp);
@@ -138,11 +138,11 @@ public class Database {
 	}
 
 	// Search by the handType
-	public HashMap<String,Sign> getSignsByHandType(HandType hand_type) throws IOException {
+	public HashMap<String,Sign> getSignsByInitialHandType(HandType hand_type) throws IOException {
 		HashMap<String,Sign> result=new HashMap<String,Sign>();
 		Sign temp;
 
-		MongoCursor<Sign> all = Jcoll.find("{handType:#}",hand_type).as(Sign.class);
+		MongoCursor<Sign> all = Jcoll.find("{initialHandType:#}",hand_type).as(Sign.class);
 		while(all.hasNext()) {
 			temp=all.next();
 			result.put(temp.getName(),temp);
@@ -154,17 +154,22 @@ public class Database {
 	}
 
 	// Search by both handType and the number of finger(s)
-	public HashMap<String, Sign> getSignsByBoth(int fingers, HandType hand_type) throws IOException {
+	public HashMap<String, Sign> getSignsByBoth(int fingers, HandType hand_type, int tolerance) throws Exception {
 		HashMap<String, Sign> result = new HashMap<String, Sign>();
 		Sign temp;
 
-		MongoCursor<Sign> all = Jcoll.find("{handType:#, fingerCount:#}", hand_type, fingers).as(Sign.class);
-		while (all.hasNext()) {
-			temp = all.next();
-			result.put(temp.getName(), temp);
-		}
+		if(tolerance<0) throw new Exception("tolerance MUST be non-negative.");
 
-		all.close();
+		for(int i=-tolerance;i<=tolerance;i++){
+			//remark: fingers+i<0 should give no result
+			MongoCursor<Sign> all = Jcoll.find("{initialHandType:#, initialFingerCount:#}", hand_type, fingers+i).as(Sign.class);
+			while (all.hasNext()) {
+				temp = all.next();
+				result.put(temp.getName(), temp);
+			}
+
+			all.close();
+		}
 
 		return result;
 	}

@@ -20,7 +20,7 @@ public class Sign {
 	/* extra information */
 	//note: the below 3 fields are based on the first frame of the first sample
 	private int initialPalmCount;
-	private HandType handType;
+	private HandType initialHandType;
 	private int initialFingerCount;
 
 
@@ -81,7 +81,7 @@ public class Sign {
 		this.samples.addAll(samples);
 		Sample first=samples.iterator().next();
 		this.initialPalmCount=first.initialPalmCount;
-		this.handType=first.initialHandType;
+		this.initialHandType=first.initialHandType;
 		this.initialFingerCount=first.initialFingerCount;
 		return true;
 	}
@@ -132,7 +132,7 @@ public class Sign {
 	public boolean setInitialHandType(HandType HandType) {
 		if(HandType==null)
 			return false;
-		this.handType=HandType;
+		this.initialHandType=HandType;
 		return true;
 	}
 
@@ -152,7 +152,7 @@ public class Sign {
 	}
 
 	public HandType getInitialHandType() {
-		return handType;
+		return initialHandType;
 	}
 
 	public int getInitialPalmCount() {
