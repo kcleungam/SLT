@@ -3,13 +3,16 @@ import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.Hand;
 import com.leapmotion.leap.HandList;
 
+import java.util.Collection;
+
 /**
  * Created by alex on 1/2/2016.
  */
 public class FingerData extends Data {
-    /* exclusive use for Jongo */
-    public FingerData() {
-    }
+    /* constructor */
+
+    /** exclusive use for Jongo */
+    public FingerData() {}
 
     public FingerData(Frame frame) {
         HandList hands = frame.hands();
@@ -45,7 +48,7 @@ public class FingerData extends Data {
                 label=(hand.isLeft())?0:5;
                 for (Finger finger : hand.fingers()) {
                     Coordinate cor = new Coordinate(finger.tipPosition().getX(), finger.tipPosition().getY(), finger.tipPosition().getZ());
-                    coordinates.set(label, cor);
+                    coordinates.set(label++, cor);
                 }
             }
         }

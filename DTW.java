@@ -59,8 +59,8 @@ public class DTW{
 
         for(Sample storedSample: storedSign.getAllSamples()) {
 
-            int rSize = rSample.allFrame.size();
-            int storedSize = storedSample.allFrame.size();
+            int rSize = rSample.allFrames.size();
+            int storedSize = storedSample.allFrames.size();
             // +1 is for the last frame as you need extra 1 more space to compare the last
             double[][] costTab = new double[rSize + 1][storedSize + 1];
             double[][] accuTab = new double[rSize + 1][storedSize + 1];
@@ -81,7 +81,7 @@ public class DTW{
 
             for(int i = 1; i < rSize + 1; i++){
                 for(int j = 1; j < storedSize + 1; j++) {
-                        costTab[i][j] = calDist(rSample.allFrame.get( i - 1 ), storedSample.allFrame.get( j - 1 ), rSample, storedSample );
+                        costTab[i][j] = calDist(rSample.allFrames.get( i - 1 ), storedSample.allFrames.get( j - 1 ), rSample, storedSample );
                 }
             }
 
@@ -188,8 +188,8 @@ public class DTW{
             }
 
             for(int j = 0; j < rPalmList.size(); j++){
-                Coordinate rPalmOrigin = rSample.allFrame.get(0).palmData.coordinates.get(j);  // Get the "Frame 0" Palm
-                Coordinate storedPalmOrigin = storedSample.allFrame.get(0).palmData.coordinates.get(j);
+                Coordinate rPalmOrigin = rSample.allFrames.get(0).palmData.coordinates.get(j);  // Get the "Frame 0" Palm
+                Coordinate storedPalmOrigin = storedSample.allFrames.get(0).palmData.coordinates.get(j);
                 palmDistance = palmDistance + palmDist(rPalmList.get(j), rPalmOrigin,storedPalmList.get(j), storedPalmOrigin);
             }
 
@@ -225,8 +225,8 @@ public class DTW{
                 }
 
                 for(int j = 0; j < rPalmList.size(); j++){      // rPalmList.size() suppose to be 1
-                    Coordinate rPalmOrigin = rSample.allFrame.get(0).palmData.coordinates.get(j);  // Get the "Frame 0" Palm
-                    Coordinate storedPalmOrigin = storedSample.allFrame.get(0).palmData.coordinates.get(j);
+                    Coordinate rPalmOrigin = rSample.allFrames.get(0).palmData.coordinates.get(j);  // Get the "Frame 0" Palm
+                    Coordinate storedPalmOrigin = storedSample.allFrames.get(0).palmData.coordinates.get(j);
                     palmDistance = palmDistance + palmDist(rPalmList.get(j), rPalmOrigin,storedPalmList.get(j), storedPalmOrigin);
                 }
 
@@ -260,8 +260,8 @@ public class DTW{
                 }
 
                 for (int j = 0; j < storedPalmList.size(); j++) {      // rPalmList.size() suppose to be 1
-                    Coordinate rPalmOrigin = rSample.allFrame.get(0).palmData.coordinates.get( j + rHandNumber);  // Get the "Frame 0" Palm
-                    Coordinate storedPalmOrigin = storedSample.allFrame.get(0).palmData.coordinates.get(j + storedHandNumber);
+                    Coordinate rPalmOrigin = rSample.allFrames.get(0).palmData.coordinates.get( j + rHandNumber);  // Get the "Frame 0" Palm
+                    Coordinate storedPalmOrigin = storedSample.allFrames.get(0).palmData.coordinates.get(j + storedHandNumber);
 
                     palmDistance = palmDistance + palmDist(rPalmList.get(j + rHandNumber), rPalmOrigin
                             , storedPalmList.get( j + storedHandNumber), storedPalmOrigin);

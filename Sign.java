@@ -14,7 +14,7 @@ public class Sign {
 	/* fundamental information */
 	@MongoObjectId
 	private String _id;
-	String name;//unique field
+	private String name;//unique field
 	private HashSet<Sample> samples=new HashSet<Sample>();//samples should not repeat
 
 	/* extra information */
@@ -42,6 +42,7 @@ public class Sign {
 		this.name=SignName;
 		this.initialFingerCount=sample.initialFingerCount;
 		this.initialPalmCount=sample.initialPalmCount;
+		this.initialHandType=sample.initialHandType;
 		this.samples.add(sample);
 	}
 

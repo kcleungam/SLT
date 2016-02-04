@@ -27,6 +27,8 @@ public class Sample {
         PalmData palmData;
         HandType handType;
 
+        /* constructor */
+
         public OneFrame(){}
 
         public OneFrame(Frame frame) throws Exception{
@@ -38,6 +40,26 @@ public class Sample {
             palmData = new PalmData(frame);
             this.handType=fingerData.handType;
         }
+
+        /* setter for Jackson, Jongo */
+        public boolean setFingerData(FingerData fingerData){
+            if(fingerData==null||this.fingerData.equals(fingerData))
+                return false;
+            this.fingerData=fingerData;
+            return true;
+        }
+        public boolean setPalmData(PalmData palmData){
+            if(palmData==null||this.palmData.equals(palmData))
+                return false;
+            this.palmData=palmData;
+            return true;
+        }
+        public boolean setHandType(HandType handType){
+            if(handType==null||this.handType.equals(handType))
+                return false;
+            this.handType=handType;
+            return true;
+        }
     }
 
 
@@ -46,7 +68,7 @@ public class Sample {
      * field
      */
 
-    public ArrayList<OneFrame> allFrame=new ArrayList<>();
+    public ArrayList<OneFrame> allFrames=new ArrayList<>();
     public int initialFingerCount = 0;
     public int initialPalmCount=0;
     public HandType initialHandType;
@@ -65,7 +87,10 @@ public class Sample {
 
     //copy constructor
     public Sample(Sample source) {
-        this.allFrame = source.allFrame;
+        this.allFrames = source.allFrames;
+        this.initialFingerCount=source.initialFingerCount;
+        this.initialPalmCount=source.initialPalmCount;
+        this.initialHandType=source.initialHandType;
     }
 
     public Sample(Collection<Frame> source) throws Exception {
@@ -80,12 +105,38 @@ public class Sample {
             if(frame == null){
                 throw new Exception();
             }
-            this.allFrame.add(new OneFrame(frame));
+            this.allFrames.add(new OneFrame(frame));
         }
 
-        initialFingerCount = this.allFrame.get(0).fingerData.count;
-        initialPalmCount=this.allFrame.get(0).palmData.count;
-        initialHandType = this.allFrame.get(0).handType;
+        initialFingerCount = this.allFrames.get(0).fingerData.count;
+        initialPalmCount=this.allFrames.get(0).palmData.count;
+        initialHandType = this.allFrames.get(0).handType;
+    }
+
+    /**
+     *  setter for Jackson, Jongo
+     */
+    public boolean setInitialFingerCount(int initialFingerCount){
+        if(initialFingerCount>=0&&initialFingerCount<=10) {
+            this.initialFingerCount = initialFingerCount;
+            return true;
+        }
+        return  false;
+    }
+    public boolean setInitialPalmCount(int initialPalmCount){
+        if(initialPalmCount>=1&&initialPalmCount<=2) {
+            this.initialPalmCount = initialPalmCount;
+            return true;
+        }
+        return  false;
+    }
+    public void setInitialHandType(HandType initialHandType){this.initialHandType=initialHandType;}
+    public boolean setAllFrames(Collection<OneFrame> source){
+        if(source==null||source.isEmpty()||source.equals(this.allFrames))
+            return false;
+        this.allFrames.clear();
+        this.allFrames.addAll(source);
+        return true;
     }
 }
 

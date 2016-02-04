@@ -5,7 +5,9 @@ import com.leapmotion.leap.Hand;
  * Created by alex on 2/2/2016.
  */
 public class PalmData extends Data{
-    /* exclusive use for Jongo */
+    /* construtor */
+
+    /** exclusive use for Jongo */
     public PalmData() {
     }
 
