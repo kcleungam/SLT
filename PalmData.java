@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.Hand;
 
@@ -8,9 +9,11 @@ public class PalmData extends Data{
     /* construtor */
 
     /** exclusive use for Jongo */
-    public PalmData() {
+    @JsonCreator
+    private PalmData() {
     }
 
+    /** preferred constructor */
     public PalmData(Frame frame) {
         this.count = frame.hands().count();
         if(this.count == 1){

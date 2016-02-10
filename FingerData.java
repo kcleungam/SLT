@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.leapmotion.leap.Finger;
 import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.Hand;
@@ -12,8 +13,10 @@ public class FingerData extends Data {
     /* constructor */
 
     /** exclusive use for Jongo */
-    public FingerData() {}
+    @JsonCreator
+    private FingerData() {}
 
+    /** preferred constructor */
     public FingerData(Frame frame) {
         HandList hands = frame.hands();
         count = (frame.fingers().count() > 0) ? frame.fingers().count() : 0;

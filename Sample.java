@@ -1,3 +1,6 @@
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.leapmotion.leap.Finger;
 import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.Hand;
@@ -23,14 +26,18 @@ public class Sample {
      */
 
     class OneFrame{
-        FingerData fingerData;
-        PalmData palmData;
-        HandType handType;
+        @JsonProperty("fingerData")
+        public FingerData fingerData;
+        @JsonProperty("palmData")
+        public PalmData palmData;
+        @JsonProperty("handType")
+        public HandType handType;
 
-        /* constructor */
+        /* for Jongo, Jackson */
+        @JsonCreator
+        protected OneFrame(){}
 
-        public OneFrame(){}
-
+        /* preferred constructor */
         public OneFrame(Frame frame) throws Exception{
             if (frame == null) {
                 throw new Exception();
@@ -42,18 +49,21 @@ public class Sample {
         }
 
         /* setter for Jackson, Jongo */
+        @JsonSetter("fingerData")
         public boolean setFingerData(FingerData fingerData){
             if(fingerData==null||this.fingerData.equals(fingerData))
                 return false;
             this.fingerData=fingerData;
             return true;
         }
+        @JsonSetter("palmData")
         public boolean setPalmData(PalmData palmData){
             if(palmData==null||this.palmData.equals(palmData))
                 return false;
             this.palmData=palmData;
             return true;
         }
+        @JsonSetter("handType")
         public boolean setHandType(HandType handType){
             if(handType==null||this.handType.equals(handType))
                 return false;
@@ -68,10 +78,10 @@ public class Sample {
      * field
      */
 
-    public ArrayList<OneFrame> allFrames=new ArrayList<>();
-    public int initialFingerCount = 0;
-    public int initialPalmCount=0;
-    public HandType initialHandType;
+    @JsonProperty("allFrames") ArrayList<OneFrame> allFrames=new ArrayList<>();
+    @JsonProperty("initialFingerCount") int initialFingerCount = 0;
+    @JsonProperty("initialPalmCount") int initialPalmCount=0;
+    @JsonProperty("initialHandType") HandType initialHandType;
 
 
     /**
@@ -83,7 +93,8 @@ public class Sample {
 	Use the constructor forcing you to give initialised parameter instead.
 	 */
     // for Jongo exclusively
-    public Sample() {}
+    @JsonCreator
+    private Sample() {}
 
     //copy constructor
     public Sample(Sample source) {
@@ -93,6 +104,7 @@ public class Sample {
         this.initialHandType=source.initialHandType;
     }
 
+    /* preferred constructor */
     public Sample(Collection<Frame> source) throws Exception {
         //Empty sample is meaningless
         if (source == null || source.isEmpty())
@@ -116,6 +128,7 @@ public class Sample {
     /**
      *  setter for Jackson, Jongo
      */
+    @JsonSetter("initialFingerCount")
     public boolean setInitialFingerCount(int initialFingerCount){
         if(initialFingerCount>=0&&initialFingerCount<=10) {
             this.initialFingerCount = initialFingerCount;
@@ -123,6 +136,7 @@ public class Sample {
         }
         return  false;
     }
+    @JsonSetter("initialPalmCount")
     public boolean setInitialPalmCount(int initialPalmCount){
         if(initialPalmCount>=1&&initialPalmCount<=2) {
             this.initialPalmCount = initialPalmCount;
@@ -130,7 +144,9 @@ public class Sample {
         }
         return  false;
     }
+    @JsonSetter("initialHandType")
     public void setInitialHandType(HandType initialHandType){this.initialHandType=initialHandType;}
+    @JsonSetter("allFrames")
     public boolean setAllFrames(Collection<OneFrame> source){
         if(source==null||source.isEmpty()||source.equals(this.allFrames))
             return false;

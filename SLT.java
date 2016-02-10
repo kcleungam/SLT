@@ -1,5 +1,6 @@
 import com.leapmotion.leap.Controller;
 import com.leapmotion.leap.Frame;
+import com.sun.istack.internal.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -159,7 +160,8 @@ public class SLT {
 						sampleListener.reset();
 						sampleListener.gainFocus();
 						boolean getSample = false;
-						Sample rSample = new Sample();
+						Sample rSample=null;
+
 						while (true) {
 							if (sampleListener.checkFinish()) {
 								if (sampleListener.checkValid()) {

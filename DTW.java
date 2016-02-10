@@ -1,3 +1,5 @@
+import com.sun.istack.internal.Nullable;
+
 import java.util.ArrayList;
 
 /**
@@ -39,8 +41,12 @@ public class DTW{
         this.storedSign = storedSign;
     }
 
-    public void setRSample(Sample rSample){ this.rSample = rSample; }
-    public void setStoredSign(Sign storedSign){
+    public void setRSample(Sample rSample) throws NullPointerException{
+        if(rSample==null) throw new NullPointerException("Cannot set sample to be null!");
+        this.rSample = rSample;
+    }
+    public void setStoredSign(Sign storedSign) throws NullPointerException{
+        if(storedSign==null) throw new NullPointerException("Cannot set stored sign to be null!");
         this.storedSign = storedSign;
     }
 

@@ -565,7 +565,7 @@ public class Interface {
                         sampleListener.reset();
                         sampleListener.gainFocus();
 
-                        Sample rSample = new Sample();
+                        Sample rSample=null;
 
                         try {
                             while (true) {
@@ -595,7 +595,7 @@ public class Interface {
                             sampleListener.lostFocus();
                             if (!recording) {
                                 if (validRec == true) {
-                                    dtw.setRSample(rSample);//TODO: if rSample is created by default constructor, error may occurs
+                                    dtw.setRSample(rSample);
 
                                     int tolerance=1;
 

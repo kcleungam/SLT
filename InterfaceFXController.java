@@ -108,7 +108,7 @@ public class InterfaceFXController implements Initializable {
                                 sampleListener.reset();
                                 sampleListener.gainFocus();
 
-                                Sample rSample = new Sample();
+                                Sample rSample=null;
 
                                 try {
                                     while (true) {
