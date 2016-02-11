@@ -14,6 +14,10 @@ import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.DirectionalLight;
+import javax.media.j3d.GeometryArray;
+import javax.media.j3d.LineArray;
+import javax.media.j3d.LineStripArray;
+import javax.media.j3d.Shape3D;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.vecmath.Color3f;
@@ -21,6 +25,7 @@ import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
 
+import com.leapmotion.leap.Bone;
 import com.leapmotion.leap.Controller;
 import com.leapmotion.leap.Finger;
 import com.leapmotion.leap.Frame;
@@ -32,17 +37,25 @@ import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 
 public class Visualizer extends Applet {
+	private final float[] appStart = { -1.5f, -1.5f, -1.5f };
+	private final float[] appEnd = { 1.5f, 1.5f, 1.5f };
+	private final float[] leapStart = { -200.0f, 0.0f, -200.0f };
+	private final float[] leapEnd = { 200.0f, 400.0f, 200.0f };
+
+	private final Vector3d INVINSIBLE_COOR = new Vector3d(0.0, 0.0, 14.0);
+
+	private final int[] stripVertexCounts = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
+
 	private SimpleUniverse u;
 	private BranchGroup scene;
-	private TransformGroup transscene;
 
-	private final float[] appStart = { -1.0f, -1.0f, -1.0f };
-	private final float[] appEnd = { 1.0f, 1.0f, 1.0f };
-	private final float[] leapStart = { -300.0f, 0.0f, -300.0f };
-	private final float[] leapEnd = { 300.0f, 600.0f, 300.0f };
+	private TransformGroup[][][] fingertg = new TransformGroup[2][5][4];
+	private TransformGroup[] palmstg = new TransformGroup[2];
 
-	private TransformGroup[][] fingers = new TransformGroup[2][5];
-	private TransformGroup[] palms = new TransformGroup[2];
+	private LineStripArray geometry = new LineStripArray(50, GeometryArray.COORDINATES, stripVertexCounts);
+
+	private Vector3d[][][] fingerCoor = new Vector3d[2][5][4];
+	private Vector3d[] palmCoor = new Vector3d[2];
 
 	public Visualizer() {
 		setLayout(new BorderLayout());
@@ -52,25 +65,37 @@ public class Visualizer extends Applet {
 
 		// Create a simple scene...
 		scene = createSceneGraph();
-		transscene = new TransformGroup();
-
-		for (int i = 0; i < 2; i++) {
-			for (int j = 0; j < 5; j++) {
-				fingers[i][j] = new TransformGroup();
-				fingers[i][j].setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-				fingers[i][j].addChild(new Sphere(0.05f));
-				scene.addChild(fingers[i][j]);
-			}
-			palms[i] = new TransformGroup();
-			palms[i].setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-			palms[i].addChild(new Sphere(0.07f));
-			scene.addChild(palms[i]);
-		}
+		// initialize the hand
+		initializeParam();
 
 		// and attach it to the virtual universe
 		u = new SimpleUniverse(c);
 		u.getViewingPlatform().setNominalViewingTransform();
 		u.addBranchGraph(scene);
+	}
+
+	public void initializeParam() {
+		for (int i = 0; i < 2; i++) {
+			for (int j = 0; j < 5; j++) {
+				for (int k = 0; k < 4; k++) {
+					fingerCoor[i][j][k] = INVINSIBLE_COOR;
+					fingertg[i][j][k] = new TransformGroup();
+					fingertg[i][j][k].setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+					fingertg[i][j][k].addChild(new Sphere(0.03f));
+					scene.addChild(fingertg[i][j][k]);
+				}
+			}
+			palmCoor[i] = INVINSIBLE_COOR;
+			palmstg[i] = new TransformGroup();
+			palmstg[i].setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+			palmstg[i].addChild(new Sphere(0.07f));
+			scene.addChild(palmstg[i]);
+		}
+		geometry.setCapability(LineStripArray.ALLOW_COORDINATE_WRITE);
+		geometry.setCoordinates(0, getPointArray());
+		Shape3D lineShape = new Shape3D(geometry);
+		scene.addChild(lineShape);
+
 	}
 
 	public BranchGroup createSceneGraph() {
@@ -100,48 +125,27 @@ public class Visualizer extends Applet {
 	}
 
 	/*
-	 * add spheres
+	 * add spheres by coordinates
 	 */
-	public void addSphere(Vector lmcoordinate, String type) {
-		float[] graphvec = new float[] { lmcoordinate.getX(), lmcoordinate.getY(), lmcoordinate.getZ() };
-		double[] appCoor = rangeConvert(graphvec);
-		Transform3D pos1 = new Transform3D();
-		pos1.setTranslation(new Vector3d(appCoor));
-		TransformGroup transgp = new TransformGroup(pos1);
-		if (type == "fingertip") {
-			transgp.addChild(new Sphere(0.03f));
-		} else if (type == "palm") {
-			transgp.addChild(new Sphere(0.07f));
-		}
-		transscene.addChild(transgp);
-	}
-	
-	// Warning: you may need to use clear().
-	// Warning2: this "coordinate" take in the range -1.0f<x,y,z<1.0f
 	public void addSphere(Vector3d coordinate, float size) {
 		Transform3D pos1 = new Transform3D();
 		pos1.setTranslation(new Vector3d(coordinate));
 		TransformGroup transgp = new TransformGroup(pos1);
 		transgp.addChild(new Sphere(size));
-		transscene.addChild(transgp);
+		scene.addChild(transgp);
 	}
-	
+
+	/*
+	 * add spheres by coordinates
+	 */
 	public void addSphere(Vector3f coordinate, float size) {
 		Vector3d transcoor = new Vector3d(coordinate);
 		addSphere(transcoor, size);
 	}
 
 	/*
-	 * move spheres
+	 * move spheres to somewhere invisible
 	 */
-	public void moveSphere(Vector coordinate, TransformGroup tg) {
-		float[] graphvec = new float[] { coordinate.getX(), coordinate.getY(), coordinate.getZ() };
-		double[] appCoor = rangeConvert(graphvec);
-		Transform3D pos1 = new Transform3D();
-		pos1.setTranslation(new Vector3d(appCoor));
-		tg.setTransform(pos1);
-	}
-
 	public void moveSphere(TransformGroup tg) {
 		Transform3D pos1 = new Transform3D();
 		pos1.setTranslation(new Vector3d(0.0, 0.0, 14.0));// invisible
@@ -149,7 +153,7 @@ public class Visualizer extends Applet {
 	}
 
 	/*
-	 * clear the spheres
+	 * clear the screen
 	 */
 	public void clear() {
 		scene.detach();
@@ -158,59 +162,86 @@ public class Visualizer extends Applet {
 	}
 
 	public void traceLM(Frame frame) {
+		setCoor(frame);
+		updateGraphic();
+	}
+
+	public Vector3d[][][] getFingerCoor() {
+		return fingerCoor;
+	}
+
+	/*
+	 * set the internal fingerCoor and palmCoor according the LM frame
+	 */
+	public void setCoor(Frame frame) {
 		HandList hands = frame.hands();
-		if (hands.count() == 2) {
-			for (int i = 0; i < 2; i++) {
-				for (int j = 0; j < 5; j++) {
-					moveSphere(hands.get(i).fingers().get(j).tipPosition(), fingers[i][j]);
-				}
-				moveSphere(hands.get(i).palmPosition(), palms[i]);
-			}
-		} else if (hands.count() == 1) {
+		int i = 0;
+		// for the existing hands
+		for (; 0 <= i && i < hands.count(); i++) {
 			for (int j = 0; j < 5; j++) {
-				moveSphere(hands.get(0).fingers().get(j).tipPosition(), fingers[0][j]);
+				fingerCoor[i][j][0] = new Vector3d(rangeConvert(hands.get(i).fingers().get(j).tipPosition()));
+				fingerCoor[i][j][1] = new Vector3d(
+						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_DISTAL).prevJoint()));
+				fingerCoor[i][j][2] = new Vector3d(
+						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_INTERMEDIATE).prevJoint()));
+				fingerCoor[i][j][3] = new Vector3d(
+						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_PROXIMAL).prevJoint()));
 			}
-			moveSphere(hands.get(0).palmPosition(), palms[0]);
+			palmCoor[i] = new Vector3d(rangeConvert(hands.get(i).palmPosition()));
+		}
+		// for non-existing hands:
+		for (; 0 <= i && i < 2; i++) {
 			for (int j = 0; j < 5; j++) {
-				moveSphere(fingers[1][j]);
-			}
-			moveSphere(palms[1]);
-		} else {
-			for (int i = 0; i < 2; i++) {
-				for (int j = 0; j < 5; j++) {
-					moveSphere(fingers[i][j]);
+				for (int k = 0; k < 4; k++) {
+					fingerCoor[i][j][k] = INVINSIBLE_COOR;
 				}
-				moveSphere(palms[i]);
 			}
+			palmCoor[i] = INVINSIBLE_COOR;
 		}
 	}
 
-	public void traceLM1(Frame frame) { 
-		scene.detach();
-		scene.removeChild(transscene);
-		transscene.removeAllChildren();
-		HandList hands = frame.hands();
-		for (Hand hand : hands) {
-			for (Finger finger : hand.fingers()) {
-				addSphere(finger.tipPosition(), "fingertip");
+	public void updateGraphic() {
+		// update spheres
+		for (int i = 0; i < 2; i++) {
+			for (int j = 0; j < 5; j++) {
+				for (int k = 0; k < 4; k++) {
+					Transform3D pos1 = new Transform3D();
+					pos1.setTranslation(new Vector3d(fingerCoor[i][j][k]));
+					fingertg[i][j][k].setTransform(pos1);
+				}
 			}
-			addSphere(hand.palmPosition(), "palm");
+			Transform3D pos1 = new Transform3D();
+			pos1.setTranslation(new Vector3d(palmCoor[i]));
+			palmstg[i].setTransform(pos1);
 		}
-		scene.addChild(transscene);
-		u.addBranchGraph(scene);
+		// update lines
+		geometry.setCoordinates(0, getPointArray());
+	}
+
+	public Point3d[] getPointArray() {
+		Point3d[] output = new Point3d[50];
+		for (int i = 0; i < 2; i++) {
+			for (int j = 0; j < 5; j++) {
+				for (int k = 0; k < 4; k++) {
+					output[i * 5 * 5 + j * 5 + k] = new Point3d(fingerCoor[i][j][k]);
+				}
+				output[i * 5 * 5 + (j + 1) * 5 - 1] = new Point3d(palmCoor[i]);
+			}
+		}
+		return output;
+	}
+
+	public double[] rangeConvert(Vector LeapCoor) {
+		return rangeConvert(new float[] { LeapCoor.getX(), LeapCoor.getY(), LeapCoor.getZ() });
 	}
 
 	public double[] rangeConvert(float[] LeapValue) {
 		double[] temp = new double[3];
 		for (int i = 0; i < 3; i++) {
-			temp[i] = (LeapValue[i] - leapStart[i]) * 2.0f / (leapEnd[i] - leapStart[i]) + appStart[i];
-			if (temp[i] > appEnd[i]) {
-				temp[i] = appEnd[i];
-			} else if (temp[i] < appStart[i]) {
-				temp[i] = appStart[i];
-			}
+			temp[i] = (LeapValue[i] - leapStart[i]) * (appEnd[i] - appStart[i]) / (leapEnd[i] - leapStart[i])
+					+ appStart[i];
 		}
-		double[] appValue = {temp[0], -temp[2], temp[1]};
+		double[] appValue = { temp[0], -temp[2], -temp[1] };
 
 		return appValue;
 	}
