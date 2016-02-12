@@ -282,11 +282,11 @@ public class Interface {
         frame.getContentPane().add(txtrName);
 
         final JList list = new JList();
-        list.setBounds(10, 94, 138, 256);
+        list.setBounds(10, 94, 138, 290);
         frame.getContentPane().add(list);
 
         JScrollPane listScrollPane = new JScrollPane(list);
-        listScrollPane.setBounds(10, 94, 138, 380);
+        listScrollPane.setBounds(10, 94, 138, 390);
         frame.add(listScrollPane);
 
         final DefaultListModel listModel = new DefaultListModel();
@@ -545,14 +545,25 @@ public class Interface {
 
             }
         });
-        /*
-        Button btnDTW = new Button("DTW");
-        btnDTW.setBounds(106, 54, 42, 23);
-        frame.getContentPane().add(btnDTW);
-        btnDTW.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            */
+
+        Button btnInfo = new Button("Info");
+        btnInfo.setBounds(106, 54, 42, 23);
+        frame.getContentPane().add(btnInfo);
+        btnInfo.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 String selectedItem = (String) list.getSelectedValue();
+                 Sign sign = allSigns.getSign(selectedItem);
+
+                 ps.println("Sign Name   : " + sign.getName() + " ,   Consist of "
+                         + sign.getAllSamples().size() + " Sample");
+                 ps.println("Initial Palm Count  : " + sign.getInitialPalmCount());
+                 ps.println("Initial Hand Type   :" + sign.getInitialHandType());
+                 ps.println("Initial Finger Count = " + sign.getInitialFingerCount());
+
+                 autoScrollDown();
+             }
+        });
 
         //TODO  --------   DTW
 
@@ -742,12 +753,12 @@ public class Interface {
         frame.getContentPane().add(lblNewLabel);
 
         textArea = new JTextArea();
-        textArea.setBounds(10, 385, 761, 68);
+        textArea.setBounds(10, 385, 761, 65);
         frame.getContentPane().add(textArea);
         textArea.setColumns(10);
 
         textScrollPane = new JScrollPane(textArea);
-        textScrollPane.setBounds(10, 520, 655, 73);
+        textScrollPane.setBounds(10, 520, 655, 65);
         frame.add(textScrollPane);
 
         label_1 = new JLabel("1");
@@ -790,7 +801,7 @@ public class Interface {
                     + allSigns.getAllSigns().get(key).getAllSamples().size() + " Sample");
             ps.println("Initial Palm Count: " + allSigns.getAllSigns().get(key).getInitialPalmCount());
             ps.println("Initial Hand Type: " + allSigns.getAllSigns().get(key).getInitialHandType());
-            ps.println("Initial Finger Count: " + allSigns.getAllSigns().get(key).getInitialFingerCount() + "\n");
+            ps.println("Initial Finger Count: " + allSigns.getAllSigns().get(key).getInitialFingerCount());
         }
 
         ps.println("All sign are printed");

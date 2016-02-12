@@ -446,9 +446,9 @@ public class InterfaceFXController implements Initializable {
 
         message.setText("Gesture Name: " + sign.getName()
                 + " Sample Size: " + sign.getAllSamples().size()
-                + " Initial Palm Count: " + sign.getInitialPalmCount()
-                + " Initial Hand Type: " + sign.getInitialHandType()
-                + " Initial Finger Count: " + sign.getInitialFingerCount());
+                + " Palm Count: " + sign.getInitialPalmCount()
+                + " Hand Type: " + sign.getInitialHandType()
+                + " Finger Count: " + sign.getInitialFingerCount());
     }
 
     @FXML
