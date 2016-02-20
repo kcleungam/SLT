@@ -1,5 +1,3 @@
-import com.sun.istack.internal.Nullable;
-
 import java.util.ArrayList;
 
 /**
@@ -14,7 +12,7 @@ public class DTW{
     public static int cutFrame = 10;   // The number of frame can be cut off on order to find the best ending of Sample
 
     public static double globalThreshold = 450; // The maximum distance between rSample and stored sample which can be recognize
-                                    // If the bestMatch > globalThreshold, then unknown gesture
+    // If the bestMatch > globalThreshold, then unknown gesture
 
     public double localThreshold = Double.POSITIVE_INFINITY;   // The distance between sample and one of the stored sample
 
@@ -87,7 +85,7 @@ public class DTW{
 
             for(int i = 1; i < rSize + 1; i++){
                 for(int j = 1; j < storedSize + 1; j++) {
-                        costTab[i][j] = calDist(rSample.allFrames.get( i - 1 ), storedSample.allFrames.get( j - 1 ), rSample, storedSample );
+                    costTab[i][j] = calDist(rSample.allFrames.get( i - 1 ), storedSample.allFrames.get( j - 1 ), rSample, storedSample );
                 }
             }
 
@@ -183,27 +181,47 @@ public class DTW{
 
 
         if (rFrame.palmData.count == storedFrame.palmData.count){
+            if(rFrame.palmData.count == 1){
+                if(rFrame.handType == storedFrame.handType){
+                    for (int i = 0; i < rFingerList.size(); i++) {
+                        int handNumber = i / 5;   // from 0 to 4 will give 0, from 5 to 9 give 1
+                        fingerDistance = fingerDistance + fingerDist(rFingerList.get(i), rPalmList.get(handNumber), storedFingerList.get(i), storedPalmList.get(handNumber));
+                        //Calculate Finger by Finger, remember to put the correct handNumber
+                    }
 
-            for(int i = 0; i < rFingerList.size(); i++){
+                    for (int j = 0; j < rPalmList.size(); j++) {
+                        Coordinate rPalmOrigin = rSample.allFrames.get(0).palmData.coordinates.get(j);  // Get the "Frame 0" Palm
+                        Coordinate storedPalmOrigin = storedSample.allFrames.get(0).palmData.coordinates.get(j);
+                        palmDistance = palmDistance + palmDist(rPalmList.get(j), rPalmOrigin, storedPalmList.get(j), storedPalmOrigin);
+                    }
 
-                int handNumber = i/5;   // from 0 to 4 will give 0, from 5 to 9 give 1
-                // Hand number indicate the finger is left hand finger or right hand finger
-                // Then we can get the normalize coordinate by FingerCoor - PalmCoor
-                fingerDistance = fingerDistance + fingerDist(rFingerList.get(i), rPalmList.get(handNumber), storedFingerList.get(i),storedPalmList.get(handNumber));
-                //Calculate Finger by Finger, remember to put the correct handNumber
+                    distance = fingerDistance + (Math.pow(palmDistance, 2) / Math.pow(adjust, 2)) * palmDistance;
+                    System.out.println("Finger part = " + fingerDistance);
+                    System.out.println("Palm part = " + (Math.pow(palmDistance, 2) / Math.pow(adjust, 2)) * palmDistance);
+
+                }else{
+                    return Double.POSITIVE_INFINITY;    // different hand
+                }
+            }else if(rFrame.palmData.count == 2){
+                for (int i = 0; i < rFingerList.size(); i++) {
+                    int handNumber = i / 5;   // from 0 to 4 will give 0, from 5 to 9 give 1
+                    // Hand number indicate the finger is left hand finger or right hand finger
+                    // Then we can get the normalize coordinate by FingerCoor - PalmCoor
+                    fingerDistance = fingerDistance + fingerDist(rFingerList.get(i), rPalmList.get(handNumber), storedFingerList.get(i), storedPalmList.get(handNumber));
+                    //Calculate Finger by Finger, remember to put the correct handNumber
+                }
+
+                for (int j = 0; j < rPalmList.size(); j++) {
+                    Coordinate rPalmOrigin = rSample.allFrames.get(0).palmData.coordinates.get(j);  // Get the "Frame 0" Palm
+                    Coordinate storedPalmOrigin = storedSample.allFrames.get(0).palmData.coordinates.get(j);
+                    palmDistance = palmDistance + palmDist(rPalmList.get(j), rPalmOrigin, storedPalmList.get(j), storedPalmOrigin);
+                }
+
+
+                distance = fingerDistance + (Math.pow(palmDistance, 2) / Math.pow(adjust, 2)) * palmDistance;
+                System.out.println("Finger part = " + fingerDistance);
+                System.out.println("Palm part = " + (Math.pow(palmDistance, 2) / Math.pow(adjust, 2)) * palmDistance);
             }
-
-            for(int j = 0; j < rPalmList.size(); j++){
-                Coordinate rPalmOrigin = rSample.allFrames.get(0).palmData.coordinates.get(j);  // Get the "Frame 0" Palm
-                Coordinate storedPalmOrigin = storedSample.allFrames.get(0).palmData.coordinates.get(j);
-                palmDistance = palmDistance + palmDist(rPalmList.get(j), rPalmOrigin,storedPalmList.get(j), storedPalmOrigin);
-            }
-
-
-            distance = fingerDistance   +   (Math.pow(palmDistance, 2)/Math.pow(adjust, 2))* palmDistance;
-            System.out.println("Finger part = " + fingerDistance);
-            System.out.println("Palm part = " + (Math.pow(palmDistance,2)/Math.pow(adjust,2))*palmDistance);
-
 
         }else{          //TODO   Different in hand number
 
@@ -321,8 +339,8 @@ public class DTW{
 
         distance =Math.sqrt(
                 Math.pow(RXN - SXN, 2) +
-                Math.pow(RYN - SYN, 2)+
-                Math.pow(RZN - SZN, 2)
+                        Math.pow(RYN - SYN, 2)+
+                        Math.pow(RZN - SZN, 2)
         );
 
         return distance;
