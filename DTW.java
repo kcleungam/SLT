@@ -168,7 +168,7 @@ public class DTW{
      *
      * @return
      */
-    public double calDist(Sample.OneFrame rFrame, Sample.OneFrame storedFrame, Sample rSample, Sample storedSample){
+    public double calDist(OneFrame rFrame, OneFrame storedFrame, Sample rSample, Sample storedSample){
 
         ArrayList<Coordinate> rFingerList = rFrame.fingerData.coordinates;
         ArrayList<Coordinate> storedFingerList = storedFrame.fingerData.coordinates;
