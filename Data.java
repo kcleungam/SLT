@@ -1,5 +1,8 @@
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.leapmotion.leap.Hand;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,6 +18,8 @@ public abstract class Data {
     @JsonProperty("handType") HandType handType;
     @JsonProperty("coordinates") ArrayList<Coordinate> coordinates = new ArrayList<>();
 
+    @JsonCreator
+    protected Data(){}
     /**
      *  setter for Jackson, Jongo
      */
@@ -32,4 +37,10 @@ public abstract class Data {
         this.coordinates.addAll(source);
         return true;
     }
+    @JsonGetter("count")
+    public int getCount(){return this.count;}
+    @JsonGetter("handType")
+    public HandType getHandType(){return this.handType;}
+    @JsonGetter("coordinates")
+    public ArrayList<Coordinate> getCoordinates(){return this.coordinates;}
 }
