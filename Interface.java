@@ -628,6 +628,7 @@ public class Interface {
                                         autoScrollDown();
                                     } else {
                                         ps.println("The most similar gesture is " + dtw.result);
+                                        Speech.play(dtw.result, Speech.LANGUAGE.ENGLISH);
                                         autoScrollDown();
                                         ps.println("The minimum cost of DTW is " + dtw.bestMatch);
                                         autoScrollDown();
