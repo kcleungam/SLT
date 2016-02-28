@@ -37,43 +37,34 @@ import com.leapmotion.leap.*;
 import java.util.ArrayList;
 
 public class SampleListener extends Listener {
-	static float minRecVelocity;
-	static float maxRecVelocity;
-	static int minPoseFrames;
+	static float minRecVelocity = 45;
+	static float maxRecVelocity = 300;
+	static int minPoseFrames = 30;
 	static ArrayList<Frame> oneSample;
 	static boolean recording;
 	static boolean finishRec;
 	static boolean validSample;
 	static boolean focus;
 	static int pauseCount;
-	static int minPauseCount;
+	static int minPauseCount = 10;
 
-	// TODO: constructor minRecVelocity differs from reset(),
-	// which one should follow? - Jacky
+
 	public SampleListener() {
-		minRecVelocity = 40;
-		maxRecVelocity = 300;
-		minPoseFrames = 30;
 		oneSample = new ArrayList<Frame>();
 		recording = false;
 		finishRec = false;
 		validSample = false;
 		focus = false;
 		pauseCount = 0;
-		minPauseCount = 10;
 	}
 
 	public void reset() {
-		minRecVelocity = 50;
-		maxRecVelocity = 300;
-		minPoseFrames = 30;
 		oneSample = new ArrayList<Frame>();
 		recording = false;
 		finishRec = false;
 		validSample = false;
 		focus = false;
 		pauseCount = 0;
-		minPauseCount = 10;
 	}
 
 	/**

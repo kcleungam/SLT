@@ -192,19 +192,19 @@ public class SLT {
 						signByBoth.putAll(db.getSignsByBoth(rSample.initialFingerCount - 1, rSample.initialHandType));
 						signByBoth.putAll(db.getSignsByBoth(rSample.initialFingerCount + 1, rSample.initialHandType));*/
 						HashMap<String, Sign> signByBoth = db.getSignsByBoth(rSample.initialFingerCount, rSample.initialHandType,tolerance);
-
+						/*
 						for (Sign storedSign : signByBoth.values()) {
 							dtw.setStoredSign(storedSign);
 							dtw.calDTW();
 						}
+						*/
 
-						/*
 						for(Sign storedSign : allSigns.getAllSigns().values()){
 							System.out.println("Checking : " + storedSign.getName());
 							dtw.setStoredSign(storedSign);
 							dtw.calDTW();
 						}
-						*/
+
 						dtw.printResult();
 						dtw.reset();
 						break;
