@@ -28,6 +28,8 @@ public class Sample {
     @JsonProperty("initialFingerCount") int initialFingerCount = 0;
     @JsonProperty("initialPalmCount") int initialPalmCount=0;
     @JsonProperty("initialHandType") HandType initialHandType;
+    @JsonProperty("lro") LRO lro;
+    @JsonProperty("averageHandNumber") double averageHandNumber = 0;
 
 
     /**
@@ -48,6 +50,8 @@ public class Sample {
         this.initialFingerCount=source.initialFingerCount;
         this.initialPalmCount=source.initialPalmCount;
         this.initialHandType=source.initialHandType;
+        this.lro = source.lro;
+        this.averageHandNumber = source.averageHandNumber;
     }
 
     /* preferred constructor */
@@ -69,6 +73,29 @@ public class Sample {
         initialFingerCount = this.allFrames.get(0).fingerData.count;
         initialPalmCount=this.allFrames.get(0).palmData.count;
         initialHandType = this.allFrames.get(0).handType;
+
+        lro = new LRO();
+        for(OneFrame frame: allFrames){
+            averageHandNumber = averageHandNumber + (double)frame.getPalmData().count;
+            if( (lro.leftPalmOrigin != null) && lro.rightPalmOrigin != null){
+                continue;
+            }
+            if(lro.leftPalmOrigin == null){
+                if(frame.handType == HandType.LEFT){
+                    lro.setLO(frame.getPalmData().getCoordinates().get(0));    // Single hand, so get 0
+                }else if(frame.handType == HandType.BOTH){
+                    lro.setLO(frame.getPalmData().getCoordinates().get(0));    // left hand, get 0
+                }
+            }
+            if(lro.rightPalmOrigin == null){
+                if(frame.handType == HandType.RIGHT){
+                    lro.setRO(frame.getPalmData().getCoordinates().get(0));    // Single hand, so get 0
+                }else if(frame.handType == HandType.BOTH){
+                    lro.setRO(frame.getPalmData().getCoordinates().get(1));    // right hand, get 1
+                }
+            }
+        }
+        averageHandNumber = averageHandNumber / allFrames.size();
     }
 
     /**

@@ -9,49 +9,21 @@ public class DTW{
     public static Sample rSample;       // Sample for recognize
     public static Sign storedSign; // Sample from database
     public static int maxSlope = 3;    // the maximum number of slope
-    public static int minFrame = 30;
+    public static int minFrame = 35;
     public static int cutFrame = 10;   // The number of frame can be cut off on order to find the best ending of Sample
 
-    public static double globalThreshold = 450; // The maximum distance between rSample and stored sample which can be recognize
+    public static double globalThreshold = 300; // The maximum distance between rSample and stored sample which can be recognize
     // If the bestMatch > globalThreshold, then unknown gesture
 
     public double localThreshold = Double.POSITIVE_INFINITY;   // The distance between sample and one of the stored sample
 
-    public double adjust = 60;     // The adjustment according to the palm, 60 = 6 cm
-    public double punishment = 200; // The number which add to distance if the number of hands are different
+    public double adjust = 50;     // The adjustment according to the palm, 50 = 5 cm
+    public double punishment = 150; // The number which add to distance if the number of hands are different
 
     public String result = "Unknown Gesture !";
 
 
     // TODO The purpose of LRO is to find the first leftPalm and rightPalm coordinate, set as reference (Origin) to other frame
-    class LRO{
-        Coordinate leftPalmOrigin;
-        Coordinate rightPalmOrigin;
-
-        LRO(){
-            leftPalmOrigin = null;
-            rightPalmOrigin = null;
-        }
-
-        void setLO(Coordinate left){
-            leftPalmOrigin = left;
-        }
-
-        void setRO(Coordinate right){
-            rightPalmOrigin = right;
-        }
-
-        void setLRO(Coordinate left, Coordinate right){
-            leftPalmOrigin = left;
-            rightPalmOrigin = right;
-        }
-
-        void resetLRO(){
-            leftPalmOrigin = null;
-            rightPalmOrigin = null;
-        }
-
-    }
 
 
     public DTW(){
@@ -92,33 +64,6 @@ public class DTW{
      *
      */
     public void calDTW(){
-        // TODO set the LRO of rSample
-        LRO rLRO = new LRO();
-        LRO storedLRO = new LRO();
-        double rHandAverage = 0;
-        double storedHandAverage = 0;
-        for(OneFrame frame: rSample.allFrames){
-            rHandAverage = rHandAverage + (double)frame.getPalmData().count;
-            if( (rLRO.leftPalmOrigin != null) && rLRO.rightPalmOrigin != null){
-                continue;
-            }
-            if(rLRO.leftPalmOrigin == null){
-                if(frame.handType == HandType.LEFT){
-                    rLRO.setLO(frame.getPalmData().getCoordinates().get(0));    // Single hand, so get 0
-                }else if(frame.handType == HandType.BOTH){
-                    rLRO.setLO(frame.getPalmData().getCoordinates().get(0));    // left hand, get 0
-                }
-            }
-            if(rLRO.rightPalmOrigin == null){
-                if(frame.handType == HandType.RIGHT){
-                    rLRO.setRO(frame.getPalmData().getCoordinates().get(0));    // Single hand, so get 0
-                }else if(frame.handType == HandType.BOTH){
-                    rLRO.setRO(frame.getPalmData().getCoordinates().get(1));    // right hand, get 1
-                }
-            }
-        }
-        rHandAverage = rHandAverage / rSample.allFrames.size();
-
         for(Sample storedSample: storedSign.getAllSamples()) {
 
             int rSize = rSample.allFrames.size();
@@ -129,33 +74,6 @@ public class DTW{
             double[][] stepCount = new double[rSize + 1][storedSize +1];
             int[][] slopeI = new int[rSize + 1][storedSize + 1];
             int[][] slopeJ = new int[rSize + 1][storedSize + 1];
-
-            //TODO Set the LRO of  storedSample every time
-            storedLRO.resetLRO();
-            storedHandAverage = 0;
-            for(OneFrame frame: storedSample.allFrames){
-                storedHandAverage = storedHandAverage + (double)frame.getPalmData().count;
-                if( (storedLRO.leftPalmOrigin != null) && storedLRO.rightPalmOrigin != null){
-                    continue;
-                }
-                if(storedLRO.leftPalmOrigin == null){
-                    if(frame.handType == HandType.LEFT){
-                        storedLRO.setLO(frame.getPalmData().getCoordinates().get(0));    // Single hand, so get 0
-                    }else if(frame.handType == HandType.BOTH){
-                        storedLRO.setLO(frame.getPalmData().getCoordinates().get(0));    // left hand, get 0
-                    }
-                }
-                if(storedLRO.rightPalmOrigin == null){
-                    if(frame.handType == HandType.RIGHT){
-                        storedLRO.setRO(frame.getPalmData().getCoordinates().get(0));    // Single hand, so get 0
-                    }else if(frame.handType == HandType.BOTH){
-                        storedLRO.setRO(frame.getPalmData().getCoordinates().get(1));    // right hand, get 1
-                    }
-                }
-            }
-            storedHandAverage = storedHandAverage / storedSample.allFrames.size();
-
-
             for (int i = 0; i < rSize + 1; i++) {
                 for (int j = 0; j < storedSize + 1; j++) {
                     accuTab[i][j] = Double.POSITIVE_INFINITY;
@@ -169,7 +87,7 @@ public class DTW{
             //TODO calculate the costTable, which is the table contain distance between frames
             for(int i = 1; i < rSize + 1; i++){
                 for(int j = 1; j < storedSize + 1; j++) {
-                    costTab[i][j] = calDist(rSample.allFrames.get( i - 1 ), storedSample.allFrames.get( j - 1 ), rLRO, storedLRO );
+                    costTab[i][j] = calDist(rSample.allFrames.get( i - 1 ), storedSample.allFrames.get( j - 1 ), rSample.lro, storedSample.lro );
                 }
             }
 
@@ -223,8 +141,8 @@ public class DTW{
                 }
             }
 
-            System.out.println( "Average hand number of Recogn = " +rHandAverage + "\tAverage hand number of" + storedSign.getName() + " = " + storedHandAverage);
-            localThreshold = localThreshold / ( (rHandAverage + storedHandAverage) / 2 );
+            System.out.println( "Average hand number of Recogn = " +rSample.averageHandNumber + "\tAverage hand number of" + storedSign.getName() + " = " + storedSample.averageHandNumber);
+            localThreshold = localThreshold / ( (rSample.averageHandNumber + storedSample.averageHandNumber) / 2 );
             if(localThreshold < bestMatch){
                 bestMatch = localThreshold;
                 result = storedSign.getName();
