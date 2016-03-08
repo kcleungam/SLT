@@ -12,7 +12,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="System">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" onAction="#exitInterface" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -38,6 +38,7 @@
                         <Label layoutX="14.0" layoutY="271.0" text="Name of gesture" />
                         <TextField fx:id="inputField" layoutX="14.0" layoutY="286.0" prefHeight="23.0" prefWidth="172.0" promptText="Enter gesture name here" />
                         <Button fx:id="addButton" layoutX="14.0" layoutY="309.0" mnemonicParsing="false" onAction="#addButtonAction" text="Add/Train" textAlignment="CENTER" />
+                        <Group fx:id="test" layoutX="200.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -55,7 +56,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <SubScene height="314.0" layoutY="32.0" width="600.0">
+                        <SubScene fx:id="visualiserfx" height="314.0" layoutY="32.0" width="600.0">
                           <root>
                             <Region />
                           </root>
