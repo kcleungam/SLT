@@ -6,6 +6,7 @@ package visualizer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Sphere;
+import javafx.geometry.Point3D;
 
 /**
  * @author Jacky
@@ -54,8 +55,8 @@ public class VisSphere extends Sphere {
 	}
 
 	public void setTranslate(Point3D coordinate) {
-		this.setTranslateX(coordinate.x);
-		this.setTranslateY(coordinate.y);
-		this.setTranslateZ(coordinate.z);
+		this.setTranslateX(coordinate.getX());
+		this.setTranslateY(coordinate.getY());
+		this.setTranslateZ(coordinate.getZ());
 	}
 }

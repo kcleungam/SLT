@@ -13,6 +13,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.*;
 import javafx.scene.paint.Color;
+import javafx.geometry.Point3D;
 
 public class VisualiseFX{
 
@@ -20,8 +21,8 @@ public class VisualiseFX{
 	static SampleListener listener = new SampleListener();
 
 	// constants
-	private int viewwidth = 400;
-	private int viewheight = 346;
+	private int viewwidth = 800;
+	private int viewheight = 600;
 	private int viewdepth = 600;
 	private final int fingerSize = 10;
 	private final int palmSize = 25;
@@ -42,18 +43,14 @@ public class VisualiseFX{
 	private Point3D[][][] fingerCoor = new Point3D[2][5][5]; // [hand][finger][joint]
 	private Point3D[] palmCoor = new Point3D[2];
 
-	private PolyLine3D[][] fingerLine = new PolyLine3D[2][5];
-	private PolyLine3D[] palmLine = new PolyLine3D[2];
+	//private PolyLine3D[][] fingerLine = new PolyLine3D[2][5];
+	private PolyCylinder3D[] palmLine = new PolyCylinder3D[2];
 
-	public VisualiseFX(){
-//		this.viewwidth = viewwidth;
-//		this.viewheight = viewheight;
-		
+	public VisualiseFX(){		
 		buildSubscene();
 	}
 	
 	public void buildSubscene() {
-
 		controller.addListener(listener);
 
 		root = new Group();
@@ -89,11 +86,6 @@ public class VisualiseFX{
 				th.start();
 			}
 		});
-
-//		stage.setScene(scene);
-//		stage.setTitle("SLT");
-//		stage.show();
-
 	}
 
 	/*
@@ -129,13 +121,13 @@ public class VisualiseFX{
 					fingerNode[i][j][k] = new VisSphere(fingerSize);
 					root.getChildren().add(fingerNode[i][j][k]);
 				}
-				fingerLine[i][j] = new PolyLine3D(getPoint3DArray(i, j), 3, Color.WHITE);
-				root.getChildren().add(fingerLine[i][j]);
+				//fingerLine[i][j] = new PolyLine3D(getPoint3DArray(i, j), 3, Color.WHITE);
+				//root.getChildren().add(fingerLine[i][j]);
 			}
 			palmCoor[i] = new Point3D(0, 0, -100);
 			palmNode[i] = new VisSphere(palmSize);
-			palmLine[i] = new PolyLine3D(getPoint3DArray(i), 3, Color.WHITE);
-			root.getChildren().addAll(palmNode[i], palmLine[i]);
+			palmLine[i] = new PolyCylinder3D(getPoint3DArray(i), 3, Color.WHITE);
+			root.getChildren().add(palmNode[i]);
 		}
 		// for better appearance, some nodes are hidden
 		fingerNode[0][1][4].setVisible(false);
@@ -165,6 +157,7 @@ public class VisualiseFX{
 				//fingerLine[i][j] = new PolyLine3D(getPoint3DArray(i, j), 3, Color.WHITE);
 			}
 			//palmLine[i] = new PolyLine3D(getPoint3DArray(i), 3, Color.WHITE);
+			palmLine[i].update(getPoint3DArray(i));
 			palmNode[i].setTranslate(palmCoor[i]);
 		}
 		
@@ -199,17 +192,17 @@ public class VisualiseFX{
 		// for the existing hands
 		for (; 0 <= i && i < hands.count(); i++) {
 			for (int j = 0; j < 5; j++) {
-				fingerCoor[i][j][0] = new Point3D(rangeConvert(hands.get(i).fingers().get(j).tipPosition()));
-				fingerCoor[i][j][1] = new Point3D(
-						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_DISTAL).prevJoint()));
-				fingerCoor[i][j][2] = new Point3D(
-						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_INTERMEDIATE).prevJoint()));
-				fingerCoor[i][j][3] = new Point3D(
-						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_PROXIMAL).prevJoint()));
-				fingerCoor[i][j][4] = new Point3D(
-						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_METACARPAL).prevJoint()));
+				fingerCoor[i][j][0] = rangeConvert(hands.get(i).fingers().get(j).tipPosition());
+				fingerCoor[i][j][1] = 
+						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_DISTAL).prevJoint());
+				fingerCoor[i][j][2] = 
+						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_INTERMEDIATE).prevJoint());
+				fingerCoor[i][j][3] = 
+						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_PROXIMAL).prevJoint());
+				fingerCoor[i][j][4] = 
+						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_METACARPAL).prevJoint());
 			}
-			palmCoor[i] = new Point3D(rangeConvert(hands.get(i).palmPosition()));
+			palmCoor[i] = rangeConvert(hands.get(i).palmPosition());
 		}
 		// for non-existing hands:
 		for (; 0 <= i && i < 2; i++) {
@@ -222,17 +215,18 @@ public class VisualiseFX{
 		}
 	}
 
-	public float[] rangeConvert(Vector LeapCoor) {
+	public Point3D rangeConvert(Vector LeapCoor) {
 		return rangeConvert(new float[] { LeapCoor.getX(), LeapCoor.getY(), LeapCoor.getZ() });
 	}
 
-	public float[] rangeConvert(float[] LeapValue) {
+	public Point3D rangeConvert(float[] LeapValue) {
 		double[] temp = new double[3];
 		for (int i = 0; i < 3; i++) {
 			temp[i] = (LeapValue[i] - leapStart[i]) * (appEnd[i] - appStart[i]) / (leapEnd[i] - leapStart[i])
 					+ appStart[i];
 		}
-		float[] appValue = { (float) temp[0], (float) temp[2], (float) temp[1] };
+//		float[] appValue = { (float) temp[0], (float) temp[2], (float) temp[1] };
+		Point3D appValue = new Point3D (temp[0], temp[2], temp[1]);
 
 		return appValue;
 	}
@@ -247,10 +241,6 @@ public class VisualiseFX{
 		return appValue;
 	}
 
-	
 	public SubScene getSubScene() { return subScene; } 
 	
-//	public static void main(String[] args) {
-//		launch(args);
-//	}
 }
