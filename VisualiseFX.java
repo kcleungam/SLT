@@ -1,28 +1,29 @@
-package visualpack;
+package visualizer;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.leapmotion.leap.Bone;
 import com.leapmotion.leap.Controller;
 import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.HandList;
 import com.leapmotion.leap.Vector;
-import database.SampleListener;
-import javafx.application.Application;
+import main.SampleListener;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Polyline;
-import javafx.stage.Stage;
+import javafx.geometry.Point3D;
 
-public class VisualiseFX extends Application {
+public class VisualiseFX{
 
 	static Controller controller = new Controller();
 	static SampleListener listener = new SampleListener();
-	
+
 	// constants
-	private final int viewwidth = 800;
-	private final int viewheight = 600;
-	private final int viewdepth = 600;
+	private int viewwidth = 800;
+	private int viewheight = 600;
+	private int viewdepth = 600;
 	private final int fingerSize = 10;
 	private final int palmSize = 25;
 
@@ -34,62 +35,59 @@ public class VisualiseFX extends Application {
 
 	// graphic-related
 	private Group root;
-	private Scene scene;
+	private SubScene subScene;
 
 	private VisSphere[][][] fingerNode = new VisSphere[2][5][5];
 	private VisSphere[] palmNode = new VisSphere[2];
 
-	private VisCoordinate[][][] fingerCoor = new VisCoordinate[2][5][5]; // [hand][finger][joint]
-	private VisCoordinate[] palmCoor = new VisCoordinate[2];
+	private Point3D[][][] fingerCoor = new Point3D[2][5][5]; // [hand][finger][joint]
+	private Point3D[] palmCoor = new Point3D[2];
 
-	@Override
-	public void start(final Stage stage) {
+	private PolyCylinder3D[][] fingerLine = new PolyCylinder3D[2][5];
+	private PolyCylinder3D[] palmLine = new PolyCylinder3D[2];
 
+	public VisualiseFX(){		
+		buildSubscene();
+	}
+	
+	public void buildSubscene() {
 		controller.addListener(listener);
-		
-		Polyline lines = new Polyline();
-		
+
 		root = new Group();
-		scene = new Scene(root, viewwidth, viewheight);
-		scene.setFill(Color.BLACK);
+		subScene = new SubScene(root, viewwidth, viewheight);
+		subScene.setFill(Color.BLACK);
 
 		lightSetting();
 
 		Camera camera = new PerspectiveCamera();
-		scene.setCamera(camera);
+		subScene.setCamera(camera);
 
 		initializeParam();
-		
-		Task<Void> task = new Task<Void>(){
+
+		Task<Void> task = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
-			while (true) {
-				try {
-					traceLM(controller.frame());
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+				while (true) {
+					try {
+						traceLM(controller.frame());
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
 			}
-		}};
-		
-		Platform.runLater(new Runnable(){
-            @Override
-            public void run() {
-            	Thread th = new Thread(task);
-            	th.setDaemon(true);
-            	th.start();
-            }}
-        );
-		
-		stage.setScene(scene);
-		stage.setTitle("SLT");
-		stage.show();
-		
+		};
+
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				Thread th = new Thread(task);
+				th.setDaemon(true);
+				th.start();
+			}
+		});
 	}
 
-	
-	
 	/*
 	 * graphic-related
 	 */
@@ -98,21 +96,18 @@ public class VisualiseFX extends Application {
 	 * initialize lights used in this app
 	 */
 	private void lightSetting() {
-		// Set up light source
-		PointLight light = new PointLight();
-		light.setColor(Color.WHITE);
+		// Creating Ambient Light
+		AmbientLight ambient = new AmbientLight();
+		ambient.setColor(Color.rgb(0, 255, 0, 0.6));
+		// Creating Point Light
+		PointLight point = new PointLight();
+		point.setColor(Color.rgb(255, 255, 255, 1));
+		point.setLayoutX(400);
+		point.setLayoutY(100);
+		point.setTranslateZ(-1100);
 
-		// Set up the ambient light
-		AmbientLight amblight = new AmbientLight();
-		amblight.setColor(Color.BLUE);
+		root.getChildren().addAll(ambient, point);
 
-		Group lightGroup = new Group();
-		lightGroup.getChildren().add(light);
-		lightGroup.getChildren().add(amblight);
-		root.getChildren().add(lightGroup);
-		lightGroup.setTranslateX(viewwidth*0.15);
-		lightGroup.setTranslateY(viewheight*0.15);
-		lightGroup.setTranslateZ(-viewdepth*0.5);
 	}
 
 	/*
@@ -122,20 +117,33 @@ public class VisualiseFX extends Application {
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 5; j++) {
 				for (int k = 0; k < 5; k++) {
+					fingerCoor[i][j][k] = new Point3D(0, 0, -100);
 					fingerNode[i][j][k] = new VisSphere(fingerSize);
 					root.getChildren().add(fingerNode[i][j][k]);
 				}
+				fingerLine[i][j] = new PolyCylinder3D(getPoint3DArray(i, j), 5, Color.WHITE);
+				root.getChildren().addAll(fingerLine[i][j].getLine());
 			}
+			palmCoor[i] = new Point3D(0, 0, -100);
 			palmNode[i] = new VisSphere(palmSize);
+			palmLine[i] = new PolyCylinder3D(getPoint3DArray(i), 7, Color.WHITE);
+			root.getChildren().addAll(palmLine[i].getLine());
 			root.getChildren().add(palmNode[i]);
 		}
+		// for better appearance, some nodes are hidden
+		fingerNode[0][1][4].setVisible(false);
+		fingerNode[0][2][4].setVisible(false);
+		fingerNode[0][3][4].setVisible(false);
+		fingerNode[1][1][4].setVisible(false);
+		fingerNode[1][2][4].setVisible(false);
+		fingerNode[1][3][4].setVisible(false);
 		// scene.addChild(lineShape);
 	}
 
 	/*
 	 * add spheres by coordinates
 	 */
-	public void addSphere(VisCoordinate coordinate, float size) {
+	public void addSphere(Point3D coordinate, float size) {
 		VisSphere sphere = new VisSphere(coordinate, size);
 		root.getChildren().add(sphere);
 	}
@@ -147,11 +155,12 @@ public class VisualiseFX extends Application {
 				for (int k = 0; k < 5; k++) {
 					fingerNode[i][j][k].setTranslate(fingerCoor[i][j][k]);
 				}
+				fingerLine[i][j].update(getPoint3DArray(i,j));
 			}
+			palmLine[i].update(getPoint3DArray(i));
 			palmNode[i].setTranslate(palmCoor[i]);
 		}
-		// update lines
-		// geometry.setCoordinates(0, getPointArray());
+		
 	}
 
 	public void traceLM(Frame frame) {
@@ -163,6 +172,17 @@ public class VisualiseFX extends Application {
 	 * calculation related
 	 */
 
+	public ArrayList<Point3D> getPoint3DArray(int palm) {
+		return new ArrayList<Point3D>(Arrays.asList(new Point3D[] { fingerCoor[palm][1][3], fingerCoor[palm][2][3],
+				fingerCoor[palm][3][3], fingerCoor[palm][4][3], fingerCoor[palm][4][4], fingerCoor[palm][0][4],
+				fingerCoor[palm][1][3] }));
+	}
+
+	public ArrayList<Point3D> getPoint3DArray(int palm, int finger) {
+		return new ArrayList<Point3D>(Arrays.asList(new Point3D[] { fingerCoor[palm][finger][0],
+				fingerCoor[palm][finger][1], fingerCoor[palm][finger][2], fingerCoor[palm][finger][3] }));
+	}
+
 	/*
 	 * set the internal fingerCoor and palmCoor according the LM frame
 	 */
@@ -172,45 +192,55 @@ public class VisualiseFX extends Application {
 		// for the existing hands
 		for (; 0 <= i && i < hands.count(); i++) {
 			for (int j = 0; j < 5; j++) {
-				fingerCoor[i][j][0] = new VisCoordinate(rangeConvert(hands.get(i).fingers().get(j).tipPosition()));
-				fingerCoor[i][j][1] = new VisCoordinate(
-						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_DISTAL).prevJoint()));
-				fingerCoor[i][j][2] = new VisCoordinate(
-						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_INTERMEDIATE).prevJoint()));
-				fingerCoor[i][j][3] = new VisCoordinate(
-						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_PROXIMAL).prevJoint()));
-				fingerCoor[i][j][4] = new VisCoordinate(
-						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_METACARPAL).prevJoint()));
+				fingerCoor[i][j][0] = rangeConvert(hands.get(i).fingers().get(j).tipPosition());
+				fingerCoor[i][j][1] = 
+						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_DISTAL).prevJoint());
+				fingerCoor[i][j][2] = 
+						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_INTERMEDIATE).prevJoint());
+				fingerCoor[i][j][3] = 
+						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_PROXIMAL).prevJoint());
+				fingerCoor[i][j][4] = 
+						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_METACARPAL).prevJoint());
 			}
-			palmCoor[i] = new VisCoordinate(rangeConvert(hands.get(i).palmPosition()));
+			palmCoor[i] = rangeConvert(hands.get(i).palmPosition());
 		}
 		// for non-existing hands:
 		for (; 0 <= i && i < 2; i++) {
 			for (int j = 0; j < 5; j++) {
 				for (int k = 0; k < 5; k++) {
-					fingerCoor[i][j][k] = new VisCoordinate(0, 0, -100);
+					fingerCoor[i][j][k] = new Point3D(0, 0, -100);
 				}
 			}
-			palmCoor[i] = new VisCoordinate(0, 0, -100);
+			palmCoor[i] = new Point3D(0, 0, -100);
 		}
 	}
 
-	public double[] rangeConvert(Vector LeapCoor) {
+	public Point3D rangeConvert(Vector LeapCoor) {
 		return rangeConvert(new float[] { LeapCoor.getX(), LeapCoor.getY(), LeapCoor.getZ() });
 	}
 
-	public double[] rangeConvert(float[] LeapValue) {
+	public Point3D rangeConvert(float[] LeapValue) {
 		double[] temp = new double[3];
 		for (int i = 0; i < 3; i++) {
 			temp[i] = (LeapValue[i] - leapStart[i]) * (appEnd[i] - appStart[i]) / (leapEnd[i] - leapStart[i])
 					+ appStart[i];
 		}
-		double[] appValue = { temp[0], temp[2], temp[1] };
+//		float[] appValue = { (float) temp[0], (float) temp[2], (float) temp[1] };
+		Point3D appValue = new Point3D (temp[0], temp[2], temp[1]);
 
 		return appValue;
 	}
 	
-	public static void main(String[] args) {
-		launch(args);
+	public float[] normalizer (float[] LeapValue) {
+		double[] temp = new double[3];
+		for (int i = 0; i < 3; i++) {
+			temp[i] = LeapValue[i]+appEnd[i]/2;
+		}
+		float[] appValue = { (float) temp[0], (float) temp[2], (float) temp[1] };
+
+		return appValue;
 	}
+
+	public SubScene getSubScene() { return subScene; } 
+	
 }
