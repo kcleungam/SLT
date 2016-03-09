@@ -19,7 +19,7 @@ public class LRO {
 
     @JsonCreator
     private LRO(@JsonProperty("leftPalmOrigin") Coordinate left,@JsonProperty("rightPalmOrigin") Coordinate right){
-        if(left==null||right==null) throw new NullPointerException();
+        //if(left==null||right==null) throw new NullPointerException();
         leftPalmOrigin=left;
         rightPalmOrigin=right;
     }

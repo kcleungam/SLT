@@ -19,7 +19,7 @@ public class Sign {
 	@MongoObjectId
 	private String _id;
 	@JsonProperty("name")
-	String name;//unique field
+	private String name;//unique field
 	@JsonProperty("samples")
 	private HashSet<Sample> samples=new HashSet<Sample>();//samples should not repeat
 
