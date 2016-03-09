@@ -43,7 +43,7 @@ public class VisualiseFX{
 	private Point3D[][][] fingerCoor = new Point3D[2][5][5]; // [hand][finger][joint]
 	private Point3D[] palmCoor = new Point3D[2];
 
-	//private PolyLine3D[][] fingerLine = new PolyLine3D[2][5];
+	private PolyCylinder3D[][] fingerLine = new PolyCylinder3D[2][5];
 	private PolyCylinder3D[] palmLine = new PolyCylinder3D[2];
 
 	public VisualiseFX(){		
@@ -121,12 +121,13 @@ public class VisualiseFX{
 					fingerNode[i][j][k] = new VisSphere(fingerSize);
 					root.getChildren().add(fingerNode[i][j][k]);
 				}
-				//fingerLine[i][j] = new PolyLine3D(getPoint3DArray(i, j), 3, Color.WHITE);
-				//root.getChildren().add(fingerLine[i][j]);
+				fingerLine[i][j] = new PolyCylinder3D(getPoint3DArray(i, j), 5, Color.WHITE);
+				root.getChildren().addAll(fingerLine[i][j].getLine());
 			}
 			palmCoor[i] = new Point3D(0, 0, -100);
 			palmNode[i] = new VisSphere(palmSize);
-			palmLine[i] = new PolyCylinder3D(getPoint3DArray(i), 3, Color.WHITE);
+			palmLine[i] = new PolyCylinder3D(getPoint3DArray(i), 7, Color.WHITE);
+			root.getChildren().addAll(palmLine[i].getLine());
 			root.getChildren().add(palmNode[i]);
 		}
 		// for better appearance, some nodes are hidden
@@ -154,9 +155,8 @@ public class VisualiseFX{
 				for (int k = 0; k < 5; k++) {
 					fingerNode[i][j][k].setTranslate(fingerCoor[i][j][k]);
 				}
-				//fingerLine[i][j] = new PolyLine3D(getPoint3DArray(i, j), 3, Color.WHITE);
+				fingerLine[i][j].update(getPoint3DArray(i,j));
 			}
-			//palmLine[i] = new PolyLine3D(getPoint3DArray(i), 3, Color.WHITE);
 			palmLine[i].update(getPoint3DArray(i));
 			palmNode[i].setTranslate(palmCoor[i]);
 		}
