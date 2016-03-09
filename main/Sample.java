@@ -79,7 +79,7 @@ public class Sample {
         initialFingerCount = this.allFrames.get(0).fingerData.count;
         initialPalmCount=this.allFrames.get(0).palmData.count;
         initialHandType = this.allFrames.get(0).handType;
-
+        //OneFrame first_frame=this.allFrames.get(0);
         lro = new LRO();
         for(OneFrame frame: allFrames){
             averageHandNumber = averageHandNumber + (double)frame.getPalmData().count;
@@ -135,7 +135,7 @@ public class Sample {
     }
     @JsonSetter("lro")
     public void setLRO(LRO lro){
-        if(lro==null) throw new NullPointerException();
+        //if(lro==null) throw new NullPointerException();
         this.lro=lro;
     }
     @JsonSetter("averageHandNumber")

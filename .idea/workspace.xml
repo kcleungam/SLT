@@ -2,137 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9273cb61-097c-4eb3-84ac-3a458ed1eb63" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UI/NewInterface.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/.name" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/compiler.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/copyright/profiles_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/libraries/lib.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/uiDesigner.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/vcs.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/.project" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Coordinate.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/DTW$LRO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/DTW.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Data.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Database.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/FingerData.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/HandType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$10$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$10.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$11.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$12$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$12.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$13.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$14.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$15.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$3.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$4.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$5.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$6$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$6.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$7$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$7.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$8$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$8.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$9$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$9.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$Setting$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface$Setting.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Interface.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceFX.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController$1$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController$10.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController$2.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController$3$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController$3.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController$4.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController$5$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController$5.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController$6.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController$7$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController$7.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController$8.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController$9$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController$9.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceFXController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/InterfaceStyle.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/OneFrame.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/PalmData.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/SLT.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/SLT.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Sample$OneFrame$FingerData.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Sample$OneFrame$PalmData.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Sample.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/SampleListener.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Sign.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/SignBank.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Speech$LANGUAGE.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Speech.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/TextAreaPrintStream.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/Visualizer.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/hs_err_pid10008.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/hs_err_pid10552.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/hs_err_pid8108.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/hs_err_pid8492.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/hs_err_pid8752.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/interfaceFX.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/LeapJava.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/bson4jackson-2.5.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/j3d/bin/j3dcore-ogl.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/j3d/lib/ext/j3dcore.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/j3d/lib/ext/j3dutils.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/j3d/lib/ext/vecmath.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/jackson-annotations-2.6.3.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/jackson-core-2.6.3.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/jackson-databind-2.6.3.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/jongo-1.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/mongo-java-driver-3.1.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/x64/Leap.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/x64/LeapCSharp.NET3.5.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/x64/LeapCSharp.NET4.0.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/x64/LeapCSharp.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/x64/LeapJava.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/x64/LeapPython.pyd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/x64/msvcp120.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/x64/msvcr120.dll" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Coordinate.java" afterPath="$PROJECT_DIR$/data/Coordinate.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/DTW.java" afterPath="$PROJECT_DIR$/main/DTW.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Data.java" afterPath="$PROJECT_DIR$/data/Data.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Database.java" afterPath="$PROJECT_DIR$/main/Database.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/FingerData.java" afterPath="$PROJECT_DIR$/data/FingerData.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HandType.java" afterPath="$PROJECT_DIR$/data/HandType.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Interface.java" afterPath="$PROJECT_DIR$/UI/Interface.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/InterfaceFX.java" afterPath="$PROJECT_DIR$/UI/InterfaceFX.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/InterfaceFXController.java" afterPath="$PROJECT_DIR$/UI/InterfaceFXController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/InterfaceStyle.css" afterPath="$PROJECT_DIR$/UI/InterfaceStyle.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/LRO.java" afterPath="$PROJECT_DIR$/data/LRO.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/OneFrame.java" afterPath="$PROJECT_DIR$/data/OneFrame.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/PalmData.java" afterPath="$PROJECT_DIR$/data/PalmData.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/SLT.java" afterPath="$PROJECT_DIR$/main/SLT.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Sample.java" afterPath="$PROJECT_DIR$/main/Sample.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/SampleListener.java" afterPath="$PROJECT_DIR$/main/SampleListener.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Sign.java" afterPath="$PROJECT_DIR$/main/Sign.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/SignBank.java" afterPath="$PROJECT_DIR$/main/SignBank.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Speech.java" afterPath="$PROJECT_DIR$/UI/Speech.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/TextAreaPrintStream.java" afterPath="$PROJECT_DIR$/UI/TextAreaPrintStream.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Visualizer.java" afterPath="$PROJECT_DIR$/UI/Visualizer.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/hs_err_pid10008.log" afterPath="$PROJECT_DIR$/log/hs_err_pid10008.log" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/hs_err_pid10552.log" afterPath="$PROJECT_DIR$/log/hs_err_pid10552.log" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/hs_err_pid8108.log" afterPath="$PROJECT_DIR$/log/hs_err_pid8108.log" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/hs_err_pid8492.log" afterPath="$PROJECT_DIR$/log/hs_err_pid8492.log" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/hs_err_pid8752.log" afterPath="$PROJECT_DIR$/log/hs_err_pid8752.log" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/interfaceFX.fxml" afterPath="$PROJECT_DIR$/UI/interfaceFX.fxml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/swipe.mp3" afterPath="$PROJECT_DIR$/audio/swipe.mp3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/UI/NewInterface.java" afterPath="$PROJECT_DIR$/UI/NewInterface.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/LRO.java" afterPath="$PROJECT_DIR$/data/LRO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/Sample.java" afterPath="$PROJECT_DIR$/main/Sample.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/Sign.java" afterPath="$PROJECT_DIR$/main/Sign.java" />
     </list>
     <ignored path="SLT.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -154,30 +28,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="NewInterface.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/UI/NewInterface.java">
+      <file leaf-file-name="InterfaceFXController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UI/InterfaceFXController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.08571429">
-              <caret line="15" column="47" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="270" column="53" selection-start-line="270" selection-start-column="53" selection-end-line="270" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#602#603#0" expanded="true" />
-                <element signature="e#630#631#0" expanded="true" />
+                <element signature="e#8263#8264#0" expanded="true" />
+                <element signature="e#8334#8335#0" expanded="true" />
+                <element signature="method#trainButtonAction#0;class#InterfaceFXController#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gui.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/UI/gui.fxml">
+      <file leaf-file-name="NewInterface.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/UI/NewInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.6724138">
-              <caret line="37" column="63" selection-start-line="37" selection-start-column="63" selection-end-line="37" selection-end-column="63" />
-              <folding />
+            <state vertical-scroll-proportion="0.7608347">
+              <caret line="80" column="8" selection-start-line="80" selection-start-column="8" selection-end-line="80" selection-end-column="8" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
           </provider>
         </entry>
       </file>
@@ -185,17 +59,8 @@
         <entry file="file://$PROJECT_DIR$/UI/Interface.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="618" column="132" selection-start-line="618" selection-start-column="132" selection-end-line="618" selection-end-column="132" />
-              <folding>
-                <element signature="e#1661#1662#0" expanded="false" />
-                <element signature="e#1697#1698#0" expanded="false" />
-                <element signature="e#29605#29606#0" expanded="false" />
-                <element signature="e#29657#29658#0" expanded="false" />
-                <element signature="e#29981#29982#0" expanded="false" />
-                <element signature="e#30023#30024#0" expanded="false" />
-                <element signature="e#30296#30297#0" expanded="false" />
-                <element signature="e#30337#30338#0" expanded="false" />
-              </folding>
+              <caret line="660" column="26" selection-start-line="660" selection-start-column="26" selection-end-line="660" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -253,17 +118,18 @@
         <option value="$PROJECT_DIR$/data/PalmData.java" />
         <option value="$PROJECT_DIR$/Sample.java" />
         <option value="$PROJECT_DIR$/data/Data.java" />
-        <option value="$PROJECT_DIR$/data/LRO.java" />
         <option value="$PROJECT_DIR$/UI/TextAreaPrintStream.java" />
         <option value="$PROJECT_DIR$/UI/Speech.java" />
-        <option value="$PROJECT_DIR$/main/Sample.java" />
         <option value="$PROJECT_DIR$/main/DTW.java" />
         <option value="$PROJECT_DIR$/UI/Interface.java" />
-        <option value="$PROJECT_DIR$/main/Sign.java" />
         <option value="$PROJECT_DIR$/main/SLT.java" />
         <option value="$PROJECT_DIR$/UI/Visualizer.java" />
-        <option value="$PROJECT_DIR$/UI/InterfaceFXController.java" />
         <option value="$PROJECT_DIR$/UI/gui.fxml" />
+        <option value="$PROJECT_DIR$/UI/test.fxml" />
+        <option value="$PROJECT_DIR$/UI/InterfaceFXController.java" />
+        <option value="$PROJECT_DIR$/main/Sign.java" />
+        <option value="$PROJECT_DIR$/data/LRO.java" />
+        <option value="$PROJECT_DIR$/main/Sample.java" />
         <option value="$PROJECT_DIR$/UI/NewInterface.java" />
       </list>
     </option>
@@ -306,8 +172,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -326,9 +193,50 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SLT" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SLT" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SLT" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SLT" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SLT" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SLT" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -384,21 +292,6 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="Visualizer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="Visualizer" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="SLT" />
-      <envs />
-      <method />
-    </configuration>
     <configuration default="false" name="InterfaceFX" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="InterfaceFX" />
@@ -422,6 +315,26 @@
         </pattern>
       </extension>
       <option name="MAIN_CLASS_NAME" value="UI.NewInterface" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="SLT" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="SLT (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="main.SLT" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -709,17 +622,17 @@
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Application.SLT" />
       <item index="1" class="java.lang.String" itemvalue="Application.Interface" />
-      <item index="2" class="java.lang.String" itemvalue="Application.Visualizer" />
-      <item index="3" class="java.lang.String" itemvalue="Application.InterfaceFX" />
-      <item index="4" class="java.lang.String" itemvalue="Application.NewInterface" />
+      <item index="2" class="java.lang.String" itemvalue="Application.InterfaceFX" />
+      <item index="3" class="java.lang.String" itemvalue="Application.NewInterface" />
+      <item index="4" class="java.lang.String" itemvalue="Application.SLT (1)" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Application.NewInterface" />
-        <item index="1" class="java.lang.String" itemvalue="Application.SLT" />
-        <item index="2" class="java.lang.String" itemvalue="Application.Interface" />
-        <item index="3" class="java.lang.String" itemvalue="Application.InterfaceFX" />
-        <item index="4" class="java.lang.String" itemvalue="Application.Visualizer" />
+        <item index="1" class="java.lang.String" itemvalue="Application.SLT (1)" />
+        <item index="2" class="java.lang.String" itemvalue="Application.SLT" />
+        <item index="3" class="java.lang.String" itemvalue="Application.Interface" />
+        <item index="4" class="java.lang.String" itemvalue="Application.InterfaceFX" />
       </list>
     </recent_temporary>
   </component>
@@ -824,27 +737,27 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.49573562" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44854072" sideWeight="0.4978678" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.8402458" sideWeight="0.5041322" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32792208" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14900154" sideWeight="0.49586776" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286385" sideWeight="0.4896694" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1755102" sideWeight="0.4945227" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13978495" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1838843" sideWeight="0.5054773" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23376623" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44785276" sideWeight="0.4978678" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47158217" sideWeight="0.49586776" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4362519" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23376623" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -899,32 +812,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/UI/interfaceFX.fxml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="13" selection-start-line="58" selection-start-column="13" selection-end-line="58" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/InterfaceStyle.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="27" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/Interface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="297" column="0" selection-start-line="297" selection-start-column="0" selection-end-line="297" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UI/InterfaceFX.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -938,7 +825,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#createButtonAction#0;class#InterfaceFXController#0" expanded="false" />
+            <element signature="e#8263#8264#0" expanded="true" />
+            <element signature="e#8334#8335#0" expanded="true" />
             <element signature="method#trainButtonAction#0;class#InterfaceFXController#0" expanded="false" />
           </folding>
         </state>
@@ -983,7 +871,8 @@
           <caret line="419" column="61" selection-start-line="419" selection-start-column="61" selection-end-line="419" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#createButtonAction#0;class#InterfaceFXController#0" expanded="false" />
+            <element signature="e#8263#8264#0" expanded="true" />
+            <element signature="e#8334#8335#0" expanded="true" />
             <element signature="method#trainButtonAction#0;class#InterfaceFXController#0" expanded="false" />
           </folding>
         </state>
@@ -1028,7 +917,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#createButtonAction#0;class#InterfaceFXController#0" expanded="false" />
+            <element signature="e#8263#8264#0" expanded="true" />
+            <element signature="e#8334#8335#0" expanded="true" />
             <element signature="method#trainButtonAction#0;class#InterfaceFXController#0" expanded="false" />
           </folding>
         </state>
@@ -1066,7 +956,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#createButtonAction#0;class#InterfaceFXController#0" expanded="false" />
+            <element signature="e#8263#8264#0" expanded="true" />
+            <element signature="e#8334#8335#0" expanded="true" />
             <element signature="method#trainButtonAction#0;class#InterfaceFXController#0" expanded="false" />
           </folding>
         </state>
@@ -1105,19 +996,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/Coordinate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="18" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/FingerData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="59" column="1" selection-start-line="59" selection-start-column="1" selection-end-line="59" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1125,19 +1007,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/LRO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="67" selection-start-line="48" selection-start-column="67" selection-end-line="48" selection-end-column="67" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#862#863#0" expanded="true" />
-            <element signature="e#899#900#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1145,7 +1014,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="17" column="32" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1153,7 +1021,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="39" column="35" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1161,7 +1028,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1169,7 +1035,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1177,7 +1042,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1185,7 +1049,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1193,15 +1056,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/InterfaceFX.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="28" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1220,7 +1074,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1" column="33" selection-start-line="1" selection-start-column="27" selection-end-line="1" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1228,7 +1081,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1240,86 +1092,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/Database.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.030546624">
-          <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2852#2865#0" expanded="false" />
-            <element signature="e#3408#3421#0" expanded="false" />
-            <element signature="e#3813#3826#0" expanded="false" />
-            <element signature="e#4265#4279#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/SignBank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.030546624">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#232#245#0" expanded="false" />
-            <element signature="e#1664#1665#0" expanded="false" />
-            <element signature="e#1693#1694#0" expanded="false" />
-            <element signature="e#1766#1767#0" expanded="false" />
-            <element signature="e#1808#1809#0" expanded="false" />
-            <element signature="e#2073#2074#0" expanded="false" />
-            <element signature="e#2101#2102#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/Sample.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.69453377">
-          <caret line="158" column="67" selection-start-line="158" selection-start-column="67" selection-end-line="158" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/DTW.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.530546">
           <caret line="149" column="180" selection-start-line="149" selection-start-column="180" selection-end-line="149" selection-end-column="180" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/Sign.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.68488747">
-          <caret line="94" column="49" selection-start-line="94" selection-start-column="49" selection-end-line="94" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/SLT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="191" column="120" selection-start-line="191" selection-start-column="120" selection-end-line="191" selection-end-column="120" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/Visualizer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="247" column="16" selection-start-line="247" selection-start-column="16" selection-end-line="247" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/InterfaceFXController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26848873">
-          <caret line="152" column="15" selection-start-line="152" selection-start-column="15" selection-end-line="152" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#createButtonAction#0;class#InterfaceFXController#0" expanded="false" />
-            <element signature="method#trainButtonAction#0;class#InterfaceFXController#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1327,31 +1103,31 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="10" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/Interface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="618" column="132" selection-start-line="618" selection-start-column="132" selection-end-line="618" selection-end-column="132" />
-          <folding>
-            <element signature="e#1661#1662#0" expanded="false" />
-            <element signature="e#1697#1698#0" expanded="false" />
-            <element signature="e#29605#29606#0" expanded="false" />
-            <element signature="e#29657#29658#0" expanded="false" />
-            <element signature="e#29981#29982#0" expanded="false" />
-            <element signature="e#30023#30024#0" expanded="false" />
-            <element signature="e#30296#30297#0" expanded="false" />
-            <element signature="e#30337#30338#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/UI/gui.fxml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="63" selection-start-line="36" selection-start-column="63" selection-end-line="36" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/jdk1.8.0_74/demo/javafx_samples/src/MandelbrotSet/src/demo/parallel/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.6724138">
-          <caret line="37" column="63" selection-start-line="37" selection-start-column="63" selection-end-line="37" selection-end-column="63" />
+        <state vertical-scroll-proportion="-39.954285">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/test.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.6206896">
+          <caret line="8" column="236" selection-start-line="8" selection-start-column="236" selection-end-line="8" selection-end-column="236" />
           <folding />
         </state>
       </provider>
@@ -1359,14 +1135,112 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UI/NewInterface.java">
+    <entry file="jar://$PROJECT_DIR$/lib/LeapJava.jar!/com/leapmotion/leap/Controller.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.08571429">
-          <caret line="15" column="47" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
+        <state vertical-scroll-proportion="-3.9176471">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/Visualizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/Coordinate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="48" column="18" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/Sign.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="39" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/SignBank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/LRO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="5.6">
+          <caret line="12" column="34" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/Sample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="137" column="16" selection-start-line="137" selection-start-column="16" selection-end-line="137" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/SLT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.3">
+          <caret line="205" column="38" selection-start-line="205" selection-start-column="37" selection-end-line="205" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/InterfaceFX.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3968254">
+          <caret line="21" column="28" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/Interface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="660" column="26" selection-start-line="660" selection-start-column="26" selection-end-line="660" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/InterfaceFXController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="270" column="53" selection-start-line="270" selection-start-column="53" selection-end-line="270" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#602#603#0" expanded="true" />
-            <element signature="e#630#631#0" expanded="true" />
+            <element signature="e#8263#8264#0" expanded="true" />
+            <element signature="e#8334#8335#0" expanded="true" />
+            <element signature="method#trainButtonAction#0;class#InterfaceFXController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/NewInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7608347">
+          <caret line="80" column="8" selection-start-line="80" selection-start-column="8" selection-end-line="80" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
