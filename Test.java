@@ -1,4 +1,4 @@
-package visualizer;
+//package visualizer;
 
 import javafx.application.Application;
 import javafx.scene.Group;

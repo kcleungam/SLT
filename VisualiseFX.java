@@ -1,4 +1,4 @@
-package visualizer;
+//package visualizer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import com.leapmotion.leap.Controller;
 import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.HandList;
 import com.leapmotion.leap.Vector;
-import main.SampleListener;
+//import main.SampleListener;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.*;

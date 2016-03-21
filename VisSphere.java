@@ -1,7 +1,7 @@
 /**
  * This class adds several functions that should be used in this program.
  */
-package visualizer;
+//package visualizer;
 
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;

@@ -2,7 +2,7 @@
  * This coordinate is for visual pack internal use only, 
  * differ from the database one
  */
-package visualpack;
+//package visualpack;
 
 /**
  * @author Jacky
