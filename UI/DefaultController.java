@@ -6,6 +6,8 @@ package UI;
  * For other operations, please goto UI.NewInterface.java
  */
 
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.EventHandler;
@@ -28,6 +30,8 @@ import javafx.util.Callback;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,15 +44,18 @@ public class DefaultController implements Initializable{
     @FXML private SubScene visualiser,visualiserfx;
     @FXML private Group test;
     @FXML private Tab controlTab,loggingTab,dtwTab;
-    static private Stage countdown=new Stage();
+    private Stage countdown=new Stage();
 
     /* Communication to NewInterface instance */
     private NewInterface application;
+    private int countdownTime;
+    private DefaultController myself;
 
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
+        myself=this;
         setList(false);
         log("OK");
     }
@@ -87,25 +94,28 @@ public class DefaultController implements Initializable{
 
     /**
      * logging rich text in logging tab
-     * @param message
+     * @param text
      */
-    public void log(Text message){//create a new line for your each time
-        loggingArea.getChildren().add(message);
+    public void log(Text text){//create a new line for your each time
+        String message=text.getText();
+        Character lastChar=message.charAt(message.length()-1);
+        if(!lastChar.equals('\n'))
+            text.setText(message+"\n");
+        loggingArea.getChildren().add(text);
     }
 
     private void invokeCountdown(){
-        try{
+        try{//load the countdown windows from fxml file
             FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("countdown.fxml"));
             fxmlLoader.setControllerFactory(new Callback<Class<?>, Object>() {
                 @Override
                 public Object call(Class<?> param) {
                     CountdownController product=new CountdownController();
-                    product.setApp(application);
+                    product.setApp(myself);
                     return product;
                 }
             });
             Parent root=fxmlLoader.load();
-
             Scene scene=new Scene(root);
             countdown.setScene(scene);
             countdown.setAlwaysOnTop(true);
@@ -119,7 +129,7 @@ public class DefaultController implements Initializable{
         }catch(Exception ex){
             Logger.getLogger(NewInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("here");
-        //countdown.close();
     }
+
+    public void closeCountdown(){countdown.close();}
 }
