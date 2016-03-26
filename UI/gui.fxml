@@ -5,16 +5,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.collections.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.NewInterface">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.DefaultController">
    <children>
       <MenuBar prefHeight="25.0" prefWidth="600.0">
         <menus>
-          <Menu mnemonicParsing="false" text="System">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#exitInterface" text="Close" />
-            </items>
-          </Menu>
+          <Menu mnemonicParsing="false" text="System" />
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />
@@ -24,7 +21,7 @@
       </MenuBar>
       <TabPane layoutY="25.0" prefHeight="375.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab closable="false" text="Control">
+          <Tab fx:id="controlTab" closable="false" text="Control">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0">
                      <children>
@@ -34,16 +31,21 @@
                           </root>
                         </SubScene>
                         <Label layoutX="14.0" layoutY="14.0" text="List of gestures" />
-                        <ListView fx:id="gestureList" layoutX="14.0" layoutY="29.0" prefHeight="226.0" prefWidth="172.0" />
                         <Label layoutX="14.0" layoutY="271.0" text="Name of gesture" />
                         <TextField fx:id="inputField" layoutX="14.0" layoutY="286.0" prefHeight="23.0" prefWidth="172.0" promptText="Enter gesture name here" />
                         <Button fx:id="addButton" layoutX="14.0" layoutY="309.0" mnemonicParsing="false" onAction="#addButtonAction" text="Add/Train" textAlignment="CENTER" />
                         <Group fx:id="test" layoutX="200.0" />
+                        <ListView fx:id="gestureList" layoutX="14.0" layoutY="29.0" prefHeight="226.0" prefWidth="172.0">
+                            <!--<items>
+                                <FXCollections fx:id="list" fx:factory="observableArrayList">
+                                </FXCollections>
+                            </items>-->
+                        </ListView>
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab closable="false" text="Logging">
+          <Tab fx:id="loggingTab" closable="false" text="Logging">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0">
                      <children>
@@ -52,7 +54,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="DTW">
+            <Tab fx:id="dtwTab" text="DTW">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
