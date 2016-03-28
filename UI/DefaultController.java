@@ -41,7 +41,7 @@ public class DefaultController implements Initializable{
     @FXML private TextField inputField;
     @FXML private Button addButton;
     @FXML private TextFlow loggingArea;
-    @FXML private SubScene visualiser,visualiserfx;
+    @FXML private SubScene visualiser;
     @FXML private Group test;
     @FXML private Tab controlTab,loggingTab,dtwTab;
     private Stage countdown=new Stage();
@@ -56,6 +56,7 @@ public class DefaultController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources){
         myself=this;
+        visualiser=application.Visualiser.getSubScene();
         setList(false);
         log("OK");
     }

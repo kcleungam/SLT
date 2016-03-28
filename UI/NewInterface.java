@@ -11,17 +11,21 @@ package UI;
 
 import com.leapmotion.leap.Controller;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.SubScene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import main.*;
+import visualizer.VisualiseFX;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -45,7 +49,8 @@ public class NewInterface extends Application{
     private static Stage stage;
     private NewInterface myself;
 
-
+    /* Visualiser */
+    public VisualiseFX Visualiser = new VisualiseFX();
 
     public static void main(String[] args){
         launch(args);
@@ -68,6 +73,16 @@ public class NewInterface extends Application{
         stage=primaryStage;
         myself=this;
 
+        // new thread will be run after the window is started
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Thread th = new Thread(VisTracing);
+                th.setDaemon(true);
+                th.start();
+            }
+        });
+
         //initialize the controller
         try{
             FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("gui.fxml"));
@@ -81,6 +96,9 @@ public class NewInterface extends Application{
             });
             Parent root=fxmlLoader.load();
             Scene scene=new Scene(root, 600, 400);
+//            Group visgp = new Group();
+//            Visual = new SubScene(visgp, 300, 200);
+//            visgp.getChildren().add(Visualiser.getSubScene());
             stage.setScene(scene);
             stage.setTitle("Sign Language Translator");
             stage.show();
@@ -89,7 +107,20 @@ public class NewInterface extends Application{
         }
     }
 
-
+    /* Thread updating visualizer from LMC */
+    protected Task<Void> VisTracing = new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+            while (true) {
+                try {
+                    Visualiser.traceLM(controller.frame());
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
 
     /* helper functions for other controllers */
 

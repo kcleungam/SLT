@@ -17,9 +17,6 @@ import javafx.geometry.Point3D;
 
 public class VisualiseFX{
 
-	static Controller controller = new Controller();
-	static SampleListener listener = new SampleListener();
-
 	// constants
 	private int viewwidth = 800;
 	private int viewheight = 600;
@@ -51,8 +48,6 @@ public class VisualiseFX{
 	}
 	
 	public void buildSubscene() {
-		controller.addListener(listener);
-
 		root = new Group();
 		subScene = new SubScene(root, viewwidth, viewheight);
 		subScene.setFill(Color.BLACK);
@@ -63,29 +58,6 @@ public class VisualiseFX{
 		subScene.setCamera(camera);
 
 		initializeParam();
-
-		Task<Void> task = new Task<Void>() {
-			@Override
-			protected Void call() throws Exception {
-				while (true) {
-					try {
-						traceLM(controller.frame());
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		};
-
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				Thread th = new Thread(task);
-				th.setDaemon(true);
-				th.start();
-			}
-		});
 	}
 
 	/*
@@ -225,10 +197,7 @@ public class VisualiseFX{
 			temp[i] = (LeapValue[i] - leapStart[i]) * (appEnd[i] - appStart[i]) / (leapEnd[i] - leapStart[i])
 					+ appStart[i];
 		}
-//		float[] appValue = { (float) temp[0], (float) temp[2], (float) temp[1] };
-		Point3D appValue = new Point3D (temp[0], temp[2], temp[1]);
-
-		return appValue;
+		return new Point3D (temp[0], temp[2], temp[1]);
 	}
 	
 	public float[] normalizer (float[] LeapValue) {
