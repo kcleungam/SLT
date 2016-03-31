@@ -18,12 +18,12 @@ public class DTW{
     public static int minFrame = 35;
     public static int cutFrame = 10;   // The number of frame can be cut off on order to find the best ending of Sample
 
-    public static double globalThreshold = 300; // The maximum distance between rSample and stored sample which can be recognize
+    public static double globalThreshold = 200; // The maximum distance between rSample and stored sample which can be recognize
     // If the bestMatch > globalThreshold, then unknown gesture
 
     public double localThreshold = Double.POSITIVE_INFINITY;   // The distance between sample and one of the stored sample
 
-    public double adjust = 50;     // The adjustment according to the palm, 50 = 5 cm
+    public double adjust = 40;     // The adjustment according to the palm, 50 = 5 cm
     public double punishment = 150; // The number which add to distance if the number of hands are different
 
     public String result = "Unknown Gesture !";
@@ -138,7 +138,7 @@ public class DTW{
             for (int i = 0; i < cutFrame; i++) {
                 for(int j = 0; j < cutFrame ; j++){
                     if(stepCount[rSize - i][storedSize - j] == Double.POSITIVE_INFINITY){
-                        System.out.println("Should not happen");
+                        //System.out.println("Should not happen");
                         continue;           // it will occur if DTW can not reach the end, that means the difference of number of frames are too large
                     }
                     if (accuTab[rSize - i][storedSize - j] / stepCount[rSize - i][storedSize - j] < localThreshold) {
@@ -147,7 +147,6 @@ public class DTW{
                 }
             }
 
-            System.out.println( "Average hand number of Recogn = " +rSample.getAverageHandNumber() + "\tAverage hand number of" + storedSign.getName() + " = " + storedSample.getAverageHandNumber());
             localThreshold = localThreshold / ( (rSample.getAverageHandNumber() + storedSample.getAverageHandNumber()) / 2 );
             if(localThreshold < bestMatch){
                 bestMatch = localThreshold;
@@ -155,6 +154,8 @@ public class DTW{
             }
 
         }
+
+        System.out.println(storedSign.getName() + " = " + localThreshold);
 
         if(bestMatch > globalThreshold){
             result = "Unknown Gesture !";
@@ -220,7 +221,7 @@ public class DTW{
 
 
                     distance = fingerDistance + (Math.pow(palmDistance, 2) / Math.pow(adjust, 2)) * palmDistance;
-                    System.out.println("Finger part = " + fingerDistance + "\tPalm part = " + (Math.pow(palmDistance, 2) / Math.pow(adjust, 2)) * palmDistance);
+                    //System.out.println("Finger part = " + fingerDistance + "\tPalm part = " + (Math.pow(palmDistance, 2) / Math.pow(adjust, 2)) * palmDistance);
 
                 }else{
                     return Double.POSITIVE_INFINITY;    // different hand
@@ -251,7 +252,7 @@ public class DTW{
 
 
                 distance = fingerDistance + (Math.pow(palmDistance, 2) / Math.pow(adjust, 2)) * palmDistance;
-                System.out.println("Finger part = " + fingerDistance + "\tPalm part = " + (Math.pow(palmDistance, 2) / Math.pow(adjust, 2)) * palmDistance);
+                //System.out.println("Finger part = " + fingerDistance + "\tPalm part = " + (Math.pow(palmDistance, 2) / Math.pow(adjust, 2)) * palmDistance);
             }
 
         }else{          //TODO   Different in hand number
@@ -304,9 +305,10 @@ public class DTW{
                 // TODO    Punishment is the value added to distance due to different number of hand
                 distance = distance + punishment;
 
+                /*
                 System.out.println("Finger part = " + fingerDistance + "\tPalm part = " + (Math.pow(palmDistance,2)/Math.pow(adjust,2))*palmDistance);
                 System.out.println("With punishment " + punishment);
-
+                */
             } else if(rFrame.palmData.count == 2 && storedFrame.palmData.count == 1) {
                 if (storedFrame.handType == HandType.LEFT) {   // Left hand case
                     rHandNumber = 0;
@@ -336,9 +338,9 @@ public class DTW{
                 */
 
                 for (int j = 0; j < storedPalmList.size(); j++) {
-                    if (rFrame.handType == HandType.LEFT) {
+                    if (storedFrame.handType == HandType.LEFT) {
                         palmDistance = palmDistance + palmDist(rPalmList.get(j + rHandNumber), rLRO.leftPalmOrigin, storedPalmList.get(j + storedHandNumber), storedLRO.leftPalmOrigin);
-                    } else {
+                    } else if(storedFrame.handType == HandType.RIGHT){
                         palmDistance = palmDistance + palmDist(rPalmList.get(j + rHandNumber), rLRO.rightPalmOrigin, storedPalmList.get(j + storedHandNumber), storedLRO.rightPalmOrigin);
                     }
                 }
@@ -348,8 +350,10 @@ public class DTW{
                 // TODO    Punishment is the value added to distance due to different number of hand
                 distance = distance + punishment;
 
+                /*
                 System.out.println("Finger part = " + fingerDistance + "\tPalm part = " + (Math.pow(palmDistance, 2) / Math.pow(adjust, 2)) * palmDistance);
                 System.out.println("With punishment " + punishment);
+                */
             }
 
         }
