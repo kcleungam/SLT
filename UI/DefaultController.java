@@ -14,10 +14,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.SubScene;
+import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -26,6 +23,7 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
+import visualizer.VisualiseFX;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,7 +40,7 @@ public class DefaultController implements Initializable{
     @FXML private Button addButton;
     @FXML private TextFlow loggingArea;
     @FXML private SubScene visualiser;
-    @FXML private Group test;
+    @FXML private Group mainVisualiser,dtwVisualiser;
     @FXML private Tab controlTab,loggingTab,dtwTab;
     private Stage countdown=new Stage();
 
@@ -56,9 +54,11 @@ public class DefaultController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources){
         myself=this;
-        visualiser=application.Visualiser.getSubScene();
         setList(false);
         log("OK");
+        mainVisualiser.getChildren().add(application.mainVisualiser.getSubScene());
+        dtwVisualiser.getChildren().add(application.dtwVisualiser.getSubScene());
+        System.out.println();
     }
 
     public void setApp(NewInterface app){application=app;}
@@ -78,7 +78,7 @@ public class DefaultController implements Initializable{
     public void addButtonAction(){
         if(inputField!=null&&!inputField.getText().isEmpty()){
             //show countdown timer
-            invokeCountdown();
+           invokeCountdown();
         }else{//require input name
             new Alert(Alert.AlertType.ERROR,"Please input the gesture name first.").show();
         }
@@ -120,10 +120,10 @@ public class DefaultController implements Initializable{
             Scene scene=new Scene(root);
             countdown.setScene(scene);
             countdown.setAlwaysOnTop(true);
-            countdown.setOnCloseRequest(new EventHandler<WindowEvent>() {//prevent from closure
+            countdown.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent event) {
-                    event.consume();
+                    event.consume();//prevent from closure
                 }
             });
             countdown.show();
@@ -133,4 +133,5 @@ public class DefaultController implements Initializable{
     }
 
     public void closeCountdown(){countdown.close();}
+
 }

@@ -12,6 +12,7 @@ package UI;
 import com.leapmotion.leap.Controller;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.binding.When;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
@@ -28,6 +29,7 @@ import main.*;
 import visualizer.VisualiseFX;
 
 import java.io.IOException;
+import java.util.concurrent.ThreadFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,7 +52,8 @@ public class NewInterface extends Application{
     private NewInterface myself;
 
     /* Visualiser */
-    public VisualiseFX Visualiser = new VisualiseFX();
+    public VisualiseFX mainVisualiser = new VisualiseFX(420,346,500);
+    public VisualiseFX dtwVisualiser=new VisualiseFX(600,300,500);
 
     public static void main(String[] args){
         launch(args);
@@ -113,7 +116,8 @@ public class NewInterface extends Application{
         protected Void call() throws Exception {
             while (true) {
                 try {
-                    Visualiser.traceLM(controller.frame());
+                    mainVisualiser.traceLM(controller.frame());
+                    dtwVisualiser.traceLM(controller.frame());
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -130,4 +134,14 @@ public class NewInterface extends Application{
      * @return  all gesture names
      */
     public ObservableList<String> getGestures(boolean sort){return (sort)?gestures:gestures.sorted();}
+
+    public boolean addSign(){
+        sampleListener.reset();
+        sampleListener.gainFocus();
+
+        //start recording
+        System.out.println(Thread.currentThread().getId());
+
+        return false;
+    }
 }

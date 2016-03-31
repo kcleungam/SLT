@@ -18,9 +18,9 @@ import javafx.geometry.Point3D;
 public class VisualiseFX{
 
 	// constants
-	private int viewwidth = 800;
-	private int viewheight = 600;
-	private int viewdepth = 600;
+	private int viewwidth = 420;// see gui.fxml
+	private int viewheight = 346;//see gui.fxml
+	private int viewdepth = 500;
 	private final int fingerSize = 10;
 	private final int palmSize = 25;
 
@@ -43,7 +43,10 @@ public class VisualiseFX{
 	private PolyCylinder3D[][] fingerLine = new PolyCylinder3D[2][5];
 	private PolyCylinder3D[] palmLine = new PolyCylinder3D[2];
 
-	public VisualiseFX(){		
+	public VisualiseFX(int viewWidth,int viewHeight,int viewDepth){
+		viewwidth=viewWidth;
+		viewheight=viewHeight;
+		viewdepth=viewDepth;
 		buildSubscene();
 	}
 	

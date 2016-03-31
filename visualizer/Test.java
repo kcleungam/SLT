@@ -14,7 +14,7 @@ public class Test extends Application{
 	static Controller controller = new Controller();
 	static SampleListener listener = new SampleListener();
 
-	VisualiseFX test = new VisualiseFX();
+	VisualiseFX test = new VisualiseFX(800,600,600);
 
 	public static void main(String[] args) {
 		launch(args);
