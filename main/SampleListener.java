@@ -194,6 +194,7 @@ public class SampleListener extends Listener {
 						finishRec = true;
 						validSample = false;
 						System.out.println("Fail to Record, " + "Time recorded is Too Short!!!");
+
 					}
 				}
 			}
