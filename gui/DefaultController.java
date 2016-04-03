@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import main.DTW;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -125,6 +126,17 @@ public class DefaultController implements Initializable{
     }
 
     public void dtwDisplay(String result){
+        Thread speechThread=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Speech.play(result, Speech.LANGUAGE.ENGLISH);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        speechThread.start();
         Text time=new Text((new Date()).toString()+"\t\t");
         Text message=new Text(result);
         if(result.equals(DTW.UNKNOWN)){

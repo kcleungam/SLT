@@ -5,23 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2a5351de-eadc-4098-9f09-70b7cbb258df" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$2.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$3.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$4$1$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$4$1$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$4$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$4$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$4.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/main/DTW.class" afterPath="$PROJECT_DIR$/out/production/SLT/main/DTW.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/main/SLT.class" afterPath="$PROJECT_DIR$/out/production/SLT/main/SLT.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/DefaultController.java" afterPath="$PROJECT_DIR$/gui/DefaultController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/NewInterface.java" afterPath="$PROJECT_DIR$/gui/NewInterface.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/gui.fxml" afterPath="$PROJECT_DIR$/gui/gui.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/DTW.java" afterPath="$PROJECT_DIR$/main/DTW.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/workspace.xml" afterPath="$PROJECT_DIR$/out/production/SLT/.idea/workspace.xml" />
     </list>
     <ignored path="SLT.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -57,11 +41,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DefaultController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DefaultController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gui/DefaultController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="123" column="39" selection-start-line="123" selection-start-column="39" selection-end-line="123" selection-end-column="39" />
+            <state relative-caret-position="259">
+              <caret line="138" column="29" selection-start-line="138" selection-start-column="29" selection-end-line="138" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Speech.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/gui/Speech.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="139">
+              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -189,7 +183,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
+              <option name="myItemId" value="gui" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -613,18 +607,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/gui/NewInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="class#4271:4707" expanded="false" />
-            <element signature="method#call#0;class#4271:4707" expanded="false" />
-            <element signature="method#run#0;class#5196:7758" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gui/DefaultController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="779">
@@ -1044,8 +1026,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/DefaultController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="123" column="39" selection-start-line="123" selection-start-column="39" selection-end-line="123" selection-end-column="39" />
+        <state relative-caret-position="259">
+          <caret line="138" column="29" selection-start-line="138" selection-start-column="29" selection-end-line="138" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/Speech.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding />
         </state>
       </provider>
