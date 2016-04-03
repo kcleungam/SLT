@@ -25,8 +25,8 @@ public class DTW{
 
     public double adjust = 40;     // The adjustment according to the palm, 50 = 5 cm
     public double punishment = 150; // The number which add to distance if the number of hands are different
-
-    public String result = "Unknown Gesture !";
+    public final static String UNKNOWN="Unknown gesture!";
+    public String result =UNKNOWN;
 
 
     // TODO The purpose of LRO is to find the first leftPalm and rightPalm coordinate, set as reference (Origin) to other frame
@@ -158,7 +158,7 @@ public class DTW{
         System.out.println(storedSign.getName() + " = " + localThreshold);
 
         if(bestMatch > globalThreshold){
-            result = "Unknown Gesture !";
+            result =UNKNOWN;
         }
 
     }
@@ -441,8 +441,8 @@ public class DTW{
     }
 
     public void printResult(){
-        if(result.equals("Unknown Gesture !")){
-            System.out.println("Unknown Gesture !");
+        if(result.equals(UNKNOWN)){
+            System.out.println(UNKNOWN);
         }else {
             System.out.println("------------Result of DTW-----------");
             System.out.println("The most similar gesture is -- " + result);
@@ -452,10 +452,14 @@ public class DTW{
 
     public void reset(){
         bestMatch = Double.POSITIVE_INFINITY;
-        result = "Unknown Gesture !";
+        result = UNKNOWN;
     }
 
     public void run(){}
 
+    public String getResult(){
+        //if(result.equals(UNKNOWN)) throw new Exception();
+        return result;
+    }
 }
 

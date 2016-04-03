@@ -16,9 +16,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.concurrent.Worker;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
@@ -26,6 +30,7 @@ import javafx.util.Callback;
 import main.*;
 import gui.visualizer.VisualiseFX;
 
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,11 +46,13 @@ public class NewInterface extends Application{
     private static boolean recognition = false;
     private static volatile boolean yes = false, no = false;
     private static ObservableList<String> gestures=FXCollections.observableArrayList();
-    private  Service<Void> dtwThread;
+    private Service<String> dtwService;
+    private final int dtwTolerance=1;
 
     /* GUI control */
     private static Stage stage;
     private NewInterface myself;
+    private DefaultController defaultController;
 
     /* Visualiser */
     public VisualiseFX mainVisualiser = new VisualiseFX(420,346,500);
@@ -65,6 +72,8 @@ public class NewInterface extends Application{
             new Alert(Alert.AlertType.ERROR,"Leap Motion controller not found.").show();
             primaryStage.close();
         }
+
+        //initialise the things related to the database
         allSigns=new SignBank(db);
         gestures.addAll(allSigns.getAllSigns().keySet());
 
@@ -77,27 +86,28 @@ public class NewInterface extends Application{
             @Override
             public void run() {
                 Thread th = new Thread(VisTracing);
-                th.setDaemon(true);
+                //th.setDaemon(true);
                 th.start();
             }
         });
 
-        //initialize the controller
+        //gesture recognition thread
+
+
+        //initialize the controllers of interface
         try{
             FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("gui.fxml"));
             fxmlLoader.setControllerFactory(new Callback<Class<?>, Object>() {
                 @Override
                 public Object call(Class<?> param) {
-                    DefaultController product=new DefaultController();
-                    product.setApp(myself);
-                    return product;
+                    defaultController=new DefaultController();
+                    defaultController.setApp(myself);
+                    return defaultController;
                 }
             });
+
             Parent root=fxmlLoader.load();
             Scene scene=new Scene(root, 600, 400);
-//            Group visgp = new Group();
-//            Visual = new SubScene(visgp, 300, 200);
-//            visgp.getChildren().add(Visualiser.getSubScene());
             stage.setScene(scene);
             stage.setTitle("Sign Language Translator");
             stage.show();
@@ -183,5 +193,81 @@ public class NewInterface extends Application{
             }
         });
         addSignThread.start();
+    }
+
+    public void startRecognition(){
+        dtwService=new Service<String>() {
+            @Override
+            protected Task<String> createTask() {
+                return new Task<String>() {
+                    @Override
+                    protected String call() throws Exception {
+                        //capture the gesture first
+                        sampleListener.reset();
+                        sampleListener.gainFocus();
+
+                        //try to record the gesture
+                        boolean input;
+                        Sample source = null;
+                        while(true){
+                            if(sampleListener.checkFinish()){
+                                if(sampleListener.checkValid()){
+                                    input=true;
+                                    try {
+                                        source=new Sample(sampleListener.returnOneSample());
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }else{
+                                    input=false;
+                                }
+                                break;//terminate
+                            }
+                            //release the thread for a while
+                            try {
+                                Thread.currentThread().sleep(10);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        sampleListener.lostFocus();
+
+                        //when successfully get the gesture
+                        if(input){
+                            DTW dtw=new DTW();
+                            dtw.setRSample(source);
+                            HashMap<String,Sign> signByBoth = null;
+                            try {
+                                signByBoth=db.getSignsByBoth(source.getInitialFingerCount(),source.getInitialHandType(),dtwTolerance);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            for(Sign storedSign:signByBoth.values()){
+                                dtw.setStoredSign(storedSign);
+                                dtw.calDTW();
+                            }
+                            String result=dtw.getResult();
+                            dtw.reset();
+                            return result;
+                        }
+                        return null;
+                    }
+                };
+            }
+        };
+        dtwService.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                if(dtwService.getValue()!=null)
+                    defaultController.dtwDisplay(dtwService.getValue());
+                dtwService.restart();
+            }
+        });
+        dtwService.start();
+    }
+
+    public void stopRecognition(){
+        if(dtwService!=null)
+            dtwService.cancel();
     }
 }
