@@ -125,7 +125,7 @@ public class VisualiseFX extends Service{
 		root.getChildren().add(sphere);
 	}
 
-	public void updateGraphic() {
+	public synchronized void updateGraphic() {
 		// update spheres
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 5; j++) {
@@ -218,6 +218,9 @@ public class VisualiseFX extends Service{
 						Thread.sleep(100);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
+						//redraw again as the interruption will make the update of some components stop
+						root.getChildren().clear();
+						initializeParam();
 					}
 				}
 			}

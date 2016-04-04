@@ -163,10 +163,11 @@ public class NewInterface extends Application{
                         }else{//invalid samples
                             Platform.runLater(() -> (new Alert(Alert.AlertType.WARNING,"Invalid recording. Too few samples.")).showAndWait());
                         }
+                        Thread.yield();
                         break;//terminate after the input is determined to be finished
                     }
                     try {
-                        Thread.currentThread().sleep(10);//release this thread for a while
+                        Thread.currentThread().sleep(100);//release this thread for a while
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -202,11 +203,12 @@ public class NewInterface extends Application{
                                 }else{
                                     input=false;
                                 }
+                                Thread.yield();
                                 break;//terminate
                             }
                             //release the thread for a while
                             try {
-                                Thread.currentThread().sleep(10);
+                                Thread.currentThread().sleep(100);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }

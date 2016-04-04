@@ -9,7 +9,9 @@ package gui;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -54,6 +56,15 @@ public class DefaultController implements Initializable{
         //about control tab
         setList(false);
         mainVisualiser.getChildren().add(application.mainVisualiser.getSubScene());
+        MenuItem playback=new MenuItem("Playback");
+        playback.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                playback(String.valueOf(gestureList.getSelectionModel().getSelectedItems()));
+            }
+        });
+        ContextMenu rightClickMenu=new ContextMenu(playback);
+        gestureList.setContextMenu(rightClickMenu);
 
         //about DTW tab
         dtwVisualiser.getChildren().add(application.dtwVisualiser.getSubScene());
@@ -185,5 +196,16 @@ public class DefaultController implements Initializable{
         application.addSign(inputField.getText());
 
         setList(false);//update the list
+    }
+
+    private void playback(String name){
+        //TODO
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                (new Alert(Alert.AlertType.INFORMATION,"TODO: implement this function.")).show();
+            }
+        });
+
     }
 }
