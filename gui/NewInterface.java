@@ -83,8 +83,8 @@ public class NewInterface extends Application{
         myself=this;
 
         //gesture visualize thread
-        new Thread(VisDtwTracing).start();
-        new Thread(VisMainTracing).start();
+        mainVisualiser.restart();
+        //dtwVisualiser.restart();
 
         //initialize the controllers of interface
         try{
@@ -112,35 +112,6 @@ public class NewInterface extends Application{
             Logger.getLogger(NewInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    /* Thread updating gui.visualizer from LMC */
-    private Task<Void> VisMainTracing = new Task<Void>() {
-        @Override
-        protected Void call() throws Exception {
-            while (true) {
-                try {
-                    mainVisualiser.traceLM(controller.frame());
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    };
-
-    public Task<Void> VisDtwTracing = new Task<Void>() {
-        @Override
-        protected Void call() throws Exception {
-            while (true) {
-                try {
-                    dtwVisualiser.traceLM(controller.frame());
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    };
 
     /* helper functions for other controllers */
 
@@ -274,6 +245,12 @@ public class NewInterface extends Application{
             }
         });
         dtwService.start();
+    }
+
+    public void replayVis(String gestureName){
+        mainVisualiser.cancel();
+        allSigns.getSign(gestureName);
+        mainVisualiser.restart();
     }
 
     public void stopRecognition(){

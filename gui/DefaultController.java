@@ -35,7 +35,6 @@ public class DefaultController implements Initializable{
     @FXML private TextField inputField;
     @FXML private Button addButton;
     @FXML private TextFlow loggingArea,dtwTextFlow;
-    @FXML private SubScene visualiser;
     @FXML private Group mainVisualiser,dtwVisualiser;
     @FXML private Tab controlTab,loggingTab,dtwTab;
     @FXML private ScrollPane dtwScrollPane,loggingScrollPane;
@@ -100,6 +99,11 @@ public class DefaultController implements Initializable{
         }else{//require input name
             new Alert(Alert.AlertType.ERROR,"Please input the gesture name first.").show();
         }
+    }
+
+    @FXML
+    public void clickListAction(){
+        application.replayVis(gestureList.getSelectionModel().getSelectedItem());
     }
 
     /**

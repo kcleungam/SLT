@@ -3,15 +3,16 @@ package gui.visualizer;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import com.leapmotion.leap.Bone;
-import com.leapmotion.leap.Frame;
-import com.leapmotion.leap.HandList;
-import com.leapmotion.leap.Vector;
+import com.leapmotion.leap.*;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.scene.*;
 import javafx.scene.paint.Color;
 import javafx.geometry.Point3D;
 
-public class VisualiseFX{
+public class VisualiseFX extends Service{
+
+	private Controller controller = new Controller();
 
 	// constants
 	private int viewwidth = 420;// see gui.fxml
@@ -166,7 +167,7 @@ public class VisualiseFX{
 		HandList hands = frame.hands();
 		int i = 0;
 		// for the existing hands
-		for (; 0 <= i && i < hands.count(); i++) {
+		for (; i < hands.count(); i++) {
 			for (int j = 0; j < 5; j++) {
 				fingerCoor[i][j][0] = rangeConvert(hands.get(i).fingers().get(j).tipPosition());
 				fingerCoor[i][j][1] =
@@ -181,7 +182,7 @@ public class VisualiseFX{
 			palmCoor[i] = rangeConvert(hands.get(i).palmPosition());
 		}
 		// for non-existing hands:
-		for (; 0 <= i && i < 2; i++) {
+		for (; i < 2; i++) {
 			for (int j = 0; j < 5; j++) {
 				for (int k = 0; k < 5; k++) {
 					fingerCoor[i][j][k] = new Point3D(0, 0, -100);
@@ -201,9 +202,25 @@ public class VisualiseFX{
 			temp[i] = (LeapValue[i] - leapStart[i]) * (appEnd[i] - appStart[i]) / (leapEnd[i] - leapStart[i])
 					+ appStart[i];
 		}
-		return new Point3D (temp[0]*1.15, temp[2]-100, temp[1]);
+		return new Point3D (temp[0]*1.4-100, temp[2]-130, temp[1]);
 	}
 
 	public SubScene getSubScene() { return subScene; }
 
+	@Override
+	protected Task createTask() {
+		return new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				while (true) {
+					try {
+						traceLM(controller.frame());
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		};
+	}
 }
