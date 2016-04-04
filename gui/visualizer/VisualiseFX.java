@@ -202,7 +202,7 @@ public class VisualiseFX extends Service{
 			temp[i] = (LeapValue[i] - leapStart[i]) * (appEnd[i] - appStart[i]) / (leapEnd[i] - leapStart[i])
 					+ appStart[i];
 		}
-		return new Point3D (temp[0]*1.4-100, temp[2]-130, temp[1]);
+		return new Point3D (temp[0]*1.4-100, temp[2]-130, -temp[1]+700);
 	}
 
 	public SubScene getSubScene() { return subScene; }
