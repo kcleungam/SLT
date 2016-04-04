@@ -13,6 +13,7 @@ import org.jongo.Jongo;
 import org.jongo.MongoCursor;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Database {
@@ -177,6 +178,18 @@ public class Database {
 		Sign result = Jcoll.findOne("{name:#}", name).as(Sign.class);
 
 		return result;
+	}
+
+	//Get the first sample of a given gesture
+	public Sample getFirstSample(String name) throws Exception{
+		Sign result=Jcoll.findOne("{name:#}",name).projection("{samples:{$slice:1}}").as(Sign.class);
+        /*if(result==null) throw new NullPointerException("Wrong query: null");
+        if(result.getAllSamples().size()>1) throw new Exception("Wrong query: more than 1 gesture");
+        if(result.getAllSamples().size()==0) throw new NullPointerException("No sample");*/
+        ArrayList<Sample> arrayList=new ArrayList<>();
+        arrayList.addAll(result.getAllSamples());
+        Sample firstSample=arrayList.get(0);
+        return firstSample;
 	}
 
 

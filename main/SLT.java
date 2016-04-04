@@ -2,6 +2,7 @@ package main;
 
 import com.leapmotion.leap.Controller;
 import com.leapmotion.leap.Frame;
+import data.OneFrame;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -225,6 +226,11 @@ public class SLT {
 								db.addSign(tempSign);
 								System.out.println("Change Sign name successfully!");
 							}
+							break;
+						case 8://database testing area
+							Sample sample=db.getFirstSample("swipe");
+							System.out.println(sample.getInitialHandType());
+							break;
 
 
 					default:
