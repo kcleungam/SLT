@@ -82,18 +82,9 @@ public class NewInterface extends Application{
         stage=primaryStage;
         myself=this;
 
-        // new thread will be run after the window is started
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                Thread th = new Thread(VisTracing);
-                //th.setDaemon(true);
-                th.start();
-            }
-        });
-
-        //gesture recognition thread
-
+        //gesture visualize thread
+        new Thread(VisDtwTracing).start();
+        new Thread(VisMainTracing).start();
 
         //initialize the controllers of interface
         try{
@@ -123,12 +114,25 @@ public class NewInterface extends Application{
     }
 
     /* Thread updating gui.visualizer from LMC */
-    protected Task<Void> VisTracing = new Task<Void>() {
+    private Task<Void> VisMainTracing = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
             while (true) {
                 try {
                     mainVisualiser.traceLM(controller.frame());
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
+
+    public Task<Void> VisDtwTracing = new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+            while (true) {
+                try {
                     dtwVisualiser.traceLM(controller.frame());
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
