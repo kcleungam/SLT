@@ -26,6 +26,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import main.*;
 import gui.visualizer.VisualiseFX;
@@ -111,6 +112,11 @@ public class NewInterface extends Application{
             stage.setScene(scene);
             stage.setTitle("Sign Language Translator");
             stage.show();
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                public void handle(WindowEvent we) {
+                    System.exit(0);
+                }
+            });
         }catch(Exception ex){
             Logger.getLogger(NewInterface.class.getName()).log(Level.SEVERE, null, ex);
         }

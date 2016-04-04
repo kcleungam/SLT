@@ -22,7 +22,7 @@ public class VisualiseFX{
 
 	// the prog starts from top-left, increase right, down, and inward.
 	private final int[] appStart = { 0, 0, 0 };
-	private final int[] appEnd = { viewwidth, viewheight, viewdepth };
+	public int[] appEnd = { viewwidth, viewheight, viewdepth };
 	private final float[] leapStart = { -200.0f, 0.0f, -200.0f };
 	private final float[] leapEnd = { 200.0f, 400.0f, 200.0f };
 
@@ -45,10 +45,10 @@ public class VisualiseFX{
 		viewdepth=viewDepth;
 		buildSubscene();
 	}
-	
+
 	public void buildSubscene() {
 		root = new Group();
-		subScene = new SubScene(root, viewwidth, viewheight);
+		subScene = new SubScene(root, viewwidth, viewheight, true, SceneAntialiasing.BALANCED);
 		subScene.setFill(Color.BLACK);
 
 		lightSetting();
@@ -85,6 +85,11 @@ public class VisualiseFX{
 	 * initialize the spheres
 	 */
 	public void initializeParam() {
+		appEnd = new int[]{viewwidth, viewheight, viewdepth};
+        for (int i = 0; i < 2; i++){
+            leapStart[i] = -appEnd[i]/2;
+            leapEnd[i]= appEnd[i]/2;
+        }
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 5; j++) {
 				for (int k = 0; k < 5; k++) {
@@ -131,7 +136,7 @@ public class VisualiseFX{
 			palmLine[i].update(getPoint3DArray(i));
 			palmNode[i].setTranslate(palmCoor[i]);
 		}
-		
+
 	}
 
 	public void traceLM(Frame frame) {
@@ -164,13 +169,13 @@ public class VisualiseFX{
 		for (; 0 <= i && i < hands.count(); i++) {
 			for (int j = 0; j < 5; j++) {
 				fingerCoor[i][j][0] = rangeConvert(hands.get(i).fingers().get(j).tipPosition());
-				fingerCoor[i][j][1] = 
+				fingerCoor[i][j][1] =
 						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_DISTAL).prevJoint());
-				fingerCoor[i][j][2] = 
+				fingerCoor[i][j][2] =
 						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_INTERMEDIATE).prevJoint());
-				fingerCoor[i][j][3] = 
+				fingerCoor[i][j][3] =
 						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_PROXIMAL).prevJoint());
-				fingerCoor[i][j][4] = 
+				fingerCoor[i][j][4] =
 						rangeConvert(hands.get(i).fingers().get(j).bone(Bone.Type.TYPE_METACARPAL).prevJoint());
 			}
 			palmCoor[i] = rangeConvert(hands.get(i).palmPosition());
@@ -196,19 +201,9 @@ public class VisualiseFX{
 			temp[i] = (LeapValue[i] - leapStart[i]) * (appEnd[i] - appStart[i]) / (leapEnd[i] - leapStart[i])
 					+ appStart[i];
 		}
-		return new Point3D (temp[0], temp[2], temp[1]);
-	}
-	
-	public float[] normalizer (float[] LeapValue) {
-		double[] temp = new double[3];
-		for (int i = 0; i < 3; i++) {
-			temp[i] = LeapValue[i]+appEnd[i]/2;
-		}
-		float[] appValue = { (float) temp[0], (float) temp[2], (float) temp[1] };
-
-		return appValue;
+		return new Point3D (temp[0], temp[2]-100, temp[1]);
 	}
 
-	public SubScene getSubScene() { return subScene; } 
-	
+	public SubScene getSubScene() { return subScene; }
+
 }
