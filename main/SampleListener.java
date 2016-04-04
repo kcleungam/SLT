@@ -38,7 +38,7 @@ import java.util.ArrayList;
 
 public class SampleListener extends Listener {
 	static float minRecVelocity = 45;
-	static float maxRecVelocity = 300;
+	static float maxRecVelocity = 200;
 	static int minPoseFrames = 30;
 	static ArrayList<Frame> oneSample;
 	static boolean recording;
@@ -171,7 +171,7 @@ public class SampleListener extends Listener {
 		// e.g. from + 100 to -100 will have 0 in between, previous method can't
 		// record this
 
-		if (focus == true && finishRec == false) {
+		if ( finishRec == false) {
 			if (recordableFrame(frame, minRecVelocity, maxRecVelocity) == true) {
 				pauseCount = 0;
 				recording = true;
