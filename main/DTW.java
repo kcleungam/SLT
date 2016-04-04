@@ -18,7 +18,7 @@ public class DTW{
     public static int minFrame = 35;
     public static int cutFrame = 10;   // The number of frame can be cut off on order to find the best ending of Sample
 
-    public static double globalThreshold = 200; // The maximum distance between rSample and stored sample which can be recognize
+    public static double globalThreshold = 150; // The maximum distance between rSample and stored sample which can be recognize
     // If the bestMatch > globalThreshold, then unknown gesture
 
     public double localThreshold = Double.POSITIVE_INFINITY;   // The distance between sample and one of the stored sample
@@ -27,6 +27,9 @@ public class DTW{
     public double punishment = 150; // The number which add to distance if the number of hands are different
     public final static String UNKNOWN="Unknown gesture!";
     public String result =UNKNOWN;
+
+    public int fastCount = 5;
+    public double fastDetermine = 1.5 * globalThreshold;
 
 
     // TODO The purpose of LRO is to find the first leftPalm and rightPalm coordinate, set as reference (Origin) to other frame
@@ -70,6 +73,9 @@ public class DTW{
      *
      */
     public void calDTW(){
+        double fastTotal = 0.0;
+        int sampleCount = 0;
+        int sampleCountLimit = storedSign.getAllSamples().size() / 2;
         for(Sample storedSample: storedSign.getAllSamples()) {
 
             int rSize = rSample.getAllFrames().size();
@@ -153,14 +159,20 @@ public class DTW{
                 result = storedSign.getName();
             }
 
+            sampleCount++;
+            fastTotal = fastTotal + localThreshold;
+            if( ( sampleCount >= ( sampleCountLimit ) ) &&  ( fastTotal/sampleCount >= ( fastDetermine ) ) ){
+                System.out.println(storedSign.getName() + " has been cut");
+                break;
+            }
+
         }
 
-        System.out.println(storedSign.getName() + " = " + localThreshold);
 
         if(bestMatch > globalThreshold){
             result =UNKNOWN;
         }
-
+        //System.out.println(result + " = " + bestMatch);
     }
 
     public double getCost(){
@@ -190,11 +202,16 @@ public class DTW{
         double fingerDistance = 0;
         double palmDistance = 0;
 
+        int rPalmCount = rFrame.getPalmData().count;
+        int storedPalmCount = storedFrame.palmData.count;
+        int rFingerCount = rFrame.fingerData.count;
+        int storedFingerCount = storedFrame.fingerData.count;
+
         double distance = Double.POSITIVE_INFINITY;
 
 
-        if (rFrame.palmData.count == storedFrame.palmData.count){
-            if(rFrame.palmData.count == 1){
+        if (rPalmCount == storedPalmCount){
+            if(rPalmCount == 1){
                 if(rFrame.handType == storedFrame.handType){
                     for (int i = 0; i < rFingerList.size(); i++) {
                         int handNumber = i / 5;   // from 0 to 4 will give 0, from 5 to 9 give 1
@@ -226,7 +243,7 @@ public class DTW{
                 }else{
                     return Double.POSITIVE_INFINITY;    // different hand
                 }
-            }else if(rFrame.palmData.count == 2){
+            }else if(rPalmCount == 2){
                 for (int i = 0; i < rFingerList.size(); i++) {
                     int handNumber = i / 5;   // from 0 to 4 will give 0, from 5 to 9 give 1
                     // Hand number indicate the finger is left hand finger or right hand finger
@@ -234,13 +251,6 @@ public class DTW{
                     //Calculate Finger by Finger, remember to put the correct handNumber
                 }
 
-                /*
-                for (int j = 0; j < rPalmList.size(); j++) {
-                    Coordinate rPalmOrigin = rSample.allFrames.get(0).palmData.coordinates.get(j);  // Get the "Frame 0" Palm
-                    Coordinate storedPalmOrigin = storedSample.allFrames.get(0).palmData.coordinates.get(j);
-                    palmDistance = palmDistance + palmDist(rPalmList.get(j), rPalmOrigin, storedPalmList.get(j), storedPalmOrigin);
-                }
-                */
 
                 for (int j = 0; j < rPalmList.size(); j++) {
                     if (rFrame.handType == HandType.LEFT) {
@@ -262,7 +272,7 @@ public class DTW{
             int rFingerNumber = 0;
             int storedFingerNumber = 0;
 
-            if(rFrame.palmData.count == 1 && storedFrame.palmData.count ==2){
+            if(rPalmCount == 1 && storedPalmCount ==2){
                 if(rFrame.handType ==HandType.LEFT){
                     rHandNumber = 0;
                     storedHandNumber = 0;
@@ -276,19 +286,11 @@ public class DTW{
                 }
 
 
-                for(int i = 0; i < rFrame.fingerData.count; i++){        // suppose to be 5
+                for(int i = 0; i < rFingerCount; i++){        // suppose to be 5
                     fingerDistance = fingerDistance + fingerDist(rFingerList.get(i + rFingerNumber), rPalmList.get(rHandNumber),
                             storedFingerList.get(i + storedFingerNumber),storedPalmList.get(storedHandNumber));
                 }
 
-
-                /*
-                for(int j = 0; j < rPalmList.size(); j++){      // rPalmList.size() suppose to be 1
-                    Coordinate rPalmOrigin = rSample.allFrames.get(0).palmData.coordinates.get(j);  // Get the "Frame 0" Palm
-                    Coordinate storedPalmOrigin = storedSample.allFrames.get(0).palmData.coordinates.get(j);
-                    palmDistance = palmDistance + palmDist(rPalmList.get(j), rPalmOrigin,storedPalmList.get(j), storedPalmOrigin);
-                }
-                */
 
                 for (int j = 0; j < rPalmList.size(); j++) {
                     if (rFrame.handType == HandType.LEFT) {
@@ -322,20 +324,11 @@ public class DTW{
                     storedFingerNumber = 0;
                 }
 
-                for (int i = 0; i < storedFrame.fingerData.count; i++) {        // suppose to be 5
+                for (int i = 0; i < storedFingerCount; i++) {        // suppose to be 5
                     fingerDistance = fingerDistance + fingerDist(rFingerList.get( i + rFingerNumber ), rPalmList.get(rHandNumber),
                             storedFingerList.get( i + storedFingerNumber ), storedPalmList.get(storedHandNumber));
                 }
 
-                /*
-                for (int j = 0; j < storedPalmList.size(); j++) {      // rPalmList.size() suppose to be 1
-                    Coordinate rPalmOrigin = rSample.allFrames.get(0).palmData.coordinates.get( j + rHandNumber);  // Get the "Frame 0" Palm
-                    Coordinate storedPalmOrigin = storedSample.allFrames.get(0).palmData.coordinates.get(j + storedHandNumber);
-
-                    palmDistance = palmDistance + palmDist(rPalmList.get(j + rHandNumber), rPalmOrigin
-                            , storedPalmList.get( j + storedHandNumber), storedPalmOrigin);
-                }
-                */
 
                 for (int j = 0; j < storedPalmList.size(); j++) {
                     if (storedFrame.handType == HandType.LEFT) {
@@ -357,7 +350,6 @@ public class DTW{
             }
 
         }
-
         return distance;
     }
 
