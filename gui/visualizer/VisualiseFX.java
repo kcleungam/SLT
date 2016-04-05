@@ -55,7 +55,7 @@ public class VisualiseFX{
 		root = new Group();
 
 		subScene = new SubScene(root, viewwidth, viewheight, true, SceneAntialiasing.BALANCED);
-		subScene.setFill(Color.BLACK);
+		subScene.setFill(Color.rgb(0,0,160));
 
 		lightSetting();
 
