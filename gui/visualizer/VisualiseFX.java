@@ -207,15 +207,15 @@ public class VisualiseFX extends Service{
 		int i = 0;
 		for (; i < palms.getCount(); i++) {
 			for (int j = 0; j < 5; j++) {
-				fingerCoor[i][j][0] = rangeConvert(finger.coordinates.get(i*0+j));
+				fingerCoor[i][j][0] = rangeConvert(finger.coordinates.get(i*5+j));
 				fingerCoor[i][j][1] =
-						rangeConvert(finger.getDistal().get(i*0+j));
+						rangeConvert(finger.getDistal().get(i*5+j));
 				fingerCoor[i][j][2] =
-						rangeConvert(finger.getIntermediate().get(i*0+j));
+						rangeConvert(finger.getIntermediate().get(i*5+j));
 				fingerCoor[i][j][3] =
-						rangeConvert(finger.getProximal().get(i*0+j));
+						rangeConvert(finger.getProximal().get(i*5+j));
 				fingerCoor[i][j][4] =
-						rangeConvert(finger.getMetacarpal().get(i*0+j));
+						rangeConvert(finger.getMetacarpal().get(i*5+j));
 			}
 			palmCoor[i] = rangeConvert(palms.getCoordinates().get(i));
 		}
