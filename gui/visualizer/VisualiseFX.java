@@ -14,7 +14,7 @@ import javafx.scene.*;
 import javafx.scene.paint.Color;
 import javafx.geometry.Point3D;
 
-public class VisualiseFX extends Service{
+public class VisualiseFX{
 
 	private Controller controller = new Controller();
 
@@ -53,6 +53,7 @@ public class VisualiseFX extends Service{
 
 	public void buildSubscene() {
 		root = new Group();
+
 		subScene = new SubScene(root, viewwidth, viewheight, true, SceneAntialiasing.BALANCED);
 		subScene.setFill(Color.BLACK);
 
@@ -141,7 +142,6 @@ public class VisualiseFX extends Service{
 			palmLine[i].update(getPoint3DArray(i));
 			palmNode[i].setTranslate(palmCoor[i]);
 		}
-
 	}
 
 	public void traceLM(Frame frame) {
@@ -248,24 +248,4 @@ public class VisualiseFX extends Service{
 	}
 
 	public SubScene getSubScene() { return subScene; }
-
-	@Override
-	protected Task createTask() {
-		return new Task<Void>() {
-			@Override
-			protected Void call() throws Exception {
-				while (true) {
-					try {
-						traceLM(controller.frame());
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-						//redraw again as the interruption will make the update of some components stop
-						root.getChildren().clear();
-						initializeParam();
-					}
-				}
-			}
-		};
-	}
 }
