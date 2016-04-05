@@ -2,7 +2,7 @@
     -fx-background-color: #0000A0;
     -fx-font-family: SansSerif;
     -fx-font-size: 14px;
-    -fx-font-weight: bold;
+    -fx-font-weight: regular;
 }
 .label
 {
@@ -16,6 +16,9 @@
 .tab-pane:top .tab-header-area .tab-header-background{
 	-fx-background-color: #8080ff;
 }
+.tab-pane:top .tab-header-area .headers-region{
+	-fx-padding-bottom: 0px;
+}
 .tab-pane:top .tab-header-area .headers-region .tab:top{
 	-fx-background-color: linear-gradient(#8080ff, #0000b3);
 }
@@ -28,11 +31,18 @@
 .tab-pane:top .tab-header-area .headers-region .tab:selected:top .tab-container .tab-label .text{
 	-fx-fill: #ffff66;
 }
+.list-view .virtual-flow.scroll-bar:vertical{
+	-fx-width: 5px;
+}
 .list-cell:odd {
 	-fx-background-color: #cccccc;
 }
 .list-cell:even {
 	-fx-background-color: #ffffff;
+}
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+    -fx-text-fill: white;
 }
 .button{
     -fx-background-color: linear-gradient(#7cafc2, #585858);
