@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  */
 public class Speech {
     /* field */
-    private static final String DIRECTORY="audio/";
+    private static final String DIRECTORY="audio\\";
     private static boolean isPlaying=false;
     public enum LANGUAGE{ENGLISH,CANTONESE}
     public static final String ENGLISH_REGEX="\\p{Print}";
@@ -72,7 +72,7 @@ public class Speech {
         }
         //saving as MP3
         InputStream in = con.getInputStream();
-        FileOutputStream out = new FileOutputStream(text + ".mp3");
+        FileOutputStream out = new FileOutputStream("audio\\" + text + ".mp3");
         byte[] buffer = new byte[1024];
         int len;
         while ((len = in.read(buffer)) > 0) {
