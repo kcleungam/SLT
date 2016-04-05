@@ -68,7 +68,7 @@ public class NewInterface extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         //initialise the things related to Leap Motion controller
-        sampleListener.lostFocus();
+//        sampleListener.lostFocus();
         controller.addListener(sampleListener);
         if(!controller.isConnected()){
             //check whether the controller is connected
@@ -127,7 +127,7 @@ public class NewInterface extends Application{
     public void addSign(String name){
 
         sampleListener.reset();
-        sampleListener.gainFocus();
+//        sampleListener.gainFocus();
 
         //start recording
         Thread addSignThread=new Thread(new Runnable() {
@@ -188,7 +188,7 @@ public class NewInterface extends Application{
                     protected String call() throws Exception {
                         //capture the gesture first
                         sampleListener.reset();
-                        sampleListener.gainFocus();
+//                        sampleListener.gainFocus();
 
                         //try to record the gesture
                         boolean input;
@@ -210,12 +210,12 @@ public class NewInterface extends Application{
                             }
                             //release the thread for a while
                             try {
-                                Thread.currentThread().sleep(100);
+                                Thread.currentThread().sleep(1000);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
                         }
-                        sampleListener.lostFocus();
+//                        sampleListener.lostFocus();
 
                         //when successfully get the gesture
                         if(input){
@@ -232,6 +232,12 @@ public class NewInterface extends Application{
                                 dtw.calDTW();
                             }
                             String result=dtw.getResult();
+                            try{
+                                defaultController.dtwWait();
+                                Thread.currentThread().sleep(1000);
+                            }catch (InterruptedException e){
+                                e.printStackTrace();
+                            }
                             dtw.reset();
                             return result;
                         }

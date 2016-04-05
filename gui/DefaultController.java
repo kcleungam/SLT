@@ -166,6 +166,13 @@ public class DefaultController implements Initializable{
         dtwScrollPane.setVvalue(1.0);
     }
 
+    public void dtwWait(){
+        Text time=new Text((new Date()).toString()+"\t\t");
+        Text message=new Text("Recognizing, please wait...");
+        dtwTextFlow.getChildren().addAll(time,message);
+        dtwScrollPane.setVvalue(1.0);
+    }
+
     private void invokeCountdown(){
         try{//load the countdown windows from fxml file
             FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("countdown.fxml"));

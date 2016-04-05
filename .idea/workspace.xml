@@ -5,30 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2a5351de-eadc-4098-9f09-70b7cbb258df" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController$2.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController$3.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$2.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$3.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$4.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$5.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/NewInterface.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/Speech.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/Speech.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/visualizer/Test$2.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/visualizer/Test$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/visualizer/Test.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/visualizer/Test.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/visualizer/VisualiseFX.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/visualizer/VisualiseFX.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/main/DTW.class" afterPath="$PROJECT_DIR$/out/production/SLT/main/DTW.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/main/Database.class" afterPath="$PROJECT_DIR$/out/production/SLT/main/Database.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/main/SLT.class" afterPath="$PROJECT_DIR$/out/production/SLT/main/SLT.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/main/SampleListener.class" afterPath="$PROJECT_DIR$/out/production/SLT/main/SampleListener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/main/Sign.class" afterPath="$PROJECT_DIR$/out/production/SLT/main/Sign.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/DefaultController.java" afterPath="$PROJECT_DIR$/gui/DefaultController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/NewInterface.java" afterPath="$PROJECT_DIR$/gui/NewInterface.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/visualizer/Test.java" afterPath="$PROJECT_DIR$/gui/visualizer/Test.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/visualizer/VisualiseFX.java" afterPath="$PROJECT_DIR$/gui/visualizer/VisualiseFX.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/workspace.xml" afterPath="$PROJECT_DIR$/out/production/SLT/.idea/workspace.xml" />
     </list>
     <ignored path="SLT.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -50,11 +29,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="VisualiseFX.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NewInterface.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/gui/NewInterface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="704">
+              <caret line="235" column="60" selection-start-line="235" selection-start-column="60" selection-end-line="235" selection-end-column="60" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VisualiseFX.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gui/visualizer/VisualiseFX.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="214" column="37" selection-start-line="214" selection-start-column="37" selection-end-line="214" selection-end-column="37" />
+            <state relative-caret-position="1180">
+              <caret line="254" column="21" selection-start-line="254" selection-start-column="21" selection-end-line="254" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -90,6 +79,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="DefaultController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gui/DefaultController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="149">
+              <caret line="171" column="8" selection-start-line="171" selection-start-column="8" selection-end-line="171" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
@@ -116,13 +115,13 @@
         <option value="$USER_HOME$/.IdeaIC2016/idea64.exe.vmoptions" />
         <option value="$PROJECT_DIR$/main/SLT.java" />
         <option value="$PROJECT_DIR$/main/Database.java" />
-        <option value="$PROJECT_DIR$/gui/DefaultController.java" />
         <option value="$PROJECT_DIR$/gui/visualizer/PolyCylinder3D.java" />
         <option value="$PROJECT_DIR$/gui/visualizer/VisSphere.java" />
         <option value="$PROJECT_DIR$/gui/Speech.java" />
         <option value="$PROJECT_DIR$/main/Sign.java" />
-        <option value="$PROJECT_DIR$/gui/NewInterface.java" />
         <option value="$PROJECT_DIR$/gui/visualizer/VisualiseFX.java" />
+        <option value="$PROJECT_DIR$/gui/DefaultController.java" />
+        <option value="$PROJECT_DIR$/gui/NewInterface.java" />
       </list>
     </option>
   </component>
@@ -610,7 +609,21 @@
       <option name="project" value="LOCAL" />
       <updated>1459777891547</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Replay implemented.">
+      <created>1459824280892</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1459824280892</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Bug fixed.">
+      <created>1459824413299</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1459824413299</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -659,7 +672,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fixed visualizer tuning" />
     <MESSAGE value="visualizer final tuned.&#10;&#10;TODO:&#10;Replay function implementation." />
-    <option name="LAST_COMMIT_MESSAGE" value="visualizer final tuned.&#10;&#10;TODO:&#10;Replay function implementation." />
+    <MESSAGE value="Replay implemented." />
+    <MESSAGE value="Bug fixed." />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug fixed." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -693,8 +708,8 @@
         <state relative-caret-position="285">
           <caret line="23" column="19" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="19" />
           <folding>
-            <element signature="e#4910#4911#0" expanded="true" />
-            <element signature="e#4949#4950#0" expanded="true" />
+            <element signature="e#4910#4911#0" expanded="false" />
+            <element signature="e#4949#4950#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -986,29 +1001,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui/NewInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="262" column="90" selection-start-line="262" selection-start-column="90" selection-end-line="262" selection-end-column="90" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui/DefaultController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="61" column="51" selection-start-line="61" selection-start-column="51" selection-end-line="61" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/Sign.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
           <folding>
-            <element signature="e#4910#4911#0" expanded="true" />
-            <element signature="e#4949#4950#0" expanded="true" />
+            <element signature="e#4910#4911#0" expanded="false" />
+            <element signature="e#4949#4950#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1063,8 +1062,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/visualizer/VisualiseFX.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="214" column="37" selection-start-line="214" selection-start-column="37" selection-end-line="214" selection-end-column="37" />
+        <state relative-caret-position="1180">
+          <caret line="254" column="21" selection-start-line="254" selection-start-column="21" selection-end-line="254" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/DefaultController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="171" column="8" selection-start-line="171" selection-start-column="8" selection-end-line="171" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/NewInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="704">
+          <caret line="235" column="60" selection-start-line="235" selection-start-column="60" selection-end-line="235" selection-end-column="60" />
           <folding />
         </state>
       </provider>
