@@ -192,7 +192,7 @@ public class Interface {
     private DTW dtw = new DTW();
 
     // the gui.visualizer applet
-    private Visualizer visualizer = new Visualizer();
+//    private Visualizer visualizer = new Visualizer();
 
 
     /**
@@ -298,23 +298,23 @@ public class Interface {
             listModel.addElement(key);
         }
 
-        visualizer.setBounds(160, 10, 500, 500);
-        frame.getContentPane().add(visualizer);
-        Runnable liveHand = new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    try {
-                        visualizer.traceLM(controller.frame());
-                        Thread.sleep(50);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-        Thread livevisual = new Thread(liveHand);
-        livevisual.start();
+//        visualizer.setBounds(160, 10, 500, 500);
+//        frame.getContentPane().add(visualizer);
+//        Runnable liveHand = new Runnable() {
+//            @Override
+//            public void run() {
+//                while (true) {
+//                    try {
+//                        visualizer.traceLM(controller.frame());
+//                        Thread.sleep(50);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        };
+//        Thread livevisual = new Thread(liveHand);
+//        livevisual.start();
 
         MouseListener mouseListener = new MouseAdapter() {
             public void mouseClicked(MouseEvent e){

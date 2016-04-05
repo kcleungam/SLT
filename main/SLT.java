@@ -2,7 +2,10 @@ package main;
 
 import com.leapmotion.leap.Controller;
 import com.leapmotion.leap.Frame;
+import data.Coordinate;
+import data.FingerData;
 import data.OneFrame;
+import data.PalmData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -228,7 +231,26 @@ public class SLT {
 							}
 							break;
 						case 8://database testing area
-							Sample sample=db.getFirstSample("swipe");
+							Sample sample=db.getFirstSample("two");
+							ArrayList<OneFrame> replayGesture = sample.getAllFrames();
+							for (OneFrame t:sample.getAllFrames()) {
+								PalmData palms = t.getPalmData();
+								FingerData finger = t.getFingerData();
+								for (Coordinate c: palms.getCoordinates()) {
+									System.out.println("palm:");
+									System.out.println("X:" +c.getX() +"Y:" +c.getY()+"Z:" +c.getZ());
+								}
+								for (Coordinate c: finger.getDistal()) {
+									System.out.println("distal:");
+									System.out.println("X:" +c.getX() +"Y:" +c.getY()+"Z:" +c.getZ());
+								}
+								for (Coordinate c: finger.getCoordinates()) {
+									System.out.println("finger:");
+									System.out.println("X:" +c.getX() +"Y:" +c.getY()+"Z:" +c.getZ());
+								}
+								System.out.println(sample.getInitialHandType());
+								Thread.sleep(100);
+							}
 							System.out.println(sample.getInitialHandType());
 							break;
 

@@ -111,11 +111,6 @@ public class DefaultController implements Initializable{
         }
     }
 
-    @FXML
-    public void clickListAction(){
-        application.replayVis(gestureList.getSelectionModel().getSelectedItem());
-    }
-
     /**
      * logging plain text in logging tab
      * @param message
@@ -219,7 +214,7 @@ public class DefaultController implements Initializable{
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                (new Alert(Alert.AlertType.INFORMATION,"TODO: implement this function.")).show();
+                application.replayVis(gestureList.getSelectionModel().getSelectedItem());
             }
         });
 

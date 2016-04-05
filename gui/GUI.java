@@ -98,8 +98,8 @@ public class GUI extends Application{
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                                 //redraw again as the interruption will make the update of some components stop
-                                dtwVisualiser.root.getChildren().clear();
-                                dtwVisualiser.initializeParam();
+                                //dtwVisualiser.root.getChildren().clear();
+                                //dtwVisualiser.initializeParam();
                             }
                         }
                     }
@@ -277,7 +277,7 @@ public class GUI extends Application{
                             }
                             String result=dtw.getResult();
                             try{
-                                defaultController.dtwWait();
+                                //defaultController.dtwWait();
                                 Thread.currentThread().sleep(1000);
                             }catch (InterruptedException e){
                                 e.printStackTrace();
@@ -301,20 +301,28 @@ public class GUI extends Application{
         dtwService.start();
     }
 
-    public void replayVis(String gestureName){
+    public void replayVis(String gestureName) {
         mainVisService.cancel();
-        ArrayList<OneFrame> replayGesture = allSigns.getSign(gestureName).getFirstSamples().getAllFrames();
-        for (OneFrame i:replayGesture) {
-            try {
-                mainVisualiser.traceLM(i);
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                //redraw again as the interruption will make the update of some components stop
-                mainVisualiser.root.getChildren().clear();
-                mainVisualiser.initializeParam();
+        try {
+            Sample sample=db.getFirstSample(gestureName);
+            for (OneFrame i:sample.getAllFrames()) {
+//                System.out.println(i);
+                if(i.getFingerData().getCoordinates()==null){
+                    System.out.println(true);
+                }else{
+                    System.out.println(false);
+                }
+
+                    mainVisualiser.traceLM(i);
+                    Thread.sleep(100);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            //redraw again as the interruption will make the update of some components stop
+            mainVisualiser.root.getChildren().clear();
+            mainVisualiser.initializeParam();
         }
+
         mainVisService = new Service<Void>() {
             @Override
             protected Task createTask() {
@@ -328,8 +336,8 @@ public class GUI extends Application{
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                                 //redraw again as the interruption will make the update of some components stop
-                                mainVisualiser.root.getChildren().clear();
-                                mainVisualiser.initializeParam();
+//                                mainVisualiser.root.getChildren().clear();
+//                                mainVisualiser.initializeParam();
                             }
                         }
                     }

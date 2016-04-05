@@ -39,7 +39,7 @@
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </padding>
                                                 </Label>
-                                                <ListView fx:id="gestureList" onMouseClicked="#clickListAction" prefHeight="205.0" prefWidth="161.0">
+                                                <ListView fx:id="gestureList" prefHeight="205.0" prefWidth="161.0">
                                                    <padding>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </padding>

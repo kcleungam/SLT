@@ -55,7 +55,7 @@ public class InterfaceFXController implements Initializable {
     private Service<Void> dtwThread;
 
     // the gui.visualizer applet
-    private Visualizer visualizer = new Visualizer();
+//    private Visualizer visualizer = new Visualizer();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
