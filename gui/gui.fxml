@@ -8,19 +8,19 @@
 <?import javafx.scene.text.*?>
 <?import javafx.collections.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@gui.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.DefaultController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@gui.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.DefaultController">
    <children>
-      <TabPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0000A0;" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #0000A0;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
           <Tab fx:id="controlTab" closable="false" text="Control">
             <content>
               <AnchorPane prefHeight="355.0" prefWidth="600.0" style="-fx-background-color: #0000A0;">
                      <children>
-                        <HBox prefHeight="354.0" prefWidth="600.0" AnchorPane.bottomAnchor="-14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <HBox prefHeight="771.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <VBox prefHeight="340.0" prefWidth="171.0" spacing="5.0">
+                              <VBox prefHeight="771.0" prefWidth="221.0" spacing="5.0">
                                  <children>
-                                    <VBox prefHeight="250.0" prefWidth="100.0" spacing="5.0">
+                                    <VBox prefHeight="658.0" prefWidth="171.0" spacing="5.0">
                                        <children>
                                           <Label prefHeight="19.0" prefWidth="171.0" text="List of gestures">
                                              <padding>
@@ -68,11 +68,11 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <VBox prefHeight="340.0" prefWidth="600.0">
+                        <VBox prefHeight="771.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <ScrollPane fx:id="dtwScrollPane" prefHeight="40.0" prefWidth="200.0">
+                              <ScrollPane fx:id="dtwScrollPane" prefHeight="89.0" prefWidth="1280.0">
                                  <content>
-                                    <TextFlow fx:id="dtwTextFlow" prefHeight="40.0" prefWidth="598.0" />
+                                    <TextFlow fx:id="dtwTextFlow" prefHeight="89.0" prefWidth="1263.0" />
                                  </content>
                               </ScrollPane>
                               <Group fx:id="dtwVisualiser" />

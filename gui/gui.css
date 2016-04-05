@@ -2,7 +2,6 @@
     -fx-background-color: #0000A0;
     -fx-font-family: SansSerif;
     -fx-font-size: 14px;
-    -fx-font-weight: regular;
 }
 .label
 {
@@ -17,7 +16,7 @@
 	-fx-background-color: #8080ff;
 }
 .tab-pane:top .tab-header-area .headers-region{
-	-fx-padding-bottom: 0px;
+	padding-bottom: 0px;
 }
 .tab-pane:top .tab-header-area .headers-region .tab:top{
 	-fx-background-color: linear-gradient(#8080ff, #0000b3);
@@ -31,8 +30,32 @@
 .tab-pane:top .tab-header-area .headers-region .tab:selected:top .tab-container .tab-label .text{
 	-fx-fill: #ffff66;
 }
-.list-view .virtual-flow.scroll-bar:vertical{
-	-fx-width: 5px;
+.scroll-bar{
+	-fx-background-color: transparent;
+}
+.scroll-bar .track{
+	-fx-background-color: transparent;
+}
+.scroll-bar .increment-button ,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+	-fx-padding: 3pt 3pt 3pt 3pt;
+	-fx-font-size: 0px;
+}
+.scroll-bar:horizontal .increment-button .increment-arrow,
+.scroll-bar:horizontal .decrement-button .decrement-arrow{
+    -fx-background-color: transparent;
+	-fx-padding: 1pt 0pt;
+	-fx-font-size: 0px;
+}
+.scroll-bar:vertical .increment-button .increment-arrow,
+.scroll-bar:vertical .decrement-button .decrement-arrow{
+    -fx-background-color: transparent;
+	-fx-padding: 0pt 1pt;
+	-fx-font-size: 0px;
+}
+.corner{
+	-fx-background-color:transparent;
 }
 .list-cell:odd {
 	-fx-background-color: #cccccc;

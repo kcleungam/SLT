@@ -36,7 +36,7 @@ public class DefaultController implements Initializable{
     @FXML private TextField inputField;
     @FXML private Button addButton;
     @FXML private TextFlow loggingArea,dtwTextFlow;
-    @FXML private Group mainVisualiser,dtwVisualiser;
+    @FXML public Group mainVisualiser,dtwVisualiser;
     @FXML private Tab controlTab,loggingTab,dtwTab;
     @FXML private ScrollPane dtwScrollPane,loggingScrollPane;
     private Stage countdown=new Stage();

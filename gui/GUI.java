@@ -58,8 +58,8 @@ public class GUI extends Application{
     /* Visualiser */
     private Service<Void> mainVisService;
     private Service<Void> dtwVisService;
-    public VisualiseFX mainVisualiser = new VisualiseFX(420,346,500);
-    public VisualiseFX dtwVisualiser=new VisualiseFX(600,300,500);
+    public VisualiseFX mainVisualiser;
+    public VisualiseFX dtwVisualiser;
 
     public static void main(String[] args){
         launch(args);
@@ -85,6 +85,9 @@ public class GUI extends Application{
         myself=this;
 
         //gesture visualize thread
+        mainVisualiser = new VisualiseFX(1000,760,800);
+        dtwVisualiser=new VisualiseFX(1280,670,900);
+
         dtwVisService = new Service<Void>() {
             @Override
             protected Task createTask() {
@@ -145,7 +148,7 @@ public class GUI extends Application{
             });
 
             Parent root=fxmlLoader.load();
-            Scene scene=new Scene(root, 600, 400);
+            Scene scene=new Scene(root, 1280, 800);
             stage.setScene(scene);
             stage.setTitle("Sign Language Translator");
             stage.show();
