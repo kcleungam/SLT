@@ -1,8 +1,12 @@
 package gui;
 
 import javafx.scene.media.*;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+
 import java.io.*;
 import java.net.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by alex on 29/2/2016.
@@ -12,6 +16,8 @@ public class Speech {
     private static final String DIRECTORY="audio/";
     private static boolean isPlaying=false;
     public enum LANGUAGE{ENGLISH,CANTONESE}
+    public static final String ENGLISH_REGEX="\\p{Print}";
+    public static final String CANTONESE_REGEX="\\p{InCJKUnifiedIdeographs}";
 
 
     /* constructor */
@@ -38,8 +44,14 @@ public class Speech {
         }
     }
 
-    public static void play(String text){
-        
+    public static void play(String text) throws IOException {
+        Pattern pattern=Pattern.compile(CANTONESE_REGEX);//
+        Matcher matcher=pattern.matcher(text);
+        //if it contains Han script, then use Cantonese
+        if(matcher.find())
+            play(text,LANGUAGE.CANTONESE);
+        else
+            play(text,LANGUAGE.ENGLISH);
     }
 
     public static boolean isPlaying(){return isPlaying;}
@@ -69,5 +81,16 @@ public class Speech {
         out.close();
         in.close();
         return true;
+    }
+
+    /**
+     * Just see whether the given gesture name contains printable ASCII or CJK unified ideographs
+     * @param name
+     * @return
+     */
+    public static boolean validate(String name){
+        Pattern pattern=Pattern.compile("[+"+ENGLISH_REGEX+"["+CANTONESE_REGEX+"]"+"]");
+        Matcher matcher=pattern.matcher(name);
+        return matcher.find();
     }
 }

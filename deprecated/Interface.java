@@ -1,7 +1,8 @@
-package gui; /**
+package deprecated; /**
  * Created by Luke on 22/12/2015.
  */
 import com.leapmotion.leap.Controller;
+import gui.Speech;
 import main.*;
 
 import javax.swing.*;

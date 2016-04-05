@@ -3,14 +3,13 @@ package gui;
  * Created by alex on 10/3/2016.
  *
  * This class handles the GUI interactions.
- * For other operations, please goto gui.NewInterface.java
+ * For other operations, please goto gui.GUI.java
  */
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,8 +41,8 @@ public class DefaultController implements Initializable{
     @FXML private ScrollPane dtwScrollPane,loggingScrollPane;
     private Stage countdown=new Stage();
 
-    /* Communication to NewInterface instance */
-    private NewInterface application;
+    /* Communication to GUI instance */
+    private GUI application;
     private int countdownTime;
     private DefaultController myself;
 
@@ -89,7 +88,7 @@ public class DefaultController implements Initializable{
         log("OK");
     }
 
-    public void setApp(NewInterface app){application=app;}
+    public void setApp(GUI app){application=app;}
 
     /**
      * set the content of the List View
@@ -145,7 +144,7 @@ public class DefaultController implements Initializable{
             @Override
             public void run() {
                 try {
-                    Speech.play(result, Speech.LANGUAGE.ENGLISH);
+                    Speech.play(result);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -194,15 +193,25 @@ public class DefaultController implements Initializable{
 
             countdown.show();
         }catch(Exception ex){
-            Logger.getLogger(NewInterface.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public void closeCountdown(){
         countdown.close();
-        application.addSign(inputField.getText());
-
-        setList(false);//update the list
+        String input=inputField.getText();
+        if(Speech.validate(input)) {
+            application.addSign(input);
+            setList(false);//update the list
+        }
+        else{
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    (new Alert(Alert.AlertType.ERROR,"Please input a proper name contains English or Chinese characters.")).show();
+                }
+            });
+        }
     }
 
     private void playback(String name){

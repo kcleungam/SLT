@@ -17,13 +17,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.concurrent.Worker;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
@@ -37,7 +35,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class NewInterface extends Application{
+public class GUI extends Application{
     /* Main control components */
     private static Database db = new Database("Signs", "HK_Signs");
     private  SignBank allSigns;
@@ -54,7 +52,7 @@ public class NewInterface extends Application{
 
     /* GUI control */
     private static Stage stage;
-    private NewInterface myself;
+    private GUI myself;
     private DefaultController defaultController;
 
     /* Visualiser */
@@ -111,7 +109,7 @@ public class NewInterface extends Application{
                 }
             });
         }catch(Exception ex){
-            Logger.getLogger(NewInterface.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

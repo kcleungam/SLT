@@ -1,4 +1,4 @@
-package gui; /**
+package deprecated; /**
  * Class TextAreaPrintStream
  * extends PrintStream.
  * A custom made PrintStream which overrides methods println(String)

@@ -1,4 +1,4 @@
-package gui; /**
+package deprecated; /**
  * Created by Luke on 27/1/2016.
  */
 
@@ -16,7 +16,7 @@ public class InterfaceFX extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("gui/interfaceFX.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("deprecated/interfaceFX.fxml"));
         primaryStage.setTitle("Sign Language Translator");
         primaryStage.setScene(new Scene(root, 1200, 700));
         primaryStage.show();

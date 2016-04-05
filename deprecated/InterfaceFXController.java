@@ -1,4 +1,4 @@
-package gui; /**
+package deprecated; /**
  * Created by Luke on 27/1/2016.
  */
 

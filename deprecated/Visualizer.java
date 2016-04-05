@@ -1,4 +1,4 @@
-package gui;
+package deprecated;
 /*
  * https://java3d.java.net/binary-builds.html
  * use the link above for the java 3d libraries,
