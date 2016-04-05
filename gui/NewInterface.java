@@ -10,6 +10,7 @@ package gui;
  */
 
 import com.leapmotion.leap.Controller;
+import data.OneFrame;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -31,6 +32,7 @@ import javafx.util.Callback;
 import main.*;
 import gui.visualizer.VisualiseFX;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -251,7 +253,18 @@ public class NewInterface extends Application{
 
     public void replayVis(String gestureName){
         mainVisualiser.cancel();
-        allSigns.getSign(gestureName);
+        ArrayList<OneFrame> replayGesture = allSigns.getSign(gestureName).getFirstSamples().getAllFrames();
+        for (OneFrame i:replayGesture) {
+            try {
+                mainVisualiser.traceLM(i);
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                //redraw again as the interruption will make the update of some components stop
+                mainVisualiser.root.getChildren().clear();
+                mainVisualiser.initializeParam();
+            }
+        }
         mainVisualiser.restart();
     }
 

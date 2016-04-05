@@ -40,7 +40,6 @@ public class Test extends Application{
 		primaryStage.setTitle("SLT");
 		primaryStage.show();
 
-		System.out.println(test.appEnd[0]);
 	}
 
 	Task<Void> VisTracing = new Task<Void>() {

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.leapmotion.leap.*;
+import data.Coordinate;
+import data.FingerData;
+import data.OneFrame;
+import data.PalmData;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.*;
@@ -28,7 +32,7 @@ public class VisualiseFX extends Service{
 	private final float[] leapEnd = { 200.0f, 400.0f, 200.0f };
 
 	// graphic-related
-	private Group root;
+	public Group root;
 	private SubScene subScene;
 
 	private VisSphere[][][] fingerNode = new VisSphere[2][5][5];
@@ -145,6 +149,11 @@ public class VisualiseFX extends Service{
 		updateGraphic();
 	}
 
+	public void traceLM(OneFrame frame) {
+		setCoor(frame);
+		updateGraphic();
+	}
+
 	/*
 	 * calculation related
 	 */
@@ -190,6 +199,39 @@ public class VisualiseFX extends Service{
 			}
 			palmCoor[i] = new Point3D(0, 0, -100);
 		}
+	}
+
+	public void setCoor(OneFrame Frame){
+		PalmData palms = Frame.getPalmData();
+		FingerData finger = Frame.getFingerData();
+		int i = 0;
+		for (; i < palms.getCount(); i++) {
+			for (int j = 0; j < 5; j++) {
+				fingerCoor[i][j][0] = rangeConvert(finger.coordinates.get(i*0+j));
+				fingerCoor[i][j][1] =
+						rangeConvert(finger.getDistal().get(i*0+j));
+				fingerCoor[i][j][2] =
+						rangeConvert(finger.getIntermediate().get(i*0+j));
+				fingerCoor[i][j][3] =
+						rangeConvert(finger.getProximal().get(i*0+j));
+				fingerCoor[i][j][4] =
+						rangeConvert(finger.getMetacarpal().get(i*0+j));
+			}
+			palmCoor[i] = rangeConvert(palms.getCoordinates().get(i));
+		}
+		// for non-existing hands:
+		for (; i < 2; i++) {
+			for (int j = 0; j < 5; j++) {
+				for (int k = 0; k < 5; k++) {
+					fingerCoor[i][j][k] = new Point3D(0, 0, -100);
+				}
+			}
+			palmCoor[i] = new Point3D(0, 0, -100);
+		}
+	}
+
+	public Point3D rangeConvert(Coordinate DataCoor) {
+		return rangeConvert(new float[] {(float) DataCoor.getX(), (float) DataCoor.getY(), (float) DataCoor.getZ()});
 	}
 
 	public Point3D rangeConvert(Vector LeapCoor) {
