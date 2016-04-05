@@ -37,6 +37,11 @@ public class Speech {
             isPlaying=false;
         }
     }
+
+    public static void play(String text){
+        
+    }
+
     public static boolean isPlaying(){return isPlaying;}
 
 

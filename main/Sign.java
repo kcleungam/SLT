@@ -173,6 +173,9 @@ public class Sign {
 	public HashSet<Sample> getAllSamples() {
 		return this.samples;
 	}
+	public Sample getFirstSamples(){
+		return samples.iterator().next();
+	}
 
 
 
