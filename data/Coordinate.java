@@ -39,9 +39,7 @@ public class Coordinate {
         this.z = z;
     }
     @JsonGetter("x")
-    public double getX() {
-        return x;
-    }
+    public double getX() { return x; }
     @JsonGetter("y")
     public double getY() {
         return y;
@@ -49,5 +47,8 @@ public class Coordinate {
     @JsonGetter("z")
     public double getZ() {
         return z;
+    }
+    public String toString () {
+        return "x = " + getX() + "y = " + getY() + "z = " + getZ() ;
     }
 }

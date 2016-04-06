@@ -8,15 +8,11 @@ import data.Coordinate;
 import data.FingerData;
 import data.OneFrame;
 import data.PalmData;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
 import javafx.scene.*;
 import javafx.scene.paint.Color;
 import javafx.geometry.Point3D;
 
 public class VisualiseFX{
-
-	private Controller controller = new Controller();
 
 	// constants
 	private int viewwidth = 420;// see gui.fxml
@@ -207,6 +203,8 @@ public class VisualiseFX{
 		int i = 0;
 		for (; i < palms.getCount(); i++) {
 			for (int j = 0; j < 5; j++) {
+//				System.out.println(rangeConvert(finger.coordinates.get(i*5+j)).toString());
+				//
 				fingerCoor[i][j][0] = rangeConvert(finger.coordinates.get(i*5+j));
 				fingerCoor[i][j][1] =
 						rangeConvert(finger.getDistal().get(i*5+j));
@@ -230,8 +228,14 @@ public class VisualiseFX{
 		}
 	}
 
-	public Point3D rangeConvert(Coordinate DataCoor) {
-		return rangeConvert(new float[] {(float) DataCoor.getX(), (float) DataCoor.getY(), (float) DataCoor.getZ()});
+	public Point3D rangeConvert(data.Coordinate DataCoor) {
+		double[] temp = new double[3];
+		double[] dataValue = new double[] {DataCoor.getX(), DataCoor.getY(), DataCoor.getZ()};
+		for (int i = 0; i < 3; i++) {
+			temp[i] = (dataValue[i] - leapStart[i]) * (appEnd[i] - appStart[i]) / (leapEnd[i] - leapStart[i])
+					+ appStart[i];
+		}
+		return new Point3D (temp[0]*1.8, temp[2]*0.8+250, -temp[1]+1000);
 	}
 
 	public Point3D rangeConvert(Vector LeapCoor) {
@@ -249,3 +253,4 @@ public class VisualiseFX{
 
 	public SubScene getSubScene() { return subScene; }
 }
+

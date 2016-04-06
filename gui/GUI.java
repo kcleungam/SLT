@@ -56,7 +56,7 @@ public class GUI extends Application{
     private DefaultController defaultController;
 
     /* Visualiser */
-    //private Service<Void> mainVisService;
+//    private Service<Void> mainVisService;
     private Service<Void> dtwVisService;
     public VisualiseFX mainVisualiser;
     public VisualiseFX dtwVisualiser;
