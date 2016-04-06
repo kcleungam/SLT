@@ -28,6 +28,7 @@ public class VisualiseFX{
 	// the prog starts from top-left, increase right, down, and inward.
 	private final int[] appStart = { 0, 0, 0 };
 	public int[] appEnd = { viewwidth, viewheight, viewdepth };
+	private final double magnifcation = 1.5;
 	private final float[] leapStart = { -200.0f, 0.0f, -200.0f };
 	private final float[] leapEnd = { 200.0f, 400.0f, 200.0f };
 
@@ -244,7 +245,7 @@ public class VisualiseFX{
 			temp[i] = (LeapValue[i] - leapStart[i]) * (appEnd[i] - appStart[i]) / (leapEnd[i] - leapStart[i])
 					+ appStart[i];
 		}
-		return new Point3D (temp[0]*1.4-100, temp[2]-130, -temp[1]+700);
+		return new Point3D (temp[0]*1.4-200, temp[2]-260, -temp[1]+1400);
 	}
 
 	public SubScene getSubScene() { return subScene; }
