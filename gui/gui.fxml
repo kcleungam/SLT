@@ -27,13 +27,13 @@
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </padding>
                                           </Label>
-                                          <ListView fx:id="gestureList" prefHeight="205.0" prefWidth="161.0" VBox.vgrow="ALWAYS" />
+                                          <ListView fx:id="gestureList" prefHeight="609.0" prefWidth="211.0" />
                                        </children>
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </padding>
                                     </VBox>
-                                    <VBox prefHeight="77.0" prefWidth="171.0" spacing="5.0">
+                                    <VBox prefHeight="397.0" prefWidth="221.0" spacing="5.0">
                                        <children>
                                           <Label text="Name of gesture">
                                              <padding>
@@ -72,7 +72,7 @@
                            <children>
                               <ScrollPane fx:id="dtwScrollPane" prefHeight="89.0" prefWidth="1280.0">
                                  <content>
-                                    <TextFlow fx:id="dtwTextFlow" prefHeight="89.0" prefWidth="1263.0" />
+                                    <TextFlow fx:id="dtwTextFlow" prefHeight="69.0" prefWidth="1263.0" />
                                  </content>
                               </ScrollPane>
                               <Group fx:id="dtwVisualiser" />

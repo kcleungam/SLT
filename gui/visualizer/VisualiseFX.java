@@ -244,7 +244,7 @@ public class VisualiseFX{
 			temp[i] = (LeapValue[i] - leapStart[i]) * (appEnd[i] - appStart[i]) / (leapEnd[i] - leapStart[i])
 					+ appStart[i];
 		}
-		return new Point3D (temp[0]*1.4-200, temp[2]-260, -temp[1]+1400);
+		return new Point3D (temp[0]*1.8-600, temp[2]*0.8-260, -temp[1]+1000);
 	}
 
 	public SubScene getSubScene() { return subScene; }
