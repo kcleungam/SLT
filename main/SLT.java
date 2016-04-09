@@ -33,6 +33,7 @@ public class SLT {
 		// New a Listener everytime
 		SampleListener sampleListener = new SampleListener();
 		sampleListener.lostFocus();
+		sampleListener.setReady(false);
 		// Add listener, grab data
 		controller.addListener(sampleListener);
 		DTW dtw = new DTW();
@@ -64,6 +65,7 @@ public class SLT {
 							ready();
 							sampleListener.reset();
 							sampleListener.gainFocus();
+							sampleListener.setReady(true);
 
 							while (true) {
 								if (sampleListener.checkFinish()) {
@@ -150,6 +152,7 @@ public class SLT {
 						ready();
 						sampleListener.reset();
 						sampleListener.gainFocus();
+						sampleListener.setReady(true);
 						boolean getSample = false;
 						Sample rSample=null;
 
@@ -170,6 +173,7 @@ public class SLT {
 							Thread.currentThread().sleep(10);
 						}
 						sampleListener.lostFocus();
+						sampleListener.setReady(false);
 
 						if(getSample == false){
 							break;
@@ -258,6 +262,7 @@ public class SLT {
 					default:
 						System.out.println("Please enter a valid option");
 						sampleListener.lostFocus();
+						sampleListener.setReady(false);
 						inputValid = false;
 						break;
 					}

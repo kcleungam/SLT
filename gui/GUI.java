@@ -69,6 +69,7 @@ public class GUI extends Application{
     public void start(Stage primaryStage) throws Exception {
         //initialise the things related to Leap Motion controller
 //        sampleListener.lostFocus();
+        sampleListener.setReady(false);
         controller.addListener(sampleListener);
         if(!controller.isConnected()){
             //check whether the controller is connected
@@ -215,6 +216,9 @@ public class GUI extends Application{
                         Thread.yield();
                         break;//terminate after the input is determined to be finished
                     }
+
+                    sampleListener.setReady(false);
+
                     try {
                         Thread.currentThread().sleep(100);//release this thread for a while
                     } catch (InterruptedException e) {
@@ -264,6 +268,7 @@ public class GUI extends Application{
                             }
                         }
 //                        sampleListener.lostFocus();
+                        sampleListener.setReady(false);
 
                         //when successfully get the gesture
                         if(input){
