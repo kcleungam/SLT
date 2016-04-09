@@ -35,6 +35,7 @@ public class DefaultController implements Initializable{
     @FXML private ListView<String> gestureList;
     @FXML private TextField inputField;
     @FXML private Button addButton;
+    @FXML private Button startButton;
     @FXML private TextFlow loggingArea,dtwTextFlow;
     @FXML public Group mainVisualiser,dtwVisualiser;
     @FXML private Tab controlTab,loggingTab,dtwTab;
@@ -158,11 +159,11 @@ public class DefaultController implements Initializable{
         dtwScrollPane.setVvalue(1.0);
     }
 
-    public void dtwWait(){
-        Text time=new Text((new Date()).toString()+"\t\t");
-        Text message=new Text("Recognizing, please wait...");
-        dtwTextFlow.getChildren().addAll(time,message);
-        dtwScrollPane.setVvalue(1.0);
+    @FXML
+    public void dtwStartAction(){
+        startButton.setText("Stop");
+        invokeCountdown();
+        startButton.setText("Start");
     }
 
     private void invokeCountdown(){
