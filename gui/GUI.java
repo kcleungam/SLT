@@ -174,6 +174,7 @@ public class GUI extends Application{
 
         sampleListener.reset();
 //        sampleListener.gainFocus();
+        sampleListener.setReady(true);
 
         //start recording
         Thread addSignThread=new Thread(new Runnable() {
@@ -234,6 +235,7 @@ public class GUI extends Application{
                     protected String call() throws Exception {
                         //capture the gesture first
                         sampleListener.reset();
+                        sampleListener.setReady(true);
 //                        sampleListener.gainFocus();
 
                         //try to record the gesture

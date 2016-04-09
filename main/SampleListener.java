@@ -44,7 +44,7 @@ public class SampleListener extends Listener {
 	static boolean recording;
 	static boolean finishRec;
 	static boolean validSample;
-	static boolean focus;
+	static boolean ready;
 	static int pauseCount;
 	static int minPauseCount = 10;
 
@@ -54,7 +54,7 @@ public class SampleListener extends Listener {
 		recording = false;
 		finishRec = false;
 		validSample = false;
-		focus = false;
+		ready = false;
 		pauseCount = 0;
 	}
 
@@ -63,7 +63,7 @@ public class SampleListener extends Listener {
 		recording = false;
 		finishRec = false;
 		validSample = false;
-		focus = false;
+		ready = false;
 		pauseCount = 0;
 	}
 
@@ -131,7 +131,7 @@ public class SampleListener extends Listener {
 	}
 
 	public void gainFocus(){
-		this.focus = true;
+		//this.focus = true;
 		System.out.println("gained");
 	}
 
@@ -148,8 +148,15 @@ public class SampleListener extends Listener {
 
 	public void lostFocus(){
 		System.out.println("lost");
-		this.focus = false;
+		//this.focus = false;
 	}
+
+
+	public void setReady(boolean bool){
+		ready = bool;
+	}
+
+
 	/**
 	 * Called when a ***new frame of hand and finger tracking data is
 	 * available****. Access the new frame data using the Controller::frame()
@@ -171,12 +178,12 @@ public class SampleListener extends Listener {
 		// e.g. from + 100 to -100 will have 0 in between, previous method can't
 		// record this
 
-		if ( finishRec == false) {
+		if ( finishRec == false && ready == true) {
 			if (recordableFrame(frame, minRecVelocity, maxRecVelocity) == true) {
 				pauseCount = 0;
 				recording = true;
 				recordFrame(oneSample, frame);
-			} else if (recording == true) {
+			} else if (recording == true	&& ready == true) {
 				pauseCount++;
 				if (pauseCount > minPauseCount) {
 					System.out.println("Recording Finish");
