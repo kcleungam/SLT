@@ -149,13 +149,11 @@ public class DefaultController implements Initializable{
         Text time=new Text((new Date()).toString()+"\t\t");
         Text message=new Text(result);
         if(result.equals(DTW.UNKNOWN)){
-            message.setText(result+"\n");
-            message.setFill(Color.RED);
+            message.setText("Ready\n");
             dtwTextFlow.getChildren().addAll(time,message);
         }else{
             message.setFill(Color.BLUE);
-            Text text=new Text("\tis the most similar gesture.\n");
-            dtwTextFlow.getChildren().addAll(time,message,text);
+            dtwTextFlow.getChildren().addAll(time,message);
         }
         dtwScrollPane.setVvalue(1.0);
     }
@@ -210,7 +208,6 @@ public class DefaultController implements Initializable{
     }
 
     private void playback(String name){
-        //TODO
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

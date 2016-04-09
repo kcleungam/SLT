@@ -11,6 +11,7 @@ package gui;
 
 import com.leapmotion.leap.Controller;
 import data.OneFrame;
+import gui.visualizer.VisualiseFX;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -28,9 +29,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import main.*;
-import gui.visualizer.VisualiseFX;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -56,7 +55,8 @@ public class GUI extends Application{
     private DefaultController defaultController;
 
     /* Visualiser */
-//    private Service<Void> mainVisService;
+    private Service<Void> mainVisService;
+    private Service<Void> replayVisService;
     private Service<Void> dtwVisService;
     public VisualiseFX mainVisualiser;
     public VisualiseFX dtwVisualiser;
@@ -101,8 +101,8 @@ public class GUI extends Application{
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                                 //redraw again as the interruption will make the update of some components stop
-                                //dtwVisualiser.root.getChildren().clear();
-                                //dtwVisualiser.initializeParam();
+                                dtwVisualiser.root.getChildren().clear();
+                                dtwVisualiser.initializeParam();
                             }
                         }
                     }
@@ -110,29 +110,28 @@ public class GUI extends Application{
             }
         };
         dtwVisService.restart();
-
-//        mainVisService = new Service<Void>() {
-//            @Override
-//            protected Task createTask() {
-//                return new Task<Void>() {
-//                    @Override
-//                    protected Void call() throws Exception {
-//                        while (true) {
-//                            try {
-//                                mainVisualiser.traceLM(controller.frame());
-//                                Thread.sleep(100);
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                                //redraw again as the interruption will make the update of some components stop
-//                                mainVisualiser.root.getChildren().clear();
-//                                mainVisualiser.initializeParam();
-//                            }
-//                        }
-//                    }
-//                };
-//            }
-//        };
-//        mainVisService.restart();
+        mainVisService = new Service<Void>() {
+            @Override
+            protected Task createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        while (true) {
+                            try {
+                                mainVisualiser.traceLM(controller.frame());
+                                Thread.sleep(100);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                                //redraw again as the interruption will make the update of some components stop
+                                mainVisualiser.root.getChildren().clear();
+                                mainVisualiser.initializeParam();
+                            }
+                        }
+                    }
+                };
+            }
+        };
+        mainVisService.restart();
 
 
         //initialize the controllers of interface
@@ -301,32 +300,61 @@ public class GUI extends Application{
                 dtwService.restart();
             }
         });
+        dtwVisService = new Service<Void>() {
+            @Override
+            protected Task createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        while (true) {
+                            try {
+                                dtwVisualiser.traceLM(controller.frame());
+//                                System.out.println(dtwVisualiser.getPoint3DArray(0).toString());
+                                Thread.sleep(100);
+
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                                //redraw again as the interruption will make the update of some components stop
+                                //dtwVisualiser.root.getChildren().clear();
+                                //dtwVisualiser.initializeParam();
+                            }
+                        }
+                    }
+                };
+            }
+        };
+        dtwVisService.start();
         dtwService.start();
     }
 
     public void replayVis(String gestureName) {
 //        mainVisService.cancel();
-        try {
-            Sample sample=db.getFirstSample(gestureName);
-            for (OneFrame i:sample.getAllFrames()) {
-//                System.out.println(i);
-//                if(i.getFingerData().getCoordinates()==null){
-//                    System.out.println(true);
-//                }else{
-//                    System.out.println(false);
-//                }
-
-                    mainVisualiser.traceLM(i);
-                    Thread.sleep(100);
+        replayVisService = new Service<Void>() {
+            @Override
+            protected Task createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        Sample sample=db.getFirstSample(gestureName);
+                        for (OneFrame i:sample.getAllFrames()) {
+                            try {
+                                    mainVisualiser.traceLM(i);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                //redraw again as the interruption will make the update of some components stop
+                                mainVisualiser.root.getChildren().clear();
+                                mainVisualiser.initializeParam();
+                            }
+                        }
+                        return null;
+                    }
+                };
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            //redraw again as the interruption will make the update of some components stop
-            mainVisualiser.root.getChildren().clear();
-            mainVisualiser.initializeParam();
-        }
-        mainVisualiser.root.getChildren().clear();
-        mainVisualiser.initializeParam();
+        };
+        replayVisService.start();
+
+//        mainVisualiser.root.getChildren().clear();
+//        mainVisualiser.initializeParam();
 
 //        mainVisService = new Service<Void>() {
 //            @Override
@@ -341,8 +369,8 @@ public class GUI extends Application{
 //                            } catch (InterruptedException e) {
 //                                e.printStackTrace();
 //                                //redraw again as the interruption will make the update of some components stop
-////                                mainVisualiser.root.getChildren().clear();
-////                                mainVisualiser.initializeParam();
+//                                mainVisualiser.root.getChildren().clear();
+//                                mainVisualiser.initializeParam();
 //                            }
 //                        }
 //                    }
@@ -355,5 +383,7 @@ public class GUI extends Application{
     public void stopRecognition(){
         if(dtwService!=null)
             dtwService.cancel();
+        if(dtwVisService!=null)
+            dtwVisService.cancel();
     }
 }

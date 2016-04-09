@@ -10,25 +10,23 @@
 .label .text{
 	-fx-font-family: SansSerif;
 	-fx-font-size: 14px;
-	-fx-fill: #ffff66;
-}
-.tab-pane:top .tab-header-area .tab-header-background{
-	-fx-background-color: #8080ff;
+	-fx-fill: #000000;
 }
 .tab-pane:top .tab-header-area .headers-region{
 	padding-bottom: 0px;
 }
 .tab-pane:top .tab-header-area .headers-region .tab:top{
 	-fx-background-color: linear-gradient(#8080ff, #0000b3);
+	-fx-margin: 0px;
 }
 .tab-pane:top .tab-header-area .headers-region .tab:top .tab-container .tab-label .text{
-	-fx-fill: #ffffff;
+	-fx-fill: #000000;
 }
 .tab-pane:top .tab-header-area .headers-region .tab:selected:top{
 	-fx-background-color: linear-gradient(#0000b3, #8080ff);
 }
 .tab-pane:top .tab-header-area .headers-region .tab:selected:top .tab-container .tab-label .text{
-	-fx-fill: #ffff66;
+	-fx-fill: #000000;
 }
 .scroll-bar{
 	-fx-background-color: transparent;
