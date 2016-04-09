@@ -1,31 +1,27 @@
 package gui.visualizer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import com.leapmotion.leap.*;
-import data.Coordinate;
-import data.FingerData;
-import data.OneFrame;
-import data.PalmData;
+import com.leapmotion.leap.Bone;
+import com.leapmotion.leap.Frame;
+import com.leapmotion.leap.HandList;
+import com.leapmotion.leap.Vector;
+import data.*;
+import javafx.geometry.Point3D;
 import javafx.scene.*;
 import javafx.scene.paint.Color;
-import javafx.geometry.Point3D;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class VisualiseFX{
 
 	// constants
-	private int viewwidth = 420;// see gui.fxml
-	private int viewheight = 346;//see gui.fxml
-	private int viewdepth = 500;
+	private int viewwidth;	// see gui.fxml
+	private int viewheight;	//see gui.fxml
+	private int viewdepth;
 	private final int fingerSize = 10;
 	private final int palmSize = 25;
 
-	// the prog starts from top-left, increase right, down, and inward.
-	private final int[] appStart = { 0, 0, 0 };
-	public int[] appEnd = { viewwidth, viewheight, viewdepth };
-	private final float[] leapStart = { -200.0f, 0.0f, -200.0f };
-	private final float[] leapEnd = { 200.0f, 400.0f, 200.0f };
+	// the scene starts from top-left, increase right, down, and inward.
 
 	// graphic-related
 	public Group root;
@@ -51,7 +47,7 @@ public class VisualiseFX{
 		root = new Group();
 
 		subScene = new SubScene(root, viewwidth, viewheight, true, SceneAntialiasing.BALANCED);
-		subScene.setFill(Color.rgb(0,0,160));
+		subScene.setFill(Color.TRANSPARENT);
 
 		lightSetting();
 
@@ -87,11 +83,6 @@ public class VisualiseFX{
 	 * initialize the spheres
 	 */
 	public void initializeParam() {
-		appEnd = new int[]{viewwidth, viewheight, viewdepth};
-        for (int i = 0; i < 2; i++){
-            leapStart[i] = -appEnd[i]/2;
-            leapEnd[i]= appEnd[i]/2;
-        }
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 5; j++) {
 				for (int k = 0; k < 5; k++) {
@@ -115,7 +106,6 @@ public class VisualiseFX{
 		fingerNode[1][1][4].setVisible(false);
 		fingerNode[1][2][4].setVisible(false);
 		fingerNode[1][3][4].setVisible(false);
-		// scene.addChild(lineShape);
 	}
 
 	/*
@@ -148,6 +138,11 @@ public class VisualiseFX{
 	public void traceLM(OneFrame frame) {
 		setCoor(frame);
 		updateGraphic();
+		try{
+			Thread.currentThread().sleep(40);
+		} catch (InterruptedException e){
+			e.printStackTrace();
+		}
 	}
 
 	/*
@@ -203,8 +198,6 @@ public class VisualiseFX{
 		int i = 0;
 		for (; i < palms.getCount(); i++) {
 			for (int j = 0; j < 5; j++) {
-//				System.out.println(rangeConvert(finger.coordinates.get(i*5+j)).toString());
-				//
 				fingerCoor[i][j][0] = rangeConvert(finger.coordinates.get(i*5+j));
 				fingerCoor[i][j][1] =
 						rangeConvert(finger.getDistal().get(i*5+j));
@@ -229,13 +222,8 @@ public class VisualiseFX{
 	}
 
 	public Point3D rangeConvert(data.Coordinate DataCoor) {
-		double[] temp = new double[3];
 		double[] dataValue = new double[] {DataCoor.getX(), DataCoor.getY(), DataCoor.getZ()};
-		for (int i = 0; i < 3; i++) {
-			temp[i] = (dataValue[i] - leapStart[i]) * (appEnd[i] - appStart[i]) / (leapEnd[i] - leapStart[i])
-					+ appStart[i];
-		}
-		return new Point3D (temp[0]*1.8, temp[2]*0.8+250, -temp[1]+1000);
+		return new Point3D (dataValue[0]*2.0+500, dataValue[2]*2.0+260, -dataValue[1]+1200);
 	}
 
 	public Point3D rangeConvert(Vector LeapCoor) {
@@ -243,12 +231,7 @@ public class VisualiseFX{
 	}
 
 	public Point3D rangeConvert(float[] LeapValue) {
-		double[] temp = new double[3];
-		for (int i = 0; i < 3; i++) {
-			temp[i] = (LeapValue[i] - leapStart[i]) * (appEnd[i] - appStart[i]) / (leapEnd[i] - leapStart[i])
-					+ appStart[i];
-		}
-		return new Point3D (temp[0]*1.8-600, temp[2]*0.8-260, -temp[1]+1000);
+		return new Point3D (LeapValue[0]*2.0+500, LeapValue[2]*2.0+260, -LeapValue[1]+1200);
 	}
 
 	public SubScene getSubScene() { return subScene; }
