@@ -46,7 +46,7 @@ public class GUI extends Application{
     private static boolean recognition = false;
     private static volatile boolean yes = false, no = false;
     private static ObservableList<String> gestures=FXCollections.observableArrayList();
-    private Service<String> dtwService;
+    public Service<String> dtwService;
     private final int dtwTolerance=1;
 
     /* GUI control */
@@ -111,6 +111,7 @@ public class GUI extends Application{
             }
         };
         dtwVisService.restart();
+
         mainVisService = new Service<Void>() {
             @Override
             protected Task createTask() {
@@ -241,6 +242,7 @@ public class GUI extends Application{
                         //capture the gesture first
                         sampleListener.reset();
                         sampleListener.setReady(true);
+                        defaultController.startBtnSetText("Stop");
 //                        sampleListener.gainFocus();
 
                         //try to record the gesture
@@ -270,7 +272,6 @@ public class GUI extends Application{
                             }
                         }
 //                        sampleListener.lostFocus();
-                        
 
                         //when successfully get the gesture
                         if(input){
@@ -288,7 +289,6 @@ public class GUI extends Application{
                             }
                             String result=dtw.getResult();
                             try{
-                                //defaultController.dtwWait();
                                 Thread.currentThread().sleep(1000);
                             }catch (InterruptedException e){
                                 e.printStackTrace();
@@ -304,40 +304,22 @@ public class GUI extends Application{
         dtwService.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent event) {
-                if(dtwService.getValue()!=null)
+                if(dtwService.getValue()!=null){
                     defaultController.dtwDisplay(dtwService.getValue());
-                dtwService.restart();
+                }
+                if(!defaultController.singleModeOn){
+                    dtwService.restart();
+                    defaultController.startBtnSetText("Stop");
+                }else{
+                    defaultController.startBtnSetText("Start");
+                }
             }
         });
-        dtwVisService = new Service<Void>() {
-            @Override
-            protected Task createTask() {
-                return new Task<Void>() {
-                    @Override
-                    protected Void call() throws Exception {
-                        while (true) {
-                            try {
-                                dtwVisualiser.traceLM(controller.frame());
-//                                System.out.println(dtwVisualiser.getPoint3DArray(0).toString());
-                                Thread.sleep(100);
-
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                                //redraw again as the interruption will make the update of some components stop
-                                //dtwVisualiser.root.getChildren().clear();
-                                //dtwVisualiser.initializeParam();
-                            }
-                        }
-                    }
-                };
-            }
-        };
-        dtwVisService.start();
+        dtwVisService.restart();
         dtwService.start();
     }
 
     public void replayVis(String gestureName) {
-//        mainVisService.cancel();
         replayVisService = new Service<Void>() {
             @Override
             protected Task createTask() {
@@ -347,7 +329,7 @@ public class GUI extends Application{
                         Sample sample=db.getFirstSample(gestureName);
                         for (OneFrame i:sample.getAllFrames()) {
                             try {
-                                    mainVisualiser.traceLM(i);
+                                mainVisualiser.traceLM(i);
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 //redraw again as the interruption will make the update of some components stop
@@ -357,36 +339,29 @@ public class GUI extends Application{
                         }
                         return null;
                     }
+
+                    @Override protected void running(){
+                        super.running();
+                        mainVisService.cancel();
+                    }
+
+                    @Override protected void scheduled(){
+                        super.scheduled();
+                        if(dtwVisService!=null)
+                            mainVisService.cancel();
+                    }
+
+                    @Override protected void succeeded(){
+                        super.succeeded();
+                        mainVisualiser.root.getChildren().clear();
+                        mainVisualiser.initializeParam();
+                        mainVisService.restart();
+                    }
                 };
             }
         };
+
         replayVisService.start();
-
-//        mainVisualiser.root.getChildren().clear();
-//        mainVisualiser.initializeParam();
-
-//        mainVisService = new Service<Void>() {
-//            @Override
-//            protected Task createTask() {
-//                return new Task<Void>() {
-//                    @Override
-//                    protected Void call() throws Exception {
-//                        while (true) {
-//                            try {
-//                                mainVisualiser.traceLM(controller.frame());
-//                                Thread.sleep(100);
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                                //redraw again as the interruption will make the update of some components stop
-//                                mainVisualiser.root.getChildren().clear();
-//                                mainVisualiser.initializeParam();
-//                            }
-//                        }
-//                    }
-//                };
-//            }
-//        };
-//        mainVisService.restart();
     }
 
     public void stopRecognition(){

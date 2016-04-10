@@ -16,7 +16,7 @@
               <menus>
                 <Menu mnemonicParsing="false" text="System">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Change Mode" />
+                    <MenuItem fx:id="modeButton" mnemonicParsing="false" onAction="#modeButtonAction" text="Change Mode" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
@@ -98,12 +98,12 @@
                                           <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                        </VBox.margin>
                                     </ScrollPane>
-                                    <Group fx:id="dtwVisualiser" />
                                     <Button fx:id="startButton" mnemonicParsing="false" onAction="#dtwStartAction" text="Start">
                                        <VBox.margin>
                                           <Insets bottom="20.0" left="20.0" right="20.0" top="5.0" />
                                        </VBox.margin>
                                     </Button>
+                                    <Group fx:id="dtwVisualiser" />
                                  </children>
                               </VBox>
                            </children>

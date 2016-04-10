@@ -36,6 +36,7 @@ public class DefaultController implements Initializable{
     @FXML private TextField inputField;
     @FXML private Button addButton;
     @FXML private Button startButton;
+    @FXML private MenuItem modeButton;
     @FXML private TextFlow loggingArea,dtwTextFlow;
     @FXML public Group mainVisualiser,dtwVisualiser;
     @FXML private Tab controlTab,loggingTab,dtwTab;
@@ -46,8 +47,7 @@ public class DefaultController implements Initializable{
     private GUI application;
     private int countdownTime;
     private DefaultController myself;
-
-
+    public boolean singleModeOn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
@@ -80,6 +80,7 @@ public class DefaultController implements Initializable{
         });
         dtwScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         dtwScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        singleModeOn = false;
 
         //logging tab
         dtwScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -99,8 +100,6 @@ public class DefaultController implements Initializable{
         gestureList.setItems(application.getGestures(sort));
     }
 
-
-
     /* GUI interactions */
     @FXML
     public void addButtonAction(){
@@ -110,6 +109,23 @@ public class DefaultController implements Initializable{
         }else{//require input name
             new Alert(Alert.AlertType.ERROR,"Please input the gesture name first.").show();
         }
+    }
+
+    @FXML
+    public void modeButtonAction(){
+        Text time=new Text((new Date()).toString()+"\t\t");
+        Text message;
+        if (singleModeOn){
+            message=new Text("Single gesture Off.\n");
+
+            singleModeOn = false;
+        }else{
+            message=new Text("Single gesture On.\n");
+
+            singleModeOn = true;
+        }
+        dtwTextFlow.getChildren().addAll(time,message);
+        dtwScrollPane.setVvalue(1.0);
     }
 
     /**
@@ -161,9 +177,17 @@ public class DefaultController implements Initializable{
 
     @FXML
     public void dtwStartAction(){
-        startButton.setText("Stop");
-        invokeCountdown();
-        startButton.setText("Start");
+        if (startButton.getText()=="Stop"){
+            application.stopRecognition();
+            startBtnSetText("Start");
+        }else{
+            startBtnSetText("Stop");
+            invokeCountdown();
+        }
+    }
+
+    public void startBtnSetText(String text){
+        startButton.setText(text);
     }
 
     private void invokeCountdown(){
@@ -193,19 +217,25 @@ public class DefaultController implements Initializable{
 
     public void closeCountdown(){
         countdown.close();
-        String input=inputField.getText();
-        if(Speech.validate(input)) {
-            application.addSign(input);
-            setList(false);//update the list
+        if (dtwTab.isSelected()){
+            application.dtwService.restart();
+            startBtnSetText("Start");
+        }else{
+            String input=inputField.getText();
+            if(Speech.validate(input)) {
+                application.addSign(input);
+                setList(false);//update the list
+            }
+            else{
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        (new Alert(Alert.AlertType.ERROR,"Please input a proper name contains English or Chinese characters.")).show();
+                    }
+                });
+            }
         }
-        else{
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    (new Alert(Alert.AlertType.ERROR,"Please input a proper name contains English or Chinese characters.")).show();
-                }
-            });
-        }
+
     }
 
     private void playback(String name){
@@ -215,6 +245,5 @@ public class DefaultController implements Initializable{
                 application.replayVis(gestureList.getSelectionModel().getSelectedItem());
             }
         });
-
     }
 }
