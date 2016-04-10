@@ -43,6 +43,7 @@ public class DefaultController implements Initializable{
     @FXML private ScrollPane dtwScrollPane,loggingScrollPane;
     @FXML private Label modeLabel;
     private Stage countdown=new Stage();
+    private Stage warning=new Stage();
 
     /* Communication to GUI instance */
     private GUI application;
@@ -59,13 +60,20 @@ public class DefaultController implements Initializable{
         setList(false);
         mainVisualiser.getChildren().add(application.mainVisualiser.getSubScene());
         MenuItem playback=new MenuItem("Playback");
+        MenuItem delete=new MenuItem("Delete");
         playback.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                playback(String.valueOf(gestureList.getSelectionModel().getSelectedItems()));
+                playback();
             }
         });
-        ContextMenu rightClickMenu=new ContextMenu(playback);
+        delete.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                invokeWarning();
+            }
+        });
+        ContextMenu rightClickMenu=new ContextMenu(playback, delete);
         gestureList.setContextMenu(rightClickMenu);
         controlTab.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
@@ -246,15 +254,54 @@ public class DefaultController implements Initializable{
                 });
             }
         }
-
     }
 
-    private void playback(String name){
+    public void invokeWarning(){
+        try{
+            application.stopMainVisualizer();
+            FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("warning.fxml"));
+            fxmlLoader.setControllerFactory(new Callback<Class<?>, Object>() {
+                @Override
+                public Object call(Class<?> param) {
+                    WarningController product=new WarningController();
+                    product.setApp(myself);
+                    return product;
+                }
+            });
+            Parent root=fxmlLoader.load();
+            Scene scene=new Scene(root);
+            warning.setScene(scene);
+            warning.setAlwaysOnTop(true);
+
+            warning.show();
+        }catch(Exception ex){
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void resolveWarning(Boolean reply){
+        application.startMainVisualizer();
+        if(reply){
+            warning.close();
+            try {
+                application.deleteGesture(getListSelected());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else{
+            warning.close();
+        }
+    }
+
+    private void playback(){
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                application.replayVis(gestureList.getSelectionModel().getSelectedItem());
+                application.replayVis(getListSelected());
             }
         });
+    }
+
+    public String getListSelected(){
+        return String.valueOf(gestureList.getSelectionModel().getSelectedItems());
     }
 }

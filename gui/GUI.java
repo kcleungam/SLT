@@ -141,6 +141,13 @@ public class GUI extends Application{
                         mainVisualiser.root.getChildren().clear();
                         mainVisualiser.initializeParam();
                         restart();
+                        defaultController.log("mainVis failed.");
+                    }
+
+                    @Override protected void cancelled(){
+                        defaultController.log("mainVis cancelled.");
+                        mainVisualiser.root.getChildren().clear();
+                        mainVisualiser.initializeParam();
                     }
                 };
             }
@@ -331,6 +338,7 @@ public class GUI extends Application{
                         for (OneFrame i:sample.getAllFrames()) {
                             try {
                                 mainVisualiser.traceLM(i);
+                                Thread.sleep(100);
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 //redraw again as the interruption will make the update of some components stop
@@ -346,9 +354,14 @@ public class GUI extends Application{
                         mainVisService.cancel();
                     }
 
+                    @Override protected void failed(){
+                        super.failed();
+                        defaultController.log("replay failed.");
+                    }
+
                     @Override protected void scheduled(){
                         super.scheduled();
-                        if(dtwVisService!=null)
+                        if(mainVisService!=null||mainVisService.isRunning())
                             mainVisService.cancel();
                     }
 
@@ -361,7 +374,7 @@ public class GUI extends Application{
                 };
             }
         };
-
+//        mainVisService.cancel();
         replayVisService.start();
     }
 
@@ -391,4 +404,13 @@ public class GUI extends Application{
         if(dtwVisService!=null||dtwVisService.isRunning())
         dtwVisService.cancel();
     }
+
+    public void deleteGesture(String deleteGest) throws Exception {
+        if(db.removeSign(db.getSignsByName(deleteGest))){
+            defaultController.setList(false);
+            defaultController.log(deleteGest + "deleted.");
+        }
+    }
+
+
 }
