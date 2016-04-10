@@ -85,7 +85,7 @@ public class GUI extends Application{
 
         //gesture visualize thread
         mainVisualiser = new VisualiseFX(1000,760,800);
-        dtwVisualiser=new VisualiseFX(1280,670,900);
+        dtwVisualiser=new VisualiseFX(1280,570,900);
 
         dtwVisService = new Service<Void>() {
             @Override
@@ -108,9 +108,16 @@ public class GUI extends Application{
 
                     @Override protected void failed(){
                         super.failed();
+                        defaultController.log("mainVis failed.");
                         dtwVisualiser.root.getChildren().clear();
                         dtwVisualiser.initializeParam();
                         restart();
+                    }
+
+                    @Override protected void cancelled(){
+                        defaultController.log("mainVis cancelled.");
+                        dtwVisualiser.root.getChildren().clear();
+                        dtwVisualiser.initializeParam();
                     }
                 };
             }
@@ -138,10 +145,10 @@ public class GUI extends Application{
 
                     @Override protected void failed(){
                         super.failed();
+                        defaultController.log("mainVis failed.");
                         mainVisualiser.root.getChildren().clear();
                         mainVisualiser.initializeParam();
                         restart();
-                        defaultController.log("mainVis failed.");
                     }
 
                     @Override protected void cancelled(){

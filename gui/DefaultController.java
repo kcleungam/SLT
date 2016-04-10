@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
@@ -203,6 +204,8 @@ public class DefaultController implements Initializable{
         });
         Text time=new Text((new Date()).toString()+"\t\t");
         Text message=new Text(result+"\n");
+        time.setFont(Font.font(20));
+        message.setFont(Font.font(20));
         if(result.equals(DTW.UNKNOWN)){
             message.setText("Ready\n");
             dtwTextFlow.getChildren().addAll(time,message);
