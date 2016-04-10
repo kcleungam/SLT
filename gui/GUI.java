@@ -213,11 +213,12 @@ public class GUI extends Application{
                         }else{//invalid samples
                             Platform.runLater(() -> (new Alert(Alert.AlertType.WARNING,"Invalid recording. Too few samples.")).showAndWait());
                         }
+                        sampleListener.setReady(false);
                         Thread.yield();
                         break;//terminate after the input is determined to be finished
                     }
 
-                    sampleListener.setReady(false);
+                    
 
                     try {
                         Thread.currentThread().sleep(100);//release this thread for a while
@@ -257,6 +258,7 @@ public class GUI extends Application{
                                 }else{
                                     input=false;
                                 }
+                                sampleListener.setReady(false);
                                 Thread.yield();
                                 break;//terminate
                             }
@@ -268,7 +270,7 @@ public class GUI extends Application{
                             }
                         }
 //                        sampleListener.lostFocus();
-                        sampleListener.setReady(false);
+                        
 
                         //when successfully get the gesture
                         if(input){
