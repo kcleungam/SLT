@@ -60,37 +60,21 @@ public class DefaultController implements Initializable{
         mainVisualiser.getChildren().add(application.mainVisualiser.getSubScene());
         MenuItem playback=new MenuItem("Playback");
         MenuItem delete=new MenuItem("Delete");
-        playback.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                playback();
-            }
-        });
-        delete.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        Alert alert=new Alert(Alert.AlertType.CONFIRMATION,"Confirm to delete?");
-                        alert.setResultConverter(new Callback<ButtonType, ButtonType>() {
-                            @Override
-                            public ButtonType call(ButtonType param) {
-                                if(param==ButtonType.OK){
-                                    try {
-                                        application.deleteGesture(getItemSelected());
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                                return null;
-                            }
-                        });
-                        alert.showAndWait();
+        playback.setOnAction(event -> playback());
+        delete.setOnAction(event -> Platform.runLater(() -> {
+            Alert alert=new Alert(Alert.AlertType.CONFIRMATION,"Confirm to delete?");
+            alert.setResultConverter(param -> {
+                if(param==ButtonType.OK){
+                    try {
+                        application.deleteGesture(getItemSelected());
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                });
-            }
-        });
+                }
+                return null;
+            });
+            alert.showAndWait();
+        }));
         ContextMenu rightClickMenu=new ContextMenu(playback, delete);
 
         gestureList.setContextMenu(rightClickMenu);
@@ -269,12 +253,7 @@ public class DefaultController implements Initializable{
 
 
     private void playback() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                application.replayVis(getItemSelected());
-            }
-        });
+        Platform.runLater(() -> application.replayVis(getItemSelected()));
     }
 
     public String getItemSelected(){
