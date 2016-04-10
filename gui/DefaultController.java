@@ -70,7 +70,26 @@ public class DefaultController implements Initializable{
         delete.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                invokeWarning();
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        Alert alert=new Alert(Alert.AlertType.CONFIRMATION,"Confirm to delete?");
+                        alert.setResultConverter(new Callback<ButtonType, ButtonType>() {
+                            @Override
+                            public ButtonType call(ButtonType param) {
+                                if(param==ButtonType.OK){
+                                    try {
+                                        application.deleteGesture(getListSelected());
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                return null;
+                            }
+                        });
+                        alert.showAndWait();
+                    }
+                });
             }
         });
         ContextMenu rightClickMenu=new ContextMenu(playback, delete);
@@ -256,41 +275,7 @@ public class DefaultController implements Initializable{
         }
     }
 
-    public void invokeWarning(){
-        try{
-            application.stopMainVisualizer();
-            FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("warning.fxml"));
-            fxmlLoader.setControllerFactory(new Callback<Class<?>, Object>() {
-                @Override
-                public Object call(Class<?> param) {
-                    WarningController product=new WarningController();
-                    product.setApp(myself);
-                    return product;
-                }
-            });
-            Parent root=fxmlLoader.load();
-            Scene scene=new Scene(root);
-            warning.setScene(scene);
-            warning.setAlwaysOnTop(true);
 
-            warning.show();
-        }catch(Exception ex){
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    public void resolveWarning(Boolean reply){
-        application.startMainVisualizer();
-        if(reply){
-            warning.close();
-            try {
-                application.deleteGesture(getListSelected());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }else{
-            warning.close();
-        }
-    }
 
     private void playback(){
         Platform.runLater(new Runnable() {
