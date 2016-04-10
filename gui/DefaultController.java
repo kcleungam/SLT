@@ -41,17 +41,19 @@ public class DefaultController implements Initializable{
     @FXML public Group mainVisualiser,dtwVisualiser;
     @FXML private Tab controlTab,loggingTab,dtwTab;
     @FXML private ScrollPane dtwScrollPane,loggingScrollPane;
+    @FXML private Label modeLabel;
     private Stage countdown=new Stage();
 
     /* Communication to GUI instance */
     private GUI application;
     private int countdownTime;
     private DefaultController myself;
-    public boolean singleModeOn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
         myself=this;
+
+        modeLabel.setText(String.valueOf(Mode.WordMode));
 
         //about control tab
         setList(false);
@@ -65,6 +67,16 @@ public class DefaultController implements Initializable{
         });
         ContextMenu rightClickMenu=new ContextMenu(playback);
         gestureList.setContextMenu(rightClickMenu);
+        controlTab.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(!oldValue&&newValue){//when the user clicks the controlTab
+                    application.startMainVisualizer();
+                }else if(oldValue&&!newValue){//when the user leaves the controlTab
+                    application.stopMainVisualizer();
+                }
+            }
+        });
 
         //about DTW tab
         dtwVisualiser.getChildren().add(application.dtwVisualiser.getSubScene());
@@ -73,14 +85,15 @@ public class DefaultController implements Initializable{
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if(!oldValue&&newValue){//when the user clicks the DTW tab
                     application.startRecognition();
+                    application.startDtwVisualizer();
                 }else if(oldValue&&!newValue){//when the user leaves the DTW tab
                     application.stopRecognition();
+                    application.stopDtwVisualizer();
                 }
             }
         });
         dtwScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         dtwScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        singleModeOn = false;
 
         //logging tab
         dtwScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -113,19 +126,18 @@ public class DefaultController implements Initializable{
 
     @FXML
     public void modeButtonAction(){
-        Text time=new Text((new Date()).toString()+"\t\t");
-        Text message;
-        if (singleModeOn){
-            message=new Text("Single gesture Off.\n");
-
-            singleModeOn = false;
+        if (modeLabel.getText()==String.valueOf(Mode.WordMode)){
+            modeLabel.setText(String.valueOf(Mode.SentenceMode));
+            startBtnSetText("Stop");
+            application.startRecognition();
         }else{
-            message=new Text("Single gesture On.\n");
-
-            singleModeOn = true;
+            modeLabel.setText(String.valueOf(Mode.WordMode));
+            startBtnSetText("Start");
         }
-        dtwTextFlow.getChildren().addAll(time,message);
-        dtwScrollPane.setVvalue(1.0);
+    }
+
+    public String getMode(){
+        return modeLabel.getText();
     }
 
     /**
@@ -162,13 +174,13 @@ public class DefaultController implements Initializable{
                 }
             }
         });
-        speechThread.start();
         Text time=new Text((new Date()).toString()+"\t\t");
-        Text message=new Text(result);
+        Text message=new Text(result+"\n");
         if(result.equals(DTW.UNKNOWN)){
             message.setText("Ready\n");
             dtwTextFlow.getChildren().addAll(time,message);
         }else{
+            speechThread.start();
             message.setFill(Color.BLUE);
             dtwTextFlow.getChildren().addAll(time,message);
         }
@@ -218,9 +230,8 @@ public class DefaultController implements Initializable{
     public void closeCountdown(){
         countdown.close();
         if (dtwTab.isSelected()){
-            application.dtwService.restart();
-            startBtnSetText("Start");
-        }else{
+            application.startRecognition();
+        }else if (controlTab.isSelected()){
             String input=inputField.getText();
             if(Speech.validate(input)) {
                 application.addSign(input);

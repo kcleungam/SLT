@@ -18,7 +18,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -46,7 +45,7 @@ public class GUI extends Application{
     private static boolean recognition = false;
     private static volatile boolean yes = false, no = false;
     private static ObservableList<String> gestures=FXCollections.observableArrayList();
-    public Service<String> dtwService;
+    private Service<String> dtwService;
     private final int dtwTolerance=1;
 
     /* GUI control */
@@ -68,7 +67,6 @@ public class GUI extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         //initialise the things related to Leap Motion controller
-//        sampleListener.lostFocus();
         sampleListener.setReady(false);
         controller.addListener(sampleListener);
         if(!controller.isConnected()){
@@ -107,10 +105,17 @@ public class GUI extends Application{
                             }
                         }
                     }
+
+                    @Override protected void failed(){
+                        super.failed();
+                        dtwVisualiser.root.getChildren().clear();
+                        dtwVisualiser.initializeParam();
+                        restart();
+                    }
                 };
             }
         };
-        dtwVisService.restart();
+        dtwVisService.cancel();
 
         mainVisService = new Service<Void>() {
             @Override
@@ -130,11 +135,97 @@ public class GUI extends Application{
                             }
                         }
                     }
+
+                    @Override protected void failed(){
+                        super.failed();
+                        mainVisualiser.root.getChildren().clear();
+                        mainVisualiser.initializeParam();
+                        restart();
+                    }
                 };
             }
         };
-        mainVisService.restart();
+        mainVisService.start();
 
+        dtwService=new Service<String>() {
+            @Override
+            protected Task<String> createTask() {
+                return new Task<String>() {
+                    @Override
+                    protected String call() throws Exception {
+                        //capture the gesture first
+                        sampleListener.reset();
+                        sampleListener.setReady(true);
+                        defaultController.startBtnSetText("Stop");
+
+                        //try to record the gesture
+                        boolean input;
+                        Sample source = null;
+                        while(true){
+                            if(sampleListener.checkFinish()){
+                                if(sampleListener.checkValid()){
+                                    input=true;
+                                    try {
+                                        source=new Sample(sampleListener.returnOneSample());
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }else{
+                                    input=false;
+                                }
+                                sampleListener.setReady(false);
+                                Thread.yield();
+                                break;//terminate
+                            }
+                            //release the thread for a while
+                            try {
+                                Thread.currentThread().sleep(100);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        //when successfully get the gesture
+                        if(input){
+                            DTW dtw=new DTW();
+                            dtw.setRSample(source);
+                            HashMap<String,Sign> signByBoth = null;
+                            try {
+                                signByBoth=db.getSignsByBoth(source.getInitialFingerCount(),source.getInitialHandType(),dtwTolerance);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            for(Sign storedSign:signByBoth.values()){
+                                dtw.setStoredSign(storedSign);
+                                dtw.calDTW();
+                            }
+                            String result=dtw.getResult();
+                            try{
+                                Thread.currentThread().sleep(1000);
+                            }catch (InterruptedException e){
+                                e.printStackTrace();
+                            }
+                            dtw.reset();
+                            return result;
+                        }
+                        return null;
+                    }
+
+                    @Override protected void succeeded(){
+                        super.succeeded();
+                        if(dtwService.getValue()!=null){
+                            defaultController.dtwDisplay(dtwService.getValue());
+                        }
+                        if(defaultController.getMode()=="WordMode"){
+                            defaultController.startBtnSetText("Start");
+                        }else if(defaultController.getMode()=="SentenceMode"){
+                            dtwService.restart();
+                        }
+                    }
+                };
+            }
+        };
+        dtwService.cancel();
 
         //initialize the controllers of interface
         try{
@@ -175,7 +266,6 @@ public class GUI extends Application{
     public void addSign(String name){
 
         sampleListener.reset();
-//        sampleListener.gainFocus();
         sampleListener.setReady(true);
 
         //start recording
@@ -219,8 +309,6 @@ public class GUI extends Application{
                         break;//terminate after the input is determined to be finished
                     }
 
-                    
-
                     try {
                         Thread.currentThread().sleep(100);//release this thread for a while
                     } catch (InterruptedException e) {
@@ -230,93 +318,6 @@ public class GUI extends Application{
             }
         });
         addSignThread.start();
-    }
-
-    public void startRecognition(){
-        dtwService=new Service<String>() {
-            @Override
-            protected Task<String> createTask() {
-                return new Task<String>() {
-                    @Override
-                    protected String call() throws Exception {
-                        //capture the gesture first
-                        sampleListener.reset();
-                        sampleListener.setReady(true);
-                        defaultController.startBtnSetText("Stop");
-//                        sampleListener.gainFocus();
-
-                        //try to record the gesture
-                        boolean input;
-                        Sample source = null;
-                        while(true){
-                            if(sampleListener.checkFinish()){
-                                if(sampleListener.checkValid()){
-                                    input=true;
-                                    try {
-                                        source=new Sample(sampleListener.returnOneSample());
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                }else{
-                                    input=false;
-                                }
-                                sampleListener.setReady(false);
-                                Thread.yield();
-                                break;//terminate
-                            }
-                            //release the thread for a while
-                            try {
-                                Thread.currentThread().sleep(100);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-//                        sampleListener.lostFocus();
-
-                        //when successfully get the gesture
-                        if(input){
-                            DTW dtw=new DTW();
-                            dtw.setRSample(source);
-                            HashMap<String,Sign> signByBoth = null;
-                            try {
-                                signByBoth=db.getSignsByBoth(source.getInitialFingerCount(),source.getInitialHandType(),dtwTolerance);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            for(Sign storedSign:signByBoth.values()){
-                                dtw.setStoredSign(storedSign);
-                                dtw.calDTW();
-                            }
-                            String result=dtw.getResult();
-                            try{
-                                Thread.currentThread().sleep(1000);
-                            }catch (InterruptedException e){
-                                e.printStackTrace();
-                            }
-                            dtw.reset();
-                            return result;
-                        }
-                        return null;
-                    }
-                };
-            }
-        };
-        dtwService.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent event) {
-                if(dtwService.getValue()!=null){
-                    defaultController.dtwDisplay(dtwService.getValue());
-                }
-                if(!defaultController.singleModeOn){
-                    dtwService.restart();
-                    defaultController.startBtnSetText("Stop");
-                }else{
-                    defaultController.startBtnSetText("Start");
-                }
-            }
-        });
-        dtwVisService.restart();
-        dtwService.start();
     }
 
     public void replayVis(String gestureName) {
@@ -364,10 +365,30 @@ public class GUI extends Application{
         replayVisService.start();
     }
 
+    public void startRecognition(){
+        dtwService.restart();
+    }
+
     public void stopRecognition(){
-        if(dtwService!=null)
+        if(dtwService!=null||dtwService.isRunning())
             dtwService.cancel();
-        if(dtwVisService!=null)
-            dtwVisService.cancel();
+    }
+
+    public void startMainVisualizer(){
+        mainVisService.restart();
+    }
+
+    public void stopMainVisualizer(){
+        if(mainVisService!=null||mainVisService.isRunning())
+            mainVisService.cancel();
+    }
+
+    public void startDtwVisualizer(){
+        dtwVisService.restart();
+    }
+
+    public void stopDtwVisualizer(){
+        if(dtwVisService!=null||dtwVisService.isRunning())
+        dtwVisService.cancel();
     }
 }

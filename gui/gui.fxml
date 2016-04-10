@@ -98,11 +98,26 @@
                                           <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                        </VBox.margin>
                                     </ScrollPane>
-                                    <Button fx:id="startButton" mnemonicParsing="false" onAction="#dtwStartAction" text="Start">
+                                    <HBox>
+                                       <children>
+                                          <Button fx:id="startButton" mnemonicParsing="false" onAction="#dtwStartAction" prefHeight="27.0" prefWidth="86.0" text="Start">
+                                             <VBox.margin>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                          <Label fx:id="modeLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" graphicTextGap="5.0" prefHeight="27.0" prefWidth="1192.0" style="-fx-text-fill: #000000;" text="Mode" HBox.hgrow="ALWAYS">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
                                        <VBox.margin>
-                                          <Insets bottom="20.0" left="20.0" right="20.0" top="5.0" />
+                                          <Insets bottom="20.0" left="20.0" right="20.0" />
                                        </VBox.margin>
-                                    </Button>
+                                    </HBox>
                                     <Group fx:id="dtwVisualiser" />
                                  </children>
                               </VBox>
