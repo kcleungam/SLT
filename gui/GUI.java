@@ -64,7 +64,7 @@ public class GUI extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         //initialise the things related to Leap Motion controller
-        sampleListener  .setReady(false);
+        sampleListener.setReady(false);
         controller.addListener(sampleListener);
         if(!controller.isConnected()){
             //check whether the controller is connected

@@ -43,7 +43,6 @@ public class DefaultController implements Initializable{
     @FXML private ScrollPane dtwScrollPane,loggingScrollPane;
     @FXML private Label modeLabel;
     private Stage countdown=new Stage();
-    private Stage warning=new Stage();
 
     /* Communication to GUI instance */
     private GUI application;
@@ -54,6 +53,7 @@ public class DefaultController implements Initializable{
         myself=this;
 
         modeLabel.setText(String.valueOf(Mode.WordMode));
+        modeLabel.setDisable(false);
 
         //about control tab
         setList(false);
@@ -149,10 +149,12 @@ public class DefaultController implements Initializable{
     public void modeButtonAction(){
         if (modeLabel.getText()==String.valueOf(Mode.WordMode)){
             modeLabel.setText(String.valueOf(Mode.SentenceMode));
+            log(LoggingTemplate.getModeMessage(Mode.SentenceMode));
             startBtnSetText("Stop");
             application.startRecognition();
         }else{
             modeLabel.setText(String.valueOf(Mode.WordMode));
+            log(LoggingTemplate.getModeMessage(Mode.WordMode));
             startBtnSetText("Start");
         }
     }
