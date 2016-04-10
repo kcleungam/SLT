@@ -7,8 +7,6 @@ package gui;
  */
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,6 +24,7 @@ import main.DTW;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -48,7 +47,6 @@ public class DefaultController implements Initializable{
 
     /* Communication to GUI instance */
     private GUI application;
-    private int countdownTime;
     private DefaultController myself;
 
     @Override
@@ -94,30 +92,25 @@ public class DefaultController implements Initializable{
             }
         });
         ContextMenu rightClickMenu=new ContextMenu(playback, delete);
+
         gestureList.setContextMenu(rightClickMenu);
-        controlTab.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(!oldValue&&newValue){//when the user clicks the controlTab
-                    application.startMainVisualizer();
-                }else if(oldValue&&!newValue){//when the user leaves the controlTab
-                    application.stopMainVisualizer();
-                }
+        controlTab.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if(!oldValue&&newValue){//when the user clicks the controlTab
+                application.startMainVisualizer();
+            }else if(oldValue&&!newValue){//when the user leaves the controlTab
+                application.stopMainVisualizer();
             }
         });
 
         //about DTW tab
         dtwVisualiser.getChildren().add(application.dtwVisualiser.getSubScene());
-        dtwTab.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(!oldValue&&newValue){//when the user clicks the DTW tab
-                    application.startRecognition();
-                    application.startDtwVisualizer();
-                }else if(oldValue&&!newValue){//when the user leaves the DTW tab
-                    application.stopRecognition();
-                    application.stopDtwVisualizer();
-                }
+        dtwTab.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if(!oldValue&&newValue){//when the user clicks the DTW tab
+                application.startRecognition();
+                application.startDtwVisualizer();
+            }else if(oldValue&&!newValue){//when the user leaves the DTW tab
+                application.stopRecognition();
+                application.stopDtwVisualizer();
             }
         });
         dtwScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -173,7 +166,7 @@ public class DefaultController implements Initializable{
      * @param message
      */
     public void log(String message){//create a new line for your each time
-        Text text=new Text(message+"\n");
+        Text text=new Text((new Date()).toString()+"\t"+message+"\n");
         loggingArea.getChildren().add(text);
         loggingScrollPane.setVvalue(1.0);
     }
@@ -191,15 +184,17 @@ public class DefaultController implements Initializable{
         loggingScrollPane.setVvalue(1.0);
     }
 
+    public void log(ArrayList<Text> stream){
+        stream.forEach(text -> loggingArea.getChildren().add(text));
+        loggingScrollPane.setVvalue(1.0);
+    }
+
     public void dtwDisplay(String result){
-        Thread speechThread=new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Speech.play(result);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        Thread speechThread=new Thread(() -> {
+            try {
+                Speech.play(result);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
         Text time=new Text((new Date()).toString()+"\t\t");
@@ -235,13 +230,10 @@ public class DefaultController implements Initializable{
     private void invokeCountdown(){
         try{//load the countdown windows from fxml file
             FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("countdown.fxml"));
-            fxmlLoader.setControllerFactory(new Callback<Class<?>, Object>() {
-                @Override
-                public Object call(Class<?> param) {
-                    CountdownController product=new CountdownController();
-                    product.setApp(myself);
-                    return product;
-                }
+            fxmlLoader.setControllerFactory(param -> {
+                CountdownController product=new CountdownController();
+                product.setApp(myself);
+                return product;
             });
             Parent root=fxmlLoader.load();
             Scene scene=new Scene(root);
@@ -268,17 +260,13 @@ public class DefaultController implements Initializable{
                 setList(false);//update the list
             }
             else{
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        (new Alert(Alert.AlertType.ERROR,"Please input a proper name contains English or Chinese characters.")).show();
-                    }
-                });
+                Platform.runLater(() -> (new Alert(Alert.AlertType.ERROR,"Please input a proper name contains English or Chinese characters.")).show());
             }
         }
     }
 
-    private void playback(){
+
+    private void playback() {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
