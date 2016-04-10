@@ -10,6 +10,7 @@ package gui;
  */
 
 import com.leapmotion.leap.Controller;
+import com.leapmotion.leap.Frame;
 import data.OneFrame;
 import gui.visualizer.VisualiseFX;
 import javafx.application.Application;
@@ -29,6 +30,7 @@ import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import main.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -273,9 +275,15 @@ public class GUI extends Application{
                                 if(param==ButtonType.OK){
                                     //add to the database, sign bank and gestures
                                     try {
-                                        Sign sign=new Sign(name,new Sample(sampleListener.returnOneSample()));
+                                        ArrayList<Frame> arr=sampleListener.returnOneSample();
+
+                                        Sign sign=new Sign(name,new Sample(arr));
                                         allSigns.addSign(name,sign);
                                         db.addSign(sign);
+
+                                        //update logging
+                                        defaultController.log(LoggingTemplate.getUpdateMessage(name,arr.size(),LoggingTemplate.UPDATE.ADD));
+
                                         if(!gestures.contains(name))
                                             gestures.add(name);//add name if not exist
                                     } catch (Exception e) {

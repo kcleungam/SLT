@@ -7,10 +7,6 @@ package gui;
  */
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,11 +16,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import main.DTW;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -133,7 +129,7 @@ public class DefaultController implements Initializable{
      * @param message
      */
     public void log(String message){//create a new line for your each time
-        Text text=new Text(message+"\n");
+        Text text=new Text((new Date()).toString()+"\t"+message+"\n");
         loggingArea.getChildren().add(text);
         loggingScrollPane.setVvalue(1.0);
     }
@@ -148,6 +144,11 @@ public class DefaultController implements Initializable{
         if(!lastChar.equals('\n'))
             text.setText(message+"\n");
         loggingArea.getChildren().add(text);
+        loggingScrollPane.setVvalue(1.0);
+    }
+
+    public void log(ArrayList<Text> stream){
+        stream.forEach(text -> loggingArea.getChildren().add(text));
         loggingScrollPane.setVvalue(1.0);
     }
 
