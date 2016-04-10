@@ -214,10 +214,10 @@ public class SLT {
 							String delName = sc.next();
 							if(db.getSignsByName(delName) != null){
 								if(db.removeSign(db.getSignsByName(delName))){
+									allSigns.removeSign(delName);
 									System.out.println("Remove " + delName + " successfully!");
 								}
 							}
-
 							break;
 						case 7:
 							System.out.println("Please enter the gesture name you want to change:");
