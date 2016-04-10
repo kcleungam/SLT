@@ -39,11 +39,6 @@ public class GUI extends Application{
     private  SignBank allSigns;
     private  SampleListener sampleListener = new SampleListener();
     private  Controller controller = new Controller();
-    private  DTW dtw = new DTW();
-    private  SLT slt=new SLT();
-    private static boolean recording = false;
-    private static boolean recognition = false;
-    private static volatile boolean yes = false, no = false;
     private static ObservableList<String> gestures=FXCollections.observableArrayList();
     private Service<String> dtwService;
     private final int dtwTolerance=1;
@@ -173,9 +168,11 @@ public class GUI extends Application{
                                 }else{
                                     input=false;
                                 }
+
+                                //terminate
                                 sampleListener.setReady(false);
                                 Thread.yield();
-                                break;//terminate
+                                break;
                             }
                             //release the thread for a while
                             try {
@@ -200,12 +197,15 @@ public class GUI extends Application{
                                 dtw.calDTW();
                             }
                             String result=dtw.getResult();
+
+                            //release current thread
                             try{
                                 Thread.currentThread().sleep(1000);
                             }catch (InterruptedException e){
                                 e.printStackTrace();
                             }
-                            dtw.reset();
+
+                            dtw.reset();//re-initialise for next time
                             return result;
                         }
                         return null;
@@ -230,13 +230,10 @@ public class GUI extends Application{
         //initialize the controllers of interface
         try{
             FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("gui.fxml"));
-            fxmlLoader.setControllerFactory(new Callback<Class<?>, Object>() {
-                @Override
-                public Object call(Class<?> param) {
-                    defaultController=new DefaultController();
-                    defaultController.setApp(myself);
-                    return defaultController;
-                }
+            fxmlLoader.setControllerFactory(param -> {
+                defaultController=new DefaultController();
+                defaultController.setApp(myself);
+                return defaultController;
             });
 
             Parent root=fxmlLoader.load();
@@ -244,11 +241,7 @@ public class GUI extends Application{
             stage.setScene(scene);
             stage.setTitle("Sign Language Translator");
             stage.show();
-            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                public void handle(WindowEvent we) {
-                    System.exit(0);
-                }
-            });
+            stage.setOnCloseRequest(we -> System.exit(0));
         }catch(Exception ex){
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -269,51 +262,45 @@ public class GUI extends Application{
         sampleListener.setReady(true);
 
         //start recording
-        Thread addSignThread=new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(true){
-                    if(sampleListener.checkFinish()){
-                        if(sampleListener.checkValid()){
-                            Platform.runLater(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Alert alert=new Alert(Alert.AlertType.CONFIRMATION,"Confirm to store?");
-                                    //if user wants to store the gesture
-                                    alert.setResultConverter(new Callback<ButtonType, ButtonType>() {
-                                        @Override
-                                        public ButtonType call(ButtonType param) {
-                                            if(param==ButtonType.OK){
-                                                //add to the database, sign bank and gestures
-                                                try {
-                                                    Sign sign=new Sign(name,new Sample(sampleListener.returnOneSample()));
-                                                    allSigns.addSign(name,sign);
-                                                    db.addSign(sign);
-                                                    if(!gestures.contains(name))
-                                                        gestures.add(name);//add name if not exist
-                                                } catch (Exception e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                            return null;
-                                        }
-                                    });
-                                    alert.showAndWait();
+        Thread addSignThread=new Thread(() -> {
+            while(true){
+                if(sampleListener.checkFinish()){
+                    if(sampleListener.checkValid()){
+                        Platform.runLater(() -> {
+                            Alert alert=new Alert(Alert.AlertType.CONFIRMATION,"Confirm to store?");
+                            //if user wants to store the gesture
+                            alert.setResultConverter(param -> {
+                                if(param==ButtonType.OK){
+                                    //add to the database, sign bank and gestures
+                                    try {
+                                        Sign sign=new Sign(name,new Sample(sampleListener.returnOneSample()));
+                                        allSigns.addSign(name,sign);
+                                        db.addSign(sign);
+                                        if(!gestures.contains(name))
+                                            gestures.add(name);//add name if not exist
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                 }
+                                return null;
                             });
-                        }else{//invalid samples
-                            Platform.runLater(() -> (new Alert(Alert.AlertType.WARNING,"Invalid recording. Too few samples.")).showAndWait());
-                        }
-                        sampleListener.setReady(false);
-                        Thread.yield();
-                        break;//terminate after the input is determined to be finished
+                            alert.showAndWait();
+                        });
+                    }else{//invalid samples
+                        Platform.runLater(() -> (new Alert(Alert.AlertType.WARNING,"Invalid recording. Too few samples.")).showAndWait());
                     }
 
-                    try {
-                        Thread.currentThread().sleep(100);//release this thread for a while
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    //terminate after the input is determined to be finished
+                    sampleListener.setReady(false);
+                    Thread.yield();
+                    break;
+                }
+
+                //release this thread for a while
+                try {
+                    Thread.currentThread().sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -389,6 +376,6 @@ public class GUI extends Application{
 
     public void stopDtwVisualizer(){
         if(dtwVisService!=null||dtwVisService.isRunning())
-        dtwVisService.cancel();
+            dtwVisService.cancel();
     }
 }

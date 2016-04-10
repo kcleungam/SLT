@@ -37,18 +37,15 @@ public class CountdownController extends HBox implements Initializable {
             @Override
             public void run() {
                 //set progress
-                Platform.runLater(new Runnable() {//JavaFX's style of controlling threads with non-JavaFX threads.
-                    @Override
-                    public void run() {
-                        //update the GUI elements
-                        countdownText.getChildren().clear();
-                        countdownText.getChildren().add(updateCountdownText((int)countdownTime));
-                        countdownProgress.setProgress((3.0-countdownTime--)/3.0);
-                        //handle the complement of countdown
-                        if(countdownProgress.getProgress()>1.0){
-                            countdownTimer.cancel();
-                            defaultController.closeCountdown();
-                        }
+                Platform.runLater(() -> {
+                    //update the GUI elements
+                    countdownText.getChildren().clear();
+                    countdownText.getChildren().add(updateCountdownText((int)countdownTime));
+                    countdownProgress.setProgress((3.0-countdownTime--)/3.0);
+                    //handle the complement of countdown
+                    if(countdownProgress.getProgress()>1.0){
+                        countdownTimer.cancel();
+                        defaultController.closeCountdown();
                     }
                 });
             }
