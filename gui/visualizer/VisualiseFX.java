@@ -231,7 +231,7 @@ public class VisualiseFX{
 	}
 
 	public Point3D rangeConvert(float[] LeapValue) {
-		return new Point3D (LeapValue[0]*2.0+500, LeapValue[2]*2.0+260, -LeapValue[1]+1200);
+		return new Point3D (LeapValue[0]*2.2+500, LeapValue[2]*2.2+260, -LeapValue[1]+1200);
 	}
 
 	public SubScene getSubScene() { return subScene; }
