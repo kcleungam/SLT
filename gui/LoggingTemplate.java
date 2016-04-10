@@ -43,4 +43,16 @@ public class LoggingTemplate {
         result.add(date);result.add(mode_name);result.add(sentence);
         return result;
     }
+
+    public static ArrayList<Text> getRecogniseMessage(String name,double cost){
+        if(name==null||name.isEmpty()||cost<0) throw new IllegalArgumentException();
+
+        ArrayList<Text> result=new ArrayList<>();
+        Text date=new Text((new Date()).toString()+"\t");
+        Text recognised_gesture=new Text(name);recognised_gesture.setFill(Color.BLUE);
+        Text sentence=new Text(" is recognised with cost "+cost+"\n");
+
+        result.add(date);result.add(recognised_gesture);result.add(sentence);
+        return result;
+    }
 }

@@ -44,6 +44,7 @@ public class GUI extends Application{
     private static ObservableList<String> gestures=FXCollections.observableArrayList();
     private Service<String> dtwService;
     private final int dtwTolerance=1;
+    private double minCost;
 
     /* GUI control */
     private static Stage stage;
@@ -213,6 +214,7 @@ public class GUI extends Application{
                                 dtw.calDTW();
                             }
                             String result=dtw.getResult();
+                            minCost=dtw.bestMatch;
 
                             //release current thread
                             try{
@@ -231,6 +233,7 @@ public class GUI extends Application{
                         super.succeeded();
                         if(dtwService.getValue()!=null){
                             defaultController.dtwDisplay(dtwService.getValue());
+                            defaultController.log(LoggingTemplate.getRecogniseMessage(dtwService.getValue(),minCost));
                         }
                         if(defaultController.getMode()=="WordMode"){
                             defaultController.startBtnSetText("Start");
