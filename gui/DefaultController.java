@@ -79,7 +79,7 @@ public class DefaultController implements Initializable{
                             public ButtonType call(ButtonType param) {
                                 if(param==ButtonType.OK){
                                     try {
-                                        application.deleteGesture(getListSelected());
+                                        application.deleteGesture(getItemSelected());
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
@@ -275,18 +275,16 @@ public class DefaultController implements Initializable{
         }
     }
 
-
-
     private void playback(){
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                application.replayVis(getListSelected());
+                application.replayVis(getItemSelected());
             }
         });
     }
 
-    public String getListSelected(){
-        return String.valueOf(gestureList.getSelectionModel().getSelectedItems());
+    public String getItemSelected(){
+        return String.valueOf(gestureList.getSelectionModel().getSelectedItem());
     }
 }

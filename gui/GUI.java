@@ -411,6 +411,4 @@ public class GUI extends Application{
             defaultController.log(deleteGest + "deleted.");
         }
     }
-
-
 }
