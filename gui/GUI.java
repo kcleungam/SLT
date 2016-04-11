@@ -424,7 +424,8 @@ public class GUI extends Application{
     public void deleteGesture(String deleteGest) throws Exception {
         if(db.removeSign(db.getSignsByName(deleteGest))){
             defaultController.setList(false);
-            defaultController.log(deleteGest + "deleted.");
+            defaultController.log(LoggingTemplate.getUpdateMessage(deleteGest,1, LoggingTemplate.UPDATE.DELETE));
+            gestures.remove(deleteGest);
         }
     }
 
