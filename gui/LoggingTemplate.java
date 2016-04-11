@@ -3,6 +3,7 @@ package gui;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -54,5 +55,21 @@ public class LoggingTemplate {
 
         result.add(date);result.add(recognised_gesture);result.add(sentence);
         return result;
+    }
+
+    public static ArrayList<Text> getSystemMessage(String message){
+        if(message==null||message.isEmpty()) throw new IllegalArgumentException();
+        ArrayList<Text> result=new ArrayList<>();
+        result.add(new Text((new Date()).toString()+"\t"));
+        Text system_message=new Text(message+"\n");system_message.setFill(Color.PINK);
+        result.add(system_message);
+        return result;
+    }
+
+    public static Text getErrorMessage(String message){
+        if(message==null||message.isEmpty()) throw new IllegalArgumentException();
+        Text error=new Text((new Date()).toString()+"\t"+message+"\n");
+        error.setFill(Color.RED);
+        return error;
     }
 }

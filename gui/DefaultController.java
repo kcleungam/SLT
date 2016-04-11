@@ -83,6 +83,7 @@ public class DefaultController implements Initializable{
                 application.startMainVisualizer();
             }else if(oldValue&&!newValue){//when the user leaves the controlTab
                 application.stopMainVisualizer();
+                application.stopReplay();
             }
         });
 

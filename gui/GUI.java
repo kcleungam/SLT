@@ -11,6 +11,8 @@ package gui;
 
 import com.leapmotion.leap.Controller;
 import com.leapmotion.leap.Frame;
+import com.sun.javafx.binding.Logging;
+import com.sun.xml.internal.bind.annotation.OverrideAnnotationOf;
 import data.OneFrame;
 import gui.visualizer.VisualiseFX;
 import javafx.application.Application;
@@ -106,14 +108,14 @@ public class GUI extends Application{
 
                     @Override protected void failed(){
                         super.failed();
-                        defaultController.log("mainVis failed.");
+                        defaultController.log(LoggingTemplate.getSystemMessage("[Service]dtwVis failed."));
                         dtwVisualiser.root.getChildren().clear();
                         dtwVisualiser.initializeParam();
                         restart();
                     }
 
                     @Override protected void cancelled(){
-                        defaultController.log("mainVis cancelled.");
+                        defaultController.log(LoggingTemplate.getSystemMessage("[Service]dtwVis cancelled."));
                         dtwVisualiser.root.getChildren().clear();
                         dtwVisualiser.initializeParam();
                     }
@@ -143,14 +145,14 @@ public class GUI extends Application{
 
                     @Override protected void failed(){
                         super.failed();
-                        defaultController.log("mainVis failed.");
+                        defaultController.log(LoggingTemplate.getSystemMessage("[Service]mainVis failed."));
                         mainVisualiser.root.getChildren().clear();
                         mainVisualiser.initializeParam();
                         restart();
                     }
 
                     @Override protected void cancelled(){
-                        defaultController.log("mainVis cancelled.");
+                        defaultController.log(LoggingTemplate.getSystemMessage("[Service]mainVis cancelled."));
                         mainVisualiser.root.getChildren().clear();
                         mainVisualiser.initializeParam();
                     }
@@ -361,7 +363,8 @@ public class GUI extends Application{
 
                     @Override protected void failed(){
                         super.failed();
-                        defaultController.log("replay failed.");
+                        defaultController.log(LoggingTemplate.getErrorMessage("replay failed."));
+                        replayVisService.cancel();
                     }
 
                     @Override protected void scheduled(){
@@ -375,6 +378,14 @@ public class GUI extends Application{
                         mainVisualiser.root.getChildren().clear();
                         mainVisualiser.initializeParam();
                         mainVisService.restart();
+                    }
+
+                    @Override protected void cancelled(){
+                        super.cancelled();
+                        mainVisualiser.root.getChildren().clear();
+                        mainVisualiser.initializeParam();
+                        mainVisService.restart();
+                        defaultController.log(LoggingTemplate.getSystemMessage("[Service]replayService is cancelled."));
                     }
                 };
             }
@@ -415,5 +426,10 @@ public class GUI extends Application{
             defaultController.setList(false);
             defaultController.log(deleteGest + "deleted.");
         }
+    }
+
+    public void stopReplay() {
+        if(replayVisService!=null&&replayVisService.isRunning())
+            replayVisService.cancel();
     }
 }
