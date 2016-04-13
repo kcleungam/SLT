@@ -5,7 +5,7 @@
 }
 .label
 {
-    -fx-text-fill: #b8b8b8;
+    -fx-text-fill: #000000;
 }
 .label .text{
 	-fx-font-family: SansSerif;

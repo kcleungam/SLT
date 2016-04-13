@@ -92,7 +92,7 @@
                            <children>
                               <VBox prefHeight="771.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <ScrollPane fx:id="dtwScrollPane" prefHeight="89.0" prefWidth="1280.0">
+                                    <ScrollPane fx:id="dtwScrollPane" fitToWidth="true" prefHeight="89.0" prefWidth="1280.0">
                                        <content>
                                           <TextFlow fx:id="dtwTextFlow" prefHeight="69.0" prefWidth="1263.0" />
                                        </content>
