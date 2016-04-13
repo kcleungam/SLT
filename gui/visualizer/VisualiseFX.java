@@ -49,8 +49,6 @@ public class VisualiseFX{
 		subScene = new SubScene(root, viewwidth, viewheight, true, SceneAntialiasing.BALANCED);
 		subScene.setFill(Color.TRANSPARENT);
 
-		lightSetting();
-
 		Camera camera = new PerspectiveCamera();
 		subScene.setCamera(camera);
 
@@ -83,6 +81,8 @@ public class VisualiseFX{
 	 * initialize the spheres
 	 */
 	public void initializeParam() {
+		lightSetting();
+
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 5; j++) {
 				for (int k = 0; k < 5; k++) {
