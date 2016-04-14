@@ -59,7 +59,7 @@ public class Speech {
 
     private static URL getURL(String text,LANGUAGE language) throws MalformedURLException {
         String type=(language==LANGUAGE.CANTONESE)?"yue":"en";
-        return new URL("http://translate.google.com/translate_tts?ie=UTF-8&q="+text+"&tl="+type+"&client=tw-ob");
+        return new URL("http://translate.google.com/translate_tts?ie=UTF-8&q="+(text.replace(" ","%20"))+"&tl="+type+"&client=tw-ob");
     }
     private static boolean getAudioFromServer(String text,LANGUAGE language) throws IOException {
         URL url = getURL(text,language);
