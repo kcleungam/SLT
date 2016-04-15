@@ -162,7 +162,7 @@ public class DTW{
             sampleCount++;
             fastTotal = fastTotal + localThreshold;
             if( ( sampleCount >= ( sampleCountLimit ) ) &&  ( fastTotal/sampleCount >= ( fastDetermine ) ) ){
-                System.out.println(storedSign.getName() + " has been cut");
+                //System.out.println(storedSign.getName() + " has been cut");
                 break;
             }
 

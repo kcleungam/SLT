@@ -139,7 +139,7 @@ public class GUI extends Application{
                         while (true) {
                             try {
                                 mainVisualiser.traceLM(controller.frame());
-                                Thread.currentThread().sleep(100);
+                                Thread.currentThread().sleep(110);
                             } catch (InterruptedException e) {
                                 //redraw again as the interruption will make the update of some components stop
                                 mainVisualiser.root.getChildren().clear();
@@ -372,7 +372,7 @@ public class GUI extends Application{
                         for (OneFrame i:sample.getAllFrames()) {
                             try {
                                 mainVisualiser.traceLM(i);
-                                Thread.currentThread().sleep(100);
+                                Thread.currentThread().sleep(40);
                             } catch (Exception e) {
                                 //redraw again as the interruption will make the update of some components stop
                                 mainVisualiser.root.getChildren().clear();

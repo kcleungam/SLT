@@ -141,6 +141,12 @@ public class VisualiseFX{
 		try{
 			Thread.currentThread().sleep(40);
 		} catch (InterruptedException e){
+				try {
+					Thread.currentThread().join();
+				}catch (Exception f) {
+					f.printStackTrace();
+				}
+				e.printStackTrace();
 			e.printStackTrace();
 		}
 	}
