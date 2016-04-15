@@ -38,7 +38,7 @@ import java.util.ArrayList;
 
 public class SampleListener extends Listener {
 	static float minRecVelocity = 45;
-	static float maxRecVelocity = 200;
+	static float maxRecVelocity = 300;
 	static int minPoseFrames = 30;
 	static ArrayList<Frame> oneSample;
 	static boolean recording;
