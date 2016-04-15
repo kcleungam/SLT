@@ -96,12 +96,18 @@ public class GUI extends Application{
                         while (true) {
                             try {
                                 dtwVisualiser.traceLM(controller.frame());
-                                Thread.sleep(100);
+                                Thread.currentThread().sleep(100);
                             } catch (InterruptedException e) {
-                                e.printStackTrace();
                                 //redraw again as the interruption will make the update of some components stop
                                 dtwVisualiser.root.getChildren().clear();
                                 dtwVisualiser.initializeParam();
+
+                                try {
+                                    Thread.currentThread().join();
+                                }catch (Exception f) {
+                                    f.printStackTrace();
+                                }
+                                e.printStackTrace();
                             }
                         }
                     }
@@ -133,12 +139,18 @@ public class GUI extends Application{
                         while (true) {
                             try {
                                 mainVisualiser.traceLM(controller.frame());
-                                Thread.sleep(100);
+                                Thread.currentThread().sleep(100);
                             } catch (InterruptedException e) {
-                                e.printStackTrace();
                                 //redraw again as the interruption will make the update of some components stop
                                 mainVisualiser.root.getChildren().clear();
                                 mainVisualiser.initializeParam();
+
+                                try {
+                                    Thread.currentThread().join();
+                                }catch (Exception f) {
+                                    f.printStackTrace();
+                                }
+                                e.printStackTrace();
                             }
                         }
                     }
@@ -197,6 +209,11 @@ public class GUI extends Application{
                             try {
                                 Thread.currentThread().sleep(100);
                             } catch (InterruptedException e) {
+                                try {
+                                    Thread.currentThread().join();
+                                }catch (Exception f) {
+                                    f.printStackTrace();
+                                }
                                 e.printStackTrace();
                             }
                         }
@@ -222,6 +239,11 @@ public class GUI extends Application{
                             try{
                                 Thread.currentThread().sleep(1000);
                             }catch (InterruptedException e){
+                                try {
+                                    Thread.currentThread().join();
+                                }catch (Exception f) {
+                                    f.printStackTrace();
+                                }
                                 e.printStackTrace();
                             }
 
@@ -327,6 +349,11 @@ public class GUI extends Application{
                 try {
                     Thread.currentThread().sleep(100);
                 } catch (InterruptedException e) {
+                    try {
+                        Thread.currentThread().join();
+                    }catch (Exception f) {
+                        f.printStackTrace();
+                    }
                     e.printStackTrace();
                 }
             }
@@ -345,12 +372,17 @@ public class GUI extends Application{
                         for (OneFrame i:sample.getAllFrames()) {
                             try {
                                 mainVisualiser.traceLM(i);
-                                Thread.sleep(100);
+                                Thread.currentThread().sleep(100);
                             } catch (Exception e) {
-                                e.printStackTrace();
                                 //redraw again as the interruption will make the update of some components stop
                                 mainVisualiser.root.getChildren().clear();
                                 mainVisualiser.initializeParam();
+                                try {
+                                    Thread.currentThread().join();
+                                }catch (Exception f) {
+                                    f.printStackTrace();
+                                }
+                                e.printStackTrace();
                             }
                         }
                         return null;
