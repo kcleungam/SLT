@@ -15,7 +15,6 @@ public class DTW{
     public static Sample rSample;       // Sample for recognize
     public static Sign storedSign; // Sample from database
     public static int maxSlope = 3;    // the maximum number of slope
-    public static int minFrame = 35;
     public static int cutFrame = 10;   // The number of frame can be cut off on order to find the best ending of Sample
 
     public static double globalThreshold = 150; // The maximum distance between rSample and stored sample which can be recognize
@@ -23,12 +22,12 @@ public class DTW{
 
     public double localThreshold = Double.POSITIVE_INFINITY;   // The distance between sample and one of the stored sample
 
-    public double adjust = 40;     // The adjustment according to the palm, 50 = 5 cm
+    public double palmAdjust = 40;     // The adjustment according to the palm, 50 = 5 cm
+    public double fingerRatio = 0.8;
     public double punishment = 150; // The number which add to distance if the number of hands are different
     public final static String UNKNOWN="Unknown gesture!";
     public String result =UNKNOWN;
 
-    public int fastCount = 5;
     public double fastDetermine = 1.5 * globalThreshold;
 
 
@@ -77,6 +76,14 @@ public class DTW{
         int sampleCount = 0;
         int sampleCountLimit = storedSign.getAllSamples().size() / 2;
         for(Sample storedSample: storedSign.getAllSamples()) {
+
+            if(rSample.getAllFrames().size() > (3 * storedSample.getAllFrames().size()) ){
+                System.out.println("CUT");
+                break;
+            } else if(storedSample.getAllFrames().size() > (3 * rSample.getAllFrames().size()) ){
+                System.out.println("CUT");
+                break;
+            }
 
             int rSize = rSample.getAllFrames().size();
             int storedSize = storedSample.getAllFrames().size();
@@ -219,13 +226,6 @@ public class DTW{
                         //Calculate Finger by Finger, remember to put the correct handNumber
                     }
 
-                    /*
-                    for (int j = 0; j < rPalmList.size(); j++) {
-                        Coordinate rPalmOrigin = rSample.allFrames.get(0).palmData.coordinates.get(j);  // Get the "Frame 0" Palm
-                        Coordinate storedPalmOrigin = storedSample.allFrames.get(0).palmData.coordinates.get(j);
-                        palmDistance = palmDistance + palmDist(rPalmList.get(j), rPalmOrigin, storedPalmList.get(j), storedPalmOrigin);
-                    }
-                    */
 
                     for (int j = 0; j < rPalmList.size(); j++) {
                         if(rFrame.handType == HandType.LEFT){
@@ -237,7 +237,7 @@ public class DTW{
                     }
 
 
-                    distance = fingerDistance + (Math.pow(palmDistance, 2) / Math.pow(adjust, 2)) * palmDistance;
+                    distance = fingerDistance + (Math.pow(palmDistance, 2) / Math.pow(palmAdjust, 2)) * palmDistance;
                     //System.out.println("Finger part = " + fingerDistance + "\tPalm part = " + (Math.pow(palmDistance, 2) / Math.pow(adjust, 2)) * palmDistance);
 
                 }else{
@@ -261,7 +261,7 @@ public class DTW{
                 }
 
 
-                distance = fingerDistance + (Math.pow(palmDistance, 2) / Math.pow(adjust, 2)) * palmDistance;
+                distance = fingerDistance + (Math.pow(palmDistance, 2) / Math.pow(palmAdjust, 2)) * palmDistance;
                 //System.out.println("Finger part = " + fingerDistance + "\tPalm part = " + (Math.pow(palmDistance, 2) / Math.pow(adjust, 2)) * palmDistance);
             }
 
@@ -303,7 +303,7 @@ public class DTW{
                 }
 
 
-                distance = fingerDistance   +   (Math.pow(palmDistance, 2)/Math.pow(adjust, 2))* palmDistance;
+                distance = fingerDistance   +   (Math.pow(palmDistance, 2)/Math.pow(palmAdjust, 2))* palmDistance;
                 // TODO    Punishment is the value added to distance due to different number of hand
                 distance = distance + punishment;
 
@@ -339,7 +339,7 @@ public class DTW{
                 }
 
 
-                distance = fingerDistance + (Math.pow(palmDistance, 2) / Math.pow(adjust, 2)) * palmDistance;
+                distance = fingerDistance + (Math.pow(palmDistance, 2) / Math.pow(palmAdjust, 2)) * palmDistance;
                 // TODO    Punishment is the value added to distance due to different number of hand
                 distance = distance + punishment;
 
@@ -384,11 +384,15 @@ public class DTW{
         double SZN = storedFinger.getZ() - storedPalm.getZ();
 
 
-        distance =Math.sqrt(
-                Math.pow(RXN - SXN, 2) +
-                        Math.pow(RYN - SYN, 2)+
+        distance = fingerRatio * Math.sqrt(
+                        Math.pow(RXN - SXN, 2) +
+                        Math.pow(RYN - SYN, 2) +
                         Math.pow(RZN - SZN, 2)
-        );
+                        )
+                    + (1 - fingerRatio) * (
+                        Math.sqrt( Math.pow( RXN, 2) + Math.pow( RYN, 2) + Math.pow( RZN, 2))
+                        - Math.sqrt( Math.pow( SXN, 2) + Math.pow( SYN, 2) + Math.pow( SZN, 2))
+                        );
 
         return distance;
     }
