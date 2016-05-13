@@ -36,7 +36,7 @@ public class DefaultController implements Initializable{
     @FXML private TextField inputField;
     @FXML private Button addButton;
     @FXML private Button startButton;
-    @FXML private MenuItem modeButton;
+    @FXML private Button modeButton;
     @FXML private TextFlow loggingArea,dtwTextFlow;
     @FXML public Group mainVisualiser,dtwVisualiser;
     @FXML private Tab controlTab,loggingTab,dtwTab;
@@ -142,6 +142,10 @@ public class DefaultController implements Initializable{
             log(LoggingTemplate.getModeMessage(Mode.WordMode));
             startBtnSetText("Start");
         }
+    }
+
+    public void aboutButtonAction(){
+
     }
 
     public String getMode(){
@@ -251,7 +255,6 @@ public class DefaultController implements Initializable{
             }
         }
     }
-
 
     private void playback() {
         Platform.runLater(() -> application.replayVis(getItemSelected()));

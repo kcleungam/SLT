@@ -43,7 +43,7 @@ public class GUI extends Application{
     private  SignBank allSigns;
     private  SampleListener sampleListener = new SampleListener();
     private  Controller controller = new Controller();
-    private static ObservableList<String> gestures=FXCollections.observableArrayList();
+    private static ObservableList<String> gestures = FXCollections.observableArrayList();
     private Service<String> dtwService;
     private final int dtwTolerance=1;
     private double minCost;
@@ -259,9 +259,9 @@ public class GUI extends Application{
                             defaultController.dtwDisplay(dtwService.getValue());
                             defaultController.log(LoggingTemplate.getRecogniseMessage(dtwService.getValue(),minCost));
                         }
-                        if(defaultController.getMode()=="WordMode"){
+                        if(defaultController.getMode()=="Word Mode"){
                             defaultController.startBtnSetText("Start");
-                        }else if(defaultController.getMode()=="SentenceMode"){
+                        }else if(defaultController.getMode()=="Sentence Mode"){
                             dtwService.restart();
                         }
                     }
