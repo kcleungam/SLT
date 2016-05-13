@@ -2,23 +2,138 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd772be8-ff47-4886-b087-900455e8a0ce" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/data/Coordinate.class" afterPath="$PROJECT_DIR$/out/production/SLT/data/Coordinate.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController$2.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController$3.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/visualizer/VisualiseFX.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/visualizer/VisualiseFX.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/main/SLT.class" afterPath="$PROJECT_DIR$/out/production/SLT/main/SLT.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/main/SampleListener.class" afterPath="$PROJECT_DIR$/out/production/SLT/main/SampleListener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/CountdownController.java" afterPath="$PROJECT_DIR$/gui/CountdownController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/DefaultController.java" afterPath="$PROJECT_DIR$/gui/DefaultController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/GUI.java" afterPath="$PROJECT_DIR$/gui/GUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/gui.fxml" afterPath="$PROJECT_DIR$/gui/gui.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/libraries/lib.xml" afterPath="$PROJECT_DIR$/out/production/SLT/.idea/libraries/lib.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/workspace.xml" afterPath="$PROJECT_DIR$/out/production/SLT/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/gui.fxml" afterPath="$PROJECT_DIR$/out/production/SLT/gui/gui.fxml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.project" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/SLT.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/audio/swipe.mp3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/Coordinate.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/Data.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/FingerData.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/HandType.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/LRO.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/OneFrame.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/PalmData.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/deprecated/Interface.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/deprecated/InterfaceFX.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/deprecated/InterfaceFXController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/deprecated/InterfaceStyle.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/deprecated/TextAreaPrintStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/deprecated/Visualizer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/deprecated/interfaceFX.fxml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/CountdownController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/DefaultController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/GUI.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/LoggingTemplate.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/Mode.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/Speech.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/countdown.fxml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/gui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/gui.fxml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/visualizer/Point3D.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/visualizer/PolyCylinder3D.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/visualizer/PolyLine3D.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/visualizer/Test.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/visualizer/VisSphere.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/visualizer/VisualiseFX.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/LeapJava.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/bson4jackson-2.5.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jackson-annotations-2.6.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jackson-core-2.6.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jackson-databind-2.6.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/jongo-1.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/mongo-java-driver-3.1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/x64/Leap.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/x64/Leap.lib" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/x64/LeapCSharp.NET3.5.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/x64/LeapCSharp.NET4.0.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/x64/LeapCSharp.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/x64/LeapJava.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/x64/LeapPython.pyd" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/x64/msvcp120.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/x64/msvcr120.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/hs_err_pid10008.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/hs_err_pid10552.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/hs_err_pid8108.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/hs_err_pid8492.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/log/hs_err_pid8752.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/DTW.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/Database.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/SLT.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/Sample.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/SampleListener.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/Sign.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/SignBank.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/compiler.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/copyright/profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/libraries/lib.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/workspace.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/.project" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/SLT.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/audio/swipe.mp3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/data/Coordinate.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/data/Data.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/data/FingerData.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/data/HandType.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/data/LRO.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/data/OneFrame.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/data/PalmData.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/gui/CountdownController$1$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/gui/CountdownController$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/gui/CountdownController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/gui/Speech$LANGUAGE.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/gui/Speech.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/gui/countdown.fxml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/gui/gui.fxml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/gui/visualizer/Point3D.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/gui/visualizer/PolyCylinder3D.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/gui/visualizer/PolyLine3D.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/gui/visualizer/Test$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/gui/visualizer/Test$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/gui/visualizer/Test.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/gui/visualizer/VisSphere.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/gui/visualizer/VisualiseFX.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/LeapJava.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/bson4jackson-2.5.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/jackson-annotations-2.6.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/jackson-core-2.6.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/jackson-databind-2.6.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/jongo-1.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/mongo-java-driver-3.1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/x64/Leap.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/x64/LeapCSharp.NET3.5.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/x64/LeapCSharp.NET4.0.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/x64/LeapCSharp.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/x64/LeapJava.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/x64/LeapPython.pyd" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/x64/msvcp120.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/lib/x64/msvcr120.dll" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/log/hs_err_pid10008.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/log/hs_err_pid10552.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/log/hs_err_pid8108.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/log/hs_err_pid8492.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/log/hs_err_pid8752.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/main/DTW.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/main/Database.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/main/SLT.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/main/Sample.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/main/SampleListener.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/main/Sign.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SLT/main/SignBank.class" afterPath="" />
     </list>
     <ignored path="SLT.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,11 +160,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gui/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="367" column="37" selection-start-line="367" selection-start-column="37" selection-end-line="367" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.27597764">
+              <caret line="39" column="37" selection-start-line="39" selection-start-column="37" selection-end-line="39" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -57,26 +172,23 @@
       </file>
       <file leaf-file-name="gui.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gui/gui.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
+            <state vertical-scroll-proportion="0.0">
               <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
               <folding />
             </state>
           </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
+          </provider>
         </entry>
       </file>
-      <file leaf-file-name="DefaultController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DefaultController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gui/DefaultController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3040">
-              <caret line="228" column="25" selection-start-line="228" selection-start-column="17" selection-end-line="228" selection-end-column="25" />
-              <folding>
-                <element signature="e#6189#6190#0" expanded="true" />
-                <element signature="e#6230#6231#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="44" column="40" selection-start-line="44" selection-start-column="40" selection-end-line="44" selection-end-column="40" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -84,9 +196,11 @@
       <file leaf-file-name="CountdownController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gui/CountdownController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
+            <state vertical-scroll-proportion="0.0">
               <caret line="40" column="2" selection-start-line="40" selection-start-column="2" selection-end-line="40" selection-end-column="2" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -115,8 +229,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1040" />
-    <option name="height" value="784" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -143,6 +257,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -191,9 +308,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -211,21 +325,31 @@
     </configuration>
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
       <option name="DEPLOY" value="true" />
       <option name="ARTIFACT_NAME" value="" />
-      <option name="PM_INSTALL_OPTIONS" value="" />
-      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
-      <option name="MODE" value="default_activity" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
       <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
-      <option name="DEEP_LINK" value="" />
-      <option name="ACTIVITY_CLASS" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
       <method />
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
@@ -235,15 +359,27 @@
       <option name="METHOD_NAME" value="" />
       <option name="CLASS_NAME" value="" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="EXTRA_OPTIONS" value="" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
       <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
       <method />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -461,9 +597,7 @@
       <item index="0" class="java.lang.String" itemvalue="Application.GUI" />
     </list>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
-  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -472,27 +606,23 @@
       <changelist id="bd772be8-ff47-4886-b087-900455e8a0ce" name="Default" comment="" />
       <created>1459873849101</created>
       <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
       <updated>1459873849101</updated>
     </task>
     <task id="LOCAL-00001" summary="Add Mac Lib">
       <created>1459874174867</created>
       <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
       <updated>1459874174867</updated>
     </task>
     <task id="LOCAL-00002" summary="size refactored, visualizer not yet tuned">
       <created>1459877532578</created>
       <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
       <updated>1459877532578</updated>
     </task>
     <task id="LOCAL-00003" summary="reverted to 6/4/2016 1810">
       <created>1459948228637</created>
       <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
       <updated>1459948228637</updated>
     </task>
@@ -500,22 +630,19 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1040" height="784" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3264865" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32565284" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32467532" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24591836" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2510661" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -524,7 +651,10 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -558,7 +688,81 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/gui/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1292">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/gui.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/DefaultController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="40" selection-start-line="44" selection-start-column="40" selection-end-line="44" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/CountdownController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="2" selection-start-line="40" selection-start-column="2" selection-end-line="40" selection-end-column="2" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/GUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="367" column="37" selection-start-line="367" selection-start-column="37" selection-end-line="367" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/gui.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/DefaultController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/CountdownController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="2" selection-start-line="40" selection-start-column="2" selection-end-line="40" selection-end-column="2" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/GUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="92" column="41" selection-start-line="92" selection-start-column="41" selection-end-line="92" selection-end-column="41" />
           <folding />
         </state>
@@ -566,37 +770,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/visualizer/VisualiseFX.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/gui.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
+        <state vertical-scroll-proportion="0.0">
           <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/DefaultController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
+        <state vertical-scroll-proportion="0.0">
           <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-          <folding>
-            <element signature="e#6189#6190#0" expanded="true" />
-            <element signature="e#6230#6231#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1254">
+        <state vertical-scroll-proportion="0.0">
           <caret line="92" column="41" selection-start-line="92" selection-start-column="41" selection-end-line="92" selection-end-column="41" />
           <folding />
         </state>
@@ -604,37 +805,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/visualizer/VisualiseFX.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/gui.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
+        <state vertical-scroll-proportion="0.0">
           <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/DefaultController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
+        <state vertical-scroll-proportion="0.0">
           <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-          <folding>
-            <element signature="e#6189#6190#0" expanded="true" />
-            <element signature="e#6230#6231#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1254">
+        <state vertical-scroll-proportion="0.0">
           <caret line="92" column="41" selection-start-line="92" selection-start-column="41" selection-end-line="92" selection-end-column="41" />
           <folding />
         </state>
@@ -642,37 +840,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/visualizer/VisualiseFX.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/gui.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
+        <state vertical-scroll-proportion="0.0">
           <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/DefaultController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
+        <state vertical-scroll-proportion="0.0">
           <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-          <folding>
-            <element signature="e#6189#6190#0" expanded="true" />
-            <element signature="e#6230#6231#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1254">
+        <state vertical-scroll-proportion="0.0">
           <caret line="92" column="41" selection-start-line="92" selection-start-column="41" selection-end-line="92" selection-end-column="41" />
           <folding />
         </state>
@@ -680,37 +875,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/visualizer/VisualiseFX.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/gui.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/DefaultController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
+        <state vertical-scroll-proportion="0.0">
           <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-          <folding>
-            <element signature="e#6189#6190#0" expanded="true" />
-            <element signature="e#6230#6231#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -718,7 +910,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/visualizer/VisualiseFX.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4446">
+        <state vertical-scroll-proportion="0.0">
           <caret line="246" column="55" selection-start-line="246" selection-start-column="55" selection-end-line="246" selection-end-column="55" />
           <folding />
         </state>
@@ -726,7 +918,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -734,7 +926,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -742,47 +934,46 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/visualizer/VisualiseFX.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
+        <state vertical-scroll-proportion="0.0">
           <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/gui.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/CountdownController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="2" selection-start-line="40" selection-start-column="2" selection-end-line="40" selection-end-column="2" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/DefaultController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="40" selection-start-line="44" selection-start-column="40" selection-end-line="44" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="367" column="37" selection-start-line="367" selection-start-column="37" selection-end-line="367" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.27597764">
+          <caret line="39" column="37" selection-start-line="39" selection-start-column="37" selection-end-line="39" selection-end-column="37" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui/gui.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui/CountdownController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="40" column="2" selection-start-line="40" selection-start-column="2" selection-end-line="40" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui/DefaultController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3040">
-          <caret line="228" column="25" selection-start-line="228" selection-start-column="17" selection-end-line="228" selection-end-column="25" />
-          <folding>
-            <element signature="e#6189#6190#0" expanded="true" />
-            <element signature="e#6230#6231#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

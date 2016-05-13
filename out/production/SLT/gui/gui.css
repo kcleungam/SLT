@@ -1,0 +1,75 @@
+.root{
+    -fx-background-color: #0000A0;
+    -fx-font-family: SansSerif;
+    -fx-font-size: 14px;
+}
+.label
+{
+    -fx-text-fill: #000000;
+}
+.label .text{
+	-fx-font-family: SansSerif;
+	-fx-font-size: 14px;
+	-fx-fill: #000000;
+}
+.tab-pane:top .tab-header-area .headers-region{
+	padding-bottom: 0px;
+}
+.tab-pane:top .tab-header-area .headers-region .tab:top{
+	-fx-background-color: linear-gradient(#8080ff, #0000b3);
+	-fx-margin: 0px;
+}
+.tab-pane:top .tab-header-area .headers-region .tab:top .tab-container .tab-label .text{
+	-fx-fill: #000000;
+}
+.tab-pane:top .tab-header-area .headers-region .tab:selected:top{
+	-fx-background-color: linear-gradient(#0000b3, #8080ff);
+}
+.tab-pane:top .tab-header-area .headers-region .tab:selected:top .tab-container .tab-label .text{
+	-fx-fill: #000000;
+}
+.scroll-bar{
+	-fx-background-color: transparent;
+}
+.scroll-bar .track{
+	-fx-background-color: transparent;
+}
+.scroll-bar .increment-button ,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+	-fx-padding: 3pt 3pt 3pt 3pt;
+	-fx-font-size: 0px;
+}
+.scroll-bar:horizontal .increment-button .increment-arrow,
+.scroll-bar:horizontal .decrement-button .decrement-arrow{
+    -fx-background-color: transparent;
+	-fx-padding: 1pt 0pt;
+	-fx-font-size: 0px;
+}
+.scroll-bar:vertical .increment-button .increment-arrow,
+.scroll-bar:vertical .decrement-button .decrement-arrow{
+    -fx-background-color: transparent;
+	-fx-padding: 0pt 1pt;
+	-fx-font-size: 0px;
+}
+.corner{
+	-fx-background-color:transparent;
+}
+.list-cell:odd {
+	-fx-background-color: #cccccc;
+}
+.list-cell:even {
+	-fx-background-color: #ffffff;
+}
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
+    -fx-text-fill: white;
+}
+.button{
+    -fx-background-color: linear-gradient(#7cafc2, #585858);
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 4;
+}
+.button:hover {
+    -fx-background-color: linear-gradient(#86c1b9, #b6b6b6);
+}
