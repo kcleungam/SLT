@@ -13,7 +13,8 @@
       </Label>
       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="800.0" text="by Cheung Yat Laam, Leung Ka Chun, To Wun Yin, Tam Chi Yan" />
       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="800.0" text="Advised by Prof. Brian Mak Kan Wing" />
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="800.0" text="Submitted in partial fulfillment of the requirements for COMP 4981" />
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="800.0" text="Submitted in partial fulfillment of the requirements for COMP 4981 as Final Year Project" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="239.0" prefHeight="75.0" prefWidth="800.0" text="HKUST President's Cup 2016 Gold Award" />
       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="75.0" prefWidth="800.0" text="Department of Computer Science and Engineering" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="306.0" prefHeight="75.0" prefWidth="800.0" text="The Hong Kong University of Science and Technology" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="366.0" prefHeight="75.0" prefWidth="800.0" text="2015 - 2016" />

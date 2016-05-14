@@ -38,12 +38,13 @@ public class DefaultController implements Initializable{
     @FXML private Button startButton;
     @FXML private Button modeButton;
     @FXML private TextFlow loggingArea,dtwTextFlow;
-    @FXML public Group mainVisualiser,dtwVisualiser;
-    @FXML private Tab controlTab,loggingTab,dtwTab;
+    @FXML public Group mainVisualiser,dtwVisualiser,playbackVisualiser;
+    @FXML private Tab controlTab,loggingTab,dtwTab,playbackTab;
     @FXML private ScrollPane dtwScrollPane,loggingScrollPane;
     @FXML private Label modeLabel;
     private Stage countdown = new Stage();
     private Stage about = new Stage();
+    private Stage help = new Stage();
 
     /* Communication to GUI instance */
     private GUI application;
@@ -105,6 +106,17 @@ public class DefaultController implements Initializable{
         //logging tab
         dtwScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         dtwScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        //playbackVisualiser.getChildren().add(application.playbackVisualiser.getSubScene());
+        playbackTab.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if(!oldValue&&newValue){//when the user clicks the playback tab
+                application.startRecognition();
+                application.startPlaybackVisualizer();
+            }else if(oldValue&&!newValue){//when the user leaves the playback tab
+                application.stopRecognition();
+                application.stopPlaybackVisualizer();
+            }
+        });
 
         //logging message
         log("OK");
@@ -253,6 +265,35 @@ public class DefaultController implements Initializable{
         }
     }
 
+    public void resetButtonAction(){
+        Alert alert=new Alert(Alert.AlertType.CONFIRMATION,"Confirm to reset the whole database?");
+        alert.setResultConverter(param -> {
+            if(param == ButtonType.OK){
+                try {
+                    application.resetDatabase();
+                    log("The database have been reset.");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            log("The reset of the database has been cancelled.");
+            return null;
+        });
+        alert.showAndWait();
+    }
+
+    public void helpButtonAction(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("help.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            help.setScene(scene);
+            help.setAlwaysOnTop(true);
+            help.show();
+        }catch(Exception ex){
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public void aboutButtonAction(){
         try{
