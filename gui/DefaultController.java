@@ -42,7 +42,8 @@ public class DefaultController implements Initializable{
     @FXML private Tab controlTab,loggingTab,dtwTab;
     @FXML private ScrollPane dtwScrollPane,loggingScrollPane;
     @FXML private Label modeLabel;
-    private Stage countdown=new Stage();
+    private Stage countdown = new Stage();
+    private Stage about = new Stage();
 
     /* Communication to GUI instance */
     private GUI application;
@@ -142,10 +143,6 @@ public class DefaultController implements Initializable{
             log(LoggingTemplate.getModeMessage(Mode.WordMode));
             startBtnSetText("Start");
         }
-    }
-
-    public void aboutButtonAction(){
-
     }
 
     public String getMode(){
@@ -253,6 +250,20 @@ public class DefaultController implements Initializable{
             else{
                 Platform.runLater(() -> (new Alert(Alert.AlertType.ERROR,"Please input a proper name contains English or Chinese characters.")).show());
             }
+        }
+    }
+
+
+    public void aboutButtonAction(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("about.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            about.setScene(scene);
+            about.setAlwaysOnTop(true);
+            about.show();
+        }catch(Exception ex){
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

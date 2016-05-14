@@ -31,7 +31,8 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
-                    <MenuItem fx:id="aboutButton" mnemonicParsing="false" text="About" />
+                        <MenuItem mnemonicParsing="false" text="Getting Started" />
+                    <MenuItem fx:id="aboutButton" mnemonicParsing="false" onAction="#aboutButtonAction" text="About" />
                   </items>
                 </Menu>
               </menus>
@@ -135,6 +136,11 @@
                               </VBox>
                            </children>
                         </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab text="PlayBack Series">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                     </content>
                   </Tab>
                 <Tab fx:id="loggingTab" closable="false" style="-fx-background-color: #ecf7e9;" text="Logging">
