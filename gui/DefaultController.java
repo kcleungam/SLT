@@ -324,12 +324,17 @@ public class DefaultController implements Initializable{
         if(message.contains(" ")){
             words = message.split(" ");
             for(int i=0; i<words.length; i++)
-                //application.translateVis(words[i]);
-                application.replayVis(words[i]);
+                try{
+                    String word = words[i];
+                    Platform.runLater(() -> application.translateVis(word));
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+
         } else {
-            application.translateVis(message);
+            Platform.runLater(() -> application.translateVis(message));
         }
-        log(message + "is translated");
+        log(message + " is translated");
     }
 
     private void playback() {

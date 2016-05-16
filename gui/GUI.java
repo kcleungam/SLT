@@ -58,9 +58,11 @@ public class GUI extends Application{
     private Service<Void> replayVisService;
     private Service<Void> dtwVisService;
     private Service<Void> translateVisService;
+    private Service<Void> playbackVisService;
     public VisualiseFX mainVisualiser;
     public VisualiseFX dtwVisualiser;
     public VisualiseFX translateVisualiser;
+    public Boolean started;
 
     public static void main(String[] args){
         launch(args);
@@ -473,12 +475,13 @@ public class GUI extends Application{
     }
 
     public void translateVis(String gestureName) {
-        translateVisService = new Service<Void>() {
+        playbackVisService = new Service<Void>() {
             @Override
             protected Task createTask() {
                 return new Task<Void>() {
                     @Override
                     protected Void call() throws Exception {
+                        started = true;
                         Sample sample = db.getFirstSample(gestureName);
                         for (OneFrame i:sample.getAllFrames()) {
                             try {
@@ -502,18 +505,22 @@ public class GUI extends Application{
                     @Override protected void running(){
                         super.running();
                         translateVisService.cancel();
+                        started = false;
                     }
 
                     @Override protected void failed(){
                         super.failed();
                         defaultController.log(LoggingTemplate.getErrorMessage("translate failed."));
-                        translateVisService.cancel();
+                        playbackVisService.cancel();
+                        started = false;
                     }
 
                     @Override protected void scheduled(){
                         super.scheduled();
-                        if(translateVisService!=null||translateVisService.isRunning())
+                        if(translateVisService!=null||translateVisService.isRunning()) {
                             translateVisService.cancel();
+                            started = false;
+                        }
                     }
 
                     @Override protected void succeeded(){
@@ -521,6 +528,7 @@ public class GUI extends Application{
                         translateVisualiser.root.getChildren().clear();
                         translateVisualiser.initializeParam();
                         translateVisService.restart();
+                        started = false;
                     }
 
                     @Override protected void cancelled(){
@@ -529,12 +537,13 @@ public class GUI extends Application{
                         translateVisualiser.initializeParam();
                         translateVisService.restart();
                         defaultController.log(LoggingTemplate.getSystemMessage("[Service]translateService is cancelled."));
+                        started = false;
                     }
                 };
             }
         };
         //mainVisService.cancel();
-        translateVisService.start();
+        playbackVisService.start();
     }
 
     public void startRecognition(){
