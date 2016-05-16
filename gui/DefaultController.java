@@ -38,10 +38,12 @@ public class DefaultController implements Initializable{
     @FXML private Button startButton;
     @FXML private Button modeButton;
     @FXML private TextFlow loggingArea,dtwTextFlow;
-    @FXML public Group mainVisualiser,dtwVisualiser,playbackVisualiser;
-    @FXML private Tab controlTab,loggingTab,dtwTab,playbackTab;
+    @FXML public Group mainVisualiser,dtwVisualiser,translateVisualiser;
+    @FXML private Tab controlTab,loggingTab,dtwTab,translateTab;
     @FXML private ScrollPane dtwScrollPane,loggingScrollPane;
     @FXML private Label modeLabel;
+    @FXML private TextField translateTextField;
+
     private Stage countdown = new Stage();
     private Stage about = new Stage();
     private Stage help = new Stage();
@@ -107,14 +109,16 @@ public class DefaultController implements Initializable{
         dtwScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         dtwScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
-        //playbackVisualiser.getChildren().add(application.playbackVisualiser.getSubScene());
-        playbackTab.selectedProperty().addListener((observable, oldValue, newValue) -> {
+        //Translate tab
+        translateVisualiser.getChildren().add(application.translateVisualiser.getSubScene());
+        translateTab.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if(!oldValue&&newValue){//when the user clicks the playback tab
-                application.startRecognition();
-                application.startPlaybackVisualizer();
+                //application.startRecognition();
+                application.startTranslateVisualizer();
             }else if(oldValue&&!newValue){//when the user leaves the playback tab
-                application.stopRecognition();
-                application.stopPlaybackVisualizer();
+                //application.stopRecognition();
+                application.stopTranslateVisualizer();
+                application.stopTranslate();
             }
         });
 
@@ -266,7 +270,7 @@ public class DefaultController implements Initializable{
     }
 
     public void resetButtonAction(){
-        Alert alert=new Alert(Alert.AlertType.CONFIRMATION,"Confirm to reset the whole database?");
+        Alert alert=new Alert(Alert.AlertType.CONFIRMATION,"Confirm to reset the database?");
         alert.setResultConverter(param -> {
             if(param == ButtonType.OK){
                 try {
@@ -306,6 +310,26 @@ public class DefaultController implements Initializable{
         }catch(Exception ex){
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void translateButtonAction(){
+        String message = translateTextField.getText();
+        String[] words;
+
+        if(message == ""){
+            Platform.runLater(() -> (new Alert(Alert.AlertType.ERROR,"Please input some characters.")).show());
+            return;
+        }
+
+        if(message.contains(" ")){
+            words = message.split(" ");
+            for(int i=0; i<words.length; i++)
+                //application.translateVis(words[i]);
+                application.replayVis(words[i]);
+        } else {
+            application.translateVis(message);
+        }
+        log(message + "is translated");
     }
 
     private void playback() {

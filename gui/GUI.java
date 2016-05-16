@@ -45,7 +45,7 @@ public class GUI extends Application{
     private  Controller controller = new Controller();
     private static ObservableList<String> gestures = FXCollections.observableArrayList();
     private Service<String> dtwService;
-    private final int dtwTolerance=1;
+    private final int dtwTolerance = 1;
     private double minCost;
 
     /* GUI control */
@@ -57,8 +57,10 @@ public class GUI extends Application{
     private Service<Void> mainVisService;
     private Service<Void> replayVisService;
     private Service<Void> dtwVisService;
+    private Service<Void> translateVisService;
     public VisualiseFX mainVisualiser;
     public VisualiseFX dtwVisualiser;
+    public VisualiseFX translateVisualiser;
 
     public static void main(String[] args){
         launch(args);
@@ -76,16 +78,17 @@ public class GUI extends Application{
         }
 
         //initialise the things related to the database
-        allSigns=new SignBank(db);
+        allSigns = new SignBank(db);
         gestures.addAll(allSigns.getAllSigns().keySet());
 
         //store the states
-        stage=primaryStage;
-        myself=this;
+        stage = primaryStage;
+        myself = this;
 
         //gesture visualize thread
         mainVisualiser = new VisualiseFX(1000,760,800);
-        dtwVisualiser=new VisualiseFX(1280,570,900);
+        dtwVisualiser = new VisualiseFX(1280,570,900);
+        translateVisualiser = new VisualiseFX(1280,570,900);
 
         dtwVisService = new Service<Void>() {
             @Override
@@ -172,6 +175,49 @@ public class GUI extends Application{
             }
         };
         mainVisService.start();
+
+        translateVisService = new Service<Void>() {
+            @Override
+            protected Task createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        while (true) {
+                            try {
+                                translateVisualiser.traceLM(controller.frame());
+                                Thread.currentThread().sleep(110);
+                            } catch (InterruptedException e) {
+                                //redraw again as the interruption will make the update of some components stop
+                                translateVisualiser.root.getChildren().clear();
+                                translateVisualiser.initializeParam();
+
+                                try {
+                                    Thread.currentThread().join();
+                                }catch (Exception f) {
+                                    f.printStackTrace();
+                                }
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override protected void failed(){
+                        super.failed();
+                        defaultController.log(LoggingTemplate.getSystemMessage("[Service]translateVis failed."));
+                        translateVisualiser.root.getChildren().clear();
+                        translateVisualiser.initializeParam();
+                        restart();
+                    }
+
+                    @Override protected void cancelled(){
+                        defaultController.log(LoggingTemplate.getSystemMessage("[Service]translateVis cancelled."));
+                        translateVisualiser.root.getChildren().clear();
+                        translateVisualiser.initializeParam();
+                    }
+                };
+            }
+        };
+        translateVisService.start();
 
         dtwService=new Service<String>() {
             @Override
@@ -422,8 +468,73 @@ public class GUI extends Application{
                 };
             }
         };
-//        mainVisService.cancel();
+        //mainVisService.cancel();
         replayVisService.start();
+    }
+
+    public void translateVis(String gestureName) {
+        translateVisService = new Service<Void>() {
+            @Override
+            protected Task createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        Sample sample = db.getFirstSample(gestureName);
+                        for (OneFrame i:sample.getAllFrames()) {
+                            try {
+                                translateVisualiser.traceLM(i);
+                                Thread.currentThread().sleep(40);
+                            } catch (Exception e) {
+                                //redraw again as the interruption will make the update of some components stop
+                                translateVisualiser.root.getChildren().clear();
+                                translateVisualiser.initializeParam();
+                                try {
+                                    Thread.currentThread().join();
+                                }catch (Exception f) {
+                                    f.printStackTrace();
+                                }
+                                e.printStackTrace();
+                            }
+                        }
+                        return null;
+                    }
+
+                    @Override protected void running(){
+                        super.running();
+                        translateVisService.cancel();
+                    }
+
+                    @Override protected void failed(){
+                        super.failed();
+                        defaultController.log(LoggingTemplate.getErrorMessage("translate failed."));
+                        translateVisService.cancel();
+                    }
+
+                    @Override protected void scheduled(){
+                        super.scheduled();
+                        if(translateVisService!=null||translateVisService.isRunning())
+                            translateVisService.cancel();
+                    }
+
+                    @Override protected void succeeded(){
+                        super.succeeded();
+                        translateVisualiser.root.getChildren().clear();
+                        translateVisualiser.initializeParam();
+                        translateVisService.restart();
+                    }
+
+                    @Override protected void cancelled(){
+                        super.cancelled();
+                        translateVisualiser.root.getChildren().clear();
+                        translateVisualiser.initializeParam();
+                        translateVisService.restart();
+                        defaultController.log(LoggingTemplate.getSystemMessage("[Service]translateService is cancelled."));
+                    }
+                };
+            }
+        };
+        //mainVisService.cancel();
+        translateVisService.start();
     }
 
     public void startRecognition(){
@@ -453,6 +564,15 @@ public class GUI extends Application{
             dtwVisService.cancel();
     }
 
+    public void startTranslateVisualizer(){
+        translateVisService.restart();
+    }
+
+    public void stopTranslateVisualizer(){
+        if(translateVisService != null || translateVisService.isRunning())
+            translateVisService.cancel();
+    }
+
     public void deleteGesture(String deleteGest) throws Exception {
         if(db.removeSign(db.getSignsByName(deleteGest))){
             defaultController.setList(false);
@@ -461,8 +581,17 @@ public class GUI extends Application{
         }
     }
 
+    public void resetDatabase() throws Exception {
+        db.removeAllSign();
+    }
+
     public void stopReplay() {
         if(replayVisService!=null&&replayVisService.isRunning())
             replayVisService.cancel();
+    }
+
+    public void stopTranslate() {
+        if(translateVisService!=null && translateVisService.isRunning())
+            translateVisService.cancel();
     }
 }
