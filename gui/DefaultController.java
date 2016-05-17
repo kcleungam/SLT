@@ -51,6 +51,7 @@ public class DefaultController implements Initializable{
     /* Communication to GUI instance */
     private GUI application;
     private DefaultController myself;
+    private Boolean playing = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
@@ -323,13 +324,11 @@ public class DefaultController implements Initializable{
 
         if(message.contains(" ")){
             words = message.split(" ");
-            for(int i=0; i<words.length; i++)
-                try{
-                    String word = words[i];
-                    Platform.runLater(() -> application.translateVis(word));
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
+            try{
+                Platform.runLater(() -> application.translateVis(words));
+            }catch(Exception e){
+                e.printStackTrace();
+            }
 
         } else {
             Platform.runLater(() -> application.translateVis(message));

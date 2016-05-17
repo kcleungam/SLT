@@ -62,7 +62,7 @@ public class GUI extends Application{
     public VisualiseFX mainVisualiser;
     public VisualiseFX dtwVisualiser;
     public VisualiseFX translateVisualiser;
-    public Boolean started;
+    public Boolean playing = false;
 
     public static void main(String[] args){
         launch(args);
@@ -481,7 +481,6 @@ public class GUI extends Application{
                 return new Task<Void>() {
                     @Override
                     protected Void call() throws Exception {
-                        started = true;
                         Sample sample = db.getFirstSample(gestureName);
                         for (OneFrame i:sample.getAllFrames()) {
                             try {
@@ -499,27 +498,25 @@ public class GUI extends Application{
                                 e.printStackTrace();
                             }
                         }
+
                         return null;
                     }
 
                     @Override protected void running(){
                         super.running();
                         translateVisService.cancel();
-                        started = false;
                     }
 
                     @Override protected void failed(){
                         super.failed();
                         defaultController.log(LoggingTemplate.getErrorMessage("translate failed."));
                         playbackVisService.cancel();
-                        started = false;
                     }
 
                     @Override protected void scheduled(){
                         super.scheduled();
                         if(translateVisService!=null||translateVisService.isRunning()) {
                             translateVisService.cancel();
-                            started = false;
                         }
                     }
 
@@ -528,7 +525,6 @@ public class GUI extends Application{
                         translateVisualiser.root.getChildren().clear();
                         translateVisualiser.initializeParam();
                         translateVisService.restart();
-                        started = false;
                     }
 
                     @Override protected void cancelled(){
@@ -537,7 +533,79 @@ public class GUI extends Application{
                         translateVisualiser.initializeParam();
                         translateVisService.restart();
                         defaultController.log(LoggingTemplate.getSystemMessage("[Service]translateService is cancelled."));
-                        started = false;
+                    }
+                };
+            }
+        };
+        //mainVisService.cancel();
+        playbackVisService.start();
+    }
+
+    public void translateVis(String[] gestureNames) {
+        playbackVisService = new Service<Void>() {
+            @Override
+            protected Task createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+
+                        for(int index = 0; index < gestureNames.length; index++){
+                            playing = true;
+                            Sample sample = db.getFirstSample(gestureNames[index]);
+
+                            for (OneFrame i:sample.getAllFrames()) {
+                                try {
+                                    translateVisualiser.traceLM(i);
+                                    Thread.currentThread().sleep(40);
+                                } catch (Exception e) {
+                                    //redraw again as the interruption will make the update of some components stop
+                                    translateVisualiser.root.getChildren().clear();
+                                    translateVisualiser.initializeParam();
+                                    try {
+                                        Thread.currentThread().join();
+                                    }catch (Exception f) {
+                                        f.printStackTrace();
+                                    }
+                                    e.printStackTrace();
+                                }
+                            }
+                            playing = false;
+                        }
+
+                        return null;
+                    }
+
+                    @Override protected void running(){
+                        super.running();
+                        translateVisService.cancel();
+                    }
+
+                    @Override protected void failed(){
+                        super.failed();
+                        defaultController.log(LoggingTemplate.getErrorMessage("translate failed."));
+                        playbackVisService.cancel();
+                    }
+
+                    @Override protected void scheduled(){
+                        super.scheduled();
+                        if(translateVisService!=null||translateVisService.isRunning()) {
+                            translateVisService.cancel();
+                        }
+                    }
+
+                    @Override protected void succeeded(){
+                        super.succeeded();
+                        translateVisualiser.root.getChildren().clear();
+                        translateVisualiser.initializeParam();
+                        translateVisService.restart();
+                    }
+
+                    @Override protected void cancelled(){
+                        super.cancelled();
+                        translateVisualiser.root.getChildren().clear();
+                        translateVisualiser.initializeParam();
+                        translateVisService.restart();
+                        defaultController.log(LoggingTemplate.getSystemMessage("[Service]translateService is cancelled."));
                     }
                 };
             }
