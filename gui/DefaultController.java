@@ -42,6 +42,7 @@ public class DefaultController implements Initializable{
     @FXML private Tab controlTab,loggingTab,dtwTab,translateTab;
     @FXML private ScrollPane dtwScrollPane,loggingScrollPane;
     @FXML private Label modeLabel;
+    @FXML private Label transModeLabel;
     @FXML private TextField translateTextField;
 
     private Stage countdown = new Stage();
@@ -51,7 +52,7 @@ public class DefaultController implements Initializable{
     /* Communication to GUI instance */
     private GUI application;
     private DefaultController myself;
-    private Boolean playing = false;
+    private Boolean englishMode = true;
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
@@ -317,23 +318,40 @@ public class DefaultController implements Initializable{
         String message = translateTextField.getText();
         String[] words;
 
-        if(message == ""){
-            Platform.runLater(() -> (new Alert(Alert.AlertType.ERROR,"Please input some characters.")).show());
-            return;
-        }
-
-        if(message.contains(" ")){
-            words = message.split(" ");
-            try{
-                Platform.runLater(() -> application.translateVis(words));
-            }catch(Exception e){
-                e.printStackTrace();
+        if(englishMode){
+            if(message == ""){
+                Platform.runLater(() -> (new Alert(Alert.AlertType.ERROR,"Please input some characters.")).show());
+                return;
             }
 
-        } else {
-            Platform.runLater(() -> application.translateVis(message));
+            if(message.contains(" ")){
+                words = message.split(" ");
+                try{
+                    Platform.runLater(() -> application.translateEngVis(words));
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+
+            } else {
+                Platform.runLater(() -> application.translateEngVis(message));
+            }
+        }else{
+            words = message.split("");
+            Platform.runLater(() -> application.translateChiVis(words));
         }
+
         log(message + " is translated");
+    }
+
+    @FXML
+    public void transModeButtonAction(){
+        if (englishMode){
+            transModeLabel.setText("Chinese Mode");
+            englishMode = false;
+        }else{
+            transModeLabel.setText("English Mode");
+            englishMode = true;
+        }
     }
 
     private void playback() {

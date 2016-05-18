@@ -474,7 +474,7 @@ public class GUI extends Application{
         replayVisService.start();
     }
 
-    public void translateVis(String gestureName) {
+    public void translateEngVis(String gestureName) {
         playbackVisService = new Service<Void>() {
             @Override
             protected Task createTask() {
@@ -541,7 +541,7 @@ public class GUI extends Application{
         playbackVisService.start();
     }
 
-    public void translateVis(String[] gestureNames) {
+    public void translateEngVis(String[] gestureNames) {
         playbackVisService = new Service<Void>() {
             @Override
             protected Task createTask() {
@@ -550,7 +550,6 @@ public class GUI extends Application{
                     protected Void call() throws Exception {
 
                         for(int index = 0; index < gestureNames.length; index++){
-                            playing = true;
                             Sample sample = db.getFirstSample(gestureNames[index]);
 
                             for (OneFrame i:sample.getAllFrames()) {
@@ -569,7 +568,6 @@ public class GUI extends Application{
                                     e.printStackTrace();
                                 }
                             }
-                            playing = false;
                         }
 
                         return null;
@@ -613,6 +611,104 @@ public class GUI extends Application{
         //mainVisService.cancel();
         playbackVisService.start();
     }
+
+    public void translateChiVis(String[] gestureNames) {
+        playbackVisService = new Service<Void>() {
+            @Override
+            protected Task createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+
+                        for(int index = 0; index < gestureNames.length; index++){
+
+
+                            if(db.isNameExist(gestureNames[index])){
+                                Sample sample = db.getFirstSample(gestureNames[index]);
+
+                                for (OneFrame i:sample.getAllFrames()) {
+                                    try {
+                                        translateVisualiser.traceLM(i);
+                                        Thread.currentThread().sleep(40);
+                                    } catch (Exception e) {
+                                        //redraw again as the interruption will make the update of some components stop
+                                        translateVisualiser.root.getChildren().clear();
+                                        translateVisualiser.initializeParam();
+                                        try {
+                                            Thread.currentThread().join();
+                                        }catch (Exception f) {
+                                            f.printStackTrace();
+                                        }
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }else{
+                                String newName = gestureNames[index] + gestureNames[index+1];
+                                Sample newSample = db.getFirstSample(newName);
+
+                                for (OneFrame i : newSample.getAllFrames()) {
+                                    try {
+                                        translateVisualiser.traceLM(i);
+                                        Thread.currentThread().sleep(40);
+                                    } catch (Exception e) {
+                                        //redraw again as the interruption will make the update of some components stop
+                                        translateVisualiser.root.getChildren().clear();
+                                        translateVisualiser.initializeParam();
+                                        try {
+                                            Thread.currentThread().join();
+                                        } catch (Exception f) {
+                                            f.printStackTrace();
+                                        }
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                index++;
+                            }
+                        }
+
+                        return null;
+                    }
+
+                    @Override protected void running(){
+                        super.running();
+                        translateVisService.cancel();
+                    }
+
+                    @Override protected void failed(){
+                        super.failed();
+                        defaultController.log(LoggingTemplate.getErrorMessage("translate failed."));
+                        playbackVisService.cancel();
+                    }
+
+                    @Override protected void scheduled(){
+                        super.scheduled();
+                        if(translateVisService!=null||translateVisService.isRunning()) {
+                            translateVisService.cancel();
+                        }
+                    }
+
+                    @Override protected void succeeded(){
+                        super.succeeded();
+                        translateVisualiser.root.getChildren().clear();
+                        translateVisualiser.initializeParam();
+                        translateVisService.restart();
+                    }
+
+                    @Override protected void cancelled(){
+                        super.cancelled();
+                        translateVisualiser.root.getChildren().clear();
+                        translateVisualiser.initializeParam();
+                        translateVisService.restart();
+                        defaultController.log(LoggingTemplate.getSystemMessage("[Service]translateService is cancelled."));
+                    }
+                };
+            }
+        };
+        //mainVisService.cancel();
+        playbackVisService.start();
+    }
+
 
     public void startRecognition(){
         dtwService.restart();

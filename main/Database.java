@@ -192,6 +192,15 @@ public class Database {
         return firstSample;
 	}
 
+	//Check whether the given sign name exist
+	public Boolean isNameExist(String name){
+		long existence = Jcoll.count("{name:#}", name);
+
+		if (existence == 0) // not exist
+			return false;
+		else
+			return true;
+	}
 
 
 	/** helper function */

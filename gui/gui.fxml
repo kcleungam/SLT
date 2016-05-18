@@ -55,7 +55,7 @@
                                                       <Insets left="10.0" top="20.0" />
                                                    </VBox.margin>
                                                 </Label>
-                                                <ListView fx:id="gestureList" prefHeight="599.0" prefWidth="191.0">
+                                                <ListView fx:id="gestureList" prefHeight="555.0" prefWidth="191.0">
                                                    <VBox.margin>
                                                       <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
                                                    </VBox.margin>
@@ -134,8 +134,10 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <TextField fx:id="translateTextField" layoutX="32.0" layoutY="591.0" prefHeight="70.0" prefWidth="1221.0" />
-                              <Button fx:id="translateButton" layoutX="32.0" layoutY="690.0" mnemonicParsing="false" onAction="#translateButtonAction" text="Translate" />
+                              <Button fx:id="translateButton" layoutX="157.0" layoutY="690.0" mnemonicParsing="false" onAction="#translateButtonAction" text="Translate" />
                                <Group fx:id="translateVisualiser" />
+                              <Button fx:id="translateModeButton" layoutX="32.0" layoutY="690.0" mnemonicParsing="false" onAction="#transModeButtonAction" text="Change Mode" />
+                              <Label fx:id="transModeLabel" layoutX="32.0" layoutY="561.0" text="English Mode" />
                            </children>
                       </AnchorPane>
                     </content>
