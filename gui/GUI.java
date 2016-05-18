@@ -643,25 +643,34 @@ public class GUI extends Application{
                                     }
                                 }
                             }else{
-                                String newName = gestureNames[index] + gestureNames[index+1];
-                                Sample newSample = db.getFirstSample(newName);
+                                String newName = gestureNames[index];
+                                do{
+                                    newName = newName + gestureNames[index+1];
 
-                                for (OneFrame i : newSample.getAllFrames()) {
-                                    try {
-                                        translateVisualiser.traceLM(i);
-                                        Thread.currentThread().sleep(40);
-                                    } catch (Exception e) {
-                                        //redraw again as the interruption will make the update of some components stop
-                                        translateVisualiser.root.getChildren().clear();
-                                        translateVisualiser.initializeParam();
-                                        try {
-                                            Thread.currentThread().join();
-                                        } catch (Exception f) {
-                                            f.printStackTrace();
-                                        }
-                                        e.printStackTrace();
+                                    if(!db.isNameExist(newName)){
+                                        index++;
+                                        continue;
                                     }
-                                }
+
+                                    Sample newSample = db.getFirstSample(newName);
+
+                                    for (OneFrame i : newSample.getAllFrames()) {
+                                        try {
+                                            translateVisualiser.traceLM(i);
+                                            Thread.currentThread().sleep(40);
+                                        } catch (Exception e) {
+                                            //redraw again as the interruption will make the update of some components stop
+                                            translateVisualiser.root.getChildren().clear();
+                                            translateVisualiser.initializeParam();
+                                            try {
+                                                Thread.currentThread().join();
+                                            } catch (Exception f) {
+                                                f.printStackTrace();
+                                            }
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }while(!db.isNameExist(newName));
 
                                 index++;
                             }
