@@ -59,10 +59,11 @@ public class GUI extends Application{
     private Service<Void> dtwVisService;
     private Service<Void> translateVisService;
     private Service<Void> playbackVisService;
+    private Service<Void> quizVisService;
     public VisualiseFX mainVisualiser;
     public VisualiseFX dtwVisualiser;
     public VisualiseFX translateVisualiser;
-    public Boolean playing = false;
+    public VisualiseFX quizVisualiser;
 
     public static void main(String[] args){
         launch(args);
@@ -91,6 +92,7 @@ public class GUI extends Application{
         mainVisualiser = new VisualiseFX(1000,760,800);
         dtwVisualiser = new VisualiseFX(1280,570,900);
         translateVisualiser = new VisualiseFX(1280,570,900);
+        quizVisualiser = new VisualiseFX(1280,570,900);
 
         dtwVisService = new Service<Void>() {
             @Override
@@ -220,6 +222,49 @@ public class GUI extends Application{
             }
         };
         translateVisService.start();
+
+        quizVisService = new Service<Void>() {
+            @Override
+            protected Task createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        while (true) {
+                            try {
+                                quizVisualiser.traceLM(controller.frame());
+                                Thread.currentThread().sleep(110);
+                            } catch (InterruptedException e) {
+                                //redraw again as the interruption will make the update of some components stop
+                                quizVisualiser.root.getChildren().clear();
+                                quizVisualiser.initializeParam();
+
+                                try {
+                                    Thread.currentThread().join();
+                                }catch (Exception f) {
+                                    f.printStackTrace();
+                                }
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override protected void failed(){
+                        super.failed();
+                        defaultController.log(LoggingTemplate.getSystemMessage("[Service]quizVis failed."));
+                        quizVisualiser.root.getChildren().clear();
+                        quizVisualiser.initializeParam();
+                        restart();
+                    }
+
+                    @Override protected void cancelled(){
+                        defaultController.log(LoggingTemplate.getSystemMessage("[Service]quizVis cancelled."));
+                        quizVisualiser.root.getChildren().clear();
+                        quizVisualiser.initializeParam();
+                    }
+                };
+            }
+        };
+        quizVisService.start();
 
         dtwService=new Service<String>() {
             @Override
@@ -718,6 +763,73 @@ public class GUI extends Application{
         playbackVisService.start();
     }
 
+    public void quizReplayVis(String gestureName) {
+        playbackVisService = new Service<Void>() {
+            @Override
+            protected Task createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        Sample sample = db.getFirstSample(gestureName);
+                        for (OneFrame i:sample.getAllFrames()) {
+                            try {
+                                quizVisualiser.traceLM(i);
+                                Thread.currentThread().sleep(40);
+                            } catch (Exception e) {
+                                //redraw again as the interruption will make the update of some components stop
+                                quizVisualiser.root.getChildren().clear();
+                                quizVisualiser.initializeParam();
+                                try {
+                                    Thread.currentThread().join();
+                                }catch (Exception f) {
+                                    f.printStackTrace();
+                                }
+                                e.printStackTrace();
+                            }
+                        }
+
+                        return null;
+                    }
+
+                    @Override protected void running(){
+                        super.running();
+                        quizVisService.cancel();
+                    }
+
+                    @Override protected void failed(){
+                        super.failed();
+                        defaultController.log(LoggingTemplate.getErrorMessage("translate failed."));
+                        playbackVisService.cancel();
+                    }
+
+                    @Override protected void scheduled(){
+                        super.scheduled();
+                        if(quizVisService!=null||quizVisService.isRunning()) {
+                            quizVisService.cancel();
+                        }
+                    }
+
+                    @Override protected void succeeded(){
+                        super.succeeded();
+                        quizVisualiser.root.getChildren().clear();
+                        quizVisualiser.initializeParam();
+                        quizVisService.restart();
+                    }
+
+                    @Override protected void cancelled(){
+                        super.cancelled();
+                        quizVisualiser.root.getChildren().clear();
+                        quizVisualiser.initializeParam();
+                        quizVisService.restart();
+                        defaultController.log(LoggingTemplate.getSystemMessage("[Service]quizService is cancelled."));
+                    }
+                };
+            }
+        };
+        //mainVisService.cancel();
+        playbackVisService.start();
+    }
+
 
     public void startRecognition(){
         dtwService.restart();
@@ -753,6 +865,15 @@ public class GUI extends Application{
     public void stopTranslateVisualizer(){
         if(translateVisService != null || translateVisService.isRunning())
             translateVisService.cancel();
+    }
+
+    public void startQuizVisualizer(){
+        quizVisService.restart();
+    }
+
+    public void stopQuizVisualizer(){
+        if(quizVisService != null || quizVisService.isRunning())
+            quizVisService.cancel();
     }
 
     public void deleteGesture(String deleteGest) throws Exception {

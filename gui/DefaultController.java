@@ -38,12 +38,14 @@ public class DefaultController implements Initializable{
     @FXML private Button startButton;
     @FXML private Button modeButton;
     @FXML private TextFlow loggingArea,dtwTextFlow;
-    @FXML public Group mainVisualiser,dtwVisualiser,translateVisualiser;
-    @FXML private Tab controlTab,loggingTab,dtwTab,translateTab;
+    @FXML public Group mainVisualiser,dtwVisualiser,translateVisualiser,quizVisualiser;
+    @FXML private Tab controlTab,loggingTab,dtwTab,translateTab,quizTab;
     @FXML private ScrollPane dtwScrollPane,loggingScrollPane;
     @FXML private Label modeLabel;
     @FXML private Label transModeLabel;
+    @FXML private Label correctNumLabel, wrongNumLabel;
     @FXML private TextField translateTextField;
+    @FXML private TextField quizTextField;
 
     private Stage countdown = new Stage();
     private Stage about = new Stage();
@@ -53,6 +55,7 @@ public class DefaultController implements Initializable{
     private GUI application;
     private DefaultController myself;
     private Boolean englishMode = true;
+    private String answer;
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
@@ -120,6 +123,19 @@ public class DefaultController implements Initializable{
             }else if(oldValue&&!newValue){//when the user leaves the playback tab
                 //application.stopRecognition();
                 application.stopTranslateVisualizer();
+                application.stopTranslate();
+            }
+        });
+
+        //Quiz tab
+        quizVisualiser.getChildren().add(application.quizVisualiser.getSubScene());
+        quizTab.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if(!oldValue&&newValue){//when the user clicks the playback tab
+                //application.startRecognition();
+                application.startQuizVisualizer();
+            }else if(oldValue&&!newValue){//when the user leaves the playback tab
+                //application.stopRecognition();
+                application.stopQuizVisualizer();
                 application.stopTranslate();
             }
         });
@@ -352,6 +368,30 @@ public class DefaultController implements Initializable{
             transModeLabel.setText("English Mode");
             englishMode = true;
         }
+    }
+
+    @FXML
+    public void playButtonAction(){
+        Platform.runLater(() -> application.quizReplayVis("One"));
+        answer = new String("One");
+
+    }
+
+    @FXML
+    public void answerButtonAction(){
+        int correctNumber = Integer.parseInt(correctNumLabel.getText());
+        int wrongNumber = Integer.parseInt(correctNumLabel.getText());
+
+        if(quizTextField.getText().equals(answer)){
+            correctNumLabel.setText("" + ++correctNumber);
+        }else{
+            wrongNumLabel.setText("" + ++wrongNumber);
+        }
+
+    }
+
+    @FXML
+    public void nextButtonAction(){
     }
 
     private void playback() {

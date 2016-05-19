@@ -129,18 +129,35 @@
                         </AnchorPane>
                     </content>
                   </Tab>
-                  <Tab fx:id="translateTab" text="Translate">
+                  <Tab fx:id="translateTab" style="-fx-background-color: #708090;" text="Translate">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #708090;">
                            <children>
                               <TextField fx:id="translateTextField" layoutX="32.0" layoutY="591.0" prefHeight="70.0" prefWidth="1221.0" />
                               <Button fx:id="translateButton" layoutX="157.0" layoutY="690.0" mnemonicParsing="false" onAction="#translateButtonAction" text="Translate" />
-                               <Group fx:id="translateVisualiser" />
                               <Button fx:id="translateModeButton" layoutX="32.0" layoutY="690.0" mnemonicParsing="false" onAction="#transModeButtonAction" text="Change Mode" />
+                               <Group fx:id="translateVisualiser" />
                               <Label fx:id="transModeLabel" layoutX="32.0" layoutY="561.0" text="English Mode" />
                            </children>
                       </AnchorPane>
                     </content>
+                  </Tab>
+                  <Tab fx:id="quizTab" style="-fx-background-color: #7068f0;" text="Quiz">
+                      <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #7068f0;">
+                              <children>
+                                  <TextField fx:id="quizTextField" layoutX="32.0" layoutY="591.0" prefHeight="70.0" prefWidth="1221.0" />
+                                  <Button fx:id="playButton" layoutX="28.0" layoutY="690.0" mnemonicParsing="false" onAction="#playButtonAction" prefHeight="26.0" prefWidth="58.0" text="Play" />
+                                  <Button fx:id="answerButton" layoutX="101.0" layoutY="690.0" mnemonicParsing="false" onAction="#answerButtonAction" text="Answer" />
+                              <Button fx:id="nextButton" layoutX="184.0" layoutY="690.0" mnemonicParsing="false" onAction="#nextButtonAction" prefHeight="26.0" prefWidth="67.0" text="Next" />
+                                  <Group fx:id="quizVisualiser" />
+                                  <Label layoutX="32.0" layoutY="561.0" text="Correct:" />
+                              <Label layoutX="122.0" layoutY="561.0" text="Wrong:" />
+                              <Label fx:id="correctNumLabel" layoutX="82.0" layoutY="561.0" prefHeight="16.0" prefWidth="16.0" text="0" />
+                              <Label fx:id="wrongNumLabel" layoutX="168.0" layoutY="561.0" prefHeight="16.0" prefWidth="16.0" text="0" />
+                              </children>
+                          </AnchorPane>
+                      </content>
                   </Tab>
                 <Tab fx:id="loggingTab" closable="false" style="-fx-background-color: #ecf7e9;" text="Logging">
                      <content>
