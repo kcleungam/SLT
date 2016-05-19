@@ -1,32 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd772be8-ff47-4886-b087-900455e8a0ce" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/CountdownController$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/CountdownController$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$1$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$1$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$2$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$2$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$2.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$3$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$3$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$3.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$4$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$4$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$4.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$5$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$5$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$5.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$6$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$6$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$6.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$7$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$7$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$7.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$7.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$8$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$8$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$8.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$8.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/DefaultController.java" afterPath="$PROJECT_DIR$/gui/DefaultController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/GUI.java" afterPath="$PROJECT_DIR$/gui/GUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/gui.fxml" afterPath="$PROJECT_DIR$/gui/gui.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/gui.fxml" afterPath="$PROJECT_DIR$/out/production/SLT/gui/gui.fxml" />
-    </list>
+    <list default="true" id="bd772be8-ff47-4886-b087-900455e8a0ce" name="Default" comment="" />
     <ignored path="SLT.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
