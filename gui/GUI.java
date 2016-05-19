@@ -897,4 +897,9 @@ public class GUI extends Application{
         if(translateVisService!=null && translateVisService.isRunning())
             translateVisService.cancel();
     }
+
+    public String getRandomSign(){
+        int randomNumber = (int)(Math.random() * gestures.size());
+        return gestures.get(randomNumber);
+    }
 }

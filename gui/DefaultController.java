@@ -372,15 +372,16 @@ public class DefaultController implements Initializable{
 
     @FXML
     public void playButtonAction(){
-        Platform.runLater(() -> application.quizReplayVis("One"));
-        answer = new String("One");
+        String signName = application.getRandomSign();
+        Platform.runLater(() -> application.quizReplayVis(signName));
+        answer = new String(signName);
 
     }
 
     @FXML
     public void answerButtonAction(){
         int correctNumber = Integer.parseInt(correctNumLabel.getText());
-        int wrongNumber = Integer.parseInt(correctNumLabel.getText());
+        int wrongNumber = Integer.parseInt(wrongNumLabel.getText());
 
         if(quizTextField.getText().equals(answer)){
             correctNumLabel.setText("" + ++correctNumber);
