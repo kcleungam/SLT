@@ -54,7 +54,9 @@ public class DefaultController implements Initializable{
     /* Communication to GUI instance */
     private GUI application;
     private DefaultController myself;
+
     private Boolean englishMode = true;
+    private Boolean answered = true;
     private String answer;
 
     @Override
@@ -372,10 +374,14 @@ public class DefaultController implements Initializable{
 
     @FXML
     public void playButtonAction(){
-        String signName = application.getRandomSign();
-        Platform.runLater(() -> application.quizReplayVis(signName));
-        answer = new String(signName);
-
+        if(answered){
+            String signName = application.getRandomSign();
+            Platform.runLater(() -> application.quizReplayVis(signName));
+            answer = new String(signName);
+            answered = false;
+        }else{
+            Platform.runLater(() -> application.quizReplayVis(answer));
+        }
     }
 
     @FXML
@@ -389,10 +395,18 @@ public class DefaultController implements Initializable{
             wrongNumLabel.setText("" + ++wrongNumber);
         }
 
+        answered = true;
     }
 
     @FXML
     public void nextButtonAction(){
+        int wrongNumber = Integer.parseInt(wrongNumLabel.getText());
+        wrongNumLabel.setText("" + ++wrongNumber);
+
+        String signName = application.getRandomSign();
+        Platform.runLater(() -> application.quizReplayVis(signName));
+        answer = new String(signName);
+        answered = false;
     }
 
     private void playback() {
