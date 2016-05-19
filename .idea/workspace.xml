@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd772be8-ff47-4886-b087-900455e8a0ce" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/DefaultController.java" afterPath="$PROJECT_DIR$/gui/DefaultController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/.idea/workspace.xml" afterPath="$PROJECT_DIR$/out/production/SLT/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/gui.fxml" afterPath="$PROJECT_DIR$/gui/gui.fxml" />
     </list>
     <ignored path="SLT.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -49,7 +47,7 @@
           </provider>
           <provider editor-type-id="text-editor">
             <state relative-caret-position="2470">
-              <caret line="130" column="24" selection-start-line="130" selection-start-column="24" selection-end-line="130" selection-end-column="24" />
+              <caret line="132" column="24" selection-start-line="132" selection-start-column="24" selection-end-line="132" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -58,8 +56,8 @@
       <file leaf-file-name="DefaultController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gui/DefaultController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="458">
-              <caret line="393" column="14" selection-start-line="393" selection-start-column="14" selection-end-line="393" selection-end-column="14" />
+            <state relative-caret-position="553">
+              <caret line="397" column="9" selection-start-line="397" selection-start-column="9" selection-end-line="397" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -135,9 +133,9 @@
         <option value="$PROJECT_DIR$/gui/CountdownController.java" />
         <option value="$PROJECT_DIR$/gui/about.fxml" />
         <option value="$PROJECT_DIR$/main/Database.java" />
-        <option value="$PROJECT_DIR$/gui/gui.fxml" />
         <option value="$PROJECT_DIR$/gui/help.fxml" />
         <option value="$PROJECT_DIR$/gui/GUI.java" />
+        <option value="$PROJECT_DIR$/gui/gui.fxml" />
         <option value="$PROJECT_DIR$/gui/DefaultController.java" />
       </list>
     </option>
@@ -537,7 +535,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -985,17 +983,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui/gui.fxml">
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="2470">
-          <caret line="130" column="24" selection-start-line="130" selection-start-column="24" selection-end-line="130" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gui/help.fxml">
       <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
         <state />
@@ -1015,10 +1002,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/gui/gui.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="2470">
+          <caret line="132" column="24" selection-start-line="132" selection-start-column="24" selection-end-line="132" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/gui/DefaultController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="393" column="14" selection-start-line="393" selection-start-column="14" selection-end-line="393" selection-end-column="14" />
+        <state relative-caret-position="553">
+          <caret line="397" column="9" selection-start-line="397" selection-start-column="9" selection-end-line="397" selection-end-column="9" />
           <folding />
         </state>
       </provider>

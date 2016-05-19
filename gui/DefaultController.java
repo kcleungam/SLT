@@ -391,15 +391,18 @@ public class DefaultController implements Initializable{
 
         if(quizTextField.getText().equals(answer)){
             correctNumLabel.setText("" + ++correctNumber);
+            Platform.runLater(() -> (new Alert(Alert.AlertType.INFORMATION,"Your answer is correct!")).show());
         }else{
             wrongNumLabel.setText("" + ++wrongNumber);
+            Platform.runLater(() -> (new Alert(Alert.AlertType.INFORMATION,"The correct answer is " + answer )).show());
         }
 
+        quizTextField.clear();
         answered = true;
     }
 
     @FXML
-    public void nextButtonAction(){
+    public void skipButtonAction(){
         int wrongNumber = Integer.parseInt(wrongNumLabel.getText());
         wrongNumLabel.setText("" + ++wrongNumber);
 

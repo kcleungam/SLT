@@ -148,8 +148,8 @@
                               <children>
                                   <TextField fx:id="quizTextField" layoutX="30.0" layoutY="611.0" prefHeight="70.0" prefWidth="1221.0" />
                                   <Button fx:id="playButton" layoutX="28.0" layoutY="690.0" mnemonicParsing="false" onAction="#playButtonAction" prefHeight="26.0" prefWidth="58.0" text="Play" />
-                                  <Button fx:id="answerButton" layoutX="101.0" layoutY="690.0" mnemonicParsing="false" onAction="#answerButtonAction" text="Answer" />
-                              <Button fx:id="nextButton" layoutX="184.0" layoutY="690.0" mnemonicParsing="false" onAction="#nextButtonAction" prefHeight="26.0" prefWidth="67.0" text="Next" />
+                                  <Button fx:id="answerButton" layoutX="101.0" layoutY="690.0" mnemonicParsing="false" onAction="#answerButtonAction" prefHeight="26.0" prefWidth="71.0" text="Answer" />
+                              <Button fx:id="skipButton" layoutX="184.0" layoutY="690.0" mnemonicParsing="false" onAction="#skipButtonAction" prefHeight="26.0" prefWidth="67.0" text="Skip" />
                                   <Group fx:id="quizVisualiser" />
                                   <Label layoutX="32.0" layoutY="588.0" text="Correct:" />
                               <Label layoutX="122.0" layoutY="588.0" text="Wrong:" />
