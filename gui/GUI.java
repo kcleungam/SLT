@@ -60,10 +60,12 @@ public class GUI extends Application{
     private Service<Void> translateVisService;
     private Service<Void> playbackVisService;
     private Service<Void> quizVisService;
+    private Service<Void> quiz2VisService;
     public VisualiseFX mainVisualiser;
     public VisualiseFX dtwVisualiser;
     public VisualiseFX translateVisualiser;
     public VisualiseFX quizVisualiser;
+    public VisualiseFX quiz2Visualiser;
 
     public static void main(String[] args){
         launch(args);
@@ -93,6 +95,7 @@ public class GUI extends Application{
         dtwVisualiser = new VisualiseFX(1280,570,900);
         translateVisualiser = new VisualiseFX(1280,570,900);
         quizVisualiser = new VisualiseFX(1280,570,900);
+        quiz2Visualiser = new VisualiseFX(1280,570,900);
 
         dtwVisService = new Service<Void>() {
             @Override
@@ -265,6 +268,49 @@ public class GUI extends Application{
             }
         };
         quizVisService.start();
+
+        quiz2VisService = new Service<Void>() {
+            @Override
+            protected Task createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        while (true) {
+                            try {
+                                quiz2Visualiser.traceLM(controller.frame());
+                                Thread.currentThread().sleep(110);
+                            } catch (InterruptedException e) {
+                                //redraw again as the interruption will make the update of some components stop
+                                quiz2Visualiser.root.getChildren().clear();
+                                quiz2Visualiser.initializeParam();
+
+                                try {
+                                    Thread.currentThread().join();
+                                }catch (Exception f) {
+                                    f.printStackTrace();
+                                }
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override protected void failed(){
+                        super.failed();
+                        defaultController.log(LoggingTemplate.getSystemMessage("[Service]quiz2Vis failed."));
+                        quiz2Visualiser.root.getChildren().clear();
+                        quiz2Visualiser.initializeParam();
+                        restart();
+                    }
+
+                    @Override protected void cancelled(){
+                        defaultController.log(LoggingTemplate.getSystemMessage("[Service]quiz2Vis cancelled."));
+                        quiz2Visualiser.root.getChildren().clear();
+                        quiz2Visualiser.initializeParam();
+                    }
+                };
+            }
+        };
+        quiz2VisService.start();
 
         dtwService=new Service<String>() {
             @Override
@@ -830,7 +876,6 @@ public class GUI extends Application{
         playbackVisService.start();
     }
 
-
     public void startRecognition(){
         dtwService.restart();
     }
@@ -874,6 +919,15 @@ public class GUI extends Application{
     public void stopQuizVisualizer(){
         if(quizVisService != null || quizVisService.isRunning())
             quizVisService.cancel();
+    }
+
+    public void startQuiz2Visualizer(){
+        quiz2VisService.restart();
+    }
+
+    public void stopQuiz2Visualizer(){
+        if(quiz2VisService != null || quiz2VisService.isRunning())
+            quiz2VisService.cancel();
     }
 
     public void deleteGesture(String deleteGest) throws Exception {

@@ -159,6 +159,22 @@
                           </AnchorPane>
                       </content>
                   </Tab>
+                  <Tab fx:id="quiz2Tab" style="-fx-background-color: #90C830;" text="Quiz2">
+                      <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #90C830;">
+                              <children>
+                                  <Button fx:id="answer2Button" layoutX="33.0" layoutY="690.0" mnemonicParsing="false" onAction="#answerButtonAction" prefHeight="26.0" prefWidth="71.0" text="Answer" />
+                                  <Button fx:id="skip2Button" layoutX="122.0" layoutY="690.0" mnemonicParsing="false" onAction="#skip2ButtonAction" prefHeight="26.0" prefWidth="67.0" text="Skip" />
+                                  <Group fx:id="quiz2Visualiser" />
+                                  <Label layoutX="33.0" layoutY="657.0" text="Correct:" />
+                                  <Label layoutX="123.0" layoutY="657.0" text="Skip:" />
+                                  <Label fx:id="correct2NumLabel" layoutX="83.0" layoutY="657.0" prefHeight="16.0" prefWidth="16.0" text="0" />
+                                  <Label fx:id="skipNumLabel" layoutX="155.0" layoutY="657.0" prefHeight="16.0" prefWidth="16.0" text="0" />
+                              <Label fx:id="quizSIgnLabel" layoutX="33.0" layoutY="619.0" prefHeight="16.0" prefWidth="217.0" text="Please perform the gesture" />
+                              </children>
+                          </AnchorPane>
+                      </content>
+                  </Tab>
                 <Tab fx:id="loggingTab" closable="false" style="-fx-background-color: #ecf7e9;" text="Logging">
                      <content>
                         <ScrollPane fx:id="loggingScrollPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ecf7e9;">

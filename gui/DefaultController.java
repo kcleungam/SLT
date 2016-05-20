@@ -38,12 +38,13 @@ public class DefaultController implements Initializable{
     @FXML private Button startButton;
     @FXML private Button modeButton;
     @FXML private TextFlow loggingArea,dtwTextFlow;
-    @FXML public Group mainVisualiser,dtwVisualiser,translateVisualiser,quizVisualiser;
-    @FXML private Tab controlTab,loggingTab,dtwTab,translateTab,quizTab;
+    @FXML public Group mainVisualiser,dtwVisualiser,translateVisualiser,quizVisualiser,quiz2Visualiser;
+    @FXML private Tab controlTab,loggingTab,dtwTab,translateTab,quizTab,quiz2Tab;
     @FXML private ScrollPane dtwScrollPane,loggingScrollPane;
     @FXML private Label modeLabel;
     @FXML private Label transModeLabel;
-    @FXML private Label correctNumLabel, wrongNumLabel;
+    @FXML private Label correctNumLabel, wrongNumLabel, correct2NumLabel, skipNumLabel;
+    @FXML private Label quizSIgnLabel;
     @FXML private TextField translateTextField;
     @FXML private TextField quizTextField;
 
@@ -56,8 +57,8 @@ public class DefaultController implements Initializable{
     private DefaultController myself;
 
     private Boolean englishMode = true;
-    private Boolean answered = true;
-    private String answer;
+    private Boolean answered = true, answered2 = true;
+    private String answer, answer2;
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
@@ -141,6 +142,23 @@ public class DefaultController implements Initializable{
                 application.stopTranslate();
             }
         });
+
+        //Quiz2 tab
+        quiz2Visualiser.getChildren().add(application.quiz2Visualiser.getSubScene());
+        quiz2Tab.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if(!oldValue&&newValue){//when the user clicks the playback tab
+                //application.startRecognition();
+                application.startQuiz2Visualizer();
+            }else if(oldValue&&!newValue){//when the user leaves the playback tab
+                //application.stopRecognition();
+                application.stopQuiz2Visualizer();
+                application.stopTranslate();
+            }
+        });
+
+        String signName = application.getRandomSign();
+        answer2 = signName;
+        quizSIgnLabel.setText("Please perform the gesture " + answer2);
 
         //logging message
         log("OK");
@@ -410,6 +428,32 @@ public class DefaultController implements Initializable{
         Platform.runLater(() -> application.quizReplayVis(signName));
         answer = new String(signName);
         answered = false;
+    }
+
+    @FXML
+    public void answer2ButtonAction(){
+        int correctNumber = Integer.parseInt(correct2NumLabel.getText());
+
+        if (startButton.getText()=="Stop"){
+            application.stopRecognition();
+            startBtnSetText("Start");
+        }else{
+            startBtnSetText("Stop");
+            invokeCountdown();
+        }
+
+        answered = true;
+    }
+
+    @FXML
+    public void skip2ButtonAction(){
+        int skipNumber = Integer.parseInt(skipNumLabel.getText());
+        skipNumLabel.setText("" + ++skipNumber);
+
+        String signName = application.getRandomSign();
+        answer2 = new String(signName);
+        quizSIgnLabel.setText("Please perform the gesture " + answer2);
+        answered2 = false;
     }
 
     private void playback() {
