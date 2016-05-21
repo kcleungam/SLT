@@ -163,7 +163,7 @@
                       <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #90C830;">
                               <children>
-                                  <Button fx:id="answer2Button" layoutX="33.0" layoutY="690.0" mnemonicParsing="false" onAction="#answerButtonAction" prefHeight="26.0" prefWidth="71.0" text="Answer" />
+                                  <Button fx:id="answer2Button" layoutX="33.0" layoutY="690.0" mnemonicParsing="false" onAction="#answer2ButtonAction" prefHeight="26.0" prefWidth="71.0" text="Answer" />
                                   <Button fx:id="skip2Button" layoutX="122.0" layoutY="690.0" mnemonicParsing="false" onAction="#skip2ButtonAction" prefHeight="26.0" prefWidth="67.0" text="Skip" />
                                   <Group fx:id="quiz2Visualiser" />
                                   <Label layoutX="33.0" layoutY="657.0" text="Correct:" />

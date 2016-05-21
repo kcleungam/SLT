@@ -45,6 +45,7 @@ public class GUI extends Application{
     private  Controller controller = new Controller();
     private static ObservableList<String> gestures = FXCollections.observableArrayList();
     private Service<String> dtwService;
+    public Service<String> dtwQuizService;
     private final int dtwTolerance = 1;
     private double minCost;
 
@@ -408,6 +409,101 @@ public class GUI extends Application{
             }
         };
         dtwService.cancel();
+
+        dtwQuizService = new Service<String>() {
+            @Override
+            protected Task<String> createTask() {
+                return new Task<String>() {
+                    @Override
+                    protected String call() throws Exception {
+                        //capture the gesture first
+                        sampleListener.reset();
+                        sampleListener.setReady(true);
+                        defaultController.answerBtnSetText("Stop");
+
+                        //try to record the gesture
+                        boolean input;
+                        Sample source = null;
+                        while(true){
+                            if(sampleListener.checkFinish()){
+                                if(sampleListener.checkValid()){
+                                    input=true;
+                                    try {
+                                        source=new Sample(sampleListener.returnOneSample());
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }else{
+                                    input=false;
+                                }
+
+                                //terminate
+                                sampleListener.setReady(false);
+                                Thread.yield();
+                                break;
+                            }
+                            //release the thread for a while
+                            try {
+                                Thread.currentThread().sleep(100);
+                            } catch (InterruptedException e) {
+                                try {
+                                    Thread.currentThread().join();
+                                }catch (Exception f) {
+                                    f.printStackTrace();
+                                }
+                                e.printStackTrace();
+                            }
+                        }
+
+                        //when successfully get the gesture
+                        if(input){
+                            DTW dtw=new DTW();
+                            dtw.setRSample(source);
+                            HashMap<String,Sign> signByBoth = null;
+                            try {
+                                signByBoth=db.getSignsByBoth(source.getInitialFingerCount(),source.getInitialHandType(),dtwTolerance);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            for(Sign storedSign:signByBoth.values()){
+                                dtw.setStoredSign(storedSign);
+                                dtw.calDTW();
+                            }
+                            String result=dtw.getResult();
+                            minCost=dtw.bestMatch;
+
+                            //release current thread
+                            try{
+                                Thread.currentThread().sleep(1000);
+                            }catch (InterruptedException e){
+                                try {
+                                    Thread.currentThread().join();
+                                }catch (Exception f) {
+                                    f.printStackTrace();
+                                }
+                                e.printStackTrace();
+                            }
+
+                            dtw.reset();//re-initialise for next time
+                            return result;
+                        }
+                        return null;
+                    }
+
+                    @Override protected void succeeded(){
+                        super.succeeded();
+
+                        if(dtwQuizService.getValue()!=null){
+                            defaultController.dtwDisplay(dtwQuizService.getValue());
+                            defaultController.log(LoggingTemplate.getRecogniseMessage(dtwQuizService.getValue(),minCost));
+                        }
+
+                        defaultController.answerBtnSetText("Answer");
+                    }
+                };
+            }
+        };
+        dtwQuizService.cancel();
 
         //initialize the controllers of interface
         try{
@@ -883,6 +979,15 @@ public class GUI extends Application{
     public void stopRecognition(){
         if(dtwService!=null||dtwService.isRunning())
             dtwService.cancel();
+    }
+
+    public void startQuizRecognition(){
+        dtwQuizService.restart();
+    }
+
+    public void stopQuizRecognition(){
+        if(dtwQuizService!=null||dtwQuizService.isRunning())
+            dtwQuizService.cancel();
     }
 
     public void startMainVisualizer(){

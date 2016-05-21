@@ -37,6 +37,7 @@ public class DefaultController implements Initializable{
     @FXML private Button addButton;
     @FXML private Button startButton;
     @FXML private Button modeButton;
+    @FXML private Button answer2Button;
     @FXML private TextFlow loggingArea,dtwTextFlow;
     @FXML public Group mainVisualiser,dtwVisualiser,translateVisualiser,quizVisualiser,quiz2Visualiser;
     @FXML private Tab controlTab,loggingTab,dtwTab,translateTab,quizTab,quiz2Tab;
@@ -120,10 +121,10 @@ public class DefaultController implements Initializable{
         //Translate tab
         translateVisualiser.getChildren().add(application.translateVisualiser.getSubScene());
         translateTab.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if(!oldValue&&newValue){//when the user clicks the playback tab
+            if(!oldValue&&newValue){//when the user clicks the translate tab
                 //application.startRecognition();
                 application.startTranslateVisualizer();
-            }else if(oldValue&&!newValue){//when the user leaves the playback tab
+            }else if(oldValue&&!newValue){//when the user leaves the translate tab
                 //application.stopRecognition();
                 application.stopTranslateVisualizer();
                 application.stopTranslate();
@@ -133,26 +134,24 @@ public class DefaultController implements Initializable{
         //Quiz tab
         quizVisualiser.getChildren().add(application.quizVisualiser.getSubScene());
         quizTab.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if(!oldValue&&newValue){//when the user clicks the playback tab
+            if(!oldValue&&newValue){//when the user clicks the quiz tab
                 //application.startRecognition();
                 application.startQuizVisualizer();
-            }else if(oldValue&&!newValue){//when the user leaves the playback tab
+            }else if(oldValue&&!newValue){//when the user leaves the quiz tab
                 //application.stopRecognition();
                 application.stopQuizVisualizer();
-                application.stopTranslate();
             }
         });
 
         //Quiz2 tab
         quiz2Visualiser.getChildren().add(application.quiz2Visualiser.getSubScene());
         quiz2Tab.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if(!oldValue&&newValue){//when the user clicks the playback tab
-                //application.startRecognition();
+            if(!oldValue&&newValue){//when the user clicks the quiz2 tab
+                application.startQuizRecognition();
                 application.startQuiz2Visualizer();
-            }else if(oldValue&&!newValue){//when the user leaves the playback tab
-                //application.stopRecognition();
+            }else if(oldValue&&!newValue){//when the user leaves the quiz2 tab
+                application.stopQuizRecognition();
                 application.stopQuiz2Visualizer();
-                application.stopTranslate();
             }
         });
 
@@ -267,6 +266,10 @@ public class DefaultController implements Initializable{
 
     public void startBtnSetText(String text){
         startButton.setText(text);
+    }
+
+    public void answerBtnSetText(String text){
+        answer2Button.setText(text);
     }
 
     private void invokeCountdown(){
@@ -434,15 +437,25 @@ public class DefaultController implements Initializable{
     public void answer2ButtonAction(){
         int correctNumber = Integer.parseInt(correct2NumLabel.getText());
 
-        if (startButton.getText()=="Stop"){
-            application.stopRecognition();
-            startBtnSetText("Start");
+        if (answer2Button.getText()=="Stop"){
+            application.stopQuizRecognition();
+            answerBtnSetText("Answer");
         }else{
-            startBtnSetText("Stop");
+            application.startQuizRecognition();
+            answerBtnSetText("Stop");
             invokeCountdown();
-        }
+            String userAnswer = application.dtwQuizService.getValue();
+            log(userAnswer);
 
-        answered = true;
+            if(answer2.equals(userAnswer)){
+                correct2NumLabel.setText("" + ++correctNumber);
+                Platform.runLater(() -> (new Alert(Alert.AlertType.INFORMATION,"Your answer is correct!")).show());
+
+                String signName = application.getRandomSign();
+                answer2 = new String(signName);
+                quizSIgnLabel.setText("Please perform the gesture " + answer2);
+            }
+        }
     }
 
     @FXML
@@ -453,7 +466,6 @@ public class DefaultController implements Initializable{
         String signName = application.getRandomSign();
         answer2 = new String(signName);
         quizSIgnLabel.setText("Please perform the gesture " + answer2);
-        answered2 = false;
     }
 
     private void playback() {
