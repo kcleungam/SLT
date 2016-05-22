@@ -494,8 +494,8 @@ public class GUI extends Application{
                         super.succeeded();
 
                         if(dtwQuizService.getValue()!=null){
-                            defaultController.dtwDisplay(dtwQuizService.getValue());
-                            defaultController.log(LoggingTemplate.getRecogniseMessage(dtwQuizService.getValue(),minCost));
+                            if(defaultController.answer2.equals(dtwQuizService.getValue()))
+                                defaultController.correctAction();
                         }
 
                         defaultController.answerBtnSetText("Answer");

@@ -59,7 +59,8 @@ public class DefaultController implements Initializable{
 
     private Boolean englishMode = true;
     private Boolean answered = true, answered2 = true;
-    private String answer, answer2;
+    private String answer;
+    public String answer2;
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
@@ -435,8 +436,6 @@ public class DefaultController implements Initializable{
 
     @FXML
     public void answer2ButtonAction(){
-        int correctNumber = Integer.parseInt(correct2NumLabel.getText());
-
         if (answer2Button.getText()=="Stop"){
             application.stopQuizRecognition();
             answerBtnSetText("Answer");
@@ -444,18 +443,17 @@ public class DefaultController implements Initializable{
             application.startQuizRecognition();
             answerBtnSetText("Stop");
             invokeCountdown();
-            String userAnswer = application.dtwQuizService.getValue();
-            log(userAnswer);
-
-            if(answer2.equals(userAnswer)){
-                correct2NumLabel.setText("" + ++correctNumber);
-                Platform.runLater(() -> (new Alert(Alert.AlertType.INFORMATION,"Your answer is correct!")).show());
-
-                String signName = application.getRandomSign();
-                answer2 = new String(signName);
-                quizSIgnLabel.setText("Please perform the gesture " + answer2);
-            }
         }
+    }
+    public void correctAction(){
+        int correctNumber = Integer.parseInt(correct2NumLabel.getText());
+        correct2NumLabel.setText("" + ++correctNumber);
+
+        Platform.runLater(() -> (new Alert(Alert.AlertType.INFORMATION,"Your answer is correct!")).show());
+
+        String signName = application.getRandomSign();
+        answer2 = new String(signName);
+        quizSIgnLabel.setText("Please perform the gesture " + answer2);
     }
 
     @FXML
