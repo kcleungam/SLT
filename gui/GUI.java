@@ -32,6 +32,7 @@ import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import main.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -668,7 +669,7 @@ public class GUI extends Application{
                 return new Task<Void>() {
                     @Override
                     protected Void call() throws Exception {
-                        Sample sample = db.getFirstSample(gestureName);
+                        Sample sample = db.getFirstSample(gestureName.toLowerCase());
                         for (OneFrame i:sample.getAllFrames()) {
                             try {
                                 translateVisualiser.traceLM(i);
@@ -742,7 +743,7 @@ public class GUI extends Application{
                                 || gestureNames[index].contains(".")
                                 || gestureNames[index].contains("!"))
                                 gestureNames[index] = gestureNames[index].substring(0,gestureNames[index].length()-1);
-                            Sample sample = db.getFirstSample(gestureNames[index]);
+                            Sample sample = db.getFirstSample(gestureNames[index].toLowerCase());
 
                             for (OneFrame i:sample.getAllFrames()) {
                                 try {
@@ -1074,5 +1075,18 @@ public class GUI extends Application{
     public String getRandomSign(){
         int randomNumber = (int)(Math.random() * gestures.size());
         return gestures.get(randomNumber);
+    }
+
+    public Boolean isDBEmpty(){
+        try {
+            if (db.getAllSigns().size() == 0)
+                return true;
+            else
+                return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return true;
     }
 }

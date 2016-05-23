@@ -2,8 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd772be8-ff47-4886-b087-900455e8a0ce" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/DefaultController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$10$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$10$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$11$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$11$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$11.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$11.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$12$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$12$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$12.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$12.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI$9$1.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI$9$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/GUI.class" afterPath="$PROJECT_DIR$/out/production/SLT/gui/GUI.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/DefaultController.java" afterPath="$PROJECT_DIR$/gui/DefaultController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/GUI.java" afterPath="$PROJECT_DIR$/gui/GUI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/help.fxml" afterPath="$PROJECT_DIR$/gui/help.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SLT/gui/help.fxml" afterPath="$PROJECT_DIR$/out/production/SLT/gui/help.fxml" />
     </list>
     <ignored path="SLT.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,11 +41,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gui/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="801">
-              <caret line="738" column="81" selection-start-line="738" selection-start-column="81" selection-end-line="738" selection-end-column="81" />
+            <state relative-caret-position="572">
+              <caret line="1079" column="31" selection-start-line="1079" selection-start-column="31" selection-end-line="1079" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -53,35 +64,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DefaultController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DefaultController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gui/DefaultController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="369" column="80" selection-start-line="369" selection-start-column="80" selection-end-line="369" selection-end-column="80" />
+            <state relative-caret-position="274">
+              <caret line="416" column="65" selection-start-line="416" selection-start-column="65" selection-end-line="416" selection-end-column="65" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Sign.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/Sign.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2698">
-              <caret line="150" column="25" selection-start-line="150" selection-start-column="25" selection-end-line="150" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#633#641#0" expanded="false" />
-                <element signature="e#4461#4462#0" expanded="false" />
-                <element signature="e#4479#4480#0" expanded="false" />
-                <element signature="e#4552#4553#0" expanded="false" />
-                <element signature="e#4584#4585#0" expanded="false" />
-                <element signature="e#4656#4657#0" expanded="false" />
-                <element signature="e#4685#4686#0" expanded="false" />
-                <element signature="e#4754#4755#0" expanded="false" />
-                <element signature="e#4784#4785#0" expanded="false" />
-                <element signature="e#4850#4851#0" expanded="false" />
-                <element signature="e#4876#4877#0" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -105,7 +93,7 @@
         <entry file="file://$PROJECT_DIR$/gui/help.fxml">
           <provider editor-type-id="text-editor">
             <state relative-caret-position="209">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -131,10 +119,10 @@
         <option value="$PROJECT_DIR$/gui/CountdownController.java" />
         <option value="$PROJECT_DIR$/gui/about.fxml" />
         <option value="$PROJECT_DIR$/main/Database.java" />
-        <option value="$PROJECT_DIR$/gui/help.fxml" />
         <option value="$PROJECT_DIR$/gui/gui.fxml" />
-        <option value="$PROJECT_DIR$/gui/DefaultController.java" />
+        <option value="$PROJECT_DIR$/gui/help.fxml" />
         <option value="$PROJECT_DIR$/gui/GUI.java" />
+        <option value="$PROJECT_DIR$/gui/DefaultController.java" />
       </list>
     </option>
   </component>
@@ -939,69 +927,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui/about.fxml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <marker date="1463223371949" expanded="true" signature="1753:1771" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Downloads/SLT-master (1)/gui/gui.css" />
     <entry file="file://$USER_HOME$/Downloads/SLT-master (1)/gui/GUI.java" />
-    <entry file="file://$PROJECT_DIR$/main/SignBank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1349">
-          <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/Database.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3496">
-          <caret line="191" column="27" selection-start-line="191" selection-start-column="27" selection-end-line="191" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui/help.fxml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/Sign.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2698">
-          <caret line="150" column="25" selection-start-line="150" selection-start-column="25" selection-end-line="150" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#633#641#0" expanded="false" />
-            <element signature="e#4461#4462#0" expanded="false" />
-            <element signature="e#4479#4480#0" expanded="false" />
-            <element signature="e#4552#4553#0" expanded="false" />
-            <element signature="e#4584#4585#0" expanded="false" />
-            <element signature="e#4656#4657#0" expanded="false" />
-            <element signature="e#4685#4686#0" expanded="false" />
-            <element signature="e#4754#4755#0" expanded="false" />
-            <element signature="e#4784#4785#0" expanded="false" />
-            <element signature="e#4850#4851#0" expanded="false" />
-            <element signature="e#4876#4877#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/DTW.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1463">
@@ -1018,6 +945,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/gui/about.fxml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <marker date="1463223371949" expanded="true" signature="1753:1771" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/help.fxml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/Sign.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2717">
+          <caret line="151" column="44" selection-start-line="151" selection-start-column="44" selection-end-line="151" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/SignBank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1292">
+          <caret line="71" column="5" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/gui/gui.fxml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="3116">
@@ -1029,18 +996,26 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui/DefaultController.java">
+    <entry file="file://$PROJECT_DIR$/main/Database.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="369" column="80" selection-start-line="369" selection-start-column="80" selection-end-line="369" selection-end-column="80" />
+        <state relative-caret-position="-874">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="801">
-          <caret line="738" column="81" selection-start-line="738" selection-start-column="81" selection-end-line="738" selection-end-column="81" />
+        <state relative-caret-position="572">
+          <caret line="1079" column="31" selection-start-line="1079" selection-start-column="31" selection-end-line="1079" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/DefaultController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="416" column="65" selection-start-line="416" selection-start-column="65" selection-end-line="416" selection-end-column="65" />
           <folding />
         </state>
       </provider>

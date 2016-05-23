@@ -156,9 +156,12 @@ public class DefaultController implements Initializable{
             }
         });
 
-        String signName = application.getRandomSign();
-        answer2 = signName;
-        quizSIgnLabel.setText("Please perform the gesture " + answer2);
+        //check whether database is not empty
+        if(!application.isDBEmpty()){
+            String signName = application.getRandomSign();
+            answer2 = signName;
+            quizSIgnLabel.setText("Please perform the gesture " + answer2);
+        }
 
         //logging message
         log("OK");
@@ -302,7 +305,7 @@ public class DefaultController implements Initializable{
         }else if (controlTab.isSelected()){
             String input=inputField.getText();
             if(Speech.validate(input)) {
-                application.addSign(input);
+                application.addSign(input.toLowerCase());
                 setList(false);//update the list
             }
             else{
@@ -411,7 +414,7 @@ public class DefaultController implements Initializable{
         int correctNumber = Integer.parseInt(correctNumLabel.getText());
         int wrongNumber = Integer.parseInt(wrongNumLabel.getText());
 
-        if(quizTextField.getText().equals(answer)){
+        if(quizTextField.getText().toLowerCase().equals(answer)){
             correctNumLabel.setText("" + ++correctNumber);
             Platform.runLater(() -> (new Alert(Alert.AlertType.INFORMATION,"Your answer is correct!")).show());
         }else{

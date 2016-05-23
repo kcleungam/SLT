@@ -15,6 +15,7 @@
       <Label prefHeight="50.0" prefWidth="800.0" text="   Under the Recognize tab, you can perform the gestures stored in the system, the corresponding gestures will be recognized and" />
       <Label prefHeight="50.0" prefWidth="800.0" text="   the corresponding speech will be played." />
       <Label layoutX="10.0" layoutY="239.0" prefHeight="50.0" prefWidth="800.0" text="   Under the Translate tab, you can type a sentence and the playback of the corresponding gestures will be played in order." />
+      <Label layoutX="10.0" layoutY="235.0" prefHeight="50.0" prefWidth="800.0" text="   Under the Quiz tab, you can learn all the gesures you recorded." />
       <Label prefHeight="50.0" prefWidth="800.0" text="  All the logs will be shown in the Logging tab." />
       <Label layoutX="10.0" layoutY="306.0" prefHeight="50.0" prefWidth="800.0" text="  Under the System menu, you can set the setting and reset the database." />
       <Label layoutX="10.0" layoutY="366.0" prefHeight="50.0" prefWidth="800.0" text="  Under the Help menu, you can find help and about." />
