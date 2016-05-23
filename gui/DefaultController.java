@@ -358,12 +358,12 @@ public class DefaultController implements Initializable{
         String message = translateTextField.getText();
         String[] words;
 
-        if(englishMode){
-            if(message == ""){
-                Platform.runLater(() -> (new Alert(Alert.AlertType.ERROR,"Please input some characters.")).show());
-                return;
-            }
+        if(message.equals("")){
+            Platform.runLater(() -> (new Alert(Alert.AlertType.ERROR,"Please input some characters.")).show());
+            return;
+        }
 
+        if(englishMode){
             if(message.contains(" ")){
                 words = message.split(" ");
                 try{

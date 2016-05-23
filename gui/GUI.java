@@ -737,6 +737,11 @@ public class GUI extends Application{
                     protected Void call() throws Exception {
 
                         for(int index = 0; index < gestureNames.length; index++){
+                            //ignore the punctuation marks
+                            if(gestureNames[index].contains(",")
+                                || gestureNames[index].contains(".")
+                                || gestureNames[index].contains("!"))
+                                gestureNames[index] = gestureNames[index].substring(0,gestureNames[index].length()-1);
                             Sample sample = db.getFirstSample(gestureNames[index]);
 
                             for (OneFrame i:sample.getAllFrames()) {
@@ -809,6 +814,13 @@ public class GUI extends Application{
 
                         for(int index = 0; index < gestureNames.length; index++){
 
+                            //ignore the punctuation marks
+                            if(gestureNames[index].equals("，")
+                                || gestureNames[index].equals("、")
+                                || gestureNames[index].equals("。")
+                                || gestureNames[index].equals("！")
+                                || gestureNames[index].equals("？"))
+                                continue;
 
                             if(db.isNameExist(gestureNames[index])){
                                 Sample sample = db.getFirstSample(gestureNames[index]);
@@ -831,6 +843,8 @@ public class GUI extends Application{
                                 }
                             }else{
                                 String newName = gestureNames[index];
+
+                                //Combine Chinese Characters until a word is formed.
                                 do{
                                     newName = newName + gestureNames[index+1];
 
