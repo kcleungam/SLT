@@ -469,6 +469,18 @@ public class DefaultController implements Initializable{
         quizSIgnLabel.setText("Please perform the gesture " + answer2);
     }
 
+    public void playSpeech(String word){
+        Thread speechThread = new Thread(() -> {
+            try {
+                Speech.play(word);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        speechThread.start();
+    }
+
     private void playback() {
         Platform.runLater(() -> application.replayVis(getItemSelected()));
     }

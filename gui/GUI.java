@@ -670,6 +670,8 @@ public class GUI extends Application{
                     @Override
                     protected Void call() throws Exception {
                         Sample sample = db.getFirstSample(gestureName.toLowerCase());
+                        defaultController.playSpeech(gestureName);
+
                         for (OneFrame i:sample.getAllFrames()) {
                             try {
                                 translateVisualiser.traceLM(i);
@@ -743,7 +745,9 @@ public class GUI extends Application{
                                 || gestureNames[index].contains(".")
                                 || gestureNames[index].contains("!"))
                                 gestureNames[index] = gestureNames[index].substring(0,gestureNames[index].length()-1);
+
                             Sample sample = db.getFirstSample(gestureNames[index].toLowerCase());
+                            defaultController.playSpeech(gestureNames[index]);
 
                             for (OneFrame i:sample.getAllFrames()) {
                                 try {
@@ -825,6 +829,7 @@ public class GUI extends Application{
 
                             if(db.isNameExist(gestureNames[index])){
                                 Sample sample = db.getFirstSample(gestureNames[index]);
+                                defaultController.playSpeech(gestureNames[index]);
 
                                 for (OneFrame i:sample.getAllFrames()) {
                                     try {
@@ -855,6 +860,7 @@ public class GUI extends Application{
                                     }
 
                                     Sample newSample = db.getFirstSample(newName);
+                                    defaultController.playSpeech(newName);
 
                                     for (OneFrame i : newSample.getAllFrames()) {
                                         try {
