@@ -40,9 +40,9 @@
             </MenuBar>
             <TabPane prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #0000A0;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <tabs>
-                <Tab fx:id="controlTab" closable="false" style="-fx-background-color: #f7e9f2;" text="Record">
+                <Tab fx:id="controlTab" closable="false" style="-fx-background-color: #3399ff;" text="Record">
                   <content>
-                    <AnchorPane prefHeight="355.0" prefWidth="600.0" style="-fx-background-color: #f7e9f2;">
+                    <AnchorPane prefHeight="355.0" prefWidth="600.0" style="-fx-background-color: #3399ff;">
                            <children>
                               <HBox prefHeight="771.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
@@ -97,9 +97,9 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                  <Tab fx:id="dtwTab" style="-fx-background-color: #e9f3f7;" text="Recognize">
+                  <Tab fx:id="dtwTab" style="-fx-background-color: #3399ff;" text="Recognize">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #e9f3f7;">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #3399ff;">
                            <children>
                                   <Label fx:id="modeLabel" depthTest="DISABLE" graphicTextGap="5.0" layoutX="4.0" layoutY="499.0" prefHeight="30.0" prefWidth="159.0" style="-fx-text-fill: #000000;" text="Mode" textAlignment="CENTER" textOverrun="CLIP">
                                      <font>
@@ -129,9 +129,9 @@
                         </AnchorPane>
                     </content>
                   </Tab>
-                  <Tab fx:id="translateTab" style="-fx-background-color: #ffff99;" text="Translate">
+                  <Tab fx:id="translateTab" style="-fx-background-color: #3399ff;" text="Translate">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ffff99;">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #3399ff;">
                            <children>
                               <TextField fx:id="translateTextField" layoutX="30.0" layoutY="609.0" prefHeight="70.0" prefWidth="1221.0" />
                               <Button fx:id="translateButton" layoutX="157.0" layoutY="690.0" mnemonicParsing="false" onAction="#translateButtonAction" text="Translate" />
@@ -159,9 +159,9 @@
                           </AnchorPane>
                       </content>
                   </Tab>
-                  <Tab fx:id="quiz2Tab" style="-fx-background-color: #90C830;" text="Quiz2">
+                  <Tab fx:id="quiz2Tab" style="-fx-background-color: #3399ff;" text="Quiz2">
                       <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #90C830;">
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #3399ff;">
                               <children>
                                   <Button fx:id="answer2Button" layoutX="33.0" layoutY="690.0" mnemonicParsing="false" onAction="#answer2ButtonAction" prefHeight="26.0" prefWidth="71.0" text="Answer" />
                                   <Button fx:id="skip2Button" layoutX="122.0" layoutY="690.0" mnemonicParsing="false" onAction="#skip2ButtonAction" prefHeight="26.0" prefWidth="67.0" text="Skip" />
@@ -175,9 +175,9 @@
                           </AnchorPane>
                       </content>
                   </Tab>
-                <Tab fx:id="loggingTab" closable="false" style="-fx-background-color: #ecf7e9;" text="Logging">
+                <Tab fx:id="loggingTab" closable="false" style="-fx-background-color: #3399ff;" text="Logging">
                      <content>
-                        <ScrollPane fx:id="loggingScrollPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ecf7e9;">
+                        <ScrollPane fx:id="loggingScrollPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #3399ff;">
                            <content>
                               <TextFlow fx:id="loggingArea" prefHeight="683.0" prefWidth="1219.0" style="-fx-background-color: transparent;" />
                            </content>
