@@ -28,6 +28,7 @@
                   <items>
                         <MenuItem fx:id="ResetButton" mnemonicParsing="false" onAction="#resetButtonAction" text="Reset" />
                     <MenuItem fx:id="SettingButton" mnemonicParsing="false" text="Setting" />
+                        <MenuItem mnemonicParsing="false" onAction="#infoButtonAction" text="Info" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">

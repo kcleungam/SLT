@@ -6,6 +6,7 @@ package gui;
  * For other operations, please goto gui.GUI.java
  */
 
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -329,6 +330,12 @@ public class DefaultController implements Initializable{
             return null;
         });
         alert.showAndWait();
+    }
+
+    public void infoButtonAction() {
+        String info = application.getDBInfo();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION,info);
+        alert.show();
     }
 
     public void helpButtonAction(){

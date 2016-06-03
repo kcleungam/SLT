@@ -1083,6 +1083,10 @@ public class GUI extends Application{
         return gestures.get(randomNumber);
     }
 
+    public String getDBInfo(){
+        return ("There are " + allSigns.getAllSigns().size() + " signs in database.\n");
+    }
+
     public Boolean isDBEmpty(){
         try {
             if (db.getAllSigns().size() == 0)
